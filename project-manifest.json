@@ -6,9 +6,9 @@
     "name": "EA Stödjare – utvecklings- och referensprojekt",
     "kind": "ea_model_template",
     "language": "sv-SE",
-    "revision": 22,
+    "revision": 23,
     "created_at": "2026-08-20T17:50:00+02:00",
-    "updated_at": "2026-08-20T19:33:00+02:00",
+    "updated_at": "2026-08-20T19:43:00+02:00",
     "lifecycle_status": "review"
   },
   "model": {
@@ -30,19 +30,19 @@
       "path": ".github/workflows/build-artifacts.yml",
       "role": "support",
       "required": false,
-      "sha256": "242d28f49f123be2ef1d730653740206ff90759f667bc69c03b7be174ef0f7cc"
+      "sha256": "93d03582e3bb410c310a2125133b49de0a10b15734a6777185129a8b66b63144"
     },
     {
       "path": ".github/workflows/ci.yml",
       "role": "support",
       "required": true,
-      "sha256": "743e06f46239902a2ca027b883c3a117f9ac623fedf155f04cf1c73f0d341851"
+      "sha256": "7faca9eabb1b95beb96c53dfaa0ef6172cb6cfbba228e34a2e1d62a29b6dac5f"
     },
     {
       "path": ".github/workflows/release.yml",
       "role": "support",
       "required": true,
-      "sha256": "47ef2bc526750c41334c5cbb0e75d3127f3e3afa624dcce1916f816397b9617b"
+      "sha256": "4dab0163b91aa6aea02e709af30f80d6f8ab87bce2e1faa6fb1d4c4961c66bc2"
     },
     {
       "path": ".gitignore",
@@ -60,7 +60,7 @@
       "path": "PROJECT_STATUS.md",
       "role": "governance",
       "required": true,
-      "sha256": "cb2a68d3a4d0e696f7723a3c2f81cd693b79e2bb3638281bec9905e9503cb1a2"
+      "sha256": "95532e8f8a3322b0c944b3073ef783acd605ecb42823af6a70413949bb9dd03a"
     },
     {
       "path": "README.md",
@@ -852,7 +852,7 @@
       "path": "revision-log.md",
       "role": "documentation_source",
       "required": true,
-      "sha256": "eb69142e239d0ef830ba11da9e342b792d94bb42337704402249c22f74dad195"
+      "sha256": "2cda965edaaa60567c71fc9f61db722eb94238a391108831900f60894cf2f928"
     },
     {
       "path": "schemas/conflicts-and-uncertainty.yaml",

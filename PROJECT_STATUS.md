@@ -4,13 +4,14 @@
 
 - **Projekt:** EA Stödjare – utvecklings- och referensprojekt
 - **Utvecklingsplan:** steg 28 av 28 genomfört
-- **Projektrevision:** 22
+- **Projektrevision:** 23
 - **Livscykelstatus:** review
 - **Metamodell:** v1.0
 - **Relationsmodell:** v1.0
 - **Proveniensmodell:** v1.0
 - **Modellformat:** v1.0
 - **Senast uppdaterad:** 2026-08-20
+- **GitHub Actions-hotfix:** setup-python pip-cache pekar explicit på `requirements-dev.txt`.
 
 ## Syfte med denna statusfil
 

@@ -210,3 +210,10 @@
 - Uppdaterat README och PROJECT_STATUS till steg 28 av 28 och releasekandidatstatus.
 - Fastställt att faktisk semantisk runtime-eval i Custom GPT Builder är sista acceptanskontroll före sluttagg v1.0.0.
 
+
+## Revision 23 – GitHub Actions-hotfix
+
+- Korrigerat `.github/workflows/ci.yml`, `.github/workflows/build-artifacts.yml` och `.github/workflows/release.yml`.
+- `actions/setup-python@v5` använder fortsatt `cache: pip` men har nu `cache-dependency-path: requirements-dev.txt`.
+- Åtgärdar CI-felet där setup-python annars söker efter `requirements.txt` eller `pyproject.toml` och stoppar innan beroenden installeras.
+- Ingen ändring av EA-metamodell, Builder-instruktion, Knowledge eller dokumentationsformat.
