@@ -299,3 +299,13 @@ Instruktionen styr roll, scope, arbetsdisciplin, evidens, research, klassificeri
 - Samtliga steg 1–28 i utvecklingsplanen är genomförda.
 - Inga kända blockerande strukturella projektfel finns.
 - Faktisk semantisk runtime-eval mot importerad Custom GPT-instans återstår som sista acceptanskontroll före sluttagg `v1.0.0`.
+
+
+## GPT-distributioner
+
+Repositoryt kan även bygga två distributionsformat från samma aktuella Builder-konfiguration:
+
+- `ea-stodjare-custom-gpt-vX.Y.Z.zip` för Custom GPT Builder.
+- `ea-stodjare-chat-vX.Y.Z.zip` för att bifogas i en vanlig ChatGPT-konversation.
+
+Kör lokalt med `python3 scripts/build_distributions.py` följt av `python3 scripts/validate_distributions.py`. Vanliga builds använder `VERSION`; vid publicerad GitHub Release används release-taggen som versionskälla. De sex genererade Builder Knowledge-filerna och huvudinstruktionen kopieras utan innehållsförändring.
