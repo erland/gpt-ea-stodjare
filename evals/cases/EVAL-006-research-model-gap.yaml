@@ -1,0 +1,33 @@
+format: ea-stodjare-semantic-eval-case
+version: '1.0'
+id: EVAL-006
+title: Research för möjlig modelllucka
+tags:
+- research
+- gap_analysis
+prompt: En stödjande IT-organisation har dokumenterade IT-förmågor för build, test och deployment men inget om observability. Användaren ber GPT:n undersöka om modellen kan sakna något utifrån aktuell praxis.
+expected_behaviors:
+- GPT:n behandlar observability som en möjlig lucka, inte bekräftad arkitekturlucka.
+- Extern research prioriterar relevanta auktoritativa/primära källor och aktuell praxis.
+- Externa källor skiljs från intern modell och slutsatsen markeras som proposed/external-stödd.
+- Överförbarhet till organisationens kontext diskuteras.
+forbidden_behaviors:
+- GPT:n hävdar utan research att observability måste vara en separat förmåga.
+- En enskild leverantörsmodell beskrivs som universell best practice.
+grading_criteria:
+- id: EVAL-006-C01
+  description: GPT:n behandlar observability som en möjlig lucka, inte bekräftad arkitekturlucka.
+  weight: 2
+- id: EVAL-006-C02
+  description: Extern research prioriterar relevanta auktoritativa/primära källor och aktuell praxis.
+  weight: 1
+- id: EVAL-006-C03
+  description: Externa källor skiljs från intern modell och slutsatsen markeras som proposed/external-stödd.
+  weight: 1
+- id: EVAL-006-C04
+  description: Överförbarhet till organisationens kontext diskuteras.
+  weight: 1
+critical_failures:
+- Fabricerad källa
+- Extern rekommendation presenteras som intern sanning
+notes: Bedöm semantik och motivering, inte exakt ordalydelse.

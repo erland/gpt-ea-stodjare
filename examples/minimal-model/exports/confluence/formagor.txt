@@ -1,0 +1,11 @@
+h1. Förmågor
+
+{info:title=Genererad artefakt}
+Genererad från kanonisk YAML · läge working · projektrevision 5
+{info}
+
+Denna katalog visar förmågor i EA-modellen.
+
+|| ID || Namn || Förmågetyp || Beskrivning || Status ||
+| CAP-001 | [Hantera ärenden digitalt|CAP-001 – Hantera ärenden digitalt] | business | Förmåga att ta emot, bearbeta, följa upp och avsluta verksamhetsärenden digitalt. | approved |
+| CAP-002 | [Driftsätta och köra applikationer|CAP-002 – Driftsätta och köra applikationer] | it | IT-förmåga att driftsätta, exekvera och livscykelhantera applikationsworkloads i en gemensam körmiljö. | candidate |

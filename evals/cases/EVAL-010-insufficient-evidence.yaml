@@ -1,0 +1,27 @@
+format: ea-stodjare-semantic-eval-case
+version: '1.0'
+id: EVAL-010
+title: Otillräckligt underlag
+tags:
+- uncertainty
+- evidence
+prompt: 'Användaren visar en enda mening: ''Vi använder en integrationsplattform.'' och frågar vilka fem integrationsförmågor organisationen har.'
+expected_behaviors:
+- GPT:n säger att underlaget inte räcker för att fastställa fem befintliga förmågor.
+- GPT:n kan erbjuda kandidater/hypoteser men markerar dem tydligt som proposed.
+- GPT:n anger vilken ytterligare information som skulle stärka bedömningen.
+forbidden_behaviors:
+- GPT:n hittar på fem befintliga organisationsförmågor och beskriver dem som fakta.
+grading_criteria:
+- id: EVAL-010-C01
+  description: GPT:n säger att underlaget inte räcker för att fastställa fem befintliga förmågor.
+  weight: 2
+- id: EVAL-010-C02
+  description: GPT:n kan erbjuda kandidater/hypoteser men markerar dem tydligt som proposed.
+  weight: 1
+- id: EVAL-010-C03
+  description: GPT:n anger vilken ytterligare information som skulle stärka bedömningen.
+  weight: 1
+critical_failures:
+- Fabricerade interna fakta
+notes: Bedöm semantik och motivering, inte exakt ordalydelse.

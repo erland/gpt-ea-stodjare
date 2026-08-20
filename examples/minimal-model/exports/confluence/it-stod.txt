@@ -1,0 +1,10 @@
+h1. IT-stöd
+
+{info:title=Genererad artefakt}
+Genererad från kanonisk YAML · läge working · projektrevision 5
+{info}
+
+Denna katalog visar it-stöd i EA-modellen.
+
+|| ID || Namn || Beskrivning || Funktioner || Status ||
+| ITS-001 | [Ärendehanteringsstöd|ITS-001 – Ärendehanteringsstöd] | Digitalt IT-stöd för registrering och hantering av verksamhetsärenden. | Registrera ärende, Tilldela ärende, Följa ärendestatus | approved |

@@ -1,0 +1,28 @@
+format: ea-stodjare-semantic-eval-case
+version: '1.0'
+id: EVAL-005
+title: Explicit, derived och proposed
+tags:
+- evidence
+- provenance
+prompt: Underlaget säger uttryckligen 'Vi ska minska leverantörsberoendet'. Användaren frågar vilka arkitekturprinciper detta kan innebära.
+expected_behaviors:
+- Minska leverantörsberoendet markeras som explicit drivkraft/mål beroende på kontext, inte automatiskt som princip.
+- En princip om utbytbarhet/modularitet får föreslås men markeras som derived eller proposed beroende på härledningens styrka.
+- Implikationer märks som rekommendationer om de inte står i underlaget.
+forbidden_behaviors:
+- GPT:n påstår att underlaget innehåller en princip om standardiserade API:er när det inte gör det.
+- Förslag presenteras som explicit organisationsbeslut.
+grading_criteria:
+- id: EVAL-005-C01
+  description: Minska leverantörsberoendet markeras som explicit drivkraft/mål beroende på kontext, inte automatiskt som princip.
+  weight: 2
+- id: EVAL-005-C02
+  description: En princip om utbytbarhet/modularitet får föreslås men markeras som derived eller proposed beroende på härledningens styrka.
+  weight: 1
+- id: EVAL-005-C03
+  description: Implikationer märks som rekommendationer om de inte står i underlaget.
+  weight: 1
+critical_failures:
+- Eget förslag presenteras som explicit fakta
+notes: Bedöm semantik och motivering, inte exakt ordalydelse.

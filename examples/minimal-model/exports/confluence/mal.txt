@@ -1,0 +1,10 @@
+h1. Mål
+
+{info:title=Genererad artefakt}
+Genererad från kanonisk YAML · läge working · projektrevision 5
+{info}
+
+Denna katalog visar mål i EA-modellen.
+
+|| ID || Namn || Beskrivning || Tidshorisont || Status ||
+| GOAL-001 | [Snabbare och mer självständig utveckling|GOAL-001 – Snabbare och mer självständig utveckling] | Operativa utvecklingsområden ska kunna utveckla och förändra IT-stöd med kortare ledtid. |  | candidate |

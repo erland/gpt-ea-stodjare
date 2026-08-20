@@ -1,0 +1,32 @@
+format: ea-stodjare-semantic-eval-case
+version: '1.0'
+id: EVAL-011
+title: Motstridiga källor
+tags:
+- conflict
+- evidence
+prompt: Dokument A säger att Plattform X är strategisk och ska användas långsiktigt. Ett nyare dokument B säger att Plattform X ska avvecklas. Ingen beslutsstatus framgår. Hur ska modellen hanteras?
+expected_behaviors:
+- GPT:n registrerar eller beskriver konflikten öppet.
+- Källornas datum/auktoritet vägs in men en version väljs inte tyst som kanonisk sanning.
+- Objektets livscykelstatus och konfliktstatus hålls semantiskt isär.
+- Ett besluts-/verifieringsbehov föreslås.
+forbidden_behaviors:
+- GPT:n väljer automatiskt dokument B som sanning enbart för att det är nyare.
+- Den äldre källan raderas ur proveniens.
+grading_criteria:
+- id: EVAL-011-C01
+  description: GPT:n registrerar eller beskriver konflikten öppet.
+  weight: 2
+- id: EVAL-011-C02
+  description: Källornas datum/auktoritet vägs in men en version väljs inte tyst som kanonisk sanning.
+  weight: 1
+- id: EVAL-011-C03
+  description: Objektets livscykelstatus och konfliktstatus hålls semantiskt isär.
+  weight: 1
+- id: EVAL-011-C04
+  description: Ett besluts-/verifieringsbehov föreslås.
+  weight: 1
+critical_failures:
+- Motstridiga källor löses genom tyst val
+notes: Bedöm semantik och motivering, inte exakt ordalydelse.

@@ -1,0 +1,37 @@
+format: ea-stodjare-semantic-eval-case
+version: '1.0'
+id: EVAL-009
+title: Modellförslag för organisation
+tags:
+- model_design
+- research
+- alternatives
+prompt: En myndighet vill skapa en IT-förmågemodell för ett stödjande utvecklingsområde som ska möjliggöra operativa teams utveckling av IT-stöd. Underlaget är kortfattat. Ta fram ett angreppssätt och ett första modellförslag.
+expected_behaviors:
+- GPT:n börjar med kontext, uppdrag och konsumtionsbehov snarare än produktlista.
+- Flera rimliga strukturprinciper/alternativ övervägs när det finns verkliga val.
+- Förslaget använder IT-förmågor och kan koppla dem till plattformstjänster utan att blanda ihop nivåerna.
+- Research används där den kan förbättra modellen och markeras som extern.
+- Förslaget märks som skiss/granskningsförslag, inte facit.
+forbidden_behaviors:
+- Modellen byggs primärt som en lista över produkter.
+- GPT:n hävdar att en viss modell är rätt för myndigheten utan tillräcklig evidens.
+grading_criteria:
+- id: EVAL-009-C01
+  description: GPT:n börjar med kontext, uppdrag och konsumtionsbehov snarare än produktlista.
+  weight: 2
+- id: EVAL-009-C02
+  description: Flera rimliga strukturprinciper/alternativ övervägs när det finns verkliga val.
+  weight: 1
+- id: EVAL-009-C03
+  description: Förslaget använder IT-förmågor och kan koppla dem till plattformstjänster utan att blanda ihop nivåerna.
+  weight: 1
+- id: EVAL-009-C04
+  description: Research används där den kan förbättra modellen och markeras som extern.
+  weight: 1
+- id: EVAL-009-C05
+  description: Förslaget märks som skiss/granskningsförslag, inte facit.
+  weight: 1
+critical_failures:
+- Förslaget presenteras som beslutad intern modell
+notes: Bedöm semantik och motivering, inte exakt ordalydelse.

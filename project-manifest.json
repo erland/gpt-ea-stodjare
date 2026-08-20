@@ -1,0 +1,1224 @@
+{
+  "format": "ea-stodjare-project",
+  "format_version": "1.0",
+  "project": {
+    "id": "ea-stodjare-reference",
+    "name": "EA Stödjare – utvecklings- och referensprojekt",
+    "kind": "ea_model_template",
+    "language": "sv-SE",
+    "revision": 23,
+    "created_at": "2026-08-20T17:50:00+02:00",
+    "updated_at": "2026-08-20T19:43:00+02:00",
+    "lifecycle_status": "review"
+  },
+  "model": {
+    "root": "model",
+    "serialization": "YAML",
+    "model_format_version": "1.0",
+    "metamodel_version": "1.0",
+    "relation_model_version": "1.0",
+    "provenance_model_version": "1.0"
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "manifest_self_hash": false,
+    "inventory_order": "path-ascending",
+    "canonical_model_required": true
+  },
+  "files": [
+    {
+      "path": ".github/workflows/build-artifacts.yml",
+      "role": "support",
+      "required": false,
+      "sha256": "93d03582e3bb410c310a2125133b49de0a10b15734a6777185129a8b66b63144"
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "role": "support",
+      "required": true,
+      "sha256": "7faca9eabb1b95beb96c53dfaa0ef6172cb6cfbba228e34a2e1d62a29b6dac5f"
+    },
+    {
+      "path": ".github/workflows/release.yml",
+      "role": "support",
+      "required": true,
+      "sha256": "4dab0163b91aa6aea02e709af30f80d6f8ab87bce2e1faa6fb1d4c4961c66bc2"
+    },
+    {
+      "path": ".gitignore",
+      "role": "support",
+      "required": false,
+      "sha256": "071271e29304ca31a25896e1097f2c18018ca2daac31956064bd5d914f7c17c3"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "e411e740d4005ce0c8b68bacb27e128bf4311393daa2ac5b4d29dfa68a1b8964"
+    },
+    {
+      "path": "PROJECT_STATUS.md",
+      "role": "governance",
+      "required": true,
+      "sha256": "95532e8f8a3322b0c944b3073ef783acd605ecb42823af6a70413949bb9dd03a"
+    },
+    {
+      "path": "README.md",
+      "role": "documentation_source",
+      "required": true,
+      "sha256": "43daaf6b65ca2a78ca4551e9948cf2f5578cb06611aa3625e0d45e26cb624c11"
+    },
+    {
+      "path": "custom-gpt/builder-config.md",
+      "role": "support",
+      "required": false,
+      "sha256": "23866b195ce3773e02bed006c9d8af934b29ea123341a328770e718f8735b699"
+    },
+    {
+      "path": "custom-gpt/instructions.md",
+      "role": "support",
+      "required": true,
+      "sha256": "705c71b9bf3fe5958e9a76d0d4b5f8f48ef2a49b07f8bcdad699ab71c59965ca"
+    },
+    {
+      "path": "custom-gpt/knowledge/00-knowledge-index.md",
+      "role": "support",
+      "required": true,
+      "sha256": "9ae001455ccc3c49c51b0875083f84a403a525ce96cad0d95605be648cca1422"
+    },
+    {
+      "path": "custom-gpt/knowledge/01-domain-model.md",
+      "role": "support",
+      "required": true,
+      "sha256": "703b369d4f467c5a7ce917829404244588d94d9821e6c2aabbe85996470e7250"
+    },
+    {
+      "path": "custom-gpt/knowledge/02-evidence-and-research.md",
+      "role": "support",
+      "required": true,
+      "sha256": "74a62c707e39917b4e48f10998d67f24563b5c7e922bc900dda79efa267d147e"
+    },
+    {
+      "path": "custom-gpt/knowledge/03-analysis-and-modeling-workflows.md",
+      "role": "support",
+      "required": true,
+      "sha256": "4fc86997c7be7540ebdf905cbfdf307730d58e7451b9ba7ef8853f487540b6b3"
+    },
+    {
+      "path": "custom-gpt/knowledge/04-quality-assurance.md",
+      "role": "support",
+      "required": true,
+      "sha256": "97096b438a652ad370ae5914b25aac9cb807e967c6855d2cc197f829622b6c1b"
+    },
+    {
+      "path": "custom-gpt/knowledge/05-project-and-output.md",
+      "role": "support",
+      "required": true,
+      "sha256": "8eaf1d131b62f94e7f535102e74e44bcb438e8844e0bcc64c180a0516da2cfb3"
+    },
+    {
+      "path": "docs/confluence-generation.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "a05632be6e3a9447ab235359c4112128c39dd727287acd3e2b4ffe2910f36276"
+    },
+    {
+      "path": "docs/development-plan.md",
+      "role": "documentation_source",
+      "required": true,
+      "sha256": "6e49e36ed0873e394190fec4aba50b0cd5deb82d3ef68041ce1db566839177a4"
+    },
+    {
+      "path": "docs/document-export.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "f181e1a739501cf2e71ca22d003c22cc57a24ac93df3cdfe930dcf7ebe3a2aca"
+    },
+    {
+      "path": "docs/documentation-profiles.md",
+      "role": "documentation_source",
+      "required": true,
+      "sha256": "9506ca5c2e2a5f36e59f025a1c619ea5fe8bd7e748803fd851bc7d70a4d176d5"
+    },
+    {
+      "path": "docs/final-review.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "7569d82ac40d58a74a13a35550090d7d509b9c0935b4a3ddcec07d04828fbdd1"
+    },
+    {
+      "path": "docs/markdown-generation.md",
+      "role": "documentation_source",
+      "required": true,
+      "sha256": "5908b8fc68f9a967246584fcbd53bc617b4eef4566e7d5c42c43f2028405e3ed"
+    },
+    {
+      "path": "docs/metamodel.md",
+      "role": "documentation_source",
+      "required": true,
+      "sha256": "6c1d07cefcf4e3de0f01ebe4faa36b8177fa6b1c3fde7275131166b1ff09f1e7"
+    },
+    {
+      "path": "docs/product-vision.md",
+      "role": "documentation_source",
+      "required": true,
+      "sha256": "e80756d95f223a71d807e59ca6133d3f35a83bce7267940f82051253cf28fc21"
+    },
+    {
+      "path": "docs/project-format.md",
+      "role": "documentation_source",
+      "required": true,
+      "sha256": "f95b574675f8db1437781af60c6294bcfcd25140fb081af9e6140591692fb61a"
+    },
+    {
+      "path": "docs/provenance-model.md",
+      "role": "documentation_source",
+      "required": true,
+      "sha256": "123241cfba4b9450e151c0d46e6c30b5cd938632ae858708d2e533045ddcf390"
+    },
+    {
+      "path": "docs/relations.md",
+      "role": "documentation_source",
+      "required": true,
+      "sha256": "20d95cd4f2e44623dbeff4e32ea54028f6991d425e195be44818c74391027d98"
+    },
+    {
+      "path": "docs/release-and-ci.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "5d5ce32b143762a80e57a94ad54da178837329fa1ba090b15cebe19778ee8fd3"
+    },
+    {
+      "path": "docs/reuse-analysis.md",
+      "role": "documentation_source",
+      "required": true,
+      "sha256": "05d527f36de7c2d1ce7b21172fb6d4659053c4a60bc21cc786cd9b3f347461f3"
+    },
+    {
+      "path": "docs/source-policy.md",
+      "role": "documentation_source",
+      "required": true,
+      "sha256": "342dc12c70b74e5371495a04d58603ee50403ec0fb7d60f67b81b8c8f31104b5"
+    },
+    {
+      "path": "docs/stress-test-report.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "10f3c0fa63982227ff6d3ebef13e01e8987492614534d8b87913cfede40f7394"
+    },
+    {
+      "path": "docs/structural-validation.md",
+      "role": "documentation_source",
+      "required": true,
+      "sha256": "374171bc2f29f3b5af2bbcffa553fc7a2da022f843b390bb4e4f2381f6a43ef7"
+    },
+    {
+      "path": "docs/technical-target.md",
+      "role": "documentation_source",
+      "required": true,
+      "sha256": "43161f50322c4f0b9ec6a6dc1097e00b887c48b41bbbf5088fc1dfc6d3b1a903"
+    },
+    {
+      "path": "docs/user-guide.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "2242007f434af1c3e8ebaca87677b956e6fbacfb7073e9fc58b46dd10bf90917"
+    },
+    {
+      "path": "docs/yaml-model-format.md",
+      "role": "documentation_source",
+      "required": true,
+      "sha256": "77952404feba36fdd43023276ccdcdf4639f975b9a318d6f5dc2808162021bc7"
+    },
+    {
+      "path": "evals/README.md",
+      "role": "support",
+      "required": false,
+      "sha256": "42cc7bf9d2d66cb61c9ae9b144d8d690c13c77e1db502711a48e929426aa678b"
+    },
+    {
+      "path": "evals/cases/EVAL-001-driver-vs-goal.yaml",
+      "role": "support",
+      "required": false,
+      "sha256": "97909a69fbb05ef6ca5cf66ea53310fdb1b97edb1c9176eabbc537417b5615c8"
+    },
+    {
+      "path": "evals/cases/EVAL-002-capability-vs-function.yaml",
+      "role": "support",
+      "required": false,
+      "sha256": "5812257f29dfdbdd765217a472867fd7ff74042d0354d4e555b16be63662b232"
+    },
+    {
+      "path": "evals/cases/EVAL-003-it-support-vs-platform-service.yaml",
+      "role": "support",
+      "required": false,
+      "sha256": "3f5a8a7be4fb79f2a320373a0325266cc1165790bdafe61de7e90beffc2b6c49"
+    },
+    {
+      "path": "evals/cases/EVAL-004-platform-service-vs-platform.yaml",
+      "role": "support",
+      "required": false,
+      "sha256": "7cd91072e5829b3e2b2c30db4693990c800948a81bc341715eb979982eb85010"
+    },
+    {
+      "path": "evals/cases/EVAL-005-explicit-derived-proposed.yaml",
+      "role": "support",
+      "required": false,
+      "sha256": "e4ad0ee3a8590eae845f029dc203631d99e253f80560a9f21847b7c21d7abb76"
+    },
+    {
+      "path": "evals/cases/EVAL-006-research-model-gap.yaml",
+      "role": "support",
+      "required": false,
+      "sha256": "f1ab37c563cd2357372bdb8da139a2aabc51bd0402c2c7d85216836a718b2815"
+    },
+    {
+      "path": "evals/cases/EVAL-007-duplicate-detection.yaml",
+      "role": "support",
+      "required": false,
+      "sha256": "6228dfe603024a4c71b4f841dc24de7e480cf5e98dbb805db01e0a3a24b8b177"
+    },
+    {
+      "path": "evals/cases/EVAL-008-gap-analysis.yaml",
+      "role": "support",
+      "required": false,
+      "sha256": "ed54bb205d0566f17ac034bb99deac62e288779587a1406a5beee362c09815ea"
+    },
+    {
+      "path": "evals/cases/EVAL-009-model-proposal.yaml",
+      "role": "support",
+      "required": false,
+      "sha256": "11bb11445c6421b327b32968e16d756c3d9f467e466d40f95b7d0be8e074f487"
+    },
+    {
+      "path": "evals/cases/EVAL-010-insufficient-evidence.yaml",
+      "role": "support",
+      "required": false,
+      "sha256": "787bd54c12e9484e2f097a531144457e8bc6123f4b21f47277b9050930645629"
+    },
+    {
+      "path": "evals/cases/EVAL-011-conflicting-sources.yaml",
+      "role": "support",
+      "required": false,
+      "sha256": "2d980b180964957a7031e4ee6be279889aaed820fecc4453ab06e586e34209aa"
+    },
+    {
+      "path": "evals/cases/EVAL-012-solution-architecture-boundary.yaml",
+      "role": "support",
+      "required": false,
+      "sha256": "66f038aa439c0ec16550786e73628a95167bebe9685edd7014d66d6540b56d55"
+    },
+    {
+      "path": "evals/cases/EVAL-013-it-capabilities-supporting-domain.yaml",
+      "role": "support",
+      "required": false,
+      "sha256": "8e94b38350ac7ccdebead449a48c186faa5eb02f9489062cfb0b9fb3f217ff0d"
+    },
+    {
+      "path": "evals/cases/EVAL-014-principle-vs-standard.yaml",
+      "role": "support",
+      "required": false,
+      "sha256": "c77990f03cc328c5153e4617cef4fc57bd06183672173b72967e1e4ce650472d"
+    },
+    {
+      "path": "evals/cases/EVAL-015-external-example-transferability.yaml",
+      "role": "support",
+      "required": false,
+      "sha256": "1c7f88a270cc22eb3aa834914bee3de547cf471901fbb9969237fbcebc0f15fd"
+    },
+    {
+      "path": "evals/eval-suite.yaml",
+      "role": "support",
+      "required": false,
+      "sha256": "b5e865ef1112c30edac07661720a820f7bba01c542d6b565b0234864cf178faa"
+    },
+    {
+      "path": "evals/rubrics/research-grading.md",
+      "role": "support",
+      "required": false,
+      "sha256": "99c2fd5f1bec593e56d695ab34942dc465c8f69b84d9d0bcdff540086a209a4b"
+    },
+    {
+      "path": "evals/rubrics/semantic-grading.md",
+      "role": "support",
+      "required": false,
+      "sha256": "f5caf91e6b29463fc59db3d4a215647720cababc57a83c20dcda3cbb3f19e6fe"
+    },
+    {
+      "path": "examples/minimal-model/PROJECT_STATUS.md",
+      "role": "support",
+      "required": false,
+      "sha256": "de7776f7b87fbfe8b9ae352f5781bc0839ece0256497e43742fd94ff56445b9d"
+    },
+    {
+      "path": "examples/minimal-model/README.md",
+      "role": "support",
+      "required": false,
+      "sha256": "d993c4358c2c39631b4090ed94e73939ae6891970d051f7242bec4b2eaf844be"
+    },
+    {
+      "path": "examples/minimal-model/docs/generated/drivkrafter.md",
+      "role": "support",
+      "required": false,
+      "sha256": "5fbbb54492d1892bffb57d01a9d2e553083bdb3ca72118f139e6209002dc676d"
+    },
+    {
+      "path": "examples/minimal-model/docs/generated/formagor.md",
+      "role": "support",
+      "required": false,
+      "sha256": "c1fde51a719ebf039f6fd906f634ce0d3d30638a74dc9d832f8065ba8c3f8f79"
+    },
+    {
+      "path": "examples/minimal-model/docs/generated/it-stod.md",
+      "role": "support",
+      "required": false,
+      "sha256": "377d89da08128e120d3188e9653add9a3d74520deb966f0bd54a99fe6c045c91"
+    },
+    {
+      "path": "examples/minimal-model/docs/generated/losningsmonster.md",
+      "role": "support",
+      "required": false,
+      "sha256": "fd859e143647236ee13b2ab4410b7d0484a406922b0c19d15342bd108f45a4aa"
+    },
+    {
+      "path": "examples/minimal-model/docs/generated/mal.md",
+      "role": "support",
+      "required": false,
+      "sha256": "11e7060f6d1647fe329d40c7b080b38bf39bab02bfe09e4c7aff31377883774c"
+    },
+    {
+      "path": "examples/minimal-model/docs/generated/objects/capabilities/CAP-001-hantera-arenden-digitalt.md",
+      "role": "support",
+      "required": false,
+      "sha256": "2586ca43f015560a488742ad581259052ca84bd965958e28e7fb3c30fbd39ea8"
+    },
+    {
+      "path": "examples/minimal-model/docs/generated/objects/capabilities/CAP-002-driftsatta-och-kora-applikationer.md",
+      "role": "support",
+      "required": false,
+      "sha256": "97aa393c98619a264b74713ede9c311c60b8a7dd15332683b7956e975fcf23fb"
+    },
+    {
+      "path": "examples/minimal-model/docs/generated/objects/drivers/DRV-001-kortare-ledtid-for-digital-utveckling.md",
+      "role": "support",
+      "required": false,
+      "sha256": "c0a473baa55aa256469f71406d18f04ed31e02a82b8d8821b3359930897089da"
+    },
+    {
+      "path": "examples/minimal-model/docs/generated/objects/goals/GOAL-001-snabbare-och-mer-sjalvstandig-utveckling.md",
+      "role": "support",
+      "required": false,
+      "sha256": "6ddc2f83b775b972758275f9cef2ca756b2d66a4f68db2c374e43445636755aa"
+    },
+    {
+      "path": "examples/minimal-model/docs/generated/objects/it-support/ITS-001-arendehanteringsstod.md",
+      "role": "support",
+      "required": false,
+      "sha256": "56d1bca4742b4f001ad3b9e9351b42fdd902901061df0bc5d560549336f3cce0"
+    },
+    {
+      "path": "examples/minimal-model/docs/generated/objects/platform-services/PLS-001-containerplattformstjanst.md",
+      "role": "support",
+      "required": false,
+      "sha256": "9baaf1c6b30f44470055b80cddf49f1e0f9fd7117b07317286fd52a8a68f673e"
+    },
+    {
+      "path": "examples/minimal-model/docs/generated/objects/platforms/PLT-001-containerplattform.md",
+      "role": "support",
+      "required": false,
+      "sha256": "eccb02da1022e0cb341b01c64a9c2194be938740ee6b72ec3b5a325bdb898c24"
+    },
+    {
+      "path": "examples/minimal-model/docs/generated/objects/principles/PRN-001-gemensamma-behov-realiseras-som-ateranvandbara-tjanster.md",
+      "role": "support",
+      "required": false,
+      "sha256": "e041371213d6a37a1630997d4fbef3018645b6d3bb49ef59a1fe20d336d5db6e"
+    },
+    {
+      "path": "examples/minimal-model/docs/generated/objects/reference-architectures/RA-001-referensarkitektur-for-gemensam-applikationskorning.md",
+      "role": "support",
+      "required": false,
+      "sha256": "be2ac4cac7fdb420d9cc9842c507c6b1f3a18b50a3ff963c4b63f17353d31b4d"
+    },
+    {
+      "path": "examples/minimal-model/docs/generated/objects/solution-patterns/PAT-001-standardiserad-applikationskorning.md",
+      "role": "support",
+      "required": false,
+      "sha256": "d780b465712a76f19133c9028ffc1583adf680d03ede6e55891342521e02c06b"
+    },
+    {
+      "path": "examples/minimal-model/docs/generated/objects/standards/STD-001-standard-for-paketering-av-applikationer.md",
+      "role": "support",
+      "required": false,
+      "sha256": "fc1840ddd8d33e5204a8ebacb989d254419a74aa52c3bd2167aec6feb18e36c3"
+    },
+    {
+      "path": "examples/minimal-model/docs/generated/plattformar.md",
+      "role": "support",
+      "required": false,
+      "sha256": "b340d046776783db6c22436b4bcf146133526bbf79fb3399364db51c48b2e792"
+    },
+    {
+      "path": "examples/minimal-model/docs/generated/plattformstjanster.md",
+      "role": "support",
+      "required": false,
+      "sha256": "f9c4e813d1086b9640441f0e51645f6cf454bccf0475c792ef1106551e571d16"
+    },
+    {
+      "path": "examples/minimal-model/docs/generated/principer.md",
+      "role": "support",
+      "required": false,
+      "sha256": "76bd24fea120c467b1a44b40f097cb2014666cb06ca8e35aeef11d3a18e6baf5"
+    },
+    {
+      "path": "examples/minimal-model/docs/generated/referensarkitekturer.md",
+      "role": "support",
+      "required": false,
+      "sha256": "18761406fa4b9d9a7c257c3293d9536f8cd039eb26bc94be192b9ab75083ed77"
+    },
+    {
+      "path": "examples/minimal-model/docs/generated/standarder.md",
+      "role": "support",
+      "required": false,
+      "sha256": "3bdab513e111536c93026129555735727af2a2139f1188944bfe223370928730"
+    },
+    {
+      "path": "examples/minimal-model/exports/confluence/drivkrafter.txt",
+      "role": "support",
+      "required": false,
+      "sha256": "1c8ea315775a12411b974b83238d47e43adcc21ce8c914f28a225bd28eb5a6ff"
+    },
+    {
+      "path": "examples/minimal-model/exports/confluence/formagor.txt",
+      "role": "support",
+      "required": false,
+      "sha256": "d400effcc0341af844ad211ceb233027e5b0f7a9f906c5690e87dd4e3e7c6458"
+    },
+    {
+      "path": "examples/minimal-model/exports/confluence/it-stod.txt",
+      "role": "support",
+      "required": false,
+      "sha256": "1b74fe26fa62fcad13cfcf34c4f8be97051398417002dce50697a298e392e040"
+    },
+    {
+      "path": "examples/minimal-model/exports/confluence/losningsmonster.txt",
+      "role": "support",
+      "required": false,
+      "sha256": "d201d764dc3b4dc38feb285174840dcebc978269b51a617737afbec8ebbee055"
+    },
+    {
+      "path": "examples/minimal-model/exports/confluence/mal.txt",
+      "role": "support",
+      "required": false,
+      "sha256": "8a676eb148c3579f7a3e83bcf889d7b02c4fd0c0a24764ae730be9a6b928b45b"
+    },
+    {
+      "path": "examples/minimal-model/exports/confluence/objects/capabilities/CAP-001-hantera-arenden-digitalt.txt",
+      "role": "support",
+      "required": false,
+      "sha256": "983fb403b4b8ee5d62c23daf31f7c9925ffd569774ec272271d5a3e253bc6e59"
+    },
+    {
+      "path": "examples/minimal-model/exports/confluence/objects/capabilities/CAP-002-driftsatta-och-kora-applikationer.txt",
+      "role": "support",
+      "required": false,
+      "sha256": "e8e991f322a65837df6b2d632007cba1040c43283b34908d07a041b69968fdd5"
+    },
+    {
+      "path": "examples/minimal-model/exports/confluence/objects/drivers/DRV-001-kortare-ledtid-for-digital-utveckling.txt",
+      "role": "support",
+      "required": false,
+      "sha256": "97e9751132acf367c820c2e0e3be29c83d82efaa561be9bba12b17f16aceab7f"
+    },
+    {
+      "path": "examples/minimal-model/exports/confluence/objects/goals/GOAL-001-snabbare-och-mer-sjalvstandig-utveckling.txt",
+      "role": "support",
+      "required": false,
+      "sha256": "dd0346fcf9bca62616fbe2cf4bd4a5f71bf6e186d6179c330e63287853356734"
+    },
+    {
+      "path": "examples/minimal-model/exports/confluence/objects/it-support/ITS-001-arendehanteringsstod.txt",
+      "role": "support",
+      "required": false,
+      "sha256": "189024585cdc3d7ed37b3173ae7a42acfe170f3688b812426d7478c19d93fa71"
+    },
+    {
+      "path": "examples/minimal-model/exports/confluence/objects/platform-services/PLS-001-containerplattformstjanst.txt",
+      "role": "support",
+      "required": false,
+      "sha256": "8b94c9dfad21e61ce5e3b60824cd50530afe6b374d7d3fd8beb6d77bf35c5fe6"
+    },
+    {
+      "path": "examples/minimal-model/exports/confluence/objects/platforms/PLT-001-containerplattform.txt",
+      "role": "support",
+      "required": false,
+      "sha256": "34187aa1cfcec1ebb677ce408a3772ea4bc8e29741fa40704033208dc131ec21"
+    },
+    {
+      "path": "examples/minimal-model/exports/confluence/objects/principles/PRN-001-gemensamma-behov-realiseras-som-ateranvandbara-tjanster.txt",
+      "role": "support",
+      "required": false,
+      "sha256": "0d202ec718d05ca941a9bbf8ef788a684f41c6a4d8d9ccdcc99ae367cd1b5021"
+    },
+    {
+      "path": "examples/minimal-model/exports/confluence/objects/reference-architectures/RA-001-referensarkitektur-for-gemensam-applikationskorning.txt",
+      "role": "support",
+      "required": false,
+      "sha256": "c2a4e0bfe08fc0f957bed1bcb8e48a6454ff5c437683b7a40b45ab82672bd568"
+    },
+    {
+      "path": "examples/minimal-model/exports/confluence/objects/solution-patterns/PAT-001-standardiserad-applikationskorning.txt",
+      "role": "support",
+      "required": false,
+      "sha256": "8d3d8a269c9ff5c0a3d2afd8d746d5df9b93d4951f67682f757d9b6d77bdfa5f"
+    },
+    {
+      "path": "examples/minimal-model/exports/confluence/objects/standards/STD-001-standard-for-paketering-av-applikationer.txt",
+      "role": "support",
+      "required": false,
+      "sha256": "8545039b351d27f5e39f15ecf1f75750c02a6341d2beffd54e259c0fbca122bf"
+    },
+    {
+      "path": "examples/minimal-model/exports/confluence/plattformar.txt",
+      "role": "support",
+      "required": false,
+      "sha256": "9ffdcb3a0366e054e24ed6b1a179b9e101c5fa1706e0c7e8e51cdfed05208091"
+    },
+    {
+      "path": "examples/minimal-model/exports/confluence/plattformstjanster.txt",
+      "role": "support",
+      "required": false,
+      "sha256": "eb4c9c1dc2962a2a9c1d322797e0ffccb3410262d0eb29092f60ad5b8310d775"
+    },
+    {
+      "path": "examples/minimal-model/exports/confluence/principer.txt",
+      "role": "support",
+      "required": false,
+      "sha256": "bf21cf89297ceeb4e7092c6e173bbb4eb85677025ac4d90bb476b0204c86b083"
+    },
+    {
+      "path": "examples/minimal-model/exports/confluence/referensarkitekturer.txt",
+      "role": "support",
+      "required": false,
+      "sha256": "8cf1b6d7a659d158fe6b1ca362e3b23e370a26baa22de31164c6902badf20f33"
+    },
+    {
+      "path": "examples/minimal-model/exports/confluence/standarder.txt",
+      "role": "support",
+      "required": false,
+      "sha256": "f1929dfe0f7bc9ae89a30d2ba40af49b1772a32a5e6bc566b248aa12bb03d14a"
+    },
+    {
+      "path": "examples/minimal-model/exports/document/ea-dokumentation-published.docx",
+      "role": "support",
+      "required": false,
+      "sha256": "426993ab0fd566cb8e49f00cd90ee7c43e79143e033143ed353e7b5792836274"
+    },
+    {
+      "path": "examples/minimal-model/exports/document/ea-dokumentation-published.pdf",
+      "role": "support",
+      "required": false,
+      "sha256": "b95c98266ff43e4cbba71a45fbe933635de176ea35a800777d80b54f7ba6862b"
+    },
+    {
+      "path": "examples/minimal-model/exports/document/ea-dokumentation-working.docx",
+      "role": "support",
+      "required": false,
+      "sha256": "0a1480cad7f341d59db6414c0efae8525902fd2f589856154172f75b89661cf8"
+    },
+    {
+      "path": "examples/minimal-model/exports/document/ea-dokumentation-working.pdf",
+      "role": "support",
+      "required": false,
+      "sha256": "4cd8a5bfbb4547b20910e56d6ab622a7784c5daddfff560e7b1715f613afb256"
+    },
+    {
+      "path": "examples/minimal-model/model/capabilities.yaml",
+      "role": "support",
+      "required": false,
+      "sha256": "a7f931e45ff55c9945c904e275d4b61469b56f70ff1074d6a8a8fb63b31256ea"
+    },
+    {
+      "path": "examples/minimal-model/model/drivers.yaml",
+      "role": "support",
+      "required": false,
+      "sha256": "b16dd74c255192a51639050c05262ec83648aa287eff6512a90a9df041111750"
+    },
+    {
+      "path": "examples/minimal-model/model/goals.yaml",
+      "role": "support",
+      "required": false,
+      "sha256": "9016f82f776b669193f39e80c6583244cb61106ed23904cb96749807c53b654a"
+    },
+    {
+      "path": "examples/minimal-model/model/it-support.yaml",
+      "role": "support",
+      "required": false,
+      "sha256": "b9afcd1c7bdd429a93f7eb4c529b9ed0f062667c7c2f1d6aa64b17c98515fc8b"
+    },
+    {
+      "path": "examples/minimal-model/model/platform-services.yaml",
+      "role": "support",
+      "required": false,
+      "sha256": "7251e2180cad817da434129607b5ed8722b71c7cf1d176a430b9b314c04d6d0b"
+    },
+    {
+      "path": "examples/minimal-model/model/platforms.yaml",
+      "role": "support",
+      "required": false,
+      "sha256": "6f61ef2fc7ab66fc60076cbaaec58356d67d8d6431b70da990d20fb460cadf97"
+    },
+    {
+      "path": "examples/minimal-model/model/principles.yaml",
+      "role": "support",
+      "required": false,
+      "sha256": "2dd603b10c1de0377daa3b16f5462f041e3e3163e80d8b4b9e81ae9128a4e2bb"
+    },
+    {
+      "path": "examples/minimal-model/model/reference-architectures.yaml",
+      "role": "support",
+      "required": false,
+      "sha256": "b4431020bd769051ec955b3640e3ba0b375b774c3d3e5f5d77d989b1136395f5"
+    },
+    {
+      "path": "examples/minimal-model/model/relations.yaml",
+      "role": "support",
+      "required": false,
+      "sha256": "bff01eed061fd87df9373dc52dc82d4d9bccd58ce63ce6b6a08b3ca348975d15"
+    },
+    {
+      "path": "examples/minimal-model/model/solution-patterns.yaml",
+      "role": "support",
+      "required": false,
+      "sha256": "3fb2ba26a3876124fa1a0b7d982f4b254effaf75070a42427f289b4b2dc78252"
+    },
+    {
+      "path": "examples/minimal-model/model/sources.yaml",
+      "role": "support",
+      "required": false,
+      "sha256": "ea62d1180e24995f34e23f794ae804b8ea11d7859a70df4a7fe8005bd51b0043"
+    },
+    {
+      "path": "examples/minimal-model/model/standards.yaml",
+      "role": "support",
+      "required": false,
+      "sha256": "5c34851c4b84e2ba2cd1af4e033379b004ff7fc14034daa98cfd378b4c346af0"
+    },
+    {
+      "path": "examples/minimal-model/revision-log.md",
+      "role": "support",
+      "required": false,
+      "sha256": "92ad02f257cafaec61d4a310770f82868d61b27839693784e3c7c8c83ee6fede"
+    },
+    {
+      "path": "knowledge/classification-guide.md",
+      "role": "support",
+      "required": false,
+      "sha256": "1f83c5e40982d731c9b174a3bbb7c21416e2fef49a6ef2b3b1c11e4b4edef625"
+    },
+    {
+      "path": "knowledge/conflicts-and-uncertainty.md",
+      "role": "support",
+      "required": true,
+      "sha256": "bb138763cc382fd82931aa3b4a76b7bd77b7a5c7a8bd44d1c6d064d28bb24d34"
+    },
+    {
+      "path": "knowledge/project-status-rules.md",
+      "role": "support",
+      "required": false,
+      "sha256": "d9dd629c0e4af80a744923b1689116736fb2df2741b0e1a1c462753893628a4d"
+    },
+    {
+      "path": "knowledge/quality-model.md",
+      "role": "support",
+      "required": false,
+      "sha256": "b8564249d6a4aee055ef19f85d67cf258515d9e10a679897688a06490e573a6b"
+    },
+    {
+      "path": "knowledge/quality-object.md",
+      "role": "support",
+      "required": false,
+      "sha256": "bdc205a066edadc7ac200a30f92ab90c66fe07675c241f9abafa86a29a824006"
+    },
+    {
+      "path": "knowledge/workflow-extraction.md",
+      "role": "support",
+      "required": false,
+      "sha256": "0ea6fd06893e0e8f726279d636155efa2615c9927bedf5eba524cf91e34c774f"
+    },
+    {
+      "path": "knowledge/workflow-model-design.md",
+      "role": "support",
+      "required": false,
+      "sha256": "db89ab716abfd34f56632c2c95637ffe8b9d55f6c407cdcf26a75f35451cf1be"
+    },
+    {
+      "path": "knowledge/workflow-research.md",
+      "role": "support",
+      "required": false,
+      "sha256": "3a03c35a86083989532794510e587747240ab7a95e64e749cb76d991a411a9ad"
+    },
+    {
+      "path": "knowledge/workflow-update.md",
+      "role": "support",
+      "required": false,
+      "sha256": "e949ca9e23555abc9b7c5e9751a503cb2c97dbb5af58a0aa507b9de93e9fbf58"
+    },
+    {
+      "path": "knowledge/workflow-usage.md",
+      "role": "support",
+      "required": false,
+      "sha256": "20d45bbfab8ba9b4533afa7a9c2ef0b6123ec6514cb5b2e67e3fa107d28b9da3"
+    },
+    {
+      "path": "model/capabilities.yaml",
+      "role": "canonical_model",
+      "required": true,
+      "sha256": "eeadaa8a0e24ae75351f42b487a74b082d5296e1af3b56e2359221e743b13488"
+    },
+    {
+      "path": "model/drivers.yaml",
+      "role": "canonical_model",
+      "required": true,
+      "sha256": "83f38e1a41b40f7a7c3150c48c50cf9b00e6bf0409e1e83812ed5d8fa176cc54"
+    },
+    {
+      "path": "model/goals.yaml",
+      "role": "canonical_model",
+      "required": true,
+      "sha256": "addbf51ff0b5a42054d42c63d580861072c9107b8f5a6a9b9bcc2b33a1490949"
+    },
+    {
+      "path": "model/it-support.yaml",
+      "role": "canonical_model",
+      "required": true,
+      "sha256": "c931cdc1b20d8b270bdc0858a59a67e2d6d7c65d6ac74385ffb249c6ea7afa1a"
+    },
+    {
+      "path": "model/platform-services.yaml",
+      "role": "canonical_model",
+      "required": true,
+      "sha256": "d7c86f2e1b5174a51ec13bd2e7f91ad0d777dd6cd533ffe884e8ca053bb775cd"
+    },
+    {
+      "path": "model/platforms.yaml",
+      "role": "canonical_model",
+      "required": true,
+      "sha256": "405d346b1d7d60b78721f632fe4e2082127b71326a1b65f7845285a70d319584"
+    },
+    {
+      "path": "model/principles.yaml",
+      "role": "canonical_model",
+      "required": true,
+      "sha256": "401a10b87561494d1f121cbedd24bfb98c70fb39e8bf8e2a7f17b50d7346f58f"
+    },
+    {
+      "path": "model/reference-architectures.yaml",
+      "role": "canonical_model",
+      "required": true,
+      "sha256": "dbdb16ae98250ba65314434279a9c2dca3b2ef35a8abe6b211ba4b548c66a36f"
+    },
+    {
+      "path": "model/relations.yaml",
+      "role": "canonical_model",
+      "required": true,
+      "sha256": "240477fb66391c7735eeff74dabdb60e0f84f296101bf2184656e555145b0ed6"
+    },
+    {
+      "path": "model/solution-patterns.yaml",
+      "role": "canonical_model",
+      "required": true,
+      "sha256": "3a8dd2198ad2a7cd004ef8571d97c02f4aa67ffb6d9e259635dae982b0459104"
+    },
+    {
+      "path": "model/sources.yaml",
+      "role": "canonical_model",
+      "required": true,
+      "sha256": "c68cfdd95fdc474c591516265e7e46d3794caad0a9d04636e07c4d29ed332637"
+    },
+    {
+      "path": "model/standards.yaml",
+      "role": "canonical_model",
+      "required": true,
+      "sha256": "ed770a02cedcb44fddf85ed59ba47024aa7d056779d1015007a245559c4b75f7"
+    },
+    {
+      "path": "requirements-dev.txt",
+      "role": "support",
+      "required": true,
+      "sha256": "00a27188140217e8344a3032abf6f83c45ce15bdeb0d95919d7b8a1aaf1822f6"
+    },
+    {
+      "path": "revision-log.md",
+      "role": "documentation_source",
+      "required": true,
+      "sha256": "2cda965edaaa60567c71fc9f61db722eb94238a391108831900f60894cf2f928"
+    },
+    {
+      "path": "schemas/conflicts-and-uncertainty.yaml",
+      "role": "schema",
+      "required": true,
+      "sha256": "ef4fad4564de71a451dc0a425af85d85b274a47562b5bc84a703ea675e3f7b41"
+    },
+    {
+      "path": "schemas/model-format.yaml",
+      "role": "schema",
+      "required": true,
+      "sha256": "567243de6b9f106507178c13fb0f8952243c7344d240d7428889d41786e0bf67"
+    },
+    {
+      "path": "schemas/model-quality-rules.yaml",
+      "role": "schema",
+      "required": true,
+      "sha256": "e76b58f523c9cd6de7cdc010b59ef34e03a8f8ca1a1c6fe6507b231bc9890465"
+    },
+    {
+      "path": "schemas/object-quality-rules.yaml",
+      "role": "schema",
+      "required": true,
+      "sha256": "be0e8f728100816d831fdf931186798092c7aa2d1ece1ec43ace2274b6e88d33"
+    },
+    {
+      "path": "schemas/object-types.yaml",
+      "role": "schema",
+      "required": true,
+      "sha256": "02f27fd0e6bc0271382c2144f95017b133dbc49a3b168b57125a5aa928fd0773"
+    },
+    {
+      "path": "schemas/project-manifest.schema.json",
+      "role": "schema",
+      "required": true,
+      "sha256": "eef9cc39667f346ee70cd9976d4d7590005fc4954e0cb13474f0111ed3076657"
+    },
+    {
+      "path": "schemas/provenance.yaml",
+      "role": "schema",
+      "required": true,
+      "sha256": "0b4817606295f35705a4ead49ca5a20d76ee612e8bf56ed6d58c6a2c5c3b3eff"
+    },
+    {
+      "path": "schemas/relations.yaml",
+      "role": "schema",
+      "required": true,
+      "sha256": "6b114b7e3f92c65e39a898a992794996fc79718f14f6233ba8b1d6cce364fc5f"
+    },
+    {
+      "path": "schemas/semantic-eval.schema.json",
+      "role": "schema",
+      "required": false,
+      "sha256": "26ba95c8487ff651e46d6ad2fa023f2d4f1f2ff56ff93da137b79bc53e5fee88"
+    },
+    {
+      "path": "scripts/build_builder_knowledge.py",
+      "role": "support",
+      "required": false,
+      "sha256": "84d99426ac52418cb7c297f324a0d3d2c283661bbef16af14c967f0f52d5cc92"
+    },
+    {
+      "path": "scripts/docx-pagebreak.lua",
+      "role": "support",
+      "required": false,
+      "sha256": "9a3507106979a2044564c34de2111793859f54e7fcb032da558e2bd17ec8ff2c"
+    },
+    {
+      "path": "scripts/export_documents.py",
+      "role": "support",
+      "required": false,
+      "sha256": "a5fc1da0be9d65144b99aa29d333bd570d58c6a7628b7ebe41b82af5cb94bdf8"
+    },
+    {
+      "path": "scripts/generate_confluence.py",
+      "role": "support",
+      "required": false,
+      "sha256": "0efe8b918fb1081aed7788082cc25ed9ce568bc2fcd52072f2621b8843026740"
+    },
+    {
+      "path": "scripts/generate_markdown.py",
+      "role": "support",
+      "required": false,
+      "sha256": "300b9c6a3de1c8b25aba432753987064013e820da1942bb5aaed6be82c96b0ee"
+    },
+    {
+      "path": "scripts/package_release.py",
+      "role": "support",
+      "required": true,
+      "sha256": "1bda305da41a0182afb2df33e2b97406dffdf380bf3074f7678c92d17262c8ef"
+    },
+    {
+      "path": "scripts/validate_project.py",
+      "role": "support",
+      "required": true,
+      "sha256": "f2028947592a545e38e2c64ac8af894210dfbe778318a9b96f51e6d9df083e43"
+    },
+    {
+      "path": "templates/markdown/capabilities-catalog.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "1864f1ab00f5e85ad5660b907456b6d3d56d0e0d8df42b1e1bfbd961a5dc7221"
+    },
+    {
+      "path": "templates/markdown/capability-detail.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "c2557dba30fa02feceaf8d6d5efdc3c58c81731b1417ab5fbefee6c8ca2b8812"
+    },
+    {
+      "path": "templates/markdown/driver-detail.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "27c07239968747231c6411cd5fead35c9ec1a5f3a50ad833171d7e9a2b8b0134"
+    },
+    {
+      "path": "templates/markdown/drivers-catalog.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "95bdc90cd34f2913bb50dcd47a67a0d1cd8154d1ddd00d117ec8b68d0f17f39e"
+    },
+    {
+      "path": "templates/markdown/goal-detail.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "fb883482e1033e161038730b87912fd6104fbff3068391d421d8881876f8fa24"
+    },
+    {
+      "path": "templates/markdown/goals-catalog.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "49b0b29154340e5949a3860392b63642003843970dd6a19a620766a8bedc7c4c"
+    },
+    {
+      "path": "templates/markdown/it-support-catalog.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "cd80e0ca1896ed314549b647f837c8aef0bfc1e88badb31d18993c7ee0230c24"
+    },
+    {
+      "path": "templates/markdown/it-support-detail.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "0ea59ed3e3fb7bb33bd36428c67a2c3c243b66e6f48d57111092c92b322d1b38"
+    },
+    {
+      "path": "templates/markdown/platform-detail.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "2f05e5865aca8959d64025d7688263eeaf9cc38c3c898cf2072d292a1790b5f0"
+    },
+    {
+      "path": "templates/markdown/platform-service-detail.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "bc61d7866aead1322c4617653df3ef53c53f7528693db88f6dc973708d7cb45a"
+    },
+    {
+      "path": "templates/markdown/platform-services-catalog.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "a6465ede042194ba872f63692cc5f00f11662d1249380ca468edc40e40be2593"
+    },
+    {
+      "path": "templates/markdown/platforms-catalog.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "649e785828ddfccc09f3a1d15169aebfcb6dfc971551e25520fdb60af7fc4162"
+    },
+    {
+      "path": "templates/markdown/principle-detail.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "288ed3fd94d3c985ad2f7f4e4b22b46d48741ced14cafd22a032fb08f43610f1"
+    },
+    {
+      "path": "templates/markdown/principles-catalog.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "ed57baaeacf5bce5bba75562c7129b3ed0e02cb62d4f5c6c3ae7b2a5eaf789e8"
+    },
+    {
+      "path": "templates/markdown/reference-architecture-detail.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "b08be5c525c4e6b4a6074247f22fa8b0d47de1c71a05a412821edae4c605829b"
+    },
+    {
+      "path": "templates/markdown/reference-architectures-catalog.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "3e150784d115a00cff79f4ad6fce4445b295f3fa2c17a3fe5aee5e2e056c8fda"
+    },
+    {
+      "path": "templates/markdown/solution-pattern-detail.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "794efce8709870b944f04509f832b16812e1ccabfd6df110d4cc221c3b02e257"
+    },
+    {
+      "path": "templates/markdown/solution-patterns-catalog.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "c09e78506589e3e0f2fd27363f98b1e081304e9e5469d562a77a6694a875ef46"
+    },
+    {
+      "path": "templates/markdown/standard-detail.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "60dff9d254850e138ece94453cc091f166b1afdecf0011799ece439cb370e160"
+    },
+    {
+      "path": "templates/markdown/standards-catalog.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "5d1a22f8f727482bf94c0cba5fade27170c79667269fea7a8a4038999b324dc7"
+    },
+    {
+      "path": "tests/builder/test_builder_knowledge.py",
+      "role": "support",
+      "required": false,
+      "sha256": "04cfbf1fef0279d818c489eb942f39e2311ea59583936c6d8d4ca25d683e5c54"
+    },
+    {
+      "path": "tests/evals/test_eval_suite.py",
+      "role": "support",
+      "required": false,
+      "sha256": "ec0788543b39dffe58505b68a73cf6f47f335d81ef329d8ca09b8d6e6532daf2"
+    },
+    {
+      "path": "tests/extraction/01-explicit-and-derived.md",
+      "role": "support",
+      "required": false,
+      "sha256": "80aab9313cfc7bbdb38ac8341acb69ef2bd3afc82ecb61d1e7ca388d5d03496c"
+    },
+    {
+      "path": "tests/extraction/02-platform-vs-service.md",
+      "role": "support",
+      "required": false,
+      "sha256": "20cbfac93407be69c4d1a046e5df91935bcd4093b3a0af54686442b57b11de5d"
+    },
+    {
+      "path": "tests/extraction/03-no-object.md",
+      "role": "support",
+      "required": false,
+      "sha256": "0926d900ad7b00cce283c9692d5736bcc02be1553e6b7c8d51d6b469e85023cb"
+    },
+    {
+      "path": "tests/extraction/04-duplicate-and-normalization.md",
+      "role": "support",
+      "required": false,
+      "sha256": "12fd4dc9f63bdb736ab793b2ca4c179c8e001ddb184a3ffb45d00f61cb7e0088"
+    },
+    {
+      "path": "tests/extraction/README.md",
+      "role": "support",
+      "required": false,
+      "sha256": "e857b3f3fa39d3fb58f923d7a365673cd291f7c68bbf2de7a3e6622261e5efc6"
+    },
+    {
+      "path": "tests/generation/test_export_documents.py",
+      "role": "support",
+      "required": false,
+      "sha256": "08a36c67a349696c563ea64a2acfe1f936988fe07d983cbed2e222c5827c3c85"
+    },
+    {
+      "path": "tests/generation/test_generate_confluence.py",
+      "role": "support",
+      "required": false,
+      "sha256": "cb2198c379a549d3cb316d09c89edde1f8728cc1201690b48e7e3ac80ae6741e"
+    },
+    {
+      "path": "tests/generation/test_generate_markdown.py",
+      "role": "support",
+      "required": false,
+      "sha256": "4a0d6573d2dc08469b147f4b2c5dac7b6f0e806d0976558628367546f685a9be"
+    },
+    {
+      "path": "tests/release/test_end_to_end_release.py",
+      "role": "support",
+      "required": false,
+      "sha256": "fe5ec374537f239a397c25efe46232aca4867fd6c0a5b84112c1f06d4ba45900"
+    },
+    {
+      "path": "tests/release/test_package_release.py",
+      "role": "support",
+      "required": false,
+      "sha256": "9288eea73a6ba5fd5b9705ae4030e2101301363d911b2006c448d174d3a222cd"
+    },
+    {
+      "path": "tests/scenarios/01-strategy-to-drivers-goals.md",
+      "role": "support",
+      "required": false,
+      "sha256": "2dda8a6d0931c9a0000a3e60a3e31402c25ac49934d762d75841038d2afcc74d"
+    },
+    {
+      "path": "tests/scenarios/02-unstructured-it-to-capabilities.md",
+      "role": "support",
+      "required": false,
+      "sha256": "2e55457f26a150deeef1db67052512423ef55810727f527ac8d13f0fa1a8f4a3"
+    },
+    {
+      "path": "tests/scenarios/03-supporting-it-capabilities.md",
+      "role": "support",
+      "required": false,
+      "sha256": "8bc40de2eae282c5d48c2e8ce8579f5f2f46eae9492992ebac7958e4f5d94d15"
+    },
+    {
+      "path": "tests/scenarios/04-it-support-inventory.md",
+      "role": "support",
+      "required": false,
+      "sha256": "b1bdb398469fd81962c5a4501c975b3e9932df0019ac23acf36ae09aac479d8c"
+    },
+    {
+      "path": "tests/scenarios/05-platform-vs-service.md",
+      "role": "support",
+      "required": false,
+      "sha256": "f9be1c4539c30adcfd12e932756109e7e071fc64c1e1c04ed9948f83fe0b6add"
+    },
+    {
+      "path": "tests/scenarios/06-standards-and-principles.md",
+      "role": "support",
+      "required": false,
+      "sha256": "f6c2003c7ca6f1462a7e3040e6090d444e8b240b88ba6002a612f916156cd3dd"
+    },
+    {
+      "path": "tests/scenarios/07-fragmented-conflicting-input.md",
+      "role": "support",
+      "required": false,
+      "sha256": "f15e0a18678640c554622c85dc0535a6f892f7d04936b6594da6fe1599719a2b"
+    },
+    {
+      "path": "tests/scenarios/08-research-based-model-proposal.md",
+      "role": "support",
+      "required": false,
+      "sha256": "25b9848ca8006ea9097542306ae1b3a0c32932bbe8495a10d65352fea10d70ad"
+    },
+    {
+      "path": "tests/scenarios/09-duplicates-wrong-levels.md",
+      "role": "support",
+      "required": false,
+      "sha256": "83a5224317317c546258ead7a0351700a0e143e780de5c57f4b5489c434573f5"
+    },
+    {
+      "path": "tests/scenarios/10-insufficient-evidence.md",
+      "role": "support",
+      "required": false,
+      "sha256": "b790672efa0c52a591117d65d8ae9a4417a0555bd126c5f96e352a2f9627c641"
+    },
+    {
+      "path": "tests/scenarios/README.md",
+      "role": "support",
+      "required": false,
+      "sha256": "618015b5843635a140a79d68d187fd93c6532cae1830505ddb0f32f6db7f23eb"
+    },
+    {
+      "path": "tests/scenarios/test_stress_scenarios.py",
+      "role": "support",
+      "required": false,
+      "sha256": "19049eb2580de6ce672c1a10e9e384fcabe0bf11e559f10e27c42147fcf7955e"
+    },
+    {
+      "path": "tests/validation/test_validate_project.py",
+      "role": "support",
+      "required": false,
+      "sha256": "a0c3b3d88400dbb193e44d0261b8df0fc53b98278ad530e02172db88966585a9"
+    }
+  ]
+}

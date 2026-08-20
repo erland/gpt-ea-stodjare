@@ -1,0 +1,114 @@
+{
+  "format": "ea-stodjare-project",
+  "format_version": "1.0",
+  "project": {
+    "id": "minimal-ea-model",
+    "name": "Minimal EA-modell",
+    "kind": "ea_reference_example",
+    "language": "sv-SE",
+    "revision": 5,
+    "created_at": "2026-08-20T17:50:00+02:00",
+    "updated_at": "2026-08-20T18:28:00+02:00",
+    "lifecycle_status": "draft"
+  },
+  "model": {
+    "root": "model",
+    "serialization": "YAML",
+    "model_format_version": "1.0",
+    "metamodel_version": "1.0",
+    "relation_model_version": "1.0",
+    "provenance_model_version": "1.0"
+  },
+  "integrity": {
+    "algorithm": "sha256",
+    "manifest_self_hash": false,
+    "inventory_order": "path-ascending",
+    "canonical_model_required": true
+  },
+  "files": [
+    {
+      "path": "PROJECT_STATUS.md",
+      "role": "governance",
+      "required": true,
+      "sha256": "de7776f7b87fbfe8b9ae352f5781bc0839ece0256497e43742fd94ff56445b9d"
+    },
+    {
+      "path": "model/capabilities.yaml",
+      "role": "canonical_model",
+      "required": true,
+      "sha256": "a7f931e45ff55c9945c904e275d4b61469b56f70ff1074d6a8a8fb63b31256ea"
+    },
+    {
+      "path": "model/drivers.yaml",
+      "role": "canonical_model",
+      "required": true,
+      "sha256": "b16dd74c255192a51639050c05262ec83648aa287eff6512a90a9df041111750"
+    },
+    {
+      "path": "model/goals.yaml",
+      "role": "canonical_model",
+      "required": true,
+      "sha256": "9016f82f776b669193f39e80c6583244cb61106ed23904cb96749807c53b654a"
+    },
+    {
+      "path": "model/it-support.yaml",
+      "role": "canonical_model",
+      "required": true,
+      "sha256": "b9afcd1c7bdd429a93f7eb4c529b9ed0f062667c7c2f1d6aa64b17c98515fc8b"
+    },
+    {
+      "path": "model/platform-services.yaml",
+      "role": "canonical_model",
+      "required": true,
+      "sha256": "7251e2180cad817da434129607b5ed8722b71c7cf1d176a430b9b314c04d6d0b"
+    },
+    {
+      "path": "model/platforms.yaml",
+      "role": "canonical_model",
+      "required": true,
+      "sha256": "6f61ef2fc7ab66fc60076cbaaec58356d67d8d6431b70da990d20fb460cadf97"
+    },
+    {
+      "path": "model/principles.yaml",
+      "role": "canonical_model",
+      "required": true,
+      "sha256": "2dd603b10c1de0377daa3b16f5462f041e3e3163e80d8b4b9e81ae9128a4e2bb"
+    },
+    {
+      "path": "model/reference-architectures.yaml",
+      "role": "canonical_model",
+      "required": true,
+      "sha256": "b4431020bd769051ec955b3640e3ba0b375b774c3d3e5f5d77d989b1136395f5"
+    },
+    {
+      "path": "model/relations.yaml",
+      "role": "canonical_model",
+      "required": true,
+      "sha256": "bff01eed061fd87df9373dc52dc82d4d9bccd58ce63ce6b6a08b3ca348975d15"
+    },
+    {
+      "path": "model/solution-patterns.yaml",
+      "role": "canonical_model",
+      "required": true,
+      "sha256": "3fb2ba26a3876124fa1a0b7d982f4b254effaf75070a42427f289b4b2dc78252"
+    },
+    {
+      "path": "model/sources.yaml",
+      "role": "canonical_model",
+      "required": true,
+      "sha256": "ea62d1180e24995f34e23f794ae804b8ea11d7859a70df4a7fe8005bd51b0043"
+    },
+    {
+      "path": "model/standards.yaml",
+      "role": "canonical_model",
+      "required": true,
+      "sha256": "5c34851c4b84e2ba2cd1af4e033379b004ff7fc14034daa98cfd378b4c346af0"
+    },
+    {
+      "path": "revision-log.md",
+      "role": "governance",
+      "required": true,
+      "sha256": "92ad02f257cafaec61d4a310770f82868d61b27839693784e3c7c8c83ee6fede"
+    }
+  ]
+}

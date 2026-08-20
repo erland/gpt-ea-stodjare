@@ -1,0 +1,43 @@
+h1. PAT-001 – Standardiserad applikationskörning
+
+{info:title=Genererad artefakt}
+Genererad från kanonisk YAML · läge working · projektrevision 5
+{info}
+
+* *ID:* PAT-001
+* *Objekttyp:* solution_pattern
+* *Status:* candidate
+
+h2. Beskrivning
+
+Återanvändbart mönster för att låta IT-stöd konsumera en gemensam körmiljö via en plattformstjänst.
+
+h2. Problem
+
+Projekt bygger annars egna körmiljöer för likartade behov.
+
+h2. Kontext
+
+IT-stöd som kan köras på den gemensamma plattformen.
+
+h2. Angreppssätt
+
+Konsumera den standardiserade containerplattformstjänsten och följ tillhörande standarder.
+
+h2. Konsekvenser
+
+* Mindre projektspecifik infrastruktur.
+* Beroende av plattformstjänstens erbjudande och livscykel.
+
+h2. Relationer
+
+h3. Härleds från ({{derived_from}})
+* [Gemensamma behov realiseras som återanvändbara tjänster|PRN-001 – Gemensamma behov realiseras som återanvändbara tjänster] ({{PRN-001}})
+
+h3. Realiserar ({{realized_by}})
+* [Referensarkitektur för gemensam applikationskörning|RA-001 – Referensarkitektur för gemensam applikationskörning] ({{RA-001}})
+
+h2. Proveniens
+* *proposed* — confidence: medium
+** Motiv: Mönstret exemplifierar hur princip och standard kan omsättas återanvändbart.
+** Härledd från: PRN-001, STD-001

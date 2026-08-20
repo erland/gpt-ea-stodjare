@@ -1,0 +1,79 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate tag
+        shell: bash
+        run: |
+          [[ "$GITHUB_REF_NAME" =~ ^v[0-9]+\.[0-9]+\.[0-9]+([+-][0-9A-Za-z.-]+)?$ ]] || {
+            echo "Taggen måste följa vMAJOR.MINOR.PATCH, exempelvis v1.0.0" >&2
+            exit 1
+          }
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: requirements-dev.txt
+
+      - name: Install dependencies
+        run: |
+          python -m pip install -r requirements-dev.txt
+          sudo apt-get update
+          sudo apt-get install -y pandoc libreoffice poppler-utils
+
+      - name: Validate and test release candidate
+        run: |
+          python scripts/validate_project.py --project-root .
+          python -m pytest -q
+          python tests/evals/test_eval_suite.py
+          python tests/builder/test_builder_knowledge.py
+          python tests/generation/test_generate_markdown.py
+          python tests/generation/test_generate_confluence.py
+          python tests/generation/test_export_documents.py
+
+      - name: Build release package
+        run: python scripts/package_release.py --project-root . --output-dir dist
+
+      - name: Verify release package can be unpacked and validated
+        shell: bash
+        run: |
+          tmp="$(mktemp -d)"
+          unzip -q "dist/ea-stodjare-${GITHUB_REF_NAME#v}.zip" -d "$tmp"
+          python scripts/validate_project.py --project-root "$tmp/ea-stodjare-${GITHUB_REF_NAME#v}"
+
+      - name: Upload workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ea-stodjare-${{ github.ref_name }}
+          path: |
+            dist/ea-stodjare-*.zip
+            dist/ea-stodjare-*.release.json
+          if-no-files-found: error
+
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" \
+            dist/ea-stodjare-*.zip \
+            dist/ea-stodjare-*.release.json \
+            --verify-tag \
+            --generate-notes \
+            --title "EA Stödjare ${GITHUB_REF_NAME#v}"

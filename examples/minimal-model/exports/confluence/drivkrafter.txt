@@ -1,0 +1,10 @@
+h1. Drivkrafter
+
+{info:title=Genererad artefakt}
+Genererad från kanonisk YAML · läge working · projektrevision 5
+{info}
+
+Denna katalog visar drivkrafter i EA-modellen.
+
+|| ID || Namn || Beskrivning || Kategori || Status ||
+| DRV-001 | [Kortare ledtid för digital utveckling|DRV-001 – Kortare ledtid för digital utveckling] | Behov av att minska tiden från verksamhetsbehov till användbart IT-stöd. | verksamhetsutveckling | approved |

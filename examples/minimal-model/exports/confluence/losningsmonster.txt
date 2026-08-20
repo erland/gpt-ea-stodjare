@@ -1,0 +1,10 @@
+h1. Lösningsmönster
+
+{info:title=Genererad artefakt}
+Genererad från kanonisk YAML · läge working · projektrevision 5
+{info}
+
+Denna katalog visar lösningsmönster i EA-modellen.
+
+|| ID || Namn || Problem/kontext || Status ||
+| PAT-001 | [Standardiserad applikationskörning|PAT-001 – Standardiserad applikationskörning] | Projekt bygger annars egna körmiljöer för likartade behov. / IT-stöd som kan köras på den gemensamma plattformen. | candidate |

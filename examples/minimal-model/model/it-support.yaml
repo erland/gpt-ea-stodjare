@@ -1,0 +1,17 @@
+schema_version: '1.0'
+object_type: it_support
+objects:
+- id: ITS-001
+  type: it_support
+  name: Ärendehanteringsstöd
+  description: Digitalt IT-stöd för registrering och hantering av verksamhetsärenden.
+  status: approved
+  functions:
+  - name: Registrera ärende
+  - name: Tilldela ärende
+  - name: Följa ärendestatus
+  provenance:
+  - evidence_type: explicit
+    source_id: SRC-002
+    reference: Systempost 17
+    confidence: high

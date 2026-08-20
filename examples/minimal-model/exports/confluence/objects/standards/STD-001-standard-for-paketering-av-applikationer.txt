@@ -1,0 +1,28 @@
+h1. STD-001 – Standard för paketering av applikationer
+
+{info:title=Genererad artefakt}
+Genererad från kanonisk YAML · läge working · projektrevision 5
+{info}
+
+* *ID:* STD-001
+* *Objekttyp:* standard
+* *Status:* candidate
+
+h2. Beskrivning
+
+Exempelstandard som anger ett gemensamt paketeringssätt för applikationer som använder containerplattformstjänsten.
+
+h2. Egenskaper
+
+* *Standardtyp:* teknikstandard
+* *Obligatorisk:* True
+
+h2. Relationer
+
+h3. Begränsar ({{constrains}})
+* [Containerplattformstjänst|PLS-001 – Containerplattformstjänst] ({{PLS-001}})
+
+h2. Proveniens
+* *proposed* — confidence: medium
+** Motiv: En konkret standard föreslås som operationalisering av principen.
+** Härledd från: PRN-001

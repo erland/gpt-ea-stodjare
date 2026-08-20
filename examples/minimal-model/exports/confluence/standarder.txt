@@ -1,0 +1,10 @@
+h1. Standarder
+
+{info:title=Genererad artefakt}
+Genererad från kanonisk YAML · läge working · projektrevision 5
+{info}
+
+Denna katalog visar standarder i EA-modellen.
+
+|| ID || Namn || Standardtyp || Referens/version || Obligatorisk || Status ||
+| STD-001 | [Standard för paketering av applikationer|STD-001 – Standard för paketering av applikationer] | teknikstandard |  | true | candidate |

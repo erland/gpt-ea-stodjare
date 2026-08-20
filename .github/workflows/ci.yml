@@ -1,0 +1,62 @@
+name: CI
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: requirements-dev.txt
+
+      - name: Install Python dependencies
+        run: python -m pip install -r requirements-dev.txt
+
+      - name: Install document toolchain
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc libreoffice poppler-utils
+
+      - name: Validate project structure
+        run: python scripts/validate_project.py --project-root .
+
+      - name: Run pytest tests
+        run: python -m pytest -q
+
+      - name: Run script-style regression checks
+        run: |
+          python tests/evals/test_eval_suite.py
+          python tests/builder/test_builder_knowledge.py
+          python tests/generation/test_generate_markdown.py
+          python tests/generation/test_generate_confluence.py
+          python tests/generation/test_export_documents.py
+
+      - name: Verify Builder Knowledge is reproducible
+        run: |
+          tmp="$(mktemp -d)"
+          python scripts/build_builder_knowledge.py --root . --output "$tmp"
+          diff -ru custom-gpt/knowledge "$tmp"
+
+      - name: Smoke-test published document export
+        run: |
+          out="$(mktemp -d)"
+          python scripts/export_documents.py \
+            --project-root examples/minimal-model \
+            --mode published \
+            --output-dir "$out" \
+            --basename ea-dokumentation-published
+          test -s "$out/ea-dokumentation-published.docx"
+          test -s "$out/ea-dokumentation-published.pdf"

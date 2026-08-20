@@ -1,0 +1,136 @@
+conflicts_and_uncertainty_model:
+  name: EA Stödjare konflikthantering och osäkerhetsmodell
+  version: "1.0-draft"
+  status: step-20-defined
+  scope: analysis_and_work_state
+  canonical_ea_object: false
+  notes:
+    - Issue records represent analysis/work-state and do not replace EA objects or relations.
+    - Object lifecycle status, evidence type, confidence and issue resolution status are separate dimensions.
+
+issue_types:
+  - source_conflict
+  - classification_uncertainty
+  - scope_uncertainty
+  - relationship_uncertainty
+  - temporal_conflict
+  - terminology_conflict
+  - missing_decision
+  - other
+
+resolution_statuses:
+  - open
+  - monitoring
+  - resolved
+  - superseded
+
+severity_values:
+  high:
+    default_blocking: true
+    definition: Material risk of incorrect EA content, governance or traceability.
+  medium:
+    default_blocking: false
+    definition: Important uncertainty that normally allows other work to continue.
+  low:
+    default_blocking: false
+    definition: Limited semantic impact or mainly terminological/editorial uncertainty.
+
+confidence_values:
+  - high
+  - medium
+  - low
+
+issue_instance:
+  required_fields:
+    - id
+    - issue_type
+    - title
+    - status
+    - severity
+    - summary
+  optional_fields:
+    - subjects
+    - sources
+    - positions
+    - confidence
+    - blocking
+    - decision_needed
+    - resolution_needed
+    - owner
+    - resolution
+    - resolved_by
+    - notes
+  field_rules:
+    id:
+      type: string
+      pattern: "^ISSUE-[0-9]{3,}$"
+    issue_type:
+      enum_ref: issue_types
+    status:
+      enum_ref: resolution_statuses
+    severity:
+      enum_ref: severity_values
+    subjects:
+      type: reference_list
+      references: [object_id, relation_id]
+    sources:
+      type: source_reference_list
+    confidence:
+      enum_ref: confidence_values
+    blocking:
+      type: boolean
+    decision_needed:
+      type: boolean
+    positions:
+      type: list
+      item_fields:
+        required: [statement]
+        optional: [source_id, reference, notes]
+
+lifecycle_mapping:
+  candidate:
+    meaning: Preliminary or not yet accepted EA object/relation.
+  approved:
+    meaning: Established EA object/relation; does not imply that every attribute is uncertainty-free.
+  deprecated:
+    meaning: Retained for history/transition but not preferred for new use.
+  retired:
+    meaning: No longer active/relevant in the current architecture.
+  obsolete:
+    introduced_as_lifecycle_status: false
+    mapping_guidance:
+      - Use deprecated or retired for EA objects depending on current existence/relevance.
+      - Use superseded for issue/work-state replacement.
+      - Use source analysis status superseded for replaced source material.
+
+validation_rules:
+  - id: UNC-V001
+    severity: error
+    rule: issue_type_is_defined
+  - id: UNC-V002
+    severity: error
+    rule: resolution_status_is_defined
+  - id: UNC-V003
+    severity: error
+    rule: severity_is_defined
+  - id: UNC-V004
+    severity: error
+    rule: referenced_subjects_exist_when_project_model_available
+  - id: UNC-V005
+    severity: error
+    rule: referenced_sources_exist_when_project_source_registry_available
+  - id: UNC-V006
+    severity: warning
+    rule: high_severity_issue_should_explicitly_state_blocking
+  - id: UNC-V007
+    severity: error
+    rule: resolved_issue_requires_resolution
+  - id: UNC-V008
+    severity: error
+    rule: resolved_issue_requires_resolved_by_or_equivalent_basis
+  - id: UNC-V009
+    severity: warning
+    rule: decision_needed_issue_should_describe_resolution_needed
+  - id: UNC-V010
+    severity: error
+    rule: issue_status_must_not_be_used_as_object_lifecycle_status

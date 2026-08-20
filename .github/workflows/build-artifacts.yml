@@ -1,0 +1,55 @@
+name: Build artifacts
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: requirements-dev.txt
+
+      - name: Install dependencies
+        run: |
+          python -m pip install -r requirements-dev.txt
+          sudo apt-get update
+          sudo apt-get install -y pandoc libreoffice poppler-utils
+
+      - name: Validate and test
+        run: |
+          python scripts/validate_project.py --project-root .
+          python -m pytest -q
+          python tests/evals/test_eval_suite.py
+          python tests/builder/test_builder_knowledge.py
+          python tests/generation/test_generate_markdown.py
+          python tests/generation/test_generate_confluence.py
+          python tests/generation/test_export_documents.py
+
+      - name: Generate reference Markdown
+        run: |
+          rm -rf dist/reference
+          mkdir -p dist/reference/markdown dist/reference/confluence dist/reference/document
+          python scripts/generate_markdown.py --project-root examples/minimal-model --mode working --output-dir "$GITHUB_WORKSPACE/dist/reference/markdown/working"
+          python scripts/generate_markdown.py --project-root examples/minimal-model --mode published --output-dir "$GITHUB_WORKSPACE/dist/reference/markdown/published"
+          python scripts/generate_confluence.py --project-root examples/minimal-model --mode working --output-dir "$GITHUB_WORKSPACE/dist/reference/confluence/working"
+          python scripts/generate_confluence.py --project-root examples/minimal-model --mode published --output-dir "$GITHUB_WORKSPACE/dist/reference/confluence/published"
+          python scripts/export_documents.py --project-root examples/minimal-model --mode working --output-dir "$GITHUB_WORKSPACE/dist/reference/document/working" --basename ea-dokumentation-working
+          python scripts/export_documents.py --project-root examples/minimal-model --mode published --output-dir "$GITHUB_WORKSPACE/dist/reference/document/published" --basename ea-dokumentation-published
+
+      - name: Upload generated reference artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ea-stodjare-reference-artifacts
+          path: dist/reference/
+          if-no-files-found: error

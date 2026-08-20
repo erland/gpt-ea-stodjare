@@ -1,0 +1,17 @@
+schema_version: '1.0'
+object_type: standard
+objects:
+- id: STD-001
+  type: standard
+  name: Standard för paketering av applikationer
+  description: Exempelstandard som anger ett gemensamt paketeringssätt för applikationer som använder
+    containerplattformstjänsten.
+  status: candidate
+  standard_type: teknikstandard
+  mandatory: true
+  provenance:
+  - evidence_type: proposed
+    derived_from:
+    - PRN-001
+    rationale: En konkret standard föreslås som operationalisering av principen.
+    confidence: medium

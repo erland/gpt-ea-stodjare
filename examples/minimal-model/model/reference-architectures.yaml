@@ -1,0 +1,24 @@
+schema_version: '1.0'
+object_type: reference_architecture
+objects:
+- id: RA-001
+  type: reference_architecture
+  name: Referensarkitektur för gemensam applikationskörning
+  description: Vägledande referensarkitektur för hur IT-stöd kan använda gemensamma plattformstjänster
+    för applikationskörning.
+  status: candidate
+  scope: Gemensam applikationskörning
+  applicability: IT-stöd som lämpar sig för containeriserad körning
+  building_blocks:
+  - IT-stöd
+  - Containerplattformstjänst
+  - Containerplattform
+  guidance:
+  - Konsumera tjänsten framför att koppla direkt mot plattformens interna implementation.
+  provenance:
+  - evidence_type: proposed
+    derived_from:
+    - PAT-001
+    - PRN-001
+    rationale: Referensarkitekturen sammanför exempelmodellens återanvändbara styrning och realisering.
+    confidence: medium

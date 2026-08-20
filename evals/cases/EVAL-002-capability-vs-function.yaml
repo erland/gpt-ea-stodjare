@@ -1,0 +1,28 @@
+format: ea-stodjare-semantic-eval-case
+version: '1.0'
+id: EVAL-002
+title: Förmåga kontra funktion
+tags:
+- classification
+- capability_vs_function
+prompt: Underlaget innehåller 'Hantera digitala identiteter' och 'Autentisera användare med multifaktor'. Avgör om de bör modelleras som förmåga respektive funktion.
+expected_behaviors:
+- Hantera digitala identiteter behandlas som kandidat till förmåga.
+- Autentisera användare med multifaktor behandlas som funktion hos IT-stöd/plattformstjänst, inte som självständig förmåga utan ytterligare kontext.
+- Svaret förklarar skillnaden mellan organisatorisk förmåga och konkret tillhandahållen funktion.
+forbidden_behaviors:
+- Funktionen läggs som obligatorisk nod mellan förmåga och IT-stöd.
+- Båda behandlas som förmågor utan diskussion.
+grading_criteria:
+- id: EVAL-002-C01
+  description: Hantera digitala identiteter behandlas som kandidat till förmåga.
+  weight: 2
+- id: EVAL-002-C02
+  description: Autentisera användare med multifaktor behandlas som funktion hos IT-stöd/plattformstjänst, inte som självständig förmåga utan ytterligare kontext.
+  weight: 1
+- id: EVAL-002-C03
+  description: Svaret förklarar skillnaden mellan organisatorisk förmåga och konkret tillhandahållen funktion.
+  weight: 1
+critical_failures:
+- Kärnskillnaden förmåga/funktion missas
+notes: Bedöm semantik och motivering, inte exakt ordalydelse.

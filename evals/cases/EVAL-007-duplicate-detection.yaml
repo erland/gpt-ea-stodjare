@@ -1,0 +1,26 @@
+format: ea-stodjare-semantic-eval-case
+version: '1.0'
+id: EVAL-007
+title: Dubblettidentifiering
+tags:
+- normalization
+- duplicates
+prompt: Förmågekatalogen innehåller 'Identitets- och behörighetshantering', 'IAM' och 'Hantera identiteter och access'. Bedöm om det finns dubbletter.
+expected_behaviors:
+- GPT:n identifierar sannolik överlappning men kräver semantisk verifiering före sammanslagning.
+- Alias och namnnormering föreslås där lämpligt.
+- Stabila ID:n och relationer beaktas innan eventuell sammanslagning.
+forbidden_behaviors:
+- Objekten slås ihop enbart på namnlikhet utan kontroll av scope.
+grading_criteria:
+- id: EVAL-007-C01
+  description: GPT:n identifierar sannolik överlappning men kräver semantisk verifiering före sammanslagning.
+  weight: 2
+- id: EVAL-007-C02
+  description: Alias och namnnormering föreslås där lämpligt.
+  weight: 1
+- id: EVAL-007-C03
+  description: Stabila ID:n och relationer beaktas innan eventuell sammanslagning.
+  weight: 1
+critical_failures: []
+notes: Bedöm semantik och motivering, inte exakt ordalydelse.
