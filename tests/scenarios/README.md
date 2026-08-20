@@ -1,5 +1,5 @@
-# Realistiska stresstestscenarier – steg 26
+# Realistiska EA-regressionsscenarier
 
-Dessa scenarier stresstestar EA Stödjare som koncept och metamodel v1 mot sammanhängande, avsiktligt stökiga enterprise architecture-situationer. Underlagen är syntetiska och ska inte tolkas som organisationsfakta.
+Denna katalog innehåller tio syntetiska scenarier som används för att stresstesta centrala klassificerings-, evidens-, research- och modelleringsbeteenden.
 
-Varje scenario beskriver problem, underlag, förväntat EA-beteende, risker och bedömning. Resultatet sammanfattas i `docs/stress-test-report.md`.
+Varje scenario beskriver problem, underlag, förväntat EA-beteende, risker och den designbedömning som scenariot ska skydda. Historiska stresstestrapporter behöver inte ligga i repositoryt; Git bevarar tidigare resultat medan scenarierna och deras automatiska strukturtest utgör den aktiva regressionstillgången.
