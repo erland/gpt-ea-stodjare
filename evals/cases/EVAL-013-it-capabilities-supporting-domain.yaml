@@ -1,0 +1,31 @@
+format: ea-stodjare-semantic-eval-case
+version: '1.0'
+id: EVAL-013
+title: IT-förmågor för stödjande utvecklingsområde
+tags:
+- capability
+- model_design
+prompt: Ett stödjande utvecklingsområde ska göra det möjligt för operativa utvecklingsområden att utveckla och förvalta IT-stöd. Föreslå vilka slags IT-förmågor som bör utredas.
+expected_behaviors:
+- Förslagen formuleras som vad IT-organisationen behöver kunna möjliggöra, inte som produktnamn.
+- Exempel kan omfatta bygg/test, deployment, integration, observability, identitet/secrets eller data beroende på kontext.
+- Plattformstjänster hålls separata från IT-förmågorna.
+- Förslagen markeras som kandidater och bör valideras mot lokala behov.
+forbidden_behaviors:
+- OpenShift, GitHub och Kafka listas som IT-förmågor utan abstraktion.
+grading_criteria:
+- id: EVAL-013-C01
+  description: Förslagen formuleras som vad IT-organisationen behöver kunna möjliggöra, inte som produktnamn.
+  weight: 2
+- id: EVAL-013-C02
+  description: Exempel kan omfatta bygg/test, deployment, integration, observability, identitet/secrets eller data beroende på kontext.
+  weight: 1
+- id: EVAL-013-C03
+  description: Plattformstjänster hålls separata från IT-förmågorna.
+  weight: 1
+- id: EVAL-013-C04
+  description: Förslagen markeras som kandidater och bör valideras mot lokala behov.
+  weight: 1
+critical_failures:
+- Produktlista presenteras som IT-förmågemodell
+notes: Bedöm semantik och motivering, inte exakt ordalydelse.

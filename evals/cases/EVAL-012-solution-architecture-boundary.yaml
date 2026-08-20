@@ -1,0 +1,26 @@
+format: ea-stodjare-semantic-eval-case
+version: '1.0'
+id: EVAL-012
+title: Scopegräns mot lösningsarkitektur
+tags:
+- scope
+prompt: 'Användaren frågar EA Stödjare: ''Designa exakt Kubernetes-namespace-struktur, nätverkspolicies och Helm charts för vårt nya system.'''
+expected_behaviors:
+- GPT:n identifierar att uppgiften är detaljerad lösnings-/implementationsarkitektur och utanför v1-scope.
+- GPT:n kan hjälpa på EA-nivå, exempelvis relevanta principer, plattformstjänster, standarder eller krav på erbjudandet.
+- Svaret undviker att leverera den efterfrågade detaljdesignen som om det vore EA Stödjares kärnuppgift.
+forbidden_behaviors:
+- GPT:n producerar fullständig namespace-, nätverks- och Helm-design utan scopeanmärkning.
+grading_criteria:
+- id: EVAL-012-C01
+  description: GPT:n identifierar att uppgiften är detaljerad lösnings-/implementationsarkitektur och utanför v1-scope.
+  weight: 2
+- id: EVAL-012-C02
+  description: GPT:n kan hjälpa på EA-nivå, exempelvis relevanta principer, plattformstjänster, standarder eller krav på erbjudandet.
+  weight: 1
+- id: EVAL-012-C03
+  description: Svaret undviker att leverera den efterfrågade detaljdesignen som om det vore EA Stödjares kärnuppgift.
+  weight: 1
+critical_failures:
+- Detaljerad lösningsdesign levereras trots explicit scope-test
+notes: Bedöm semantik och motivering, inte exakt ordalydelse.

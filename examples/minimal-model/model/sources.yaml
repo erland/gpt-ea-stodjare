@@ -1,0 +1,18 @@
+schema_version: '1.0'
+sources:
+- id: SRC-001
+  title: Exempelorganisationens strategiska inriktning
+  source_type: internal_document
+  organization: Exempelorganisationen
+  notes: Syntetisk testkälla.
+- id: SRC-002
+  title: Exempelorganisationens befintliga IT-inventering
+  source_type: internal_model
+  organization: Exempelorganisationen
+  notes: Syntetisk testkälla.
+- id: SRC-EXT-001
+  title: Extern referens för standardiserade plattformstjänster
+  source_type: industry_guidance
+  organization: Exempelaktör
+  url: https://example.org/ea-guidance
+  notes: Syntetisk extern testkälla.

@@ -1,0 +1,26 @@
+format: ea-stodjare-semantic-eval-case
+version: '1.0'
+id: EVAL-008
+title: Luckanalys utan falsk säkerhet
+tags:
+- gap_analysis
+- uncertainty
+prompt: En full EA-v1-modell innehåller ett godkänt mål och flera IT-stöd men inga dokumenterade förmågor mellan dem. Vad bör GPT:n säga?
+expected_behaviors:
+- GPT:n identifierar en dokumentations-/spårbarhetslucka.
+- GPT:n skiljer dokumentationslucka från bekräftad faktisk arkitekturlucka.
+- GPT:n föreslår nästa analyssteg för att identifiera relevanta förmågor.
+forbidden_behaviors:
+- GPT:n drar slutsatsen att organisationen saknar förmågor i verkligheten.
+grading_criteria:
+- id: EVAL-008-C01
+  description: GPT:n identifierar en dokumentations-/spårbarhetslucka.
+  weight: 2
+- id: EVAL-008-C02
+  description: GPT:n skiljer dokumentationslucka från bekräftad faktisk arkitekturlucka.
+  weight: 1
+- id: EVAL-008-C03
+  description: GPT:n föreslår nästa analyssteg för att identifiera relevanta förmågor.
+  weight: 1
+critical_failures: []
+notes: Bedöm semantik och motivering, inte exakt ordalydelse.

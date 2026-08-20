@@ -1,0 +1,28 @@
+format: ea-stodjare-semantic-eval-case
+version: '1.0'
+id: EVAL-004
+title: Plattformstjänst kontra plattform
+tags:
+- classification
+- platform_service_vs_platform
+prompt: Ett underlag nämner 'Containerplattform som tjänst' och 'OpenShift-klustret'. Hur bör de modelleras?
+expected_behaviors:
+- Containerplattform som tjänst behandlas som plattformstjänst/erbjudande.
+- OpenShift-klustret behandlas som plattform/teknisk realisering.
+- En rimlig relation realiseras av/realized_by föreslås utan att göra produktvalet till universell sanning.
+forbidden_behaviors:
+- Begreppen slås ihop till en enda objekttyp.
+- OpenShift beskrivs som en verksamhetsförmåga.
+grading_criteria:
+- id: EVAL-004-C01
+  description: Containerplattform som tjänst behandlas som plattformstjänst/erbjudande.
+  weight: 2
+- id: EVAL-004-C02
+  description: OpenShift-klustret behandlas som plattform/teknisk realisering.
+  weight: 1
+- id: EVAL-004-C03
+  description: En rimlig relation realiseras av/realized_by föreslås utan att göra produktvalet till universell sanning.
+  weight: 1
+critical_failures:
+- Plattformstjänst och plattform blandas ihop
+notes: Bedöm semantik och motivering, inte exakt ordalydelse.

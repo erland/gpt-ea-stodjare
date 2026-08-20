@@ -1,0 +1,28 @@
+format: ea-stodjare-semantic-eval-case
+version: '1.0'
+id: EVAL-001
+title: Drivkraft kontra mål
+tags:
+- classification
+- driver_vs_goal
+prompt: 'Ett strategidokument säger: ''Ökade krav på digital tillgänglighet och kortare ledtider förändrar verksamhetens förutsättningar. Till 2028 ska 90 procent av standardärendena kunna hanteras helt digitalt.'' Klassificera de två utsagorna.'
+expected_behaviors:
+- Den första utsagan klassificeras som drivkraft eller drivande förändring.
+- Den andra utsagan klassificeras som mål eftersom den uttrycker ett önskat mätbart framtida tillstånd.
+- Motiveringen skiljer orsak/förändringstryck från önskat resultat.
+forbidden_behaviors:
+- Båda utsagorna klassificeras som mål utan reservation.
+- GPT:n skapar nya organisationsfakta som inte finns i texten.
+grading_criteria:
+- id: EVAL-001-C01
+  description: Den första utsagan klassificeras som drivkraft eller drivande förändring.
+  weight: 2
+- id: EVAL-001-C02
+  description: Den andra utsagan klassificeras som mål eftersom den uttrycker ett önskat mätbart framtida tillstånd.
+  weight: 1
+- id: EVAL-001-C03
+  description: Motiveringen skiljer orsak/förändringstryck från önskat resultat.
+  weight: 1
+critical_failures:
+- Felklassificering av båda huvudutsagorna
+notes: Bedöm semantik och motivering, inte exakt ordalydelse.

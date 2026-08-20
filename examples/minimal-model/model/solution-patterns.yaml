@@ -1,0 +1,21 @@
+schema_version: '1.0'
+object_type: solution_pattern
+objects:
+- id: PAT-001
+  type: solution_pattern
+  name: Standardiserad applikationskörning
+  description: Återanvändbart mönster för att låta IT-stöd konsumera en gemensam körmiljö via en plattformstjänst.
+  status: candidate
+  problem: Projekt bygger annars egna körmiljöer för likartade behov.
+  context: IT-stöd som kan köras på den gemensamma plattformen.
+  approach: Konsumera den standardiserade containerplattformstjänsten och följ tillhörande standarder.
+  consequences:
+  - Mindre projektspecifik infrastruktur.
+  - Beroende av plattformstjänstens erbjudande och livscykel.
+  provenance:
+  - evidence_type: proposed
+    derived_from:
+    - PRN-001
+    - STD-001
+    rationale: Mönstret exemplifierar hur princip och standard kan omsättas återanvändbart.
+    confidence: medium

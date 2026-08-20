@@ -1,0 +1,82 @@
+format: ea-stodjare-semantic-eval-suite
+version: "1.0"
+name: EA Stödjare – semantiska evals v1
+language: sv-SE
+purpose: >-
+  Verifiera att EA Stödjare resonerar korrekt inom enterprise architecture,
+  håller evidens och rekommendationer isär, använder research ansvarsfullt och
+  respekterar v1-scope.
+result_levels:
+  pass:
+    minimum_score_percent: 80
+    critical_failures_allowed: 0
+  pass_with_warnings:
+    minimum_score_percent: 65
+    maximum_score_percent: 79
+    critical_failures_allowed: 0
+  fail:
+    condition: critical_failure_or_score_below_65
+release_gate:
+  minimum_weighted_score_percent: 85
+  blocking_cases_must_pass: true
+cases:
+  - id: EVAL-001
+    file: cases/EVAL-001-driver-vs-goal.yaml
+    weight: 1.0
+    blocking: true
+  - id: EVAL-002
+    file: cases/EVAL-002-capability-vs-function.yaml
+    weight: 1.0
+    blocking: true
+  - id: EVAL-003
+    file: cases/EVAL-003-it-support-vs-platform-service.yaml
+    weight: 1.0
+    blocking: true
+  - id: EVAL-004
+    file: cases/EVAL-004-platform-service-vs-platform.yaml
+    weight: 1.0
+    blocking: true
+  - id: EVAL-005
+    file: cases/EVAL-005-explicit-derived-proposed.yaml
+    weight: 1.5
+    blocking: true
+  - id: EVAL-006
+    file: cases/EVAL-006-research-model-gap.yaml
+    weight: 1.5
+    blocking: true
+  - id: EVAL-007
+    file: cases/EVAL-007-duplicate-detection.yaml
+    weight: 1.0
+    blocking: false
+  - id: EVAL-008
+    file: cases/EVAL-008-gap-analysis.yaml
+    weight: 1.0
+    blocking: false
+  - id: EVAL-009
+    file: cases/EVAL-009-model-proposal.yaml
+    weight: 1.5
+    blocking: true
+  - id: EVAL-010
+    file: cases/EVAL-010-insufficient-evidence.yaml
+    weight: 1.5
+    blocking: true
+  - id: EVAL-011
+    file: cases/EVAL-011-conflicting-sources.yaml
+    weight: 1.5
+    blocking: true
+  - id: EVAL-012
+    file: cases/EVAL-012-solution-architecture-boundary.yaml
+    weight: 1.5
+    blocking: true
+  - id: EVAL-013
+    file: cases/EVAL-013-it-capabilities-supporting-domain.yaml
+    weight: 1.5
+    blocking: true
+  - id: EVAL-014
+    file: cases/EVAL-014-principle-vs-standard.yaml
+    weight: 1.0
+    blocking: false
+  - id: EVAL-015
+    file: cases/EVAL-015-external-example-transferability.yaml
+    weight: 1.5
+    blocking: true

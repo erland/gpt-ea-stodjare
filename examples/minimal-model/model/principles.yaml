@@ -1,0 +1,25 @@
+schema_version: '1.0'
+object_type: principle
+objects:
+- id: PRN-001
+  type: principle
+  name: Gemensamma behov realiseras som återanvändbara tjänster
+  description: Återkommande tekniska behov bör erbjudas gemensamt när det ger tydlig nytta och minskar
+    duplicering.
+  status: candidate
+  statement: Gemensamma tekniska behov ska i första hand mötas genom återanvändbara plattformstjänster.
+  rationale: Minskar dubbelarbete och ger en enhetlig konsumtionsmodell.
+  implications:
+  - Plattformstjänster behöver tydliga erbjudanden och ansvar.
+  - Operativa IT-stöd bör återanvända gemensamma tjänster där de passar.
+  provenance:
+  - evidence_type: proposed
+    derived_from:
+    - GOAL-001
+    rationale: Föreslagen styrning för att stödja målet om snabbare utveckling.
+    confidence: medium
+  - evidence_type: external
+    source_id: SRC-EXT-001
+    reference: Exempel på standardiserade interna plattformserbjudanden
+    confidence: medium
+    transferability: medium

@@ -1,0 +1,10 @@
+h1. Principer
+
+{info:title=Genererad artefakt}
+Genererad från kanonisk YAML · läge working · projektrevision 5
+{info}
+
+Denna katalog visar principer i EA-modellen.
+
+|| ID || Namn || Principformulering || Status ||
+| PRN-001 | [Gemensamma behov realiseras som återanvändbara tjänster|PRN-001 – Gemensamma behov realiseras som återanvändbara tjänster] | Gemensamma tekniska behov ska i första hand mötas genom återanvändbara plattformstjänster. | candidate |

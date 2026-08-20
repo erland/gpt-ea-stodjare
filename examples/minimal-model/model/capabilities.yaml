@@ -1,0 +1,27 @@
+schema_version: '1.0'
+object_type: capability
+objects:
+- id: CAP-001
+  type: capability
+  name: Hantera ärenden digitalt
+  description: Förmåga att ta emot, bearbeta, följa upp och avsluta verksamhetsärenden digitalt.
+  status: approved
+  capability_type: business
+  provenance:
+  - evidence_type: explicit
+    source_id: SRC-001
+    reference: Avsnitt 4
+    confidence: high
+- id: CAP-002
+  type: capability
+  name: Driftsätta och köra applikationer
+  description: IT-förmåga att driftsätta, exekvera och livscykelhantera applikationsworkloads i en gemensam
+    körmiljö.
+  status: candidate
+  capability_type: it
+  provenance:
+  - evidence_type: proposed
+    derived_from:
+    - GOAL-001
+    rationale: En gemensam körförmåga föreslås för att minska projektspecifik etablering.
+    confidence: medium

@@ -1,0 +1,14 @@
+schema_version: '1.0'
+object_type: driver
+objects:
+- id: DRV-001
+  type: driver
+  name: Kortare ledtid för digital utveckling
+  description: Behov av att minska tiden från verksamhetsbehov till användbart IT-stöd.
+  status: approved
+  category: verksamhetsutveckling
+  provenance:
+  - evidence_type: explicit
+    source_id: SRC-001
+    reference: Avsnitt 2
+    confidence: high

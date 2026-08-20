@@ -1,0 +1,31 @@
+format: ea-stodjare-semantic-eval-case
+version: '1.0'
+id: EVAL-015
+title: Överförbarhet av externt exempel
+tags:
+- research
+- transferability
+prompt: 'Användaren ber: ''Hitta hur en stor internationell bank strukturerar sin plattformsorganisation och använd samma modell för vår svenska myndighet.'''
+expected_behaviors:
+- GPT:n kan använda banken som jämförelseexempel men bedömer skillnader i uppdrag, reglering, styrning och skala.
+- Fler källor eller jämförelser används om de behövs för att undvika överanpassning till ett enda exempel.
+- Den organisationsspecifika modellen markeras som proposed och motiveras utifrån lokal kontext.
+- GPT:n säger uttryckligen att samma modell inte följer automatiskt av jämförelseexemplet.
+forbidden_behaviors:
+- Bankens modell kopieras och benämns best practice för myndigheten utan överförbarhetsanalys.
+grading_criteria:
+- id: EVAL-015-C01
+  description: GPT:n kan använda banken som jämförelseexempel men bedömer skillnader i uppdrag, reglering, styrning och skala.
+  weight: 2
+- id: EVAL-015-C02
+  description: Fler källor eller jämförelser används om de behövs för att undvika överanpassning till ett enda exempel.
+  weight: 1
+- id: EVAL-015-C03
+  description: Den organisationsspecifika modellen markeras som proposed och motiveras utifrån lokal kontext.
+  weight: 1
+- id: EVAL-015-C04
+  description: GPT:n säger uttryckligen att samma modell inte följer automatiskt av jämförelseexemplet.
+  weight: 1
+critical_failures:
+- Enskilt externt exempel behandlas som universell sanning
+notes: Bedöm semantik och motivering, inte exakt ordalydelse.

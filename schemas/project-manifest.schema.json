@@ -1,0 +1,173 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ea-stodjare.local/schemas/project-manifest.schema.json",
+  "title": "EA Stödjare project manifest v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format",
+    "format_version",
+    "project",
+    "model",
+    "integrity",
+    "files"
+  ],
+  "properties": {
+    "format": {
+      "const": "ea-stodjare-project"
+    },
+    "format_version": {
+      "const": "1.0"
+    },
+    "project": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "kind",
+        "language",
+        "revision",
+        "created_at",
+        "updated_at",
+        "lifecycle_status"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]{2,63}$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "type": "string",
+          "minLength": 1
+        },
+        "language": {
+          "type": "string",
+          "pattern": "^[A-Za-z]{2,3}(-[A-Za-z0-9]{2,8})*$"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "lifecycle_status": {
+          "enum": [
+            "draft",
+            "active",
+            "review",
+            "approved",
+            "archived"
+          ]
+        }
+      }
+    },
+    "model": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "root",
+        "serialization",
+        "model_format_version",
+        "metamodel_version",
+        "relation_model_version",
+        "provenance_model_version"
+      ],
+      "properties": {
+        "root": {
+          "type": "string",
+          "minLength": 1
+        },
+        "serialization": {
+          "const": "YAML"
+        },
+        "model_format_version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+$"
+        },
+        "metamodel_version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+$"
+        },
+        "relation_model_version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+$"
+        },
+        "provenance_model_version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+$"
+        }
+      }
+    },
+    "integrity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "algorithm",
+        "manifest_self_hash",
+        "inventory_order",
+        "canonical_model_required"
+      ],
+      "properties": {
+        "algorithm": {
+          "const": "sha256"
+        },
+        "manifest_self_hash": {
+          "const": false
+        },
+        "inventory_order": {
+          "const": "path-ascending"
+        },
+        "canonical_model_required": {
+          "type": "boolean"
+        }
+      }
+    },
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "path",
+          "role",
+          "required",
+          "sha256"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^(?!/)(?!.*\\.\\./).+$"
+          },
+          "role": {
+            "enum": [
+              "canonical_model",
+              "schema",
+              "governance",
+              "documentation_source",
+              "support"
+            ]
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        }
+      }
+    }
+  }
+}

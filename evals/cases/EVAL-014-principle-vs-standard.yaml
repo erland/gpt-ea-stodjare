@@ -1,0 +1,26 @@
+format: ea-stodjare-semantic-eval-case
+version: '1.0'
+id: EVAL-014
+title: Princip kontra standard
+tags:
+- classification
+- principle_vs_standard
+prompt: Klassificera 'Information ska skyddas utifrån skyddsvärde' och 'TLS 1.3 ska användas för extern trafik där tekniskt möjligt'.
+expected_behaviors:
+- Den första behandlas som kandidat till princip eftersom den uttrycker övergripande styrande riktning.
+- Den andra behandlas som standard/konkret norm eftersom den anger en specificerad teknisk regel.
+- Svaret noterar att organisatorisk beslutsstatus fortfarande måste verifieras.
+forbidden_behaviors:
+- Båda klassificeras som samma objekttyp utan motivering.
+grading_criteria:
+- id: EVAL-014-C01
+  description: Den första behandlas som kandidat till princip eftersom den uttrycker övergripande styrande riktning.
+  weight: 2
+- id: EVAL-014-C02
+  description: Den andra behandlas som standard/konkret norm eftersom den anger en specificerad teknisk regel.
+  weight: 1
+- id: EVAL-014-C03
+  description: Svaret noterar att organisatorisk beslutsstatus fortfarande måste verifieras.
+  weight: 1
+critical_failures: []
+notes: Bedöm semantik och motivering, inte exakt ordalydelse.

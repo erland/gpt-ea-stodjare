@@ -1,0 +1,147 @@
+quality_rules:
+  name: EA Stödjare object quality rules
+  version: "1.0-draft"
+  scope: single_object
+  result_levels:
+    - approved
+    - approved_with_warnings
+    - blocked
+  severities:
+    error:
+      blocks_approval: true
+    warning:
+      blocks_approval: false
+      requires_attention: true
+    info:
+      blocks_approval: false
+      requires_attention: false
+
+  common_rules:
+    - id: QO-COM-001
+      severity: error
+      check: stable_correct_id
+      applies_to: [driver, goal, principle, capability, it_support, platform_service, platform, standard, solution_pattern, reference_architecture]
+    - id: QO-COM-002
+      severity: warning
+      check: clear_name
+      applies_to: [driver, goal, principle, capability, it_support, platform_service, platform, standard, solution_pattern, reference_architecture]
+    - id: QO-COM-003
+      severity: warning
+      check: meaningful_description
+      applies_to: [driver, goal, principle, capability, it_support, platform_service, platform, standard, solution_pattern, reference_architecture]
+    - id: QO-COM-004
+      severity: error
+      check: correct_object_type
+      applies_to: [driver, goal, principle, capability, it_support, platform_service, platform, standard, solution_pattern, reference_architecture]
+    - id: QO-COM-005
+      severity: warning
+      check: single_semantic_object
+      applies_to: [driver, goal, principle, capability, it_support, platform_service, platform, standard, solution_pattern, reference_architecture]
+    - id: QO-COM-006
+      severity: error
+      check: provenance_sufficient_for_claim_and_status
+      severity_override:
+        candidate_with_declared_uncertainty: warning
+      applies_to: [driver, goal, principle, capability, it_support, platform_service, platform, standard, solution_pattern, reference_architecture]
+    - id: QO-COM-007
+      severity: error
+      check: lifecycle_status_consistent
+      applies_to: [driver, goal, principle, capability, it_support, platform_service, platform, standard, solution_pattern, reference_architecture]
+    - id: QO-COM-008
+      severity: error
+      check: relation_semantics_valid
+      applies_to: [driver, goal, principle, capability, it_support, platform_service, platform, standard, solution_pattern, reference_architecture]
+    - id: QO-COM-009
+      severity: warning
+      check: duplicate_or_overlap_risk
+      applies_to: [driver, goal, principle, capability, it_support, platform_service, platform, standard, solution_pattern, reference_architecture]
+    - id: QO-COM-010
+      severity: info
+      check: terminology_consistent
+      severity_override:
+        material_semantic_deviation: warning
+      applies_to: [driver, goal, principle, capability, it_support, platform_service, platform, standard, solution_pattern, reference_architecture]
+
+  object_type_rules:
+    driver:
+      - {id: QO-DRV-001, severity: error, check: not_goal_solution_or_activity}
+      - {id: QO-DRV-002, severity: warning, check: expresses_change_pressure_or_cause}
+      - {id: QO-DRV-003, severity: info, check: category_and_time_horizon_when_useful}
+      - {id: QO-DRV-004, severity: warning, check: organization_specific_claim_has_provenance}
+    goal:
+      - {id: QO-GOAL-001, severity: error, check: not_driver_principle_or_activity}
+      - {id: QO-GOAL-002, severity: warning, check: outcome_not_only_implementation}
+      - {id: QO-GOAL-003, severity: info, check: target_state_time_horizon_measure_when_known}
+      - {id: QO-GOAL-004, severity: warning, check: motivation_or_driver_link_when_expected}
+    principle:
+      - {id: QO-PRN-001, severity: error, check: not_goal_standard_or_solution_decision}
+      - {id: QO-PRN-002, severity: warning, check: normative_statement_present}
+      - {id: QO-PRN-003, severity: warning, check: rationale_present}
+      - {id: QO-PRN-004, severity: warning, check: meaningful_implications_present}
+      - {id: QO-PRN-005, severity: warning, check: normative_strength_supported}
+    capability:
+      - {id: QO-CAP-001, severity: error, check: capability_type_valid}
+      - {id: QO-CAP-002, severity: error, check: not_process_organization_function_project_or_it_support}
+      - {id: QO-CAP-003, severity: warning, check: technology_independent_name}
+      - {id: QO-CAP-004, severity: warning, check: not_too_broad_or_composite}
+      - {id: QO-CAP-005, severity: warning, check: not_too_narrow_or_system_function}
+      - {id: QO-CAP-006, severity: warning, check: business_or_it_type_semantically_correct}
+      - {id: QO-CAP-007, severity: info, check: scope_when_ambiguous}
+      - {id: QO-CAP-008, severity: info, check: owner_and_consumer_scope_for_central_it_capability_when_known}
+    it_support:
+      - {id: QO-ITS-001, severity: error, check: not_capability_platform_service_or_platform}
+      - {id: QO-ITS-002, severity: warning, check: supported_capabilities_when_evidence_available}
+      - {id: QO-ITS-003, severity: info, check: functions_when_explanatory}
+      - {id: QO-ITS-004, severity: warning, check: functions_are_concrete_not_capabilities_or_processes}
+      - {id: QO-ITS-005, severity: info, check: lifecycle_and_criticality_when_known}
+    platform_service:
+      - {id: QO-PLS-001, severity: error, check: not_platform_it_support_or_capability}
+      - {id: QO-PLS-002, severity: warning, check: consumable_offer_and_consumer_clear}
+      - {id: QO-PLS-003, severity: info, check: functions_when_explanatory}
+      - {id: QO-PLS-004, severity: warning, check: functions_express_consumer_value}
+      - {id: QO-PLS-005, severity: info, check: service_level_and_consumer_scope_when_known}
+      - {id: QO-PLS-006, severity: warning, check: capability_or_consumer_relation_when_evidence_available}
+    platform:
+      - {id: QO-PLT-001, severity: error, check: not_platform_service_it_support_or_product_only}
+      - {id: QO-PLT-002, severity: warning, check: technical_scope_clear}
+      - {id: QO-PLT-003, severity: info, check: realization_attributes_when_useful}
+      - {id: QO-PLT-004, severity: warning, check: product_label_has_platform_role}
+      - {id: QO-PLT-005, severity: warning, check: realized_service_relation_when_evidence_available}
+    standard:
+      - {id: QO-STD-001, severity: error, check: not_principle_or_solution_pattern}
+      - {id: QO-STD-002, severity: warning, check: reference_and_version_when_material}
+      - {id: QO-STD-003, severity: warning, check: mandatory_or_guidance_clear_when_material}
+      - {id: QO-STD-004, severity: warning, check: concrete_standardization_scope}
+      - {id: QO-STD-005, severity: info, check: standard_type_when_useful}
+    solution_pattern:
+      - {id: QO-PAT-001, severity: error, check: reusable_not_specific_solution}
+      - {id: QO-PAT-002, severity: warning, check: problem_and_context_present}
+      - {id: QO-PAT-003, severity: warning, check: approach_not_overly_product_specific}
+      - {id: QO-PAT-004, severity: info, check: consequences_when_relevant}
+    reference_architecture:
+      - {id: QO-RA-001, severity: error, check: reusable_not_specific_solution_or_diagram_only}
+      - {id: QO-RA-002, severity: warning, check: scope_and_applicability_present}
+      - {id: QO-RA-003, severity: warning, check: building_blocks_or_guidance_present}
+      - {id: QO-RA-004, severity: warning, check: reusable_beyond_single_initiative}
+
+  embedded_function_rules:
+    applies_to: [it_support, platform_service, platform]
+    rules:
+      - {id: QO-FUN-001, severity: error, check: functions_only_on_allowed_object_types}
+      - {id: QO-FUN-002, severity: warning, check: function_not_broad_capability}
+      - {id: QO-FUN-003, severity: warning, check: function_not_implementation_detail_by_default}
+      - {id: QO-FUN-004, severity: warning, check: no_duplicate_functions_within_object}
+      - {id: QO-FUN-005, severity: info, check: naming_form_consistent}
+
+  aggregate_result:
+    blocked_when:
+      min_errors: 1
+    approved_with_warnings_when:
+      errors: 0
+      min_warnings: 1
+    approved_when:
+      errors: 0
+      material_warnings: 0
+    note: >-
+      A quality result does not automatically change object lifecycle status.
+      Promotion from candidate to approved is a separate governance/model decision.

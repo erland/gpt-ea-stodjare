@@ -1,0 +1,10 @@
+h1. Plattformar
+
+{info:title=Genererad artefakt}
+Genererad från kanonisk YAML · läge working · projektrevision 5
+{info}
+
+Denna katalog visar plattformar i EA-modellen.
+
+|| ID || Namn || Beskrivning || Teknik/produkter || Funktioner || Status ||
+| PLT-001 | [Containerplattform|PLT-001 – Containerplattform] | Gemensam teknisk plattform som realiserar containerplattformstjänsten. | Containerorkestrering / Exempelprodukt | Schemalägga workloads, Hantera containerkörning, Tillhandahålla nätverksabstraktion | candidate |

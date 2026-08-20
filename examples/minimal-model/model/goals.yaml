@@ -1,0 +1,16 @@
+schema_version: '1.0'
+object_type: goal
+objects:
+- id: GOAL-001
+  type: goal
+  name: Snabbare och mer självständig utveckling
+  description: Operativa utvecklingsområden ska kunna utveckla och förändra IT-stöd med kortare ledtid.
+  status: candidate
+  target_state: Utvecklingsområden kan använda gemensamma IT-förmågor utan projektspecifik grundetablering.
+  provenance:
+  - evidence_type: derived
+    source_id: SRC-001
+    derived_from:
+    - DRV-001
+    rationale: Målet konkretiserar drivkraften om kortare ledtid.
+    confidence: high

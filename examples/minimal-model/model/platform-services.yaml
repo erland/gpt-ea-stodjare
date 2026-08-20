@@ -1,0 +1,19 @@
+schema_version: '1.0'
+object_type: platform_service
+objects:
+- id: PLS-001
+  type: platform_service
+  name: Containerplattformstjänst
+  description: Gemensamt tjänsteerbjudande för att driftsätta och köra containeriserade applikationer.
+  status: candidate
+  functions:
+  - name: Driftsätta containeriserade applikationer
+  - name: Skala applikationsworkloads
+  - name: Hantera applikationskonfiguration
+  consumer_scope: Operativa utvecklingsområden
+  provenance:
+  - evidence_type: proposed
+    derived_from:
+    - CAP-002
+    rationale: Tjänsten föreslås som konsumtionsyta för IT-förmågan.
+    confidence: medium

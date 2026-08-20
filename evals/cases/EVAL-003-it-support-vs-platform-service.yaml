@@ -1,0 +1,27 @@
+format: ea-stodjare-semantic-eval-case
+version: '1.0'
+id: EVAL-003
+title: IT-stöd kontra plattformstjänst
+tags:
+- classification
+- it_support_vs_platform_service
+prompt: Organisationen har 'Ärendehantering' som stöd för handläggning och erbjuder 'Central logghantering' till många utvecklingsteam. Klassificera objekten.
+expected_behaviors:
+- Ärendehantering klassificeras som IT-stöd.
+- Central logghantering klassificeras som plattformstjänst om den är ett återanvändbart erbjudande till flera konsumenter.
+- Svaret gör klassificeringen kontextberoende när underlaget inte räcker.
+forbidden_behaviors:
+- Central logghantering klassificeras automatiskt som IT-stöd bara för att den är IT-relaterad.
+grading_criteria:
+- id: EVAL-003-C01
+  description: Ärendehantering klassificeras som IT-stöd.
+  weight: 2
+- id: EVAL-003-C02
+  description: Central logghantering klassificeras som plattformstjänst om den är ett återanvändbart erbjudande till flera konsumenter.
+  weight: 1
+- id: EVAL-003-C03
+  description: Svaret gör klassificeringen kontextberoende när underlaget inte räcker.
+  weight: 1
+critical_failures:
+- De två objekttypernas huvudskillnad missas
+notes: Bedöm semantik och motivering, inte exakt ordalydelse.

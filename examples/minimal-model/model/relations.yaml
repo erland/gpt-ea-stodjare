@@ -1,0 +1,146 @@
+schema_version: '1.0'
+relations:
+- id: REL-001
+  type: influences
+  source: DRV-001
+  target: GOAL-001
+  status: approved
+  provenance:
+  - evidence_type: derived
+    derived_from:
+    - DRV-001
+    - GOAL-001
+    rationale: Målet är ett svar på drivkraften.
+    confidence: high
+- id: REL-002
+  type: influences
+  source: GOAL-001
+  target: PRN-001
+  status: candidate
+  provenance:
+  - evidence_type: proposed
+    derived_from:
+    - GOAL-001
+    - PRN-001
+    rationale: Principen föreslås bidra till målet.
+    confidence: medium
+- id: REL-003
+  type: supports
+  source: ITS-001
+  target: CAP-001
+  status: approved
+  provenance:
+  - evidence_type: derived
+    derived_from:
+    - ITS-001
+    - CAP-001
+    rationale: IT-stödets funktioner stödjer verksamhetsförmågan.
+    confidence: high
+- id: REL-004
+  type: supports
+  source: PLS-001
+  target: CAP-002
+  status: candidate
+  provenance:
+  - evidence_type: proposed
+    derived_from:
+    - PLS-001
+    - CAP-002
+    rationale: Plattformstjänsten föreslås stödja IT-förmågan.
+    confidence: medium
+- id: REL-005
+  type: uses
+  source: ITS-001
+  target: PLS-001
+  status: candidate
+  provenance:
+  - evidence_type: proposed
+    derived_from:
+    - ITS-001
+    - PLS-001
+    rationale: IT-stödet exemplifierar konsumtion av tjänsten.
+    confidence: medium
+- id: REL-006
+  type: realized_by
+  source: PLS-001
+  target: PLT-001
+  status: candidate
+  provenance:
+  - evidence_type: proposed
+    derived_from:
+    - PLS-001
+    - PLT-001
+    rationale: Plattformen realiserar tjänsteerbjudandet.
+    confidence: medium
+- id: REL-007
+  type: governed_by
+  source: PLS-001
+  target: PRN-001
+  status: candidate
+  provenance:
+  - evidence_type: proposed
+    derived_from:
+    - PLS-001
+    - PRN-001
+    rationale: Tjänsten bör följa principens styrning.
+    confidence: medium
+- id: REL-008
+  type: constrains
+  source: STD-001
+  target: PLS-001
+  status: candidate
+  provenance:
+  - evidence_type: proposed
+    derived_from:
+    - STD-001
+    - PLS-001
+    rationale: Standarden begränsar hur tjänsten konsumeras.
+    confidence: medium
+- id: REL-009
+  type: depends_on
+  source: CAP-001
+  target: CAP-002
+  status: candidate
+  provenance:
+  - evidence_type: proposed
+    derived_from:
+    - CAP-001
+    - CAP-002
+    rationale: Exemplet antar ett beroende mellan förmågorna.
+    confidence: low
+- id: REL-010
+  type: derived_from
+  source: PAT-001
+  target: PRN-001
+  status: candidate
+  provenance:
+  - evidence_type: proposed
+    derived_from:
+    - PAT-001
+    - PRN-001
+    rationale: Mönstret konkretiserar principen.
+    confidence: medium
+- id: REL-011
+  type: realized_by
+  source: RA-001
+  target: PAT-001
+  status: candidate
+  provenance:
+  - evidence_type: proposed
+    derived_from:
+    - RA-001
+    - PAT-001
+    rationale: Referensarkitekturen använder mönstret som realiseringsstruktur.
+    confidence: medium
+- id: REL-012
+  type: related_to
+  source: RA-001
+  target: CAP-002
+  status: candidate
+  provenance:
+  - evidence_type: proposed
+    derived_from:
+    - RA-001
+    - CAP-002
+    rationale: Fallback-relation som demonstrerar osäker koppling.
+    confidence: low

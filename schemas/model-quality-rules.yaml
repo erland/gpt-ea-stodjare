@@ -1,0 +1,171 @@
+quality_rules:
+  name: EA Stödjare model quality rules
+  version: "1.0-draft"
+  scope: whole_model
+
+  result_levels:
+    - approved
+    - approved_with_warnings
+    - blocked
+
+  severities:
+    error:
+      blocks_model_approval: true
+    warning:
+      blocks_model_approval: false
+      requires_attention: true
+    info:
+      blocks_model_approval: false
+      requires_attention: false
+
+  coverage_profiles:
+    catalog:
+      description: Catalog quality; relationship coverage is normally informational unless explicitly in scope.
+    strategy_to_capability:
+      expected_layers: [driver, goal, principle, capability]
+    capability_to_it:
+      expected_layers: [capability, it_support, platform_service]
+    full_ea_v1:
+      expected_layers: [driver, goal, principle, capability, it_support, platform_service, platform, standard]
+
+  rules:
+    referential_integrity:
+      - {id: QM-INT-001, severity: error, check: unique_object_ids}
+      - {id: QM-INT-002, severity: error, check: relation_endpoints_exist}
+      - {id: QM-INT-003, severity: error, check: relation_semantics_allowed}
+      - {id: QM-INT-004, severity: warning, check: no_duplicate_identical_relations}
+      - {id: QM-INT-005, severity: warning, check: no_stored_inverse_duplicates}
+      - {id: QM-INT-006, severity: error, check: derived_from_acyclic}
+      - id: QM-INT-007
+        severity: error
+        check: provenance_source_references_resolve
+        severity_override:
+          candidate_with_declared_uncertainty: warning
+
+    orphans:
+      - {id: QM-ORP-001, severity: warning, check: approved_goal_has_architecture_context, profiles: [strategy_to_capability, full_ea_v1]}
+      - {id: QM-ORP-002, severity: warning, check: approved_capability_has_relevant_context, profiles: [strategy_to_capability, capability_to_it, full_ea_v1]}
+      - {id: QM-ORP-003, severity: warning, check: approved_it_support_has_capability_context, profiles: [capability_to_it, full_ea_v1]}
+      - {id: QM-ORP-004, severity: warning, check: approved_platform_service_has_offer_or_realization_context, profiles: [capability_to_it, full_ea_v1]}
+      - {id: QM-ORP-005, severity: warning, check: approved_platform_has_service_or_use_context, profiles: [full_ea_v1]}
+      - {id: QM-ORP-006, severity: info, check: candidate_orphan_visible}
+      - {id: QM-ORP-007, severity: warning, check: approved_governance_object_has_application, profiles: [strategy_to_capability, full_ea_v1]}
+
+    traceability:
+      - {id: QM-TRC-001, severity: warning, check: approved_drivers_trace_to_goals, profiles: [strategy_to_capability, full_ea_v1]}
+      - {id: QM-TRC-002, severity: warning, check: approved_goals_trace_to_capabilities, profiles: [strategy_to_capability, full_ea_v1]}
+      - id: QM-TRC-003
+        severity: info
+        check: business_capability_has_known_it_support
+        severity_override:
+          explicit_capability_to_it_scope_and_approved: warning
+        profiles: [capability_to_it, full_ea_v1]
+      - {id: QM-TRC-004, severity: warning, check: approved_it_capability_has_enabling_platform_service, profiles: [capability_to_it, full_ea_v1]}
+      - id: QM-TRC-005
+        severity: info
+        check: it_support_has_known_platform_service_use
+        severity_override:
+          explicit_platform_use_scope_and_approved: warning
+        profiles: [capability_to_it, full_ea_v1]
+      - {id: QM-TRC-006, severity: warning, check: approved_platform_service_has_platform_realization, profiles: [full_ea_v1]}
+      - {id: QM-TRC-007, severity: warning, check: critical_traceability_not_mainly_related_to}
+
+    duplicates_overlap:
+      - {id: QM-DUP-001, severity: warning, check: probable_duplicate_objects}
+      - {id: QM-DUP-002, severity: warning, check: material_semantic_overlap}
+      - {id: QM-DUP-003, severity: warning, check: same_name_different_semantics_disambiguated}
+      - id: QM-DUP-004
+        severity: info
+        check: function_overlap_review
+        severity_override:
+          likely_unintended_overlap: warning
+
+    consistency:
+      - id: QM-CON-001
+        severity: error
+        check: lifecycle_dependency_consistency
+        severity_override:
+          deprecated_current_dependency: warning
+      - {id: QM-CON-002, severity: warning, check: classification_consistent_with_model_usage}
+      - {id: QM-CON-003, severity: warning, check: conflicting_evidence_explicitly_handled}
+      - id: QM-CON-004
+        severity: warning
+        check: approved_claim_not_based_only_on_unresolved_weak_assumptions
+        severity_override:
+          materially_false_internal_truth: error
+      - {id: QM-CON-005, severity: error, check: no_relations_to_removed_objects}
+
+    coverage:
+      - {id: QM-COV-001, severity: warning, check: scope_clear_for_coverage_review}
+      - {id: QM-COV-002, severity: warning, check: declared_scope_has_expected_core_coverage}
+      - {id: QM-COV-003, severity: info, check: classify_gap_type}
+      - {id: QM-COV-004, severity: warning, check: critical_areas_have_adequate_evidence_coverage}
+      - {id: QM-COV-005, severity: warning, check: externally_inspired_proposals_not_dominating_without_internal_validation}
+
+    graph_structure:
+      - id: QM-GRF-001
+        severity: info
+        check: extreme_degree_outliers_reviewed
+        severity_override:
+          likely_scope_or_related_to_problem: warning
+      - id: QM-GRF-002
+        severity: info
+        check: isolated_subgraphs_reviewed
+        severity_override:
+          expected_integrated_by_scope: warning
+      - {id: QM-GRF-003, severity: warning, check: related_to_not_overused}
+      - id: QM-GRF-004
+        severity: info
+        check: depends_on_cycles_reviewed
+        severity_override:
+          material_changeability_risk: warning
+      - {id: QM-GRF-005, severity: info, check: dependency_hubs_identified_as_analysis_candidates}
+
+    governance:
+      - {id: QM-GOV-001, severity: warning, check: approved_principles_have_application}
+      - {id: QM-GOV-002, severity: warning, check: approved_standards_have_application}
+      - {id: QM-GOV-003, severity: warning, check: organization_specific_governance_relations_have_provenance}
+      - {id: QM-GOV-004, severity: warning, check: conflicting_governance_signals_handled}
+
+    provenance:
+      - id: QM-PRV-001
+        severity: warning
+        check: approved_model_elements_have_adequate_evidence
+        severity_override:
+          violates_object_or_relation_approval_rule: error
+      - {id: QM-PRV-002, severity: warning, check: external_sources_have_transferability_assessment_when_material}
+      - {id: QM-PRV-003, severity: error, check: proposals_not_reclassified_as_explicit_internal_truth}
+      - {id: QM-PRV-004, severity: warning, check: derived_chains_explainable}
+
+    secondary_objects:
+      - id: QM-SEC-001
+        severity: info
+        check: approved_solution_pattern_has_relevance_context
+        severity_override:
+          relevance_expected_by_scope: warning
+      - id: QM-SEC-002
+        severity: info
+        check: approved_reference_architecture_has_relevance_context
+        severity_override:
+          relevance_expected_by_scope: warning
+
+  gap_classes:
+    documentation_gap:
+      meaning: Missing or insufficient information; architecture gap not established.
+    possible_architecture_gap:
+      meaning: Evidence suggests a real missing capability/support/realization but requires validation.
+    confirmed_architecture_gap:
+      meaning: Gap is established by sufficient internal evidence or explicit organizational decision.
+
+  aggregate_result:
+    blocked_when:
+      min_errors: 1
+    approved_with_warnings_when:
+      errors: 0
+      min_warnings: 1
+    approved_when:
+      errors: 0
+      material_warnings: 0
+    note: >-
+      Model quality results are diagnostic and do not automatically mutate canonical objects,
+      relations, lifecycle status, or governance decisions.

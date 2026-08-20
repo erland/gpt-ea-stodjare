@@ -1,0 +1,10 @@
+h1. Referensarkitekturer
+
+{info:title=Genererad artefakt}
+Genererad från kanonisk YAML · läge working · projektrevision 5
+{info}
+
+Denna katalog visar referensarkitekturer i EA-modellen.
+
+|| ID || Namn || Scope/tillämplighet || Status ||
+| RA-001 | [Referensarkitektur för gemensam applikationskörning|RA-001 – Referensarkitektur för gemensam applikationskörning] | Gemensam applikationskörning / IT-stöd som lämpar sig för containeriserad körning | candidate |
