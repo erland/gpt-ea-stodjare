@@ -16,9 +16,7 @@ Den kanoniska produktvisionen och v1-avgränsningen finns i:
 
 Den stegvisa utvecklingsplanen finns i:
 
-- [`docs/development-plan.md`](docs/development-plan.md)
 
-Varje steg är utformat för att kunna genomföras i en separat prompt. Samtliga **28 av 28 steg är nu genomförda**. Slutrevisionen finns i [`docs/final-review.md`](docs/final-review.md) och projektet är paketerat som **v1.0.0-rc1** för praktisk Builder-import och acceptanstestning före sluttagg `v1.0.0`.
 
 ## V1 i korthet
 
@@ -70,7 +68,6 @@ Bland annat:
 
 Steg 2 fastställer vilka mekanismer från Lärobokskaparen som ska återanvändas och vilka som är bokdomänspecifika. Se:
 
-- [`docs/reuse-analysis.md`](docs/reuse-analysis.md)
 - [`docs/technical-target.md`](docs/technical-target.md)
 
 Huvudprincipen är att återanvända projekt-, revisions-, integritets-, distributions- och kvalitetsmönster, men bygga EA Stödjares metamodel och arbetsflöden domänspecifikt.
@@ -277,7 +274,6 @@ Instruktionen styr roll, scope, arbetsdisciplin, evidens, research, klassificeri
 ## Nytt i steg 26
 
 - `tests/scenarios/` innehåller tio realistiska syntetiska EA-scenarier för strategi, förmågor, IT-stöd, plattformar, styrning, konflikter, research och otillräckligt underlag.
-- `docs/stress-test-report.md` dokumenterar resultat, kvarvarande risker och designbeslut.
 - Förmåga har kompletterats med valfritt `consumer_scope` för att beskriva vilka områden/målgrupper en framför allt IT-förmåga avses betjäna utan att införa Organisation som kärnobjekttyp.
 - Funktion förblir underordnat attribut och detaljerad lösningsarkitektur ligger fortsatt utanför v1.
 
@@ -294,8 +290,17 @@ Instruktionen styr roll, scope, arbetsdisciplin, evidens, research, klassificeri
 
 ## Releasekandidat v1.0.0-rc1
 
-- Slutlig helhetsrevision: [`docs/final-review.md`](docs/final-review.md)
 - Ändringshistorik: [`CHANGELOG.md`](CHANGELOG.md)
 - Samtliga steg 1–28 i utvecklingsplanen är genomförda.
 - Inga kända blockerande strukturella projektfel finns.
 - Faktisk semantisk runtime-eval mot importerad Custom GPT-instans återstår som sista acceptanskontroll före sluttagg `v1.0.0`.
+
+
+## GPT-distributioner
+
+Repositoryt kan även bygga två distributionsformat från samma aktuella Builder-konfiguration:
+
+- `ea-stodjare-custom-gpt-vX.Y.Z.zip` för Custom GPT Builder.
+- `ea-stodjare-chat-vX.Y.Z.zip` för att bifogas i en vanlig ChatGPT-konversation.
+
+Kör lokalt med `python3 scripts/build_distributions.py` följt av `python3 scripts/validate_distributions.py`. Vanliga builds använder `VERSION`; vid publicerad GitHub Release används release-taggen som versionskälla. De sex genererade Builder Knowledge-filerna och huvudinstruktionen kopieras utan innehållsförändring.

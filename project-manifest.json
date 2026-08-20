@@ -60,13 +60,13 @@
       "path": "PROJECT_STATUS.md",
       "role": "governance",
       "required": true,
-      "sha256": "95532e8f8a3322b0c944b3073ef783acd605ecb42823af6a70413949bb9dd03a"
+      "sha256": "0324fd4bc1ae8736cba16b08db9367a3856cf3f6c5a7a996c5f7c278d93e65d3"
     },
     {
       "path": "README.md",
       "role": "documentation_source",
       "required": true,
-      "sha256": "43daaf6b65ca2a78ca4551e9948cf2f5578cb06611aa3625e0d45e26cb624c11"
+      "sha256": "6afa7c0762b286993ca1ae1e98237706a36ba3ddf0e61499281dd7dc835ce152"
     },
     {
       "path": "custom-gpt/builder-config.md",
@@ -123,12 +123,6 @@
       "sha256": "a05632be6e3a9447ab235359c4112128c39dd727287acd3e2b4ffe2910f36276"
     },
     {
-      "path": "docs/development-plan.md",
-      "role": "documentation_source",
-      "required": true,
-      "sha256": "6e49e36ed0873e394190fec4aba50b0cd5deb82d3ef68041ce1db566839177a4"
-    },
-    {
       "path": "docs/document-export.md",
       "role": "documentation_source",
       "required": false,
@@ -139,12 +133,6 @@
       "role": "documentation_source",
       "required": true,
       "sha256": "9506ca5c2e2a5f36e59f025a1c619ea5fe8bd7e748803fd851bc7d70a4d176d5"
-    },
-    {
-      "path": "docs/final-review.md",
-      "role": "documentation_source",
-      "required": false,
-      "sha256": "7569d82ac40d58a74a13a35550090d7d509b9c0935b4a3ddcec07d04828fbdd1"
     },
     {
       "path": "docs/markdown-generation.md",
@@ -189,22 +177,10 @@
       "sha256": "5d5ce32b143762a80e57a94ad54da178837329fa1ba090b15cebe19778ee8fd3"
     },
     {
-      "path": "docs/reuse-analysis.md",
-      "role": "documentation_source",
-      "required": true,
-      "sha256": "05d527f36de7c2d1ce7b21172fb6d4659053c4a60bc21cc786cd9b3f347461f3"
-    },
-    {
       "path": "docs/source-policy.md",
       "role": "documentation_source",
       "required": true,
       "sha256": "342dc12c70b74e5371495a04d58603ee50403ec0fb7d60f67b81b8c8f31104b5"
-    },
-    {
-      "path": "docs/stress-test-report.md",
-      "role": "documentation_source",
-      "required": false,
-      "sha256": "10f3c0fa63982227ff6d3ebef13e01e8987492614534d8b87913cfede40f7394"
     },
     {
       "path": "docs/structural-validation.md",
@@ -852,7 +828,7 @@
       "path": "revision-log.md",
       "role": "documentation_source",
       "required": true,
-      "sha256": "2cda965edaaa60567c71fc9f61db722eb94238a391108831900f60894cf2f928"
+      "sha256": "ad7656d8861ffd860865a949ca8dbf65fc43601e70e8e1e233c51c06078b42d0"
     },
     {
       "path": "schemas/conflicts-and-uncertainty.yaml",
@@ -1206,13 +1182,13 @@
       "path": "tests/scenarios/README.md",
       "role": "support",
       "required": false,
-      "sha256": "618015b5843635a140a79d68d187fd93c6532cae1830505ddb0f32f6db7f23eb"
+      "sha256": "5295d7a13a082052ee0688728846f1a883f2ca2d1309349d86e963538558ac64"
     },
     {
       "path": "tests/scenarios/test_stress_scenarios.py",
       "role": "support",
       "required": false,
-      "sha256": "19049eb2580de6ce672c1a10e9e384fcabe0bf11e559f10e27c42147fcf7955e"
+      "sha256": "0b3182453ad58fb01fa20e70a3ad5b794f38faad500ab6dace7a4242b216e4ca"
     },
     {
       "path": "tests/validation/test_validate_project.py",
