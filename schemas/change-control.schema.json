@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ea-stodjare.local/schemas/change-control.schema.json",
+  "title": "EA Stödjare v2 change control",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "change_control"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "change_control": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["enabled", "baseline", "change_classes", "policies", "registries", "changelogs"],
+      "properties": {
+        "enabled": {"type": "boolean"},
+        "baseline": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["id", "version", "freeze_status", "model_revision", "metamodel_version"],
+          "properties": {
+            "id": {"type": "string", "minLength": 1},
+            "version": {"type": "string", "minLength": 1},
+            "freeze_status": {"enum": ["draft", "review", "frozen", "reopened", "retired", "not_applicable"]},
+            "model_revision": {"type": "integer", "minimum": 1},
+            "metamodel_version": {"type": "string", "minLength": 1},
+            "created_at": {"type": "string", "format": "date-time"},
+            "notes": {"type": "array", "items": {"type": "string"}}
+          }
+        },
+        "change_classes": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["editorial", "evidence_update", "controlled_model_change", "breaking_model_change", "metamodel_change"],
+          "properties": {
+            "editorial": {"$ref": "#/$defs/changeClass"},
+            "evidence_update": {"$ref": "#/$defs/changeClass"},
+            "controlled_model_change": {"$ref": "#/$defs/changeClass"},
+            "breaking_model_change": {"$ref": "#/$defs/changeClass"},
+            "metamodel_change": {"$ref": "#/$defs/changeClass"}
+          }
+        },
+        "policies": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["frozen_baseline", "id_retirement", "metamodel_separation"],
+          "properties": {
+            "frozen_baseline": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["allowed_without_reopen", "requires_reopen"],
+              "properties": {
+                "allowed_without_reopen": {"type": "array", "items": {"enum": ["editorial", "evidence_update", "controlled_model_change", "breaking_model_change", "metamodel_change"]}, "uniqueItems": true},
+                "requires_reopen": {"type": "array", "items": {"enum": ["editorial", "evidence_update", "controlled_model_change", "breaking_model_change", "metamodel_change"]}, "uniqueItems": true}
+              }
+            },
+            "id_retirement": {"type": "string", "enum": ["retire_never_reuse"]},
+            "metamodel_separation": {"type": "string", "enum": ["metamodel_changes_in_separate_log"]}
+          }
+        },
+        "registries": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["retired_ids"],
+          "properties": {"retired_ids": {"type": "string", "minLength": 1}}
+        },
+        "changelogs": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["model", "metamodel"],
+          "properties": {
+            "model": {"type": "string", "minLength": 1},
+            "metamodel": {"type": "string", "minLength": 1}
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "changeClass": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scope", "description"],
+      "properties": {
+        "scope": {"enum": ["model", "metamodel"]},
+        "description": {"type": "string", "minLength": 1},
+        "requires_evidence": {"type": "boolean"},
+        "requires_approval": {"type": "boolean"},
+        "requires_new_baseline": {"type": "boolean"}
+      }
+    }
+  }
+}

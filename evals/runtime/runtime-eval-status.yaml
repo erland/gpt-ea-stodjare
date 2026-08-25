@@ -1,0 +1,14 @@
+format: ea-stodjare-runtime-eval-status
+version: '1.0'
+target_release: 2.0.0
+status: not_executed_external_runtime_required
+cases_defined: 29
+blocking_cases_defined: 26
+runtime_cases_executed: 0
+release_gate_evaluated: false
+reason: Den lokala byggmiljön kan validera evaldefinitioner och poängsättningsprotokoll
+  men kan inte starta en separat installerad Custom GPT och köra 29 oberoende runtime-konversationer.
+next_action: 'Valfritt efter release: kör runtime-evalpaketet för kompletterande beteendeevidens.'
+final_release_exception: accepted_residual_risk
+final_release_exception_note: Extern LLM-runtime-eval är inte exekverad. Slutlig 2.0.0
+  bygger på lokal teknisk verifiering; runtime-evidens får inte beskrivas som passed.

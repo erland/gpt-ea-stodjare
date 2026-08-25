@@ -168,6 +168,29 @@
           }
         }
       }
+    },
+    "information_layers": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "conceptual",
+        "market_reference",
+        "actual_state"
+      ],
+      "properties": {
+        "conceptual": {
+          "type": "string",
+          "const": "model"
+        },
+        "market_reference": {
+          "type": "string",
+          "const": "market-reference"
+        },
+        "actual_state": {
+          "type": "string",
+          "const": "actual-state"
+        }
+      }
     }
   }
 }

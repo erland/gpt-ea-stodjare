@@ -1,11 +1,9 @@
 format: ea-stodjare-semantic-eval-suite
-version: "1.0"
-name: EA Stödjare – semantiska evals v1
+version: '2.0'
+name: EA Stödjare – semantiska evals v2
 language: sv-SE
-purpose: >-
-  Verifiera att EA Stödjare resonerar korrekt inom enterprise architecture,
-  håller evidens och rekommendationer isär, använder research ansvarsfullt och
-  respekterar v1-scope.
+purpose: 'Verifiera v1-baslinjens semantik samt v2-risker: projektprofil, faktisk projektmetamodell, extensions, Produkt/realisering,
+  informationslager, migration, derived views och change-control.'
 result_levels:
   pass:
     minimum_score_percent: 80
@@ -20,63 +18,119 @@ release_gate:
   minimum_weighted_score_percent: 85
   blocking_cases_must_pass: true
 cases:
-  - id: EVAL-001
-    file: cases/EVAL-001-driver-vs-goal.yaml
-    weight: 1.0
-    blocking: true
-  - id: EVAL-002
-    file: cases/EVAL-002-capability-vs-function.yaml
-    weight: 1.0
-    blocking: true
-  - id: EVAL-003
-    file: cases/EVAL-003-it-support-vs-platform-service.yaml
-    weight: 1.0
-    blocking: true
-  - id: EVAL-004
-    file: cases/EVAL-004-platform-service-vs-platform.yaml
-    weight: 1.0
-    blocking: true
-  - id: EVAL-005
-    file: cases/EVAL-005-explicit-derived-proposed.yaml
-    weight: 1.5
-    blocking: true
-  - id: EVAL-006
-    file: cases/EVAL-006-research-model-gap.yaml
-    weight: 1.5
-    blocking: true
-  - id: EVAL-007
-    file: cases/EVAL-007-duplicate-detection.yaml
-    weight: 1.0
-    blocking: false
-  - id: EVAL-008
-    file: cases/EVAL-008-gap-analysis.yaml
-    weight: 1.0
-    blocking: false
-  - id: EVAL-009
-    file: cases/EVAL-009-model-proposal.yaml
-    weight: 1.5
-    blocking: true
-  - id: EVAL-010
-    file: cases/EVAL-010-insufficient-evidence.yaml
-    weight: 1.5
-    blocking: true
-  - id: EVAL-011
-    file: cases/EVAL-011-conflicting-sources.yaml
-    weight: 1.5
-    blocking: true
-  - id: EVAL-012
-    file: cases/EVAL-012-solution-architecture-boundary.yaml
-    weight: 1.5
-    blocking: true
-  - id: EVAL-013
-    file: cases/EVAL-013-it-capabilities-supporting-domain.yaml
-    weight: 1.5
-    blocking: true
-  - id: EVAL-014
-    file: cases/EVAL-014-principle-vs-standard.yaml
-    weight: 1.0
-    blocking: false
-  - id: EVAL-015
-    file: cases/EVAL-015-external-example-transferability.yaml
-    weight: 1.5
-    blocking: true
+- id: EVAL-001
+  file: cases/EVAL-001-driver-vs-goal.yaml
+  weight: 1.0
+  blocking: true
+- id: EVAL-002
+  file: cases/EVAL-002-capability-vs-function.yaml
+  weight: 1.0
+  blocking: true
+- id: EVAL-003
+  file: cases/EVAL-003-it-support-vs-platform-service.yaml
+  weight: 1.0
+  blocking: true
+- id: EVAL-004
+  file: cases/EVAL-004-platform-service-vs-platform.yaml
+  weight: 1.0
+  blocking: true
+- id: EVAL-005
+  file: cases/EVAL-005-explicit-derived-proposed.yaml
+  weight: 1.5
+  blocking: true
+- id: EVAL-006
+  file: cases/EVAL-006-research-model-gap.yaml
+  weight: 1.5
+  blocking: true
+- id: EVAL-007
+  file: cases/EVAL-007-duplicate-detection.yaml
+  weight: 1.0
+  blocking: false
+- id: EVAL-008
+  file: cases/EVAL-008-gap-analysis.yaml
+  weight: 1.0
+  blocking: false
+- id: EVAL-009
+  file: cases/EVAL-009-model-proposal.yaml
+  weight: 1.5
+  blocking: true
+- id: EVAL-010
+  file: cases/EVAL-010-insufficient-evidence.yaml
+  weight: 1.5
+  blocking: true
+- id: EVAL-011
+  file: cases/EVAL-011-conflicting-sources.yaml
+  weight: 1.5
+  blocking: true
+- id: EVAL-012
+  file: cases/EVAL-012-solution-architecture-boundary.yaml
+  weight: 1.5
+  blocking: true
+- id: EVAL-013
+  file: cases/EVAL-013-it-capabilities-supporting-domain.yaml
+  weight: 1.5
+  blocking: true
+- id: EVAL-014
+  file: cases/EVAL-014-principle-vs-standard.yaml
+  weight: 1.0
+  blocking: false
+- id: EVAL-015
+  file: cases/EVAL-015-external-example-transferability.yaml
+  weight: 1.5
+  blocking: true
+- id: EVAL-016
+  file: cases/EVAL-016-v1-project-open.yaml
+  weight: 1.5
+  blocking: true
+- id: EVAL-017
+  file: cases/EVAL-017-extended-legacy-project.yaml
+  weight: 1.5
+  blocking: true
+- id: EVAL-018
+  file: cases/EVAL-018-project-metamodel-override.yaml
+  weight: 1.5
+  blocking: true
+- id: EVAL-019
+  file: cases/EVAL-019-product-vs-it-support.yaml
+  weight: 1.5
+  blocking: true
+- id: EVAL-020
+  file: cases/EVAL-020-product-vs-platform.yaml
+  weight: 1.5
+  blocking: true
+- id: EVAL-021
+  file: cases/EVAL-021-can-realize-it-support.yaml
+  weight: 1.5
+  blocking: true
+- id: EVAL-022
+  file: cases/EVAL-022-can-realize-platform-service.yaml
+  weight: 1.5
+  blocking: true
+- id: EVAL-023
+  file: cases/EVAL-023-provided-by.yaml
+  weight: 1.5
+  blocking: true
+- id: EVAL-024
+  file: cases/EVAL-024-legacy-realized-by-ambiguity.yaml
+  weight: 1.5
+  blocking: true
+- id: EVAL-025
+  file: cases/EVAL-025-embedded-function-coverage.yaml
+  weight: 1.5
+  blocking: true
+- id: EVAL-026
+  file: cases/EVAL-026-information-layer-separation.yaml
+  weight: 1.5
+  blocking: true
+- id: EVAL-027
+  file: cases/EVAL-027-derived-view-source-of-truth.yaml
+  weight: 1.5
+  blocking: true
+- id: EVAL-028
+  file: cases/EVAL-028-project-specific-extension.yaml
+  weight: 1.5
+  blocking: true
+- id: EVAL-029
+  file: cases/EVAL-029-metamodel-change-control.yaml
+  weight: 1.5
+  blocking: true

@@ -1,0 +1,28 @@
+h1. Hantera ärenden digitalt (CAP-001)
+
+{info:title=Genererad artefakt}
+Genererad från kanonisk YAML · läge working · projektrevision 5
+{info}
+
+* *ID:* CAP-001
+* *Objekttyp:* capability
+* *Status:* approved
+
+h2. Beskrivning
+
+Förmåga att ta emot, bearbeta, följa upp och avsluta verksamhetsärenden digitalt.
+
+h2. Egenskaper
+
+* *Förmågetyp:* business
+
+h2. Relationer
+
+h3. Beror på ({{depends_on}})
+* [Driftsätta och köra applikationer|Driftsätta och köra applikationer (CAP-002)] ({{CAP-002}})
+
+h3. Stöds av ({{supports}})
+* [Ärendehanteringsstöd|Ärendehanteringsstöd (ITS-001)] ({{ITS-001}})
+
+h2. Proveniens
+* *explicit* — källa: Exempelorganisationens strategiska inriktning ({{SRC-001}}); referens: Avsnitt 4

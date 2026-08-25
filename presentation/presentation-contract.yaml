@@ -1,0 +1,77 @@
+schema_version: '1.0'
+contract:
+  id: ea-reader-oriented-sv
+  version: '1.0'
+  language: sv-SE
+  description: Läsarorienterad standardpresentation för native EA Stödjare v2.
+source_of_truth: false
+principles:
+  - Presentation får byta etikett och ordning men aldrig ändra modellsemantik.
+  - Härledda navigationssektioner är alltid icke-kanoniska och regenererbara.
+  - Tekniska fältnamn ska inte exponeras när en tydligare svensk läsaretikett finns.
+  - Epistemiska skillnader mellan conceptual, market och actual ska bevaras i presentationen.
+object_display:
+  default_pattern: '{name} ({id})'
+  id_visibility: always
+  patterns_by_type: {}
+field_labels:
+  capability:
+    in_scope:
+      default: Omfattar
+      by_attribute:
+        attribute: capability_type
+        values:
+          it: Stödjer
+          business: Omfattar
+    out_of_scope: Omfattar inte
+    consumer_scope: Avsedda konsumenter
+  platform_service:
+    consumer_scope: Avsedda konsumenter
+    realization_pattern: Realiseringsmönster
+  product:
+    product_kind: Produkttyp
+relation_labels:
+  influences: {forward: Påverkar, reverse: Påverkas av}
+  supports: {forward: Stödjer, reverse: Stöds av}
+  uses: {forward: Använder, reverse: Används av}
+  provided_by: {forward: Tillhandahålls av, reverse: Tillhandahåller}
+  realized_by: {forward: Realiseras av, reverse: Realiserar}
+  can_realize: {forward: Kan realisera, reverse: Kan realiseras av}
+  governed_by: {forward: Styrs av, reverse: Styr}
+  constrains: {forward: Begränsar, reverse: Begränsas av}
+  depends_on: {forward: Beror på, reverse: Är beroende för}
+  derived_from: {forward: Härleds från, reverse: Ligger till grund för}
+  related_to: {forward: Relaterar till, reverse: Relaterar till}
+section_order:
+  default: [summary, boundary, functions, attributes, navigation, relations, provenance, metadata]
+  capability: [summary, boundary, navigation, relations, provenance, metadata]
+  platform_service: [summary, functions, attributes, navigation, relations, provenance, metadata]
+  platform: [summary, functions, navigation, relations, provenance, metadata]
+  product: [summary, attributes, navigation, relations, provenance, metadata]
+empty_section_policy: omit
+navigation_sections:
+  capability:
+    - id: supported-by-platform-services
+      title: Understöds av
+      derived_view: capability-service-platform
+      source_of_truth: false
+      when_empty: omit
+  platform:
+    - id: provides-platform-services
+      title: Tillhandahåller
+      derived_view: platform-service-capability
+      source_of_truth: false
+      when_empty: omit
+  product:
+    - id: can-realize-it-support
+      title: Kan realisera IT-stöd
+      derived_view: product-it-support
+      source_of_truth: false
+      epistemic_note: Visar verifierad potential, inte vald eller faktisk användning.
+      when_empty: omit
+    - id: can-realize-platform-services
+      title: Kan realisera Plattformstjänster
+      derived_view: product-service-platform
+      source_of_truth: false
+      epistemic_note: Marknads-/potentialvy, inte actual state.
+      when_empty: omit

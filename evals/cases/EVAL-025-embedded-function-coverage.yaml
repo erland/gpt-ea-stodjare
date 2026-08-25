@@ -1,0 +1,36 @@
+format: ea-stodjare-semantic-eval-case
+version: '1.0'
+id: EVAL-025
+title: Embedded Funktion används för coverage utan globalisering
+tags:
+- function
+- coverage
+- product
+- classification
+prompt: IT-stödet Ordbehandling har fyra embedded functions med lokala ID:n. Användaren vill jämföra två produkter och se
+  vilka funktioner de täcker.
+expected_behaviors:
+- GPT:n använder funktionerna som lokalt scoped delar av IT-stödet och kan referera deras lokala ID:n i analysen.
+- Coverage-analysen får stödja can_realize-bedömningen men gör inte Funktion till global EA-objekttyp.
+- Samma lokala funktions-ID kan endast förstås i kombination med sitt moderobjekt.
+- GPT:n skiljer funktionscoverage från faktisk produktanvändning.
+forbidden_behaviors:
+- Globala relationer skapas direkt till ett lokalt funktions-ID.
+- Funktioner lyfts automatiskt till globala objekt för att möjliggöra coverage.
+grading_criteria:
+- id: EVAL-025-C01
+  description: GPT:n använder funktionerna som lokalt scoped delar av IT-stödet och kan referera deras lokala ID:n i analysen.
+  weight: 2
+- id: EVAL-025-C02
+  description: Coverage-analysen får stödja can_realize-bedömningen men gör inte Funktion till global EA-objekttyp.
+  weight: 1
+- id: EVAL-025-C03
+  description: Samma lokala funktions-ID kan endast förstås i kombination med sitt moderobjekt.
+  weight: 1
+- id: EVAL-025-C04
+  description: GPT:n skiljer funktionscoverage från faktisk produktanvändning.
+  weight: 1
+critical_failures:
+- embedded Funktion globaliseras
+- lokalt ID behandlas som globalt stabilt EA-ID
+notes: Bedöm semantik och motivering, inte exakt ordalydelse.

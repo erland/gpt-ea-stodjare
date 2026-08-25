@@ -1,0 +1,245 @@
+metamodel:
+  name: EA Stödjare metamodel
+  version: "1.0-draft"
+  status: step-6-integrated
+  note: >-
+    Machine-readable domain specification of object types. Canonical instance
+    serialization is defined by schemas/model-format.yaml as of development step 6.
+
+common:
+  required_attributes:
+    - id
+    - type
+    - name
+    - description
+    - status
+  optional_attributes:
+    - aliases
+    - owner
+    - tags
+    - notes
+    - provenance
+  statuses:
+    - candidate
+    - approved
+    - deprecated
+    - retired
+
+object_types:
+  driver:
+    display_name: Drivkraft
+    category: primary
+    id_prefix: DRV-
+    definition: >-
+      An omständighet, kraft eller förändring som skapar behov av att
+      organisationen agerar, prioriterar eller förändras.
+    question: Varför behöver något förändras eller uppmärksammas?
+    optional_attributes:
+      - category
+      - time_horizon
+    not:
+      - goal
+      - principle
+      - capability
+
+  goal:
+    display_name: Mål
+    category: primary
+    id_prefix: GOAL-
+    definition: >-
+      Ett önskat framtida resultat eller tillstånd som organisationen vill
+      uppnå.
+    question: Vad vill vi uppnå?
+    optional_attributes:
+      - target_state
+      - time_horizon
+      - measure
+    not:
+      - driver
+      - principle
+      - activity
+
+  principle:
+    display_name: Princip
+    category: primary
+    id_prefix: PRN-
+    definition: >-
+      En varaktig styrande regel eller vägledning som ska påverka
+      arkitekturbeslut och utformning över flera initiativ eller lösningar.
+    question: Vilken övergripande regel ska vägleda våra arkitekturbeslut?
+    recommended_attributes:
+      - statement
+      - rationale
+      - implications
+    not:
+      - goal
+      - standard
+
+  capability:
+    display_name: Förmåga
+    category: primary
+    id_prefix: CAP-
+    definition: >-
+      En stabil beskrivning av vad organisationen eller dess IT-verksamhet
+      behöver kunna åstadkomma, oberoende av exakt organisation, process,
+      system eller teknisk realisering.
+    question: Vad behöver vi kunna göra eller åstadkomma?
+    required_attributes:
+      - capability_type
+    allowed_values:
+      capability_type:
+        - business
+        - it
+    optional_attributes:
+      - scope
+      - consumer_scope
+    not:
+      - process
+      - organization
+      - function
+      - it_support
+
+  it_support:
+    display_name: IT-stöd
+    category: primary
+    id_prefix: ITS-
+    definition: >-
+      Ett informationssystem, en applikation eller en sammanhållen digital
+      tjänst som används för att stödja en eller flera verksamhets- eller
+      IT-förmågor.
+    question: Vilket konkret digitalt stöd används för att utföra arbetet?
+    optional_attributes:
+      - functions
+      - lifecycle
+      - criticality
+    supports_functions: true
+    not:
+      - helpdesk
+      - capability
+      - platform_service
+      - platform
+
+  platform_service:
+    display_name: Plattformstjänst
+    category: primary
+    id_prefix: PLS-
+    definition: >-
+      Ett standardiserat tekniskt eller gemensamt IT-erbjudande som kan
+      konsumeras av IT-stöd, utvecklingsteam eller andra interna konsumenter
+      och som abstraherar delar av den underliggande tekniska realiseringen.
+    question: Vilken gemensam teknisk tjänst erbjuder vi för konsumtion?
+    optional_attributes:
+      - functions
+      - service_level
+      - consumer_scope
+    supports_functions: true
+    not:
+      - capability
+      - platform
+      - business_application
+
+  platform:
+    display_name: Plattform
+    category: primary
+    id_prefix: PLT-
+    definition: >-
+      En gemensam teknisk grund eller sammanhållen teknisk miljö som
+      realiserar eller möjliggör en eller flera plattformstjänster och/eller
+      tekniska funktioner.
+    question: Vilken teknisk grund realiserar våra gemensamma erbjudanden?
+    optional_attributes:
+      - functions
+      - technology
+      - products
+    supports_functions: true
+    not:
+      - platform_service
+      - it_support
+      - product_by_default
+
+  standard:
+    display_name: Standard
+    category: primary
+    id_prefix: STD-
+    definition: >-
+      En beslutad eller normativ specifikation, regel, teknikstandard,
+      informationsstandard eller annan konkret standardisering som styr eller
+      begränsar arkitekturens utformning.
+    question: Vilken konkret standard, norm eller specifikation ska följas?
+    optional_attributes:
+      - standard_type
+      - reference
+      - version
+      - mandatory
+    not:
+      - principle
+      - solution_pattern
+
+  solution_pattern:
+    display_name: Lösningsmönster
+    category: secondary
+    id_prefix: PAT-
+    definition: >-
+      En återanvändbar och vägledande lösningsstruktur för en återkommande typ
+      av arkitekturproblem, beskriven på en nivå som kan tillämpas i flera
+      lösningar.
+    optional_attributes:
+      - problem
+      - context
+      - approach
+      - consequences
+    not:
+      - specific_solution_design
+      - reference_architecture
+      - standard
+
+  reference_architecture:
+    display_name: Referensarkitektur
+    category: secondary
+    id_prefix: RA-
+    definition: >-
+      En återanvändbar, vägledande arkitektur för ett definierat område som
+      beskriver centrala byggblock, ansvar, principer och relationer utan att
+      vara designen för en specifik implementation.
+    optional_attributes:
+      - scope
+      - applicability
+      - building_blocks
+      - guidance
+    not:
+      - specific_solution_architecture
+      - diagram_only
+      - solution_pattern
+
+embedded_concepts:
+  function:
+    display_name: Funktion
+    standalone_object: false
+    allowed_on:
+      - it_support
+      - platform_service
+      - platform
+    definition: >-
+      En konkret funktion som ett IT-stöd, en plattformstjänst eller en
+      plattform tillhandahåller. Funktion är underordnad information i v1 och
+      har inte egen global identitet.
+
+explicitly_out_of_core_v1:
+  - organization
+  - stakeholder
+  - process
+  - activity
+  - information_object
+  - data_domain
+  - product
+  - technology
+  - project
+  - initiative
+  - roadmap
+  - transition_architecture
+  - kpi
+  - risk
+  - requirement
+  - constraint
+  - physical_component
+  - api_contract

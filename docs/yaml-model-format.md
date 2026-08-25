@@ -20,6 +20,7 @@ model/
   it-support.yaml
   platform-services.yaml
   platforms.yaml
+  products.yaml
   standards.yaml
   solution-patterns.yaml
   reference-architectures.yaml
@@ -114,3 +115,29 @@ Objekt-ID följer prefixen i metamodel v1. Relationer använder `REL-`. Källor 
 ## Exempelmodell
 
 `examples/minimal-model/` innehåller syntetisk testdata som demonstrerar samtliga primära och sekundära objekttyper, verksamhets- och IT-förmåga, funktioner, källor, evidenstyper och relationstyper. Den ska inte tolkas som rekommendation för en verklig organisation.
+
+
+## Produkt i native v2
+
+`model/products.yaml` innehåller stödjande Produkt-objekt (`PRD-*`). Produkt kräver `product_kind` och beskriver ett konkret marknadserbjudande. Produkt är inte automatiskt IT-stöd, Plattformstjänst, Plattform eller faktisk organisationsanvändning. Produktrelationer till IT-stöd/PLS införs i v2 steg 10.
+
+## Embedded Funktion i native v2
+
+`functions[]` får användas på IT-stöd, Plattformstjänst och Plattform. Varje post kräver `name` och kan ha `id`, `description` och `required`. Ett funktions-ID är **lokalt till moderobjektet** och skapar ingen global `FUN-*`-identitet.
+
+```yaml
+functions:
+  - id: F01
+    name: Spåra ändringar
+    description: Visa och acceptera eller avvisa ändringar.
+    required: true
+```
+
+Regler:
+
+- lokalt ID måste vara unikt inom samma moderobjekt,
+- samma lokala ID får förekomma under ett annat moderobjekt,
+- lokala funktions-ID:n får inte användas som globala relationsmål,
+- legacy v1-funktioner utan ID fortsätter vara giltiga,
+- migration ska inte skapa lokala ID:n om projektet inte behöver dem.
+

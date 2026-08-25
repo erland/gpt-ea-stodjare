@@ -1,0 +1,12 @@
+scenario: product-analysis-platform-service
+product_neutral_service: true
+platform_service: PLS-261
+realization_roles:
+  PRD-261: primary
+  PRD-262: partial
+  PRD-263: supporting
+actual_products_in_use: []
+guards:
+- can_realize_does_not_imply_actual_use
+- platform_service_remains_realization_neutral
+- market_reference_is_not_actual_state

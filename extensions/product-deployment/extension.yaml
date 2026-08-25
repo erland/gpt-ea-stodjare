@@ -1,0 +1,85 @@
+schema_version: '2.0'
+extension:
+  id: ea.product-deployment
+  version: '1.0'
+  namespace: ea.product_deployment
+  description: Valfri extension för att beskriva hur ett marknadserbjudande kan driftsättas
+    utan att påstå faktisk organisationsanvändning.
+  compatible_base_profiles:
+  - id: ea-stodjare-v2
+    versions:
+    - '2.0'
+  requires: []
+  conflicts_with: []
+  contributions:
+    object_types: []
+    attribute_extensions:
+    - object_type: product
+      attributes:
+      - name: control_plane_location
+        type: enum
+        required: false
+        value_set: product_deployment.control_plane_location
+        description: Var produktens kontrollplan normalt kan ligga enligt källstödd
+          marknads-/produktinformation.
+      - name: data_plane_location
+        type: enum
+        required: false
+        value_set: product_deployment.data_plane_location
+        description: Var produktens dataplan normalt kan ligga enligt källstödd marknads-/produktinformation.
+      - name: deployment_posture
+        type: enum
+        required: false
+        value_set: product_deployment.deployment_posture
+        description: Övergripande realiserings-/driftsättningskaraktär. Är inte evidens
+          för faktisk installation hos organisationen.
+    relations: []
+    relation_qualifiers: []
+    value_sets:
+    - id: product_deployment.control_plane_location
+      description: Kontrollerad värdemängd återanvändbar från rev80:s deploymentmodell.
+      values:
+      - customer_on_premises
+      - customer_private_cloud
+      - vendor_cloud
+      - vendor_edge_cloud
+      - mixed_or_configurable
+      - not_applicable
+      - unknown
+    - id: product_deployment.data_plane_location
+      description: Kontrollerad värdemängd återanvändbar från rev80:s deploymentmodell.
+      values:
+      - customer_on_premises
+      - customer_private_cloud
+      - vendor_cloud
+      - vendor_edge_cloud
+      - customer_edge
+      - mixed_or_configurable
+      - not_applicable
+      - unknown
+    - id: product_deployment.deployment_posture
+      description: Kontrollerad värdemängd återanvändbar från rev80:s deploymentmodell.
+      values:
+      - full_on_premises
+      - self_hosted_private_cloud
+      - hybrid_vendor_control_plane
+      - vendor_cloud_service
+      - edge_managed_service
+      - mixed_or_configurable
+      - unknown
+    value_set_extensions: []
+    qa_rules:
+    - id: EXT_DEPLOY_001
+      severity: warning
+      description: Deploymentklassificering på Produkt ska vara evidensbaserad och
+        får inte presenteras som faktisk organisationsdriftsättning.
+      applies_to:
+      - product
+      check:
+        epistemic_guard: market_capability_not_actual_usage
+    presentation:
+      labels:
+        product.control_plane_location: Kontrollplan
+        product.data_plane_location: Dataplan
+        product.deployment_posture: Driftsättningskaraktär
+      object_display_patterns: {}

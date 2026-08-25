@@ -17,6 +17,7 @@ import json
 import os
 import re
 import subprocess
+import sys
 import zipfile
 from pathlib import Path, PurePosixPath
 
@@ -103,6 +104,21 @@ def main() -> int:
     out.mkdir(parents=True, exist_ok=True)
 
     version, source = resolve_version(root, args.version)
+
+    # Structural preflight is mandatory even when packaging is invoked outside GitHub Actions.
+    validator = root / "scripts" / "validate_project.py"
+    if not validator.is_file():
+        raise RuntimeError(f"Strukturvalidator saknas: {validator}")
+    validation = subprocess.run(
+        [sys.executable, str(validator), "--project-root", str(root), "--repo-root", str(root), "--no-generated"],
+        cwd=root, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=False,
+    )
+    if validation.returncode != 0:
+        raise RuntimeError(
+            "Releasepaketering stoppad av strukturell v2-preflight.\n"
+            + validation.stdout + validation.stderr
+        )
+
     zip_path = out / f"{args.basename}-{version}.zip"
     metadata_path = out / f"{args.basename}-{version}.release.json"
     archive_root = f"{args.basename}-{version}"
@@ -126,6 +142,8 @@ def main() -> int:
         "archive_sha256": sha256(zip_path),
         "file_count": len(files),
         "deterministic_zip": True,
+        "structural_preflight": {"gate": "ea-stodjare-v2-structural", "passed": True},
+        "project_revision": json.loads((root / "project-manifest.json").read_text(encoding="utf-8")).get("project", {}).get("revision") if (root / "project-manifest.json").is_file() else None,
     }
     metadata_path.write_text(json.dumps(metadata, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(metadata, ensure_ascii=False, indent=2))

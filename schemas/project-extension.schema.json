@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/ea-stodjare/project-extension.schema.json",
+  "title": "EA Stödjare v2 project extension package",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "extension"],
+  "properties": {
+    "schema_version": {"const": "2.0"},
+    "extension": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version", "namespace", "compatible_base_profiles", "contributions"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^[a-z][a-z0-9-]*(?:\\.[a-z][a-z0-9-]*)+$"},
+        "version": {"type": "string", "minLength": 1},
+        "namespace": {"type": "string", "pattern": "^[a-z][a-z0-9_]*(?:\\.[a-z][a-z0-9_]*)+$"},
+        "description": {"type": "string"},
+        "compatible_base_profiles": {
+          "type": "array", "minItems": 1,
+          "items": {
+            "type": "object", "additionalProperties": false, "required": ["id"],
+            "properties": {
+              "id": {"type": "string", "minLength": 1},
+              "versions": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+            }
+          }
+        },
+        "requires": {"type": "array", "items": {"type": "string"}, "uniqueItems": true, "default": []},
+        "conflicts_with": {"type": "array", "items": {"type": "string"}, "uniqueItems": true, "default": []},
+        "contributions": {
+          "type": "object", "additionalProperties": false,
+          "properties": {
+            "object_types": {"type": "array", "items": {"$ref": "project-metamodel.schema.json#/$defs/customObjectType"}, "default": []},
+            "attribute_extensions": {"type": "array", "items": {"$ref": "project-metamodel.schema.json#/$defs/attributeExtension"}, "default": []},
+            "relations": {"type": "array", "items": {"$ref": "project-metamodel.schema.json#/$defs/customRelation"}, "default": []},
+            "relation_qualifiers": {"type": "array", "items": {"$ref": "project-metamodel.schema.json#/$defs/relationQualifier"}, "default": []},
+            "value_sets": {"type": "array", "items": {"$ref": "project-metamodel.schema.json#/$defs/valueSet"}, "default": []},
+            "value_set_extensions": {
+              "type": "array", "default": [],
+              "items": {
+                "type": "object", "additionalProperties": false, "required": ["target", "add_values"],
+                "properties": {
+                  "target": {"type": "string", "minLength": 1},
+                  "add_values": {"type": "array", "items": {"type": "string"}, "minItems": 1, "uniqueItems": true}
+                }
+              }
+            },
+            "qa_rules": {
+              "type": "array", "default": [],
+              "items": {
+                "type": "object", "additionalProperties": false, "required": ["id", "severity", "description"],
+                "properties": {
+                  "id": {"type": "string", "pattern": "^[A-Z][A-Z0-9_-]+$"},
+                  "severity": {"type": "string", "enum": ["error", "warning", "info"]},
+                  "description": {"type": "string", "minLength": 1},
+                  "applies_to": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+                  "check": {"type": "object", "additionalProperties": true}
+                }
+              }
+            },
+            "presentation": {
+              "type": "object", "additionalProperties": false,
+              "properties": {
+                "labels": {"type": "object", "additionalProperties": {"type": "string"}},
+                "object_display_patterns": {"type": "object", "additionalProperties": {"type": "string"}}
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

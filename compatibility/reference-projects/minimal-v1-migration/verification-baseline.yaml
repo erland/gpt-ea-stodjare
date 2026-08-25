@@ -1,0 +1,55 @@
+schema_version: '1.0'
+reference:
+  id: minimal-v1-migration
+  source_project: examples/minimal-model
+  source_profile: ea-stodjare-v1
+  source_revision: 5
+  purpose: End-to-end regression baseline for normal v1 to v2 migration.
+expected:
+  object_count: 11
+  relation_count: 12
+  source_count: 3
+  object_ids:
+    - DRV-001
+    - GOAL-001
+    - PRN-001
+    - CAP-001
+    - CAP-002
+    - ITS-001
+    - PLS-001
+    - PLT-001
+    - STD-001
+    - PAT-001
+    - RA-001
+  relation_ids:
+    - REL-001
+    - REL-002
+    - REL-003
+    - REL-004
+    - REL-005
+    - REL-006
+    - REL-007
+    - REL-008
+    - REL-009
+    - REL-010
+    - REL-011
+    - REL-012
+  source_ids:
+    - SRC-001
+    - SRC-002
+    - SRC-EXT-001
+  intentional_relation_transformations:
+    - id: REL-006
+      source_type: realized_by
+      target_type: legacy_realized_by
+      semantic_equivalence_for_migration_verification: realized_by
+  unchanged_realized_by_relations:
+    - REL-011
+acceptance:
+  - stable object, relation and source IDs are preserved
+  - object records and their provenance are preserved exactly
+  - relation records are preserved exactly except explicitly declared legacy-preservation relation codes
+  - source registry is preserved exactly
+  - regenerated Markdown is semantically equivalent after revision and declared legacy-code normalization
+  - regenerated Confluence markup is semantically equivalent after revision and declared legacy-code normalization
+  - DOCX and PDF can be regenerated for both source and target

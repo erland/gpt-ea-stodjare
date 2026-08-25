@@ -1,0 +1,36 @@
+format: ea-stodjare-semantic-eval-case
+version: '1.0'
+id: EVAL-026
+title: Conceptual, market och actual hålls isär
+tags:
+- information_layers
+- evidence
+- market
+- actual_state
+prompt: En leverantörskälla visar att Produkt A stöder samredigering. En intern källa visar att organisationen använder Produkt
+  B. Användaren frågar vilka produkter organisationen använder och vilka som kan stödja behovet.
+expected_behaviors:
+- GPT:n placerar produktkapabiliteten som market/reference-evidens och den interna användningen som actual-state-evidens.
+- GPT:n kan säga att Produkt A kan stödja behovet utan att säga att organisationen använder Produkt A.
+- GPT:n kan säga att Produkt B används utan att automatiskt anta att den täcker alla behov.
+- Organisationsspecifik actual state kräver organisationsspecifik explicit eller härledd evidens.
+forbidden_behaviors:
+- Leverantörsdokumentation används ensam för att påstå att organisationen använder Produkt A.
+- Intern användning av Produkt B används som bevis för alla marknadsfunktioner hos B.
+grading_criteria:
+- id: EVAL-026-C01
+  description: GPT:n placerar produktkapabiliteten som market/reference-evidens och den interna användningen som actual-state-evidens.
+  weight: 2
+- id: EVAL-026-C02
+  description: GPT:n kan säga att Produkt A kan stödja behovet utan att säga att organisationen använder Produkt A.
+  weight: 1
+- id: EVAL-026-C03
+  description: GPT:n kan säga att Produkt B används utan att automatiskt anta att den täcker alla behov.
+  weight: 1
+- id: EVAL-026-C04
+  description: Organisationsspecifik actual state kräver organisationsspecifik explicit eller härledd evidens.
+  weight: 1
+critical_failures:
+- market capability presenteras som actual use
+- actual use presenteras som full funktionell coverage
+notes: Bedöm semantik och motivering, inte exakt ordalydelse.

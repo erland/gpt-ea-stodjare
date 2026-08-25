@@ -1,0 +1,12 @@
+migration_rule:
+  id: v1-to-v2-product-object
+  from_profile: ea-stodjare-v1
+  to_profile: ea-stodjare-v2-draft
+  automatic: false
+  rules:
+  - v1 has no canonical product object type
+  - legacy platform.products or technology metadata must not automatically become PRD objects
+  - extended legacy product catalogs may be reconstructed as project extensions and migrated only with preserved provenance
+  - creating Product objects must not imply actual organizational use
+  safe_action: Preserve legacy fields/extensions until controlled product migration is explicitly requested.
+  review_required: true

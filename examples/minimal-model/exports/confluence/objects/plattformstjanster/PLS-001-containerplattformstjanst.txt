@@ -1,0 +1,43 @@
+h1. Containerplattformstjänst (PLS-001)
+
+{info:title=Genererad artefakt}
+Genererad från kanonisk YAML · läge working · projektrevision 5
+{info}
+
+* *ID:* PLS-001
+* *Objekttyp:* platform_service
+* *Status:* candidate
+
+h2. Beskrivning
+
+Gemensamt tjänsteerbjudande för att driftsätta och köra containeriserade applikationer.
+
+h2. Funktioner
+
+* {"name": "Driftsätta containeriserade applikationer"}
+* {"name": "Skala applikationsworkloads"}
+* {"name": "Hantera applikationskonfiguration"}
+
+h2. Egenskaper
+
+* *Avsedda konsumenter:* Operativa utvecklingsområden
+
+h2. Relationer
+
+h3. Används av ({{uses}})
+* [Ärendehanteringsstöd|Ärendehanteringsstöd (ITS-001)] ({{ITS-001}})
+
+h3. Begränsas av ({{constrains}})
+* [Standard för paketering av applikationer|Standard för paketering av applikationer (STD-001)] ({{STD-001}})
+
+h3. Realiseras av ({{realized_by}})
+* [Containerplattform|Containerplattform (PLT-001)] ({{PLT-001}})
+
+h3. Styrs av ({{governed_by}})
+* [Gemensamma behov realiseras som återanvändbara tjänster|Gemensamma behov realiseras som återanvändbara tjänster (PRN-001)] ({{PRN-001}})
+
+h3. Stödjer ({{supports}})
+* [Driftsätta och köra applikationer|Driftsätta och köra applikationer (CAP-002)] ({{CAP-002}})
+
+h2. Proveniens
+* *proposed*

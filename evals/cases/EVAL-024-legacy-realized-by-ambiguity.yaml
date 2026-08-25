@@ -1,0 +1,38 @@
+format: ea-stodjare-semantic-eval-case
+version: '1.0'
+id: EVAL-024
+title: Legacy realized_by migreras inte blint
+tags:
+- backward_compatibility
+- migration
+- realized_by
+- provided_by
+- uncertainty
+prompt: Ett v1-projekt har flera PLS→PLT realized_by-relationer men dokumentationen säger inte om de betyder konceptuell hemvist
+  eller konkret realisering. Användaren ber GPT:n migrera till v2.
+expected_behaviors:
+- GPT:n identifierar den semantiska tvetydigheten före konvertering.
+- Relationernas ID, endpoints och proveniens bevaras medan tvetydiga relationer lämnas för review, exempelvis som legacy_realized_by.
+- provided_by skapas först när konceptuell hemvist kan verifieras.
+- GPT:n redovisar migrationsosäkerheten explicit i plan/rapport.
+forbidden_behaviors:
+- Alla realized_by sök/ersätts automatiskt till provided_by.
+- Tvetydiga relationer raderas för att få v2-valideringen grön.
+grading_criteria:
+- id: EVAL-024-C01
+  description: GPT:n identifierar den semantiska tvetydigheten före konvertering.
+  weight: 2
+- id: EVAL-024-C02
+  description: Relationernas ID, endpoints och proveniens bevaras medan tvetydiga relationer lämnas för review, exempelvis
+    som legacy_realized_by.
+  weight: 1
+- id: EVAL-024-C03
+  description: provided_by skapas först när konceptuell hemvist kan verifieras.
+  weight: 1
+- id: EVAL-024-C04
+  description: GPT:n redovisar migrationsosäkerheten explicit i plan/rapport.
+  weight: 1
+critical_failures:
+- blind realized_by→provided_by migration
+- relationsdata eller proveniens tappas
+notes: Bedöm semantik och motivering, inte exakt ordalydelse.

@@ -1,0 +1,14 @@
+migration_rule:
+  id: V1-V2-FUNCTION-001
+  from_profile: ea-stodjare-v1
+  to_profile: ea-stodjare-v2
+  source_concept: embedded function
+  target_concept: embedded function
+  automatic: safe_no_change
+  rules:
+  - legacy_function_name_and_description_are_preserved
+  - local_function_id_is_not_generated_automatically
+  - required_is_not_inferred_without_project_evidence
+  - function_remains_embedded_and_not_global
+  notes: V1-funktioner är redan semantiskt kompatibla som embedded data. V2:s lokala id och required är opt-in metadata och
+    ska inte fabriceras vid migration.

@@ -1,0 +1,27 @@
+schema_version: '1.0'
+sources:
+  - id: SRC-251
+    title: Syntetisk intern behovsbeskrivning för ordbehandling
+    source_type: internal_document
+    organization: Exempelorganisationen
+    notes: Testkälla; inte ett verkligt organisationsdokument.
+  - id: SRC-252
+    title: Syntetiskt internt produktregister
+    source_type: internal_model
+    organization: Exempelorganisationen
+    notes: Testkälla för faktisk användning; inte verklig organisationsinformation.
+  - id: SRC-EXT-251
+    title: Acme Writer Suite – syntetisk leverantörsdokumentation
+    source_type: vendor_documentation
+    organization: Acme Software
+    notes: Syntetisk extern testkälla.
+  - id: SRC-EXT-252
+    title: Nimbus Docs – syntetisk leverantörsdokumentation
+    source_type: vendor_documentation
+    organization: Nimbus Cloud
+    notes: Syntetisk extern testkälla.
+  - id: SRC-EXT-253
+    title: Lexicon Language Tools – syntetisk leverantörsdokumentation
+    source_type: vendor_documentation
+    organization: Lexicon Labs
+    notes: Syntetisk extern testkälla.

@@ -1,0 +1,30 @@
+migration_rule_set:
+  id: v1-to-v2-capability-boundary
+  version: '1.0'
+  source_profile: ea-stodjare-v1
+  target_profile: ea-stodjare-v2-draft
+  automatic_rewrite_default: false
+  rules:
+  - id: CAP-BND-001
+    source_field: scope
+    target_fields:
+    - in_scope
+    - out_of_scope
+    rule: Do not split or rename scope automatically unless the source wording unambiguously
+      states only positive or only negative boundary.
+    ambiguous_action: preserve legacy scope and record migration issue
+  - id: CAP-BND-002
+    source_field: consumer_scope
+    target_field: consumer_scope
+    rule: Preserve unchanged when semantic identity is unchanged.
+  - id: CAP-BND-003
+    applies_to: capability_type=it
+    target_field: in_scope
+    rule: After migration, verify that positive boundary expresses technical enablement
+      for consumers and is not a product list, platform-service list, or business
+      functionality claimed as IT responsibility.
+  reporting_requirements:
+  - record_each_transformed_capability
+  - record_preserved_legacy_scope
+  - record_ambiguous_cases
+  - preserve_stable_capability_id_when_semantics_are_unchanged

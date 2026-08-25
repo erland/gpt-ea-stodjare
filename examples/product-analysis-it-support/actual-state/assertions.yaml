@@ -1,0 +1,11 @@
+schema_version: '1.0'
+layer: actual_state
+assertions:
+  - id: ACT-251
+    assertion_type: product_in_use
+    subject: PRD-252
+    statement: Nimbus Docs används i exempelorganisationen för delar av ordbehandlingsbehovet.
+    status: verified
+    provenance:
+      - evidence_type: explicit
+        source_id: SRC-252

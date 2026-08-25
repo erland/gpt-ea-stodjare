@@ -1,0 +1,123 @@
+model_format:
+  name: EA Stödjare kanoniskt YAML-format
+  version: '1.0'
+  status: step-6-defined
+  encoding: UTF-8
+  source_of_truth: true
+  serialization: YAML
+file_structure:
+  object_files:
+    drivers.yaml: driver
+    goals.yaml: goal
+    principles.yaml: principle
+    capabilities.yaml: capability
+    it-support.yaml: it_support
+    platform-services.yaml: platform_service
+    platforms.yaml: platform
+    standards.yaml: standard
+    solution-patterns.yaml: solution_pattern
+    reference-architectures.yaml: reference_architecture
+  special_files:
+    sources.yaml: source_registry
+    relations.yaml: relation_registry
+common_object_instance:
+  required_fields:
+  - id
+  - type
+  - name
+  - description
+  - status
+  - provenance
+  optional_fields:
+  - aliases
+  - owner
+  - tags
+  - notes
+  rules:
+  - object_type_must_match_file_object_type
+  - id_prefix_must_match_object_type
+  - id_must_be_globally_unique
+  - provenance_must_contain_at_least_one_entry
+function_instance:
+  required_fields:
+  - name
+  optional_fields:
+  - description
+  allowed_on:
+  - it_support
+  - platform_service
+  - platform
+  rules:
+  - function_has_no_global_id_in_v1
+  - function_is_not_a_relation_target_in_v1
+provenance_entry:
+  required_fields:
+  - evidence_type
+  optional_fields:
+  - source_id
+  - reference
+  - quote
+  - derived_from
+  - rationale
+  - confidence
+  - transferability
+  - recorded_at
+  - notes
+  multiplicity: one_or_more_per_object_or_relation
+  semantics_reference: schemas/provenance.yaml
+source_instance:
+  required_fields:
+  - id
+  - title
+  - source_type
+  optional_fields:
+  - organization
+  - url
+  - publication_date
+  - accessed_at
+  - version
+  - notes
+  semantics_reference: schemas/provenance.yaml
+relation_instance:
+  required_fields:
+  - id
+  - type
+  - source
+  - target
+  - status
+  - provenance
+  optional_fields:
+  - description
+  - notes
+  rules:
+  - id_must_be_globally_unique
+  - source_and_target_must_exist
+  - type_must_be_defined_in_relations_schema
+  - source_target_pair_must_be_allowed
+  - inverse_relation_is_not_stored_separately
+  - provenance_must_contain_at_least_one_entry
+file_envelopes:
+  object_file:
+    required_fields:
+    - schema_version
+    - object_type
+    - objects
+  sources_file:
+    required_fields:
+    - schema_version
+    - sources
+  relations_file:
+    required_fields:
+    - schema_version
+    - relations
+versioning:
+  schema_version: '1.0'
+  rule: schema_version describes the serialization contract, not the project revision. Project revision and manifest
+    metadata are introduced in development step 7.
+canonicality:
+  rules:
+  - YAML in model/ is the editable source of truth for EA model content.
+  - Generated Markdown, Confluence, DOCX and PDF are derived outputs.
+  - Generated outputs must not be used as competing canonical model stores.
+  - Object relations are stored only in relations.yaml, not duplicated as object fields.
+  - Sources are registered once in sources.yaml and referenced by source_id.

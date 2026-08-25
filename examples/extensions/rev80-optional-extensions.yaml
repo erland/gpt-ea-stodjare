@@ -1,0 +1,42 @@
+schema_version: '2.0'
+project_metamodel:
+  id: optional-rev80-extensions-demo
+  version: '1.0'
+  base_profile:
+    id: ea-stodjare-v2
+    version: '2.0'
+    compatibility_mode: native
+  object_types:
+    enabled:
+    - product
+    - platform
+    disabled: []
+    custom: []
+  attribute_extensions: []
+  relations:
+    enabled: []
+    disabled: []
+    custom: []
+  relation_qualifiers: []
+  value_sets: []
+  extensions:
+  - id: ea.product-deployment
+    version: '1.0'
+    enabled: true
+  - id: ea.product-openness
+    version: '1.0'
+    enabled: true
+  - id: ea.platform-maturity
+    version: '1.0'
+    enabled: true
+  derived_views: []
+  presentation:
+    labels: {}
+  governance:
+    change_control: false
+    baseline_id: null
+    freeze_status: draft
+  notes:
+  - Demonstrerar steg 15:s tre oberoende, valfria extensions. De beskriver marknads-/produktkaraktär
+    respektive konceptuell plattformsstruktur och får inte tolkas som actual organization
+    state.

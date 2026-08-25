@@ -1,0 +1,25 @@
+scenario: it_support_product_analysis
+it_support: ITS-251
+product_neutral_need: true
+embedded_function_ids:
+  - create_document
+  - edit_format
+  - spelling_language
+  - collaborate
+expected_realization_roles:
+  PRD-251: primary
+  PRD-252: partial
+  PRD-253: supporting
+expected_market_evidence:
+  - PRD-251
+  - PRD-252
+  - PRD-253
+actual_products_in_use:
+  - PRD-252
+not_actual_by_inference:
+  - PRD-251
+  - PRD-253
+guards:
+  - can_realize_does_not_imply_actual_use
+  - market_capability_does_not_imply_actual_use
+  - actual_use_requires_organization_specific_evidence

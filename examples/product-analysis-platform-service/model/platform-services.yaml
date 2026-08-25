@@ -1,0 +1,30 @@
+schema_version: '1.0'
+object_type: platform_service
+objects:
+- id: PLS-261
+  type: platform_service
+  name: Applikationskörning
+  description: Produktneutralt tekniskt erbjudande för att köra paketerade applikationer.
+  status: candidate
+  consumer_scope: Applikationsteam som behöver standardiserad körmiljö
+  realization_pattern: mixed
+  functions:
+  - id: deploy_runtime
+    name: Driftsätt körbar applikation
+    description: Tar emot och startar paketerad applikation.
+    required: true
+  - id: runtime_isolation
+    name: Isolera körning
+    description: Ger separerad körmiljö mellan applikationer.
+    required: true
+  - id: runtime_observability
+    name: Exponera körningsstatus
+    description: Ger grundläggande status och loggbarhet.
+    required: true
+  - id: autoscale
+    name: Skala körning
+    description: Kan skala instanser efter belastning.
+    required: false
+  provenance:
+  - evidence_type: explicit
+    source_id: SRC-261

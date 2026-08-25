@@ -1,0 +1,30 @@
+schema_version: '1.0'
+layer: market_reference
+assertions:
+- id: MKT-261
+  assertion_type: product_capability
+  subject: PRD-261
+  statement: Syntetiskt marknadspåstående om produktens bidrag till applikationskörning.
+  provenance:
+  - evidence_type: external
+    source_id: SRC-EXT-261
+    confidence: high
+    transferability: high
+- id: MKT-262
+  assertion_type: product_capability
+  subject: PRD-262
+  statement: Syntetiskt marknadspåstående om produktens bidrag till applikationskörning.
+  provenance:
+  - evidence_type: external
+    source_id: SRC-EXT-262
+    confidence: high
+    transferability: high
+- id: MKT-263
+  assertion_type: product_capability
+  subject: PRD-263
+  statement: Syntetiskt marknadspåstående om produktens bidrag till applikationskörning.
+  provenance:
+  - evidence_type: external
+    source_id: SRC-EXT-263
+    confidence: high
+    transferability: medium

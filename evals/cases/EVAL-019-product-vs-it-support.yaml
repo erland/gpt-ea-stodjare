@@ -1,0 +1,36 @@
+format: ea-stodjare-semantic-eval-case
+version: '1.0'
+id: EVAL-019
+title: Produkt skiljs från IT-stöd
+tags:
+- classification
+- product
+- it_support
+prompt: 'Användaren säger: ''Microsoft Word är vårt IT-stöd för ordbehandling. Lägg in Word som IT-stöd och funktionerna som
+  Word har.'''
+expected_behaviors:
+- GPT:n skiljer produktneutralt IT-stöd från konkret Produkt och föreslår exempelvis IT-stöd Ordbehandling samt Word som Produkt
+  om underlaget stödjer det.
+- IT-stödets funktioner formuleras som behov/funktionalitet och inte som en kopia av en viss produkts feature-lista.
+- Produktens möjliga realisering hanteras via relation/evidens, inte genom att byta objekttyp på IT-stödet.
+- Faktisk användning markeras endast om organisationsspecifik evidens finns.
+forbidden_behaviors:
+- Word modelleras direkt som IT-stöd enbart för att det används för ordbehandling.
+- Produktens marknadsfunktioner skrivs in som organisationens krav utan analys.
+grading_criteria:
+- id: EVAL-019-C01
+  description: GPT:n skiljer produktneutralt IT-stöd från konkret Produkt och föreslår exempelvis IT-stöd Ordbehandling samt
+    Word som Produkt om underlaget stödjer det.
+  weight: 2
+- id: EVAL-019-C02
+  description: IT-stödets funktioner formuleras som behov/funktionalitet och inte som en kopia av en viss produkts feature-lista.
+  weight: 1
+- id: EVAL-019-C03
+  description: Produktens möjliga realisering hanteras via relation/evidens, inte genom att byta objekttyp på IT-stödet.
+  weight: 1
+- id: EVAL-019-C04
+  description: Faktisk användning markeras endast om organisationsspecifik evidens finns.
+  weight: 1
+critical_failures:
+- Produkt och IT-stöd kollapsas till samma objekt
+notes: Bedöm semantik och motivering, inte exakt ordalydelse.

@@ -1,0 +1,8 @@
+h1. Mål
+
+{info:title=Genererad artefakt}
+Genererad från kanonisk YAML · läge working · projektrevision 59 · presentationskontrakt ea-reader-oriented-sv
+{info}
+
+|| ID || Namn || Beskrivning || Status ||
+| _Inga objekt i valt läge_ |  |  |  |

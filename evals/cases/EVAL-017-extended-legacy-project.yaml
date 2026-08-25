@@ -1,0 +1,36 @@
+format: ea-stodjare-semantic-eval-case
+version: '1.0'
+id: EVAL-017
+title: Öppna extended legacy-projekt säkert
+tags:
+- backward_compatibility
+- extended_legacy
+- project_open
+prompt: Användaren öppnar ett äldre projekt med v1-kärna men egna produkt-, deployment- och relationsrollfiler och ber GPT:n
+  analysera det.
+expected_behaviors:
+- GPT:n klassificerar projektet som extended legacy när tilläggen är tydliga och läser projektets faktiska semantik före analys.
+- GPT:n bevarar projektspecifika tillägg som projektfakta och upphöjer dem inte automatiskt till native v2-kärna.
+- GPT:n skiljer market/reference-data från actual organization state om projektet gör det.
+- GPT:n markerar okända eller tvetydiga extensions som sådana i stället för att gissa.
+forbidden_behaviors:
+- Projektspecifika tillägg ignoreras eftersom de inte finns i standardmodellen.
+- Marknadsdata behandlas som faktisk organisationsstatus.
+grading_criteria:
+- id: EVAL-017-C01
+  description: GPT:n klassificerar projektet som extended legacy när tilläggen är tydliga och läser projektets faktiska semantik
+    före analys.
+  weight: 2
+- id: EVAL-017-C02
+  description: GPT:n bevarar projektspecifika tillägg som projektfakta och upphöjer dem inte automatiskt till native v2-kärna.
+  weight: 1
+- id: EVAL-017-C03
+  description: GPT:n skiljer market/reference-data från actual organization state om projektet gör det.
+  weight: 1
+- id: EVAL-017-C04
+  description: GPT:n markerar okända eller tvetydiga extensions som sådana i stället för att gissa.
+  weight: 1
+critical_failures:
+- extended legacy plattas ut till v2 med informationsförlust
+- projektspecifik semantik hittas på
+notes: Bedöm semantik och motivering, inte exakt ordalydelse.

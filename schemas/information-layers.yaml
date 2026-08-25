@@ -1,0 +1,88 @@
+information_layer_model:
+  name: EA Stödjare informationslager
+  version: '1.0'
+  status: v2-step-16
+  principle: Samma sak får beskrivas i flera epistemiska lager endast när påståendets betydelse och evidens tydligt skiljs åt.
+
+layers:
+  conceptual:
+    path: model/
+    source_of_truth_for: conceptual_architecture
+    canonical: true
+    description: Behov, målarkitektur, förmågor, IT-stöd, produktneutrala plattformstjänster/plattformar och andra konceptuella EA-objekt.
+    guards:
+      - conceptual_need_does_not_imply_product_choice
+      - product_can_realize_does_not_imply_actual_use
+  market_reference:
+    path: market-reference/
+    source_of_truth_for: market_reference_assertions
+    canonical_for_organization: false
+    description: Källstödda påståenden om marknadsprodukter, leverantörserbjudanden och extern realiseringspotential.
+    guards:
+      - market_capability_does_not_imply_actual_use
+      - market_reference_must_not_be_presented_as_organizational_fact
+  actual_state:
+    path: actual-state/
+    source_of_truth_for: organization_specific_actual_state
+    canonical: true
+    description: Verifierad organisationsspecifik information om val, användning, godkännande, avveckling och faktiska erbjudanden.
+    guards:
+      - actual_use_does_not_imply_organizational_offering
+      - organizational_offering_must_be_asserted_explicitly
+      - external_market_evidence_alone_is_insufficient_for_actual_state
+      - actual_state_may_reference_product_directly
+
+market_reference_assertion:
+  envelope:
+    schema_version: '1.0'
+    layer: market_reference
+    collection: assertions
+  required_fields: [id, assertion_type, subject, statement, provenance]
+  id_pattern: '^MKT-[0-9]{3,}$'
+  assertion_types:
+    - product_capability
+    - product_characteristic
+    - product_lifecycle
+    - vendor_offering
+    - market_comparison
+    - other
+  subject_rule: subject_should_reference_a_product_or_other_explicitly_market_scoped_entity
+  evidence_rule: positive_market_claims_require_source_backed_provenance
+
+actual_state_assertion:
+  envelope:
+    schema_version: '1.0'
+    layer: actual_state
+    collection: assertions
+  required_fields: [id, assertion_type, subject, statement, status, provenance]
+  id_pattern: '^ACT-[0-9]{3,}$'
+  assertion_types:
+    - product_in_use
+    - product_selected
+    - product_approved
+    - product_retired
+    - organizational_offering
+    - implementation_state
+    - other
+  status_values: [candidate, verified, retired]
+  rules:
+    - product_in_use_may_reference_product_directly
+    - product_selected_is_not_equivalent_to_product_in_use
+    - product_in_use_is_not_equivalent_to_organizational_offering
+    - organizational_offering_must_be_a_separate_assertion
+    - external_evidence_alone_cannot_verify_actual_state
+    - verified_actual_state_requires_explicit_or_derived_organization_specific_evidence
+
+cross_layer_rules:
+  - id: LAYER-001
+    rule: conceptual need != product choice
+  - id: LAYER-002
+    rule: market capability != actual use
+  - id: LAYER-003
+    rule: actual use != organizational offering
+  - id: LAYER-004
+    rule: can_realize is never evidence of product_in_use by itself
+  - id: LAYER-005
+    rule: actual-state may reference Product directly; no actual_platform_offering core object is required
+  - id: LAYER-006
+    rule: movement from market_reference to actual_state requires new organization-specific evidence, not file relocation or relabeling

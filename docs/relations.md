@@ -1,4 +1,4 @@
-# EA Stödjare – relationsmodell v1
+# EA Stödjare – relationsmodell v1 med v2-utökningar
 
 ## 1. Syfte och status
 
@@ -14,7 +14,7 @@ Proveniens för relationer specificeras i steg 5 och det slutliga instanceschema
 2. **Relationen ska beskriva arkitekturell betydelse, inte bara association.** `related_to` används endast när en mer precis relation ännu inte kan fastställas.
 3. **Samma sak ska inte modelleras dubbelt i både objektattribut och relationer.** Globala kopplingar mellan EA-objekt uttrycks i relationsmodellen. Underordnade `functions` förblir attribut.
 4. **Förmågor realiseras inte automatiskt av IT-stöd.** Ett IT-stöd `supports` en förmåga. Förmågan är organisatorisk/IT-mässig förmåga och är inte samma sak som systemets funktionalitet.
-5. **Plattformstjänst och Plattform hålls isär.** Plattformstjänsten kan `realized_by` en Plattform; ett IT-stöd kan `uses` en Plattformstjänst.
+5. **Plattformstjänst och Plattform hålls isär.** I native v2 använder Plattformstjänsten `provided_by` för konceptuell hemvist i en Plattform; ett IT-stöd kan `uses` en Plattformstjänst. Legacy v1 kan fortsatt använda `realized_by` enligt den frysta v1-profilen.
 6. **Strategiska relationer får vara många-till-många.** En Drivkraft kan påverka flera Mål och ett Mål kan påverkas av flera Drivkrafter.
 7. **Relationer ska kunna ha egen proveniens.** Det kan vara belagt att två objekt finns men endast härlett att de har en viss relation.
 8. **Avsaknad av relation är inte automatiskt ett fel.** Kvalitetsregler för förväntade relationer definieras senare.
@@ -88,26 +88,23 @@ Det rekommenderade läsriktningen är alltså från det stödjande objektet till
 
 > Tullklareringssystemet **använder** den gemensamma meddelandetjänsten.
 
-`uses` ska inte användas för att beskriva att en Plattformstjänst tekniskt implementeras av en Plattform; använd då `realized_by`.
+`uses` ska inte användas för att beskriva Plattformstjänstens konceptuella hemvist; använd i native v2 `provided_by`. `realized_by` reserveras för konkret realiseringssemantik där projektmetamodellen uttryckligen stödjer den.
 
 ---
 
-### 4.4 `realized_by` – realiseras av
+### 4.4 `provided_by` – tillhandahålls av
 
-**Betydelse:** Källobjektet får sin konkreta realisering genom målobjektet.
+**Semantik:** Plattformstjänsten har sin konceptuella hemvist i och tillhandahålls inom Plattformen. Relationen beskriver gruppering/hemvist, inte konkret implementation.
 
-**Primära användningar:**
+Tillåten native v2-kombination:
 
 - Plattformstjänst → Plattform
-- Referensarkitektur → Lösningsmönster, när referensarkitekturen konkretiseras genom återanvändbara mönster
 
-**Exempel:**
+`provided_by` innebär inte att Plattformen är en produkt, att en enda produkt realiserar hela tjänsten eller att organisationen faktiskt erbjuder en viss produktbaserad runtime.
 
-> Containerplattformstjänsten **realiseras av** OpenShift-plattformen.
+### 4.4b `realized_by` – realiseras av
 
-Relationen ska inte användas mellan Förmåga och IT-stöd i v1; där används `supports` i motsatt riktning.
-
----
+**Semantik:** konkret realisering. I native v2 används `realized_by` inte för Plattformstjänst → Plattform. Relationstypen kan fortsatt användas där den definierade projektmetamodellen verkligen behöver konkret realiseringssemantik, exempelvis Referensarkitektur → Lösningsmönster. Legacy v1 `PLS --realized_by--> PLT` tolkas genom den frysta v1-profilen tills kontrollerad migration görs.
 
 ### 4.5 `governed_by` – styrs av
 
@@ -222,7 +219,7 @@ Tabellen sammanfattar den kanoniska riktningen.
 | `uses` | IT-stöd | Plattformstjänst |
 | `uses` | Plattformstjänst | Plattformstjänst |
 | `uses` | Plattform | Plattformstjänst |
-| `realized_by` | Plattformstjänst | Plattform |
+| `provided_by` | Plattformstjänst | Plattform |
 | `realized_by` | Referensarkitektur | Lösningsmönster |
 | `governed_by` | Förmåga, IT-stöd, Plattformstjänst, Plattform, Lösningsmönster, Referensarkitektur | Princip, Standard |
 | `constrains` | Standard | IT-stöd, Plattformstjänst, Plattform, Lösningsmönster, Referensarkitektur |
@@ -250,7 +247,7 @@ För att hålla det maskinläsbara vokabuläret litet lagras inte separata inver
 | Kanonisk relation | Tillåten presentationsform |
 |---|---|
 | `IT-stöd supports Förmåga` | Förmågan **stöds av** IT-stödet |
-| `Plattformstjänst realized_by Plattform` | Plattformen **realiserar** plattformstjänsten |
+| `Plattformstjänst provided_by Plattform` | Plattformen **tillhandahåller/grupperar** plattformstjänsten konceptuellt |
 | `Objekt governed_by Princip` | Principen **styr** objektet |
 | `Objekt uses Plattformstjänst` | Plattformstjänsten **används av** objektet |
 
@@ -282,7 +279,7 @@ GOAL-001 Kortare ledtid från behov till produktion
 
 PLS-001 Containerplattformstjänst
     ├─ supports → CAP-IT-001 Driftsätta applikationer
-    └─ realized_by → PLT-001 OpenShift-plattform
+    └─ provided_by → PLT-001 Containerplattform
 
 ITS-001 Ärendehanteringssystem
     ├─ supports → CAP-001 Hantera ärenden
@@ -314,6 +311,7 @@ Relationsmodell v1 består av nio relationstyper:
 influences
 supports
 uses
+provided_by
 realized_by
 governed_by
 constrains
@@ -323,3 +321,88 @@ related_to
 ```
 
 Detta är avsiktligt färre relationstyper än vad ett fullskaligt EA-språk kan erbjuda. Målet är en modell som är lätt att förstå, lätt att validera och tillräckligt uttrycksfull för EA Stödjares v1-scope.
+
+
+## 9. V2-utökning: `can_realize` – kan realisera
+
+**Betydelse:** En Produkt har verifierade egenskaper som gör att den helt eller delvis kan realisera ett produktoberoende IT-stöd eller en Plattformstjänst. Relationens existens uttrycker marknads-/realiseringspotential och betyder **inte** att produkten används, är vald eller erbjuds av organisationen.
+
+**Tillåtna riktningar:**
+
+- Produkt → IT-stöd
+- Produkt → Plattformstjänst
+
+**Obligatorisk kvalificerare:** `realization_role`. Standardvärden i v2 är `primary`, `partial` och `supporting`. Projektmetamodellen får senare utöka värdemängden när en domän behöver mer detaljer, exempelvis `native_primary` eller `integrated`.
+
+**Evidensregel:** Ett positivt `can_realize`-påstående ska ha källstödd proveniens. En relation som endast har `proposed`-evidens är inte tillräcklig som marknadspåstående. External, explicit eller härledd evidens med spårbar källa/underlag krävs.
+
+Exempel:
+
+```yaml
+- id: REL-0901
+  type: can_realize
+  source: PRD-101
+  target: ITS-020
+  realization_role: primary
+  status: candidate
+  provenance:
+    - evidence_type: external
+      source_id: SRC-EXT-101
+      reference: Produktdokumentation för dokumentredigering
+      confidence: high
+      transferability: high
+```
+
+Samma mönster kan användas för en plattformsprodukt mot en Plattformstjänst. Produktens närvaro i marknadsreferensen eller `can_realize` får aldrig infereras till faktisk organisationsanvändning.
+
+
+## V2 steg 12 – generella relationskvalificerare
+
+V2 behåller en liten relationskärna och använder **kvalificerare** när en relation behöver mer precision. Kvalificerare är metadata på relationen; de får aldrig användas för att ändra relationstypens grundbetydelse.
+
+Standardkvalificerare:
+
+| Kvalificerare | Typ | Standardvärden / semantik |
+|---|---|---|
+| `relation_role` | enum | `responsibility_boundary`, `cross_capability_support`, `information_dependency`, `lifecycle_dependency`, `operational_dependency`; projektextensibel |
+| `strength` | enum | `structural`, `typical`, `optional`, `informational` |
+| `mandatory` | boolean | Om relationen uttrycker ett obligatoriskt krav/beroende i aktuell kontext |
+| `realization_role` | enum | `primary`, `partial`, `supporting`; projektextensibel och obligatorisk för `can_realize` |
+| `verification_status` | enum | `verified`, `partially_verified`, `unverified`, `unknown` |
+| `boundary_basis` | string | Kort motivering till boundary/klassificering |
+| `notes` | string eller lista | Kompletterande kommentar |
+
+Tillämpbarheten är **relationsspecifik** och definieras maskinläsbart i `schemas/relations.yaml`. Exempelvis är `realization_role` tillåten för `can_realize`, medan `relation_role` främst används på `related_to`, `supports`, `uses` och `depends_on`. En kvalificerare som inte är deklarerad för relationstypen är ogiltig.
+
+`verification_status` ersätter aldrig relationens proveniens. `unknown` betyder att påståendet ännu inte är verifierat, inte att relationen är falsk. `mandatory` får inte användas för att göra en i grunden mjuk relationstyp semantiskt hårdare än vad relationstypens definition tillåter.
+
+Exempel:
+
+```yaml
+- id: REL-1201
+  type: related_to
+  source: CAP-IT-001
+  target: CAP-IT-002
+  relation_role: responsibility_boundary
+  strength: informational
+  verification_status: verified
+  boundary_basis: Ansvarsgränsen behöver synliggöras men är inte ett hårt beroende.
+  status: approved
+  provenance:
+    - evidence_type: explicit
+      source_id: SRC-001
+```
+
+```yaml
+- id: REL-1202
+  type: can_realize
+  source: PRD-010
+  target: ITS-004
+  realization_role: partial
+  strength: typical
+  verification_status: verified
+  status: candidate
+  provenance:
+    - evidence_type: external
+      source_id: SRC-EXT-010
+```

@@ -14,6 +14,7 @@ file_structure:
     it-support.yaml: it_support
     platform-services.yaml: platform_service
     platforms.yaml: platform
+    products.yaml: product
     standards.yaml: standard
     solution-patterns.yaml: solution_pattern
     reference-architectures.yaml: reference_architecture
@@ -42,14 +43,20 @@ function_instance:
   required_fields:
   - name
   optional_fields:
+  - id
   - description
+  - required
   allowed_on:
   - it_support
   - platform_service
   - platform
+  id_scope: parent_object
+  id_pattern: ^[A-Za-z][A-Za-z0-9._-]{0,63}$
   rules:
-  - function_has_no_global_id_in_v1
-  - function_is_not_a_relation_target_in_v1
+  - function_id_is_optional_and_local_to_parent_in_v2
+  - function_id_must_be_unique_within_parent_when_present
+  - function_is_not_a_global_object_or_relation_target
+  - required_is_boolean_when_present
 provenance_entry:
   required_fields:
   - evidence_type
@@ -88,6 +95,12 @@ relation_instance:
   - provenance
   optional_fields:
   - description
+  - relation_role
+  - strength
+  - mandatory
+  - realization_role
+  - verification_status
+  - boundary_basis
   - notes
   rules:
   - id_must_be_globally_unique
@@ -96,6 +109,18 @@ relation_instance:
   - source_target_pair_must_be_allowed
   - inverse_relation_is_not_stored_separately
   - provenance_must_contain_at_least_one_entry
+  - native_v2_platform_service_to_platform_conceptual_home_uses_provided_by
+  - qualifiers_must_be_allowed_for_relation_type
+  - qualifier_values_must_match_relations_schema
+  - qualifiers_refine_but_do_not_replace_relation_type_semantics
+  qualifier_rules:
+    general: Allowed qualifier names, types and value sets are defined in schemas/relations.yaml.
+    can_realize:
+      required_fields:
+      - realization_role
+      project_extensions_may_add_realization_role_values: true
+      evidence_rule: must_have_explicit_external_or_derived_source_backed_provenance; proposed-only is insufficient
+  qualifier_semantics_reference: schemas/relations.yaml#qualifier_definitions
 file_envelopes:
   object_file:
     required_fields:
@@ -112,8 +137,8 @@ file_envelopes:
     - relations
 versioning:
   schema_version: '1.0'
-  rule: schema_version describes the serialization contract, not the project revision. Project revision and manifest
-    metadata are introduced in development step 7.
+  rule: schema_version describes the serialization contract, not the project revision. Project revision and manifest metadata
+    are introduced in development step 7.
 canonicality:
   rules:
   - YAML in model/ is the editable source of truth for EA model content.
@@ -121,3 +146,103 @@ canonicality:
   - Generated outputs must not be used as competing canonical model stores.
   - Object relations are stored only in relations.yaml, not duplicated as object fields.
   - Sources are registered once in sources.yaml and referenced by source_id.
+capability_instance:
+  required_fields:
+  - capability_type
+  optional_fields:
+  - in_scope
+  - out_of_scope
+  - consumer_scope
+  rules:
+  - in_scope_and_out_of_scope_are_lists_of_boundary_statements_when_present
+  - consumer_scope_may_be_string_or_list
+  - legacy_scope_is_not_native_v2_and_requires_legacy_profile_or_explicit_extension
+  - it_capability_in_scope_describes_technical_enablement_not_product_or_platform_service_inventory
+  legacy_v1_field:
+    scope: interpreted only through compatibility/ea-stodjare-v1
+platform_service_instance:
+  optional_fields:
+  - functions
+  - service_level
+  - consumer_scope
+  - realization_pattern
+  allowed_values:
+    realization_pattern:
+    - single_product
+    - product_family
+    - composition
+    - framework_or_library
+    - managed_service
+    - saas
+    - mixed
+    - unknown
+  rules:
+  - platform_service_is_realization_neutral
+  - shared_or_centrally_operated_runtime_is_not_required
+  - realization_pattern_is_descriptive_not_a_commitment_to_actual_organizational_realization
+  legacy_v1_semantics: interpreted only through compatibility/ea-stodjare-v1
+  relation_note: Native v2 använder Platform Service --provided_by--> Platform för konceptuell hemvist. Legacy v1 PLS --realized_by-->
+    Platform tolkas endast genom legacyprofil/migreringsregel.
+platform_instance:
+  applies_when: object_type == platform in native v2
+  identity: product_neutral_conceptual_grouping
+  optional_fields:
+  - functions
+  - technology
+  - products
+  semantic_rules:
+  - platform_groups_platform_services_conceptually
+  - platform_boundary_is_not_defined_by_product_identity
+  - singleton_platform_may_be_valid
+  - composition_realization_may_be_valid
+  - actual_organizational_offering_is_not_inferred_from_product_or_market_presence
+  legacy_note: V1 platform semantics remain in compatibility/ea-stodjare-v1 and are not rewritten automatically.
+product_instance:
+  required_fields:
+  - product_kind
+  optional_fields:
+  - vendor
+  - website
+  - lifecycle
+  - version
+  - market_notes
+  allowed_values:
+    product_kind:
+    - application_product
+    - platform_product
+    - infrastructure_product
+    - service_product
+    - framework
+    - library
+    - component_library
+    - data_access_framework
+    - build_tool
+    - testing_framework
+    - developer_tool
+    - sdk
+    - appliance
+    - other
+    - unknown
+  rules:
+  - product_is_supporting_market_realization_object
+  - product_is_not_it_support_platform_service_or_platform
+  - actual_organizational_use_is_not_inferred_from_market_presence
+  relation_note: Native v2 supports Product --can_realize--> IT Support or Platform Service. This is market/realization potential
+    and never proves actual organizational use.
+information_layers:
+  semantics_reference: schemas/information-layers.yaml
+  conceptual:
+    path: model/
+    source_of_truth_for: conceptual_architecture
+  market_reference:
+    path: market-reference/
+    canonical_for_organization: false
+  actual_state:
+    path: actual-state/
+    source_of_truth_for: organization_specific_actual_state
+  rules:
+  - conceptual_need_does_not_imply_product_choice
+  - market_capability_does_not_imply_actual_use
+  - actual_use_does_not_imply_organizational_offering
+  - actual_state_may_reference_product_directly
+  - actual_platform_offering_is_not_required_core_object

@@ -1,0 +1,68 @@
+schema_version: '1.0'
+change_control:
+  enabled: true
+  baseline:
+    id: EA-STODJARE-V2
+    version: 2.0.0-r59
+    freeze_status: frozen
+    model_revision: 59
+    metamodel_version: '2.0'
+    created_at: '2026-08-25T23:00:00+02:00'
+    notes:
+    - Slutlig 2.0.0-baslinje efter post-release cleanup r59; ingen modell- eller metamodellsemantik
+      ändrad jämfört med r58.
+    - Extern LLM-runtime-eval är inte exekverad och redovisas som accepterad residualrisk,
+      inte som passed.
+    - V1.0.0-rc1 bevaras separat som fryst legacy-profil.
+  change_classes:
+    editorial:
+      scope: model
+      description: Språk, formatering eller presentation som inte ändrar objektens
+        eller relationernas betydelse.
+      requires_evidence: false
+      requires_approval: false
+      requires_new_baseline: false
+    evidence_update:
+      scope: model
+      description: Källor, proveniens eller evidensstatus uppdateras utan att modellens
+        semantiska påstående ändras.
+      requires_evidence: true
+      requires_approval: false
+      requires_new_baseline: false
+    controlled_model_change:
+      scope: model
+      description: Kanoniskt modellinnehåll ändras inom oförändrad metamodell, exempelvis
+        objekt, boundary eller relation.
+      requires_evidence: true
+      requires_approval: true
+      requires_new_baseline: true
+    breaking_model_change:
+      scope: model
+      description: Modelländring bryter stabila ID:n, konsumentkontrakt eller etablerad
+        semantik och kräver explicit övergång.
+      requires_evidence: true
+      requires_approval: true
+      requires_new_baseline: true
+    metamodel_change:
+      scope: metamodel
+      description: Objekttyper, attribut, relationstyper, värdemängder, constraints
+        eller projektmetamodellens semantik ändras.
+      requires_evidence: true
+      requires_approval: true
+      requires_new_baseline: true
+  policies:
+    frozen_baseline:
+      allowed_without_reopen:
+      - editorial
+      - evidence_update
+      requires_reopen:
+      - controlled_model_change
+      - breaking_model_change
+      - metamodel_change
+    id_retirement: retire_never_reuse
+    metamodel_separation: metamodel_changes_in_separate_log
+  registries:
+    retired_ids: governance/retired-ids.yaml
+  changelogs:
+    model: governance/model-changelog.yaml
+    metamodel: governance/metamodel-changelog.yaml

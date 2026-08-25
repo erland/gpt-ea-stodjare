@@ -5,1242 +5,903 @@
 
 Denna fil konsoliderar följande kanoniska källor:
 
-- `docs/yaml-model-format.md`
-- `docs/project-format.md`
-- `knowledge/project-status-rules.md`
-- `docs/documentation-profiles.md`
-- `docs/markdown-generation.md`
-- `docs/confluence-generation.md`
-- `docs/document-export.md`
-- `docs/structural-validation.md`
+- `docs/runtime-project-output-v2.md`
+- `docs/backward-compatibility-contract.md`
+- `docs/project-metamodel-format.md`
+- `docs/derived-views.md`
+- `docs/presentation-contract.md`
+- `docs/metamodel-aware-generation.md`
+- `docs/structural-validation-v2.md`
 
 ---
 
 
-# KÄLLA: `docs/yaml-model-format.md`
+# KÄLLA: `docs/runtime-project-output-v2.md`
 
-# Kanoniskt YAML-format v1
+# Runtimekontrakt – projekt, output och kompatibilitet v2
 
-## Syfte
+## Projektmetamodell
 
-Detta dokument fastställer serialiseringen av EA Stödjares kanoniska modell efter steg 6. Metamodellen beskriver **vilka begrepp som finns**, relationsmodellen beskriver **vilka kopplingar som är tillåtna**, proveniensmodellen beskriver **varför informationen finns**, och detta format beskriver **hur allt lagras i YAML**.
+Native v2 deklarerar sin faktiska modell i `project-metamodel.yaml`: basprofil, aktiva/inaktiva standardtyper, custom types, attribut, relationer, värdemängder, extensions, derived views och presentationsdelta. Resolverad metamodell är härledd och inte source of truth.
 
-## Grundprincip
+## Kompatibilitet
 
-`model/` är source of truth för EA-modellens innehåll. Genererad Markdown, Confluence markup, DOCX och PDF ska senare byggas från denna modell och får inte utvecklas till parallella sanningskällor.
+- legacy v1 använder fryst v1-profil,
+- extended legacy använder rekonstruerad/projektspecifik profil,
+- native v2 använder aktuell projektmetamodell,
+- unknown stoppas för semantisk automatiktolkning.
 
-## Filstruktur
+## Derived views och presentation
 
-```text
-model/
-  sources.yaml
-  drivers.yaml
-  goals.yaml
-  principles.yaml
-  capabilities.yaml
-  it-support.yaml
-  platform-services.yaml
-  platforms.yaml
-  standards.yaml
-  solution-patterns.yaml
-  reference-architectures.yaml
-  relations.yaml
-```
+Derived views är deterministiska, regenererbara och `source_of_truth: false`. Presentation contract styr läsaretiketter, ordning, rubriker och visning men får inte ändra semantik eller proveniens.
 
-En objekttyp per fil gör modellen enkel att diffgranska, generera dokumentation från och validera. Källor och relationer är gemensamma register och ligger därför separat.
+## Dokumentgenerering
 
-## Objektfil
+Markdown, Confluence, DOCX och PDF genereras från projektets effektiva metamodell och presentation contract. Generation manifest beskriver vilka kataloger som skapats. Product, custom types och extensions ska följa med när de är aktiva; avaktiverade typer utelämnas.
 
-Varje objektfil har ett litet envelope:
+## Validering och release
 
-```yaml
-schema_version: "1.0"
-object_type: capability
-objects:
-  - id: CAP-001
-    type: capability
-    name: Utveckla IT-stöd
-    description: Förmåga att utveckla och vidareutveckla IT-stöd.
-    status: candidate
-    capability_type: it
-    provenance:
-      - evidence_type: proposed
-        rationale: Föreslagen som del av exempelmodellen.
-        confidence: medium
-```
-
-`type` på varje objekt är avsiktligt kvar även om filen redan anger `object_type`. Redundansen gör fristående objekt begripliga och möjliggör enkel validering av att ett objekt ligger i rätt fil.
-
-## Gemensamma objektfält
-
-Obligatoriska fält är `id`, `type`, `name`, `description`, `status` och `provenance`. Valfria gemensamma fält är `aliases`, `owner`, `tags` och `notes`. Objekttypsspecifika fält definieras i `schemas/object-types.yaml`.
-
-## Funktioner
-
-Funktion är fortfarande ett underordnat begrepp i v1. Därför lagras funktioner inuti IT-stöd, Plattformstjänst och Plattform och får inga globala ID:n:
-
-```yaml
-functions:
-  - name: Köra containeriserade applikationer
-    description: Tillhandahåller exekveringsmiljö för containeriserade workloads.
-```
-
-Om funktioner senare behöver egna relationer eller livscykel kan de migreras till fullvärdiga objekt i en framtida schemaversion.
-
-## Källregister och proveniens
-
-`sources.yaml` registrerar varje källa en gång. Objekt och relationer refererar därefter till källan via `source_id`.
-
-`provenance` är en lista, inte ett enskilt block. Ett objekt kan därmed ha flera belägg av olika slag. Ett organisationsspecifikt förslag som inspirerats av extern research ska fortfarande ha en `proposed`-post. Externa källor kan läggas som ytterligare evidensposter men gör inte förslaget till ett internt faktum.
-
-## Relationer
-
-Relationer lagras endast i `relations.yaml`:
-
-```yaml
-schema_version: "1.0"
-relations:
-  - id: REL-001
-    type: supports
-    source: ITS-001
-    target: CAP-001
-    status: candidate
-    provenance:
-      - evidence_type: proposed
-        rationale: IT-stödet föreslås stödja förmågan.
-        confidence: medium
-```
-
-Relationer dupliceras inte som `supports_capabilities`, `uses_platform_services` eller liknande fält på objekt. En enda kanonisk relationsrepresentation minskar synkproblem och gör grafanalys möjlig senare.
-
-## Status och schema-version
-
-Objekt använder `candidate`, `approved`, `deprecated` och `retired`. Relationer använder samma värden för att kunna skilja preliminära kopplingar från accepterade utan en separat livscykelmodell.
-
-`schema_version` beskriver YAML-kontraktet. Projektets revision, manifest och filintegritet införs först i steg 7.
-
-## Identifierare
-
-Objekt-ID följer prefixen i metamodel v1. Relationer använder `REL-`. Källor använder `SRC-` eller `SRC-EXT-`. ID:n ska vara stabila över namnändringar.
-
-## Medvetna förenklingar i v1
-
-- Ingen generell `attributes`-påse; kända fält ska vara explicita.
-- Inga relationer dupliceras inne i objekten.
-- Funktioner saknar global identitet.
-- Produkt och teknik är attribut där de behövs, inte egna kärnobjekt.
-- Projektmanifest och revision väntar till steg 7.
-- Exekverbar fullvalidering implementeras senare enligt utvecklingsplanen.
-
-## Exempelmodell
-
-`examples/minimal-model/` innehåller syntetisk testdata som demonstrerar samtliga primära och sekundära objekttyper, verksamhets- och IT-förmåga, funktioner, källor, evidenstyper och relationstyper. Den ska inte tolkas som rekommendation för en verklig organisation.
+`scripts/validate_project.py` är gemensam strukturell grind och kan skriva maskinläsbar valideringsrapport. CI/release ska även kontrollera legacy v1, extended legacy/rev80, migration, Builder-distributioner, dokumentexport och release unpack-and-validate.
 
 
-# KÄLLA: `docs/project-format.md`
+# KÄLLA: `docs/backward-compatibility-contract.md`
 
-# EA Stödjare – projektformat v1
+# EA Stödjare v2 – bakåtkompatibilitetskontrakt
 
 ## 1. Syfte
 
-Detta dokument definierar **EA Stödjares projektformat v1**. Formatet gör ett EA-projekt självbeskrivande, versionsbart och integritetskontrollerbart så att en LLM eller ett verktyg kan läsa, verifiera och uppdatera projektet reproducerbart.
+Detta dokument definierar vad nästa EA Stödjare-version måste kunna göra med projekt som skapats med tidigare versioner.
 
-Projektformatet beskriver projektbehållaren. Själva EA-semantiken definieras separat av metamodel, relationsmodell, proveniensmodell och det kanoniska YAML-formatet.
+Kontraktet är styrande för v2-utvecklingen och ska användas som releasegrind.
 
----
+Målet är inte att alla äldre projekt automatiskt ska konverteras till v2. Målet är att de ska kunna **öppnas, förstås, fortsätta användas och migreras kontrollerat**.
+
+## 2. Grundprincip
+
+> En ny GPT-version får inte göra ett äldre EA Stödjare-projekt oanvändbart enbart för att standardmetamodellen utvecklats.
+
+Bakåtkompatibilitet innebär därför både **read compatibility**, **work compatibility** och **migration compatibility**.
+
+## 3. Projektklasser som v2 måste känna igen
+
+### 3.1 Native v2 project
+
+Projekt som innehåller en explicit v2-kompatibel projektmetamodell.
+
+GPT:n ska läsa denna metamodell före projektets objektdata.
+
+### 3.2 Legacy v1 project
+
+Projekt som följer den fasta v1-metamodellen och v1-projektformatet.
+
+GPT:n ska kunna:
+
+1. identifiera projektet som v1,
+2. ladda en explicit v1-kompatibilitetsprofil,
+3. tolka v1-objekt och relationer enligt v1-semantiken,
+4. fortsätta arbeta med projektet utan obligatorisk migration,
+5. erbjuda migration när en v2-funktion motiverar det.
+
+### 3.3 Extended legacy project
+
+Projekt som utgått från v1 men där verkligt arbete har lagt till supporting-modeller, projektspecifika schemas, härledda vyer eller andra extension-liknande koncept.
+
+Referensprojektet `it-formagemodell-del3-rev80` är obligatoriskt testfall för denna klass.
+
+GPT:n ska kunna:
+
+1. identifiera v1-kärnan,
+2. inventera projektspecifika utvidgningar,
+3. skilja aktiv semantik från experiment/pensionerade koncept,
+4. rekonstruera den faktiskt använda metamodellen,
+5. dokumentera denna maskinläsbart,
+6. fortsätta arbeta med projektet utan att först kräva full migration,
+7. skapa en kontrollerad v2-migration när användaren väljer det.
+
+### 3.4 Unknown or ambiguous project
+
+Om GPT:n inte säkert kan identifiera projektets metamodell får den inte tyst anta v2-standardmodellen.
+
+Den ska:
+
+- inventera schemas, model-filer och manifest,
+- ange vad som är säkert identifierat,
+- markera osäkerheter,
+- undvika destruktiva modelländringar tills projektsemantiken är tillräckligt förstådd.
+
+## 4. Read compatibility
+
+V2 ska kunna läsa v1-projekt utan att kräva att projektfiler först skrivs om.
+
+Minimikrav:
+
+- v1-ID-prefix ska förstås,
+- v1-objekttyper ska förstås,
+- v1-attribut ska förstås,
+- v1-relationssemantik ska förstås,
+- v1-proveniens ska förstås,
+- v1-statusvärden ska förstås,
+- v1-manifest och filstruktur ska förstås.
+
+V2 ska inte automatiskt applicera ny v2-semantik på äldre data när detta kan ändra betydelsen.
+
+## 5. Work compatibility
+
+Ett legacy-projekt ska kunna fortsätta utvecklas i v2 utan omedelbar migration.
+
+Det innebär att GPT:n vid arbete i legacy mode ska:
+
+- respektera projektets befintliga semantik,
+- skapa nya objekt enligt projektets legacy-profil om användaren inte valt migration,
+- undvika att skriva v2-only-attribut in i v1-filer utan explicit formatändring,
+- dokumentera om en önskad funktion kräver v2-migration eller project extension.
+
+V2 får alltså fungera som **kompatibel redigerare** av v1-projekt.
+
+## 6. Migration compatibility
+
+Migration ska vara:
+
+- explicit,
+- reproducerbar,
+- granskningsbar,
+- icke-destruktiv,
+- informationsbevarande så långt semantiken tillåter.
+
+Migration får inte skriva över originalprojektet som standard.
+
+Den ska skapa:
+
+- ny projektkopia eller ny kontrollerad revision,
+- explicit v2-projektmetamodell,
+- migreringsrapport,
+- lista över automatiskt transformerade objekt/relationer,
+- lista över osäkra transformationer som kräver beslut,
+- lista över legacy-koncept som bevarats som extensions.
+
+## 7. Stabil ID-princip
+
+Migration ska behålla ett objekts ID när objektets semantiska identitet är oförändrad.
+
+Nytt ID krävs när:
+
+- ett objekt semantiskt ersätts av ett annat,
+- en uppdelning skapar flera självständiga objekt,
+- ett sammanslaget objekt får ny semantisk identitet.
+
+Pensionerade ID:n får inte återanvändas.
+
+## 8. V1 → v2: kända semantiska skillnader
+
+Följande skillnader får **inte** hanteras med blind textsök/ersätt.
+
+### 8.1 Förmåga `scope`
+
+V1 kan använda ett generellt `scope`.
+
+V2 planerar:
+
+```yaml
+in_scope:
+out_of_scope:
+consumer_scope:
+```
+
+Migration måste avgöra om legacy `scope` motsvarar positiv boundary, blandad boundary eller behöver mänsklig granskning.
+
+### 8.2 Plattformstjänst
+
+V1-formuleringar kan implicera ett standardiserat/gemensamt tekniskt erbjudande.
+
+V2-semantiken är realiseringsneutral.
+
+Legacy-data behöver normalt inte skrivas om enbart för definitionens skull, men GPT:n ska tolka äldre objekt enligt v1-profil tills migration gjorts.
+
+### 8.3 Plattform
+
+V1 `platform` kan ha bredare betydelse än planerad v2-standardsemantik.
+
+Migration får inte automatiskt anta att varje v1-Plattform redan är en v2-konceptuell Plattform. Varje objekt måste kunna behållas som legacy-semantik tills en säker klassificering finns.
+
+### 8.4 `realized_by`
+
+V1 kan använda `realized_by` i en betydelse som senare behöver delas mellan konceptuell hemvist och konkret realisering.
+
+Native v2 använder nu:
+
+```text
+Platform Service --provided_by--> Platform
+```
+
+för konceptuell hemvist. Migration får därför inte mekaniskt byta alla legacy-relationer:
+
+```text
+Platform Service --realized_by--> Platform
+```
+
+till `provided_by`. En relation får konverteras endast när legacybetydelsen faktiskt är konceptuell hemvist/tillhandahålls inom. Om relationen uttrycker eller kan uttrycka konkret realisering ska den bevaras för manuell semantisk granskning. Rev80 är ett känt fall där PLS→PLT `realized_by` betyder konceptuell hemvist och därmed är en stark kandidat för kontrollerad migration till `provided_by`.
+
+### 8.5 Produkt
+
+Produkt finns inte som standardobjekt i v1.
+
+Legacy-projekt som själva infört produkter ska rekonstrueras som project extension eller migreras till v2:s Product-stöd först efter inventering av faktisk projektsyntax och semantik.
+
+## 9. Referensprojekt rev80 – obligatoriskt kompatibilitetstest
+
+`it-formagemodell-del3-rev80` ska användas som ett verkligt extended legacy-test.
+
+V2-utvecklingen ska kunna verifiera minst:
+
+- 13 IT-förmågor,
+- befintliga IT-stöd,
+- 92 Plattformstjänster,
+- 35 konceptuella Plattformar,
+- kanoniska relationer,
+- produkt-/teknikreferenser,
+- produkt→PLS-realiseringar,
+- deploymentklassificering,
+- opennessklassificering,
+- plattformsmognad,
+- relation roles,
+- derived views,
+- baseline/model freeze/change control,
+- pensionerade actual-platform-experiment.
+
+Dessa delar behöver inte alla bli standardfunktioner i v2-kärnan. Kompatibilitetskravet är att den nya GPT:n ska kunna **förstå vad projektet faktiskt använder** och fortsätta arbeta med det.
+
+## 10. Extended legacy reconstruction
+
+När ett projekt saknar explicit project metamodel men har egna supporting-filer ska GPT:n kunna skapa en rekonstruerad beskrivning med minst:
+
+```yaml
+base_profile:
+detected_object_types:
+detected_embedded_structures:
+detected_relations:
+custom_attributes:
+custom_enums:
+derived_views:
+presentation_semantics:
+governance_extensions:
+uncertainties:
+```
+
+Rekonstruktionen är initialt en analysartefakt och får inte automatiskt bli kanonisk utan kontroll.
+
+## 11. Ingen tyst informationsförlust
+
+Om v2 inte kan representera ett legacy-koncept exakt måste GPT:n:
+
+1. bevara originalinformationen,
+2. dokumentera mismatchen,
+3. representera konceptet som extension eller legacy payload om möjligt,
+4. markera behov av beslut.
+
+Det är inte tillåtet att utelämna information bara för att den inte passar standardmetamodellen.
+
+## 12. Ingen tyst semantisk uppgradering
+
+Följande får inte ske utan evidens eller explicit projektbeslut:
+
+- Product → Actual Platform Offering,
+- product capability → actual organizational use,
+- actual product use → organizational platform offering,
+- `related_to` → hårt `depends_on`,
+- legacy `realized_by` → v2 `provided_by`,
+- v1 Platform → v2 conceptual Platform.
+
+## 13. Conceptual / market / actual vid migration
+
+Legacy-projekt kan blanda dessa lager.
+
+V2-migrationen ska, där det är möjligt, klassificera information i:
+
+- conceptual,
+- market_reference,
+- actual_state.
+
+Osäker klassificering ska markeras och bevaras, inte gissas bort.
+
+## 14. Derived views
+
+Legacy-rapporter och supporting-vyer som kan återskapas från kanonisk data ska i v2 kunna klassificeras som derived views.
+
+Migration får inte göra en härledd presentation till ny source of truth.
+
+## 15. Backward compatibility och validatorn
+
+Den framtida v2-validatorn ska kunna arbeta i minst tre explicita lägen:
+
+```text
+native-v2
+legacy-v1
+extended-legacy
+```
+
+Valideringen ska använda rätt profil för respektive projekt och får inte rapportera v2-obligatoriska fält som fel i ett legitimt v1-projekt.
+
+## 16. Backward compatibility och dokumentgeneratorer
+
+När ett legacy-projekt öppnas utan migration ska befintlig dokumentgenerering kunna fortsätta använda legacy-semantiken.
+
+När projektet migrerats ska generatorer i stället styras av den explicita v2-projektmetamodellen och presentation contract.
+
+## 17. Releasegrind
+
+En v2-releasekandidat får inte godkännas förrän följande fungerar end-to-end:
+
+1. öppna ett minimalt v1-projekt,
+2. analysera det med korrekt v1-semantik,
+3. göra en avgränsad ändring utan migration,
+4. validera projektet efter ändringen,
+5. migrera projektet till v2 i separat kopia,
+6. verifiera semantic equivalence där transformationen är säker,
+7. öppna rev80 som extended legacy,
+8. rekonstruera rev80:s projektmetamodell,
+9. fortsätta arbeta med rev80 utan obligatorisk migration,
+10. migrera rev80 i separat kopia utan dold informationsförlust.
+
+## 18. Acceptanskriterium
+
+Bakåtkompatibilitetskontraktet är uppfyllt när en användare kan ta en tidigare EA Stödjare-projektzip, öppna den i den nya GPT-versionen och fortsätta arbetet utan att behöva känna till intern v1/v2-migrationsmekanik för att undvika datatapp.
+
+
+# KÄLLA: `docs/project-metamodel-format.md`
+
+# Projektmetamodellformat v2
+
+## 1. Syfte
+
+EA Stödjare v2 ska inte förutsätta att alla projekt använder exakt samma metamodell. Varje native v2-projekt ska därför kunna bära en maskinläsbar deklaration av den **faktiska metamodell som gäller i projektet**.
+
+Formatet är deklarativt: projektet refererar till en basprofil och beskriver endast vilka delar som aktiveras, stängs av eller utökas. Det ska inte behöva kopiera hela standardmetamodellen.
+
+Detta format är ett styrkontrakt för projektets semantik. Det är inte en katalog över projektets EA-objekt.
 
 ## 2. Grundprinciper
 
-1. `project-manifest.json` är projektets maskinläsbara ingångspunkt.
-2. `model/` är den kanoniska EA-modellen och är source of truth för arkitekturinnehållet.
-3. Projektets **revision** och modellformatens **versioner** är olika saker.
-4. Alla sökvägar i manifestet är relativa till projektroten och använder `/` som separator.
-5. SHA-256 används för att upptäcka oavsiktliga filändringar.
-6. `project-manifest.json` hashas inte av sig självt.
-7. Genererad dokumentation och export ska kunna återskapas från den kanoniska modellen och behöver därför inte vara del av den kanoniska integritetsmängden.
-8. En uppdatering avslutas med att manifestet skrivs sist, efter att revision, revisionslogg och checksummor har uppdaterats.
+1. **Basprofil + delta.** Projektet anger en `base_profile` och deklarerar sina avvikelser/extensions.
+2. **Minimum sufficient model.** Ett projekt får inaktivera standardobjekt som inte behövs.
+3. **Explicit extension.** Egna objekttyper, attribut och relationer måste deklareras innan de används i kanonisk data.
+4. **Ingen tyst semantik.** En GPT får inte anta att en projektspecifik supporting-fil ändrar metamodel utan att detta finns deklarerat eller rekonstruerat som extended legacy.
+5. **Projektmetamodellen är styrande.** QA, validering och senare dokumentgenerering ska i v2 läsa projektmetamodellen före projektdata.
+6. **Bakåtkompatibilitet först.** Legacy v1-projekt behöver inte innehålla denna fil; de tolkas via compatibility profile tills de migreras.
+7. **Derived views är aldrig source of truth.** Formatet tillåter vydefinitioner, men `source_of_truth` måste vara `false`.
 
----
+## 3. Rekommenderad placering
 
-## 3. Minsta projektstruktur
-
-Ett EA-projekt enligt v1 bör minst ha:
+För native v2-projekt rekommenderas:
 
 ```text
-<project-root>/
-  project-manifest.json
-  revision-log.md
-  model/
-    drivers.yaml
-    goals.yaml
-    principles.yaml
-    capabilities.yaml
-    it-support.yaml
-    platform-services.yaml
-    platforms.yaml
-    standards.yaml
-    solution-patterns.yaml
-    reference-architectures.yaml
-    sources.yaml
-    relations.yaml
+model-definition/
+  project-metamodel.yaml
 ```
 
-Ett fullt projekt kan dessutom innehålla:
+Projektet kan senare kompletteras med separata extension- eller presentationsfiler, men `project-metamodel.yaml` ska vara den primära ingången till modellsemantiken.
 
-```text
-  docs/                 # genererade eller stödjande dokument
-  exports/              # Confluence/DOCX/PDF m.m.
-  sources/              # lokala källfiler när det är lämpligt
-  schemas/              # schemas som följer med projektet
-  scripts/              # projektlokal generering/validering
-  PROJECT_STATUS.md     # införs som arbetsstatus i steg 8
+## 4. Toppnivå
+
+```yaml
+schema_version: "2.0"
+project_metamodel:
+  id: example-metamodel
+  version: "1.0"
+  base_profile:
+    id: ea-stodjare-v2
+    version: "2.0"
+    compatibility_mode: native
 ```
 
-`PROJECT_STATUS.md` är avsiktligt inte obligatorisk i projektformat v1 ännu; arbetsstatusens semantik fastställs i steg 8.
+`project_metamodel.version` är projektets egen metamodellversion och ska inte blandas ihop med projektets innehållsrevision eller EA Stödjares releaseversion.
 
----
+## 5. Basprofil
 
-## 4. `project-manifest.json`
-
-Manifestet ska vara UTF-8-kodad JSON och följa `schemas/project-manifest.schema.json` när schemat finns tillgängligt.
-
-### 4.1 Toppnivå
-
-```json
-{
-  "format": "ea-stodjare-project",
-  "format_version": "1.0",
-  "project": {},
-  "model": {},
-  "integrity": {},
-  "files": []
-}
-```
-
-### 4.2 `format`
-
-Fast värde:
-
-```text
-ea-stodjare-project
-```
-
-Det gör att en LLM eller validator kan skilja EA Stödjare-projekt från andra zip-/repositoryformat.
-
-### 4.3 `format_version`
-
-Version på själva projektbehållarens kontrakt.
-
-V1 använder:
-
-```text
-1.0
-```
-
-Ändring av projektformatversion ska ske medvetet och får inte blandas ihop med en vanlig projektrevision.
-
----
-
-## 5. Projektmetadata
-
-`project` innehåller minst:
-
-| Fält | Betydelse |
-|---|---|
-| `id` | Stabil maskinläsbar projektidentitet |
-| `name` | Användarvänligt projektnamn |
-| `kind` | Typ av projektinstans |
-| `language` | Primärt språk enligt BCP 47, exempelvis `sv-SE` |
-| `revision` | Monotont heltal för projektets innehållsrevision |
-| `created_at` | Tidpunkt då manifeststyrd projektinstans skapades |
-| `updated_at` | Tidpunkt för senaste manifeststyrda revision |
-| `lifecycle_status` | Övergripande projektstatus |
-
-### 5.1 Projekt-ID
-
-Rekommenderat format:
-
-```text
-[a-z0-9][a-z0-9-]{2,63}
-```
-
-ID:t ska vara stabilt även om projektets visningsnamn ändras.
-
-### 5.2 `kind`
-
-V1 använder fria men dokumenterade värden. Rekommenderade värden är:
-
-- `ea_model` – normalt EA-projekt,
-- `ea_model_template` – återanvändbar tom/starter-modell,
-- `ea_reference_example` – exempelprojekt.
-
-### 5.3 `lifecycle_status`
-
-Rekommenderade v1-värden:
-
-- `draft`,
-- `active`,
-- `review`,
-- `approved`,
-- `archived`.
-
-Detta är projektets övergripande livscykelstatus och ska inte förväxlas med den mer detaljerade arbetsstatus som införs i steg 8.
-
----
-
-## 6. Revision
-
-`project.revision` är ett monotont heltal som börjar på `1` när projektet tas under manifeststyrning.
-
-En revision ska ökas när en bestående ändring görs i projektets integritetsskyddade innehåll, till exempel när:
-
-- ett EA-objekt läggs till, ändras eller tas bort,
-- en relation ändras,
-- en källreferens ändras,
-- projektstyrande dokument eller schemas som ingår i integritetsmängden ändras.
-
-Revisionen ska **inte** återställas när exempelvis en ny DOCX exporteras från oförändrad modell.
-
-Införandet av manifestet i EA Stödjares utvecklingsprojekt startar revision `1`; tidigare utvecklingssteg 1–6 mappas inte retroaktivt till projektrevisioner.
-
----
-
-## 7. Modellmetadata
-
-`model` anger vilka semantiska kontrakt projektet följer.
+`base_profile` anger vilken modell projektet bygger vidare på.
 
 Exempel:
 
-```json
-{
-  "root": "model",
-  "serialization": "YAML",
-  "model_format_version": "1.0",
-  "metamodel_version": "1.0",
-  "relation_model_version": "1.0",
-  "provenance_model_version": "1.0"
-}
+```yaml
+base_profile:
+  id: ea-stodjare-v2
+  version: "2.0"
+  compatibility_mode: native
 ```
 
-Detta möjliggör många projektrevisioner utan att metamodelversionen behöver ändras.
+Tillåtna compatibility modes är:
 
-Om EA Stödjare möter en format-/modellversion som den inte stöder ska den inte gissa. Den ska rapportera versionskonflikten och kräva migration eller ett kompatibelt arbetsläge.
+- `native`
+- `legacy`
+- `extended_legacy`
+- `custom`
 
----
+Native v2 använder normalt `native`. Legacy-projekt får sin effektiva metamodell via kompatibilitetslagret och behöver inte skrivas om bara för att detta format finns.
 
-## 8. Filinventering
+## 6. Aktiva och inaktiva objekttyper
 
-`files` är en deterministiskt sorterad lista över integritetsskyddade projektfiler.
-
-Varje post har:
-
-| Fält | Betydelse |
-|---|---|
-| `path` | Relativ POSIX-sökväg |
-| `role` | Filens funktion i projektet |
-| `required` | Om filen krävs för den aktuella projektprofilen |
-| `sha256` | SHA-256 över filens exakta bytes |
-
-Tillåtna/rekommenderade roller i v1:
-
-- `canonical_model`
-- `schema`
-- `governance`
-- `documentation_source`
-- `support`
-
-Källmaterial som kan vara känsligt eller stort behöver inte kopieras in i projektpaketet bara för att det finns en proveniensreferens. `model/sources.yaml` kan referera till externa eller organisatoriska källor utan att källfilen ingår i integritetsinventeringen.
-
----
-
-## 9. Integritet
-
-V1 använder:
-
-```json
-{
-  "algorithm": "sha256",
-  "manifest_self_hash": false,
-  "inventory_order": "path-ascending",
-  "canonical_model_required": true
-}
+```yaml
+object_types:
+  enabled:
+    - capability
+    - it_support
+    - platform_service
+    - platform
+  disabled:
+    - driver
+    - goal
+  custom: []
 ```
 
-### 9.1 Hashning
+Regler:
 
-SHA-256 beräknas över filens råa bytes och skrivs som 64 gemena hexadecimala tecken.
+- Samma typ får inte avsiktligt förekomma i både `enabled` och `disabled`.
+- `enabled` betyder att typen ingår i projektets aktiva modellprofil.
+- `disabled` gör frånvaron explicit och ska senare kunna hindra QA från att rapportera falska modellgap.
+- Standardtypen måste finnas i basprofilen eller tillföras som `custom`.
+
+## 7. Egna objekttyper
+
+Projekt får deklarera egna objekttyper:
+
+```yaml
+custom:
+  - type: organization_unit
+    display_name: Organisationsenhet
+    id_prefix: ORG-
+    definition: Organisatorisk enhet som är relevant för projektets arkitekturmodell.
+    provenance_required: true
+    status_values: [candidate, approved, deprecated, retired]
+    attributes:
+      - name: name
+        type: string
+        required: true
+```
+
+Custom object types ska vara projektstyrda extensions, inte automatiskt föreslås bli nya kärnobjekt i den generella GPT:n.
+
+## 8. Attribututökningar
+
+Ett projekt kan lägga till attribut på en aktiverad basobjekttyp:
+
+```yaml
+attribute_extensions:
+  - object_type: capability
+    attributes:
+      - name: in_scope
+        type: array
+        item_type: string
+        required: false
+      - name: out_of_scope
+        type: array
+        item_type: string
+        required: false
+```
+
+Detta är mekanismen som kan beskriva ett extended legacy-projekt som rev80 utan att ändra den frysta v1-profilen.
+
+## 9. Relationer
+
+Projektet deklarerar vilka basrelationer som används samt eventuella egna relationer:
+
+```yaml
+relations:
+  enabled:
+    - supports
+    - uses
+    - related_to
+  disabled:
+    - influences
+  custom:
+    - type: owned_by
+      definition: Anger ansvarig organisatorisk enhet.
+      endpoints:
+        - source: [capability, platform]
+          target: [organization_unit]
+      provenance_required: true
+```
+
+Relationens source/target-regler ska vara explicit maskinläsbara.
+
+## 10. Relationskvalificerare
+
+V2-formatet kan deklarera kvalificerande metadata utan att skapa en explosion av relationstyper:
+
+```yaml
+relation_qualifiers:
+  - name: relation_role
+    applies_to: [related_to]
+    type: enum
+    value_set: relation_role
+```
+
+Standardvokabulären för native v2 finns från steg 12 i `schemas/relations.yaml`. Projektmetamodellen använder samma deklarationsmekanism för att aktivera, begränsa eller projektspecifikt utöka kvalificerare där schemat uttryckligen tillåter det.
+
+## 11. Värdemängder
+
+```yaml
+value_sets:
+  - id: relation_role
+    values:
+      - responsibility_boundary
+      - lifecycle_dependency
+      - operational_dependency
+```
+
+Ett projekt får också förlänga en värdemängd genom `extension_of`, men konfliktregler och namnrymder formaliseras i extension-steget senare i planen.
+
+## 12. Generella extensions
+
+Projektet ska kunna aktivera paketerade extensions utan att duplicera deras schemas:
+
+```yaml
+extensions:
+  - id: product-deployment
+    version: "1.0"
+    enabled: true
+```
+
+I steg 4 definieras kontraktet. Själva generella extension-paketen införs senare.
+
+## 13. Derived views
+
+Från v2 steg 17 finns den fullständiga förstaklassdefinitionen i `schemas/derived-view.schema.json` och standardkatalogen i `derived-views/views.yaml`. Projektmetamodellens `derived_views` kan fortsatt användas för projektlokala inline-vyer; semantiken ska följa samma principer och får aldrig bli source of truth.
+
+
+Projektmetamodellen kan beskriva vilka härledda vyer projektet använder:
+
+```yaml
+derived_views:
+  - id: capability-service-platform
+    source_of_truth: false
+    join_path:
+      - capability
+      - supports:inverse
+      - platform_service
+      - provided_by
+      - platform
+    filters: {}
+    sort: [capability.name, platform_service.name]
+    regeneration_policy: on_source_change
+```
+
+Krav:
+
+- `source_of_truth` måste vara `false`.
+- Vyn får inte användas för att korrigera kanonisk data bakvägen.
+- Join-semantiken måste kunna härledas från projektets aktiva relationsmodell.
+
+## 14. Presentationssemantik
+
+```yaml
+presentation:
+  contract: reader-oriented-v1
+  object_display_pattern: "{name} ({id})"
+  labels:
+    capability.in_scope: Stödjer
+    capability.out_of_scope: Omfattar inte
+```
+
+Presentation ändrar inte metamodellsemantik. Den översätter strukturerade fält till ett läsarorienterat språk.
+
+## 15. Governance
+
+Formatet reserverar enkel deklaration för senare change-control:
+
+```yaml
+governance:
+  change_control: true
+  baseline_id: MY-MODEL-v1
+  baseline_version: 1.0
+  freeze_status: frozen
+  retired_id_registry: governance/retired-ids.yaml
+  model_changelog: governance/model-changelog.yaml
+  metamodel_changelog: governance/metamodel-changelog.yaml
+```
+
+Detaljerad change-control finns i `docs/change-control.md`. Governancefältet är en deklarativ pekare; den fulla policyn och loggarna ligger i `governance/`.
+
+## 16. Tre användningsnivåer
+
+### Enkel native v2
+
+Projektet anger basprofil och ett litet urval aktiva objekttyper. Inga custom extensions krävs.
+
+### Avancerad native v2
+
+Projektet aktiverar fler standardtyper, Product och generella extensions samt egna derived views.
+
+### Extended legacy
+
+Ett legacy-projekt behöver inte först migreras till detta format. GPT:n rekonstruerar den effektiva modellen genom v1-profile + project extensions. När projektet senare migreras kan rekonstruktionen materialiseras som en native v2 `project-metamodel.yaml`.
+
+## 17. Rev80 som designfall
+
+Formatet är uttryckligen utformat för att kunna beskriva rev80:s behov:
+
+- basprofil v1,
+- capability `in_scope/out_of_scope`,
+- realiseringsneutral PLS-semantik som projektöverlagring,
+- konceptuell Plattform som projektöverlagring,
+- marknadsproduktlager,
+- product→PLS-realisering,
+- relation roles,
+- deployment/openness,
+- platform maturity,
+- derived views,
+- presentation contract,
+- freeze/change control.
+
+Det betyder inte att rev80 automatiskt migreras i steg 4. Det betyder att formatet har tillräcklig uttryckskraft för en senare kontrollerad migration.
+
+## 18. Validering i steg 4
+
+I detta steg valideras projektmetamodellfiler fristående mot `schemas/project-metamodel.schema.json`.
+
+Den befintliga strukturvalidatorn görs **inte** ännu metamodellstyrd; detta sker i ett senare steg enligt planen. Steg 4 ändrar därför inte v1-validatorns tolkning av `model/`.
+
+## 19. Ändringar som inte görs i steg 4
+
+Steg 4:
+
+- ändrar inte v1-kärnmetamodellen,
+- inför inte Produkt i huvudschemat ännu,
+- inför inte `provided_by` eller `can_realize` ännu,
+- migrerar inte rev80,
+- ändrar inte Builder Instructions/Knowledge,
+- ändrar inte dokumentgeneratorernas semantik.
+
+Detta format är kontraktet som senare v2-steg ska implementera mot.
+
+## Extensioner och namnrymder
+
+Återanvändbara extensions definieras separat enligt `schemas/project-extension.schema.json` och registreras i `extensions/registry.yaml`. Projektets `extensions[]` är aktiveringsreferenser, inte inline-kopior av extensionens definitioner. Namespace-, beroende- och konfliktregler samt resolveringsordning finns i `docs/project-extensions.md`.
+
+Inline `custom`-definitioner i projektmetamodellen är fortsatt projektlokala. En resolverad metamodell är en härledd artefakt och får inte ersätta `project-metamodel.yaml` eller de versionssatta extensionpaketen som source of truth.
+
+
+# KÄLLA: `docs/derived-views.md`
+
+# Derived views i EA Stödjare v2
+
+Derived views är maskinläsbara fråge-/presentationsdefinitioner som **återskapas från kanonisk data**. De är aldrig source of truth för arkitektur-, marknads- eller actual-state-påståenden.
+
+## Grundregler
+
+1. `source_of_truth` ska alltid vara `false`.
+2. En vy får endast läsa aktiva objekt, relationer och informationslager; den får inte skriva tillbaka till dem.
+3. En vy ska kunna regenereras deterministiskt från samma input.
+4. Saknad rad i en vy betyder inte automatiskt att kanonisk data ska tas bort eller läggas till.
+5. Marknadssemantik behålls i presentationen. Exempelvis betyder Product `can_realize` inte faktisk användning.
+6. Generated output ska betraktas som cache/presentation och kan tas bort och byggas om.
+
+## Katalog
+
+Standarddefinitionerna finns i `derived-views/views.yaml` och valideras mot `schemas/derived-view.schema.json`.
+
+Varje vy anger:
+
+- `id`
+- `source_of_truth: false`
+- startpunkt (`anchor`)
+- `join_path` med relation, riktning och alias
+- valfria `filters`
+- valfri `aggregation`
+- `sort`
+- `presentation_semantics`
+- `regeneration_policy`
+
+## Standardvyer i steg 17
+
+- Förmåga → Plattformstjänst → Plattform
+- Plattform → Plattformstjänst → Förmåga
+- Produkt → IT-stöd
+- Produkt → Plattformstjänst → Plattform
+- härledda plattformsberoenden
+- shared realization
+- product coverage
+
+## Regenerering
+
+`scripts/generate_derived_views.py` materialiserar vyerna som YAML i vald outputkatalog. Outputen innehåller input-fingeravtryck och `source_of_truth: false` och ska inte behandlas som kanonisk modell.
 
 Exempel:
 
-```text
-sha256(file_bytes).hexdigest()
+```bash
+python3 scripts/generate_derived_views.py --project-root . --output-dir build/derived-views
 ```
 
-### 9.2 Manifestet hashar inte sig självt
+`on_source_change` betyder att en konsument får cacha resultatet men måste regenerera när relevant kanonisk input ändras. `always` regenereras varje gång. `manual_rebuild` tillåter explicit körning men ändrar inte vyers icke-kanoniska status.
 
-Det undviker rekursiv självreferens. Manifestets konsistens verifieras i stället genom schema, filinventering och att manifestet skrivs sist i varje revision.
 
-### 9.3 Genererade filer
+# KÄLLA: `docs/presentation-contract.md`
 
-Genererad Markdown, Confluence markup, DOCX och PDF ska normalt inte vara del av den kanoniska integritetsmängden. Senare generatorsteg kan ha egna outputmanifest/checksummor.
-
----
-
-## 10. Revisionslogg
-
-`revision-log.md` är den människoläsbara historiken över projektets manifeststyrda revisioner.
-
-Minimikrav per revision:
-
-- revision,
-- datum/tid,
-- kort ändringssammanfattning,
-- ändrade fil-/modellområden,
-- eventuell kommentar om migration eller särskild risk.
-
-Manifestet är maskinläsbar aktuell status; revisionsloggen är historisk förklaring.
-
----
-
-## 11. Reproducerbart uppdateringsförfarande
-
-EA Stödjare eller annat verktyg ska vid uppdatering följa denna ordning:
-
-1. Läs `project-manifest.json`.
-2. Kontrollera `format` och stödd `format_version`.
-3. Kontrollera modellversionerna.
-4. Verifiera att integritetsskyddade filer finns och matchar registrerade SHA-256.
-5. Läs den kanoniska YAML-modellen.
-6. Tillämpa endast beställda/avsedda ändringar.
-7. Uppdatera berörda modell- och projektfiler.
-8. Lägg till post i `revision-log.md`.
-9. Öka `project.revision` exakt en gång för revisionen.
-10. Uppdatera `project.updated_at`.
-11. Bygg om den deterministiskt sorterade filinventeringen och dess SHA-256.
-12. Skriv `project-manifest.json` sist.
-13. Verifiera att manifestet nu motsvarar projektets faktiska filer.
-
-Om SHA-256 inte matchar **innan** ändringen ska EA Stödjare inte tyst skriva över avvikelsen. Avvikelsen ska först redovisas och hanteras som en potentiell extern/okänd ändring.
-
----
-
-## 12. Datum och tid
-
-Manifestets tidsfält använder ISO 8601 med explicit tidszon, exempelvis:
-
-```text
-2026-08-20T17:50:00+02:00
-```
-
-Det gör tidpunkten entydig utan att kräva UTC-konvertering i människoläsbara projekt.
-
----
-
-## 13. Exempelmanifest
-
-Det minimala exempelprojektet under `examples/minimal-model/` innehåller ett konkret `project-manifest.json` och `revision-log.md` som följer detta format.
-
----
-
-## 14. Medvetna avgränsningar i steg 7
-
-Steg 7 definierar **projektbehållaren**, inte:
-
-- detaljerad arbetsstatus och öppna frågor (`PROJECT_STATUS.md`) – steg 8,
-- semantisk innehållsextraktion – steg 9,
-- valideringsscript – steg 24,
-- generatorversioner/outputmanifest – senare generator- och release-steg.
-
-Detta håller projektformatet stabilt utan att föregripa senare arbetsflöden.
-
-
-# KÄLLA: `knowledge/project-status-rules.md`
-
-# Regler för projektstatus och arbetsläge
-
-## 1. Syfte
-
-EA Stödjare ska kunna återuppta ett projekt säkert efter en ny chat, en paus eller en överlämning. `PROJECT_STATUS.md` är den mänskligt läsbara sammanfattningen av arbetsläget och kompletterar `project-manifest.json`.
-
-Manifestet svarar främst på **vad projektet är och vilka filer/revisioner som är giltiga**. Statusfilen svarar främst på **var arbetet befinner sig och vad som återstår**.
-
-## 2. Source-of-truth-regel
-
-`PROJECT_STATUS.md` får aldrig ersätta den kanoniska YAML-modellen.
-
-- EA-objekt och relationer hör hemma i `model/`.
-- Källor/proveniens hör hemma i den kanoniska modellen.
-- Projektets tekniska identitet/revision hör hemma i `project-manifest.json`.
-- Arbetsläge, öppna frågor och nästa steg hör hemma i `PROJECT_STATUS.md`.
-
-Om statusfilen och den kanoniska modellen motsäger varandra gäller den kanoniska modellen för EA-innehåll. Motsägelsen ska då rapporteras och statusfilen korrigeras.
-
-## 3. Obligatoriska statusområden
-
-Statusfilen ska minst kunna beskriva:
-
-- aktuell utvecklings-/arbetsstatus,
-- genomförda steg eller analyser,
-- analyserat underlag,
-- modellstatus,
-- preliminära delar,
-- öppna frågor,
-- kända konflikter,
-- senaste kvalitetskontroll,
-- rekommenderat nästa steg,
-- återupptagningsinstruktion.
-
-Tomma områden ska uttryckligen säga att inget finns registrerat, inte bara utelämnas när frånvaron är viktig för återupptagningen.
-
-## 4. Analyserat underlag
-
-För konkreta EA-projekt bör statusen per relevant källa kunna sammanfatta:
-
-- käll-ID eller tydlig referens,
-- dokument/version/datum,
-- analysstatus: `not_started`, `partial`, `complete`, `superseded`,
-- berörda modellområden,
-- viktiga begränsningar.
-
-Den detaljerade evidensen ska fortfarande ligga i modellens proveniensstruktur.
-
-## 5. Preliminära objekt och modelldelar
-
-Statusfilen får sammanfatta preliminära områden men ska normalt referera till objekt-ID eller modellområde i stället för att duplicera fullständiga objekt.
-
-Exempel:
-
-> CAP-014–CAP-018 är kandidater och behöver verksamhetsvalideras.
-
-Inte:
-
-> Kopiera hela definitionerna av CAP-014–CAP-018 in i statusfilen.
-
-## 6. Öppna frågor
-
-En öppen fråga ska vara konkret och handlingsbar. Ange när möjligt:
-
-- berört objekt/område,
-- varför frågan är öppen,
-- vad som krävs för att lösa den,
-- om den blockerar fortsatt arbete.
-
-GPT:n ska inte ställa om samma fråga i en ny chat om svaret redan framgår av projektets status eller kanoniska filer.
-
-## 7. Konflikter
-
-Statusfilen ska sammanfatta materiella öppna konflikter och osäkerheter enligt `knowledge/conflicts-and-uncertainty.md`.
-
-En konflikt ska inte lösas genom att tyst välja en källa. Om befintligt underlag, en styrande källa eller ett dokumenterat beslut inte löser konflikten ska den stå kvar med egen lösningsstatus.
-
-Vid många eller komplexa frågor bör ett separat strukturerat issue-register användas enligt `schemas/conflicts-and-uncertainty.yaml`; `PROJECT_STATUS.md` ska då endast sammanfatta de viktigaste aktiva frågorna.
-
-## 8. Senaste kvalitetskontroll
-
-Statusen ska ange:
-
-- datum eller projektrevision,
-- vilken kontrollnivå som genomfördes,
-- viktiga resultat,
-- kända begränsningar.
-
-En gammal kvalitetskontroll får inte framställas som om den täcker senare modelländringar.
-
-## 9. Rekommenderat nästa steg
-
-EA Stödjare ska normalt ange ett tydligt rekommenderat nästa steg efter avslutad arbetsomgång.
-
-Det ska bygga på:
-
-1. användarens uttryckliga mål,
-2. utvecklings-/arbetsplanen,
-3. blockerande öppna frågor,
-4. modellens faktiska status.
-
-I ett utvecklingsprojekt med sekventiell plan är nästa ej genomförda steg normalt rekommendationen om inget blockerar.
-
-## 10. Uppdateringsregler
-
-När en arbetsomgång faktiskt ändrar projektet ska EA Stödjare:
-
-1. verifiera befintlig projektintegritet,
-2. utföra den avgränsade ändringen,
-3. uppdatera statusfilen,
-4. öka projektrevisionen exakt en gång,
-5. uppdatera revisionsloggen,
-6. uppdatera manifestets tidsstämpel och filinventering,
-7. beräkna checksummor sist,
-8. verifiera resultatet.
-
-## 11. Återupptagning i ny chat
-
-När ett befintligt EA Stödjare-projekt bifogas ska GPT:n normalt läsa i denna ordning:
-
-1. `project-manifest.json`,
-2. `PROJECT_STATUS.md`,
-3. relevant utvecklings-/arbetsplan,
-4. endast de kanoniska modell- och styrfiler som behövs för uppgiften.
-
-Syftet är att minimera risken att historiskt konversationsminne får högre auktoritet än det bifogade projektet.
-
-## 12. Status är en sammanfattning, inte ett loggarkiv
-
-`PROJECT_STATUS.md` ska hållas aktuell och kompakt. Historiska revisioner hör hemma i `revision-log.md` och Git-historik. Avslutade öppna frågor och gamla nästa-steg-punkter behöver inte ackumuleras i statusfilen.
-
-
-# KÄLLA: `docs/documentation-profiles.md`
-
-# Markdown-dokumentationsprofiler v1
+# Reader-oriented presentation contract
 
 ## Syfte
 
-Detta dokument definierar hur EA Stödjares kanoniska YAML-modell ska presenteras som Markdown. Profilerna är ett **presentationskontrakt**, inte en ny informationsmodell. All sakinformation ska hämtas från `model/`; genererade Markdown-filer får inte bli en parallell source of truth.
+Presentationskontraktet separerar **modellens maskinläsbara semantik** från det språk och den struktur som möter en läsare. Kontraktet finns i `presentation/presentation-contract.yaml` och valideras mot `schemas/presentation-contract.schema.json`.
 
-## Grundprinciper
+Kontraktet är uttryckligen `source_of_truth: false`. Det får ändra **etikett, ordning, rubrik och visningsmönster**, men aldrig modellens innebörd, proveniens, informationslager eller relationer.
 
-1. **YAML före Markdown.** Sakuppgifter ändras i modellen och därefter regenereras dokumentationen.
-2. **Determinism.** Samma modell och samma profilinställningar ska ge semantiskt och textuellt stabil output.
-3. **Stabila ID:n visas.** ID används för spårbarhet även när läsaren främst arbetar med namn.
-4. **Relationer härleds från `relations.yaml`.** De får inte återskapas genom tolkning av löptext.
-5. **Proveniens visas proportionerligt.** Arbetsdokument visar mer evidens än publiceringsvyer.
-6. **Tomma sektioner utelämnas.** En rubrik ska inte genereras bara för att mallen har stöd för fältet.
-7. **Ingen hallucinerad utfyllnad.** Saknade värden återges inte som antagna fakta.
-8. **Sekundära objekttyper hålls tydligt sekundära.** Lösningsmönster och Referensarkitekturer stöds, men får inte dra v1 mot detaljerad lösningsarkitektur.
+## Standardvisning av objekt
 
-## Två presentationsnivåer
-
-### Katalogprofil
-
-Katalogen ger en kompakt översikt över en objekttyp. Varje objekttyp får en egen katalogfil.
-
-Rekommenderade outputvägar:
+Standardmönstret är:
 
 ```text
-docs/generated/
-  drivkrafter.md
-  mal.md
-  principer.md
-  formagor.md
-  it-stod.md
-  plattformstjanster.md
-  plattformar.md
-  standarder.md
-  losningsmonster.md
-  referensarkitekturer.md
+Namn (ID)
 ```
 
-### Detaljprofil
+ID visas alltid i standardkontraktet. Ett projektspecifikt kontrakt får välja annan visningspolicy, men ett genererat dokument får inte låta ett presentationsnamn ersätta objektets stabila ID i modellen.
 
-Detaljprofilen visar ett objekt med relevanta attribut, funktioner, relationer och proveniens.
+## Fältetiketter
 
-Rekommenderade outputvägar:
+Maskinfält kan få läsarorienterade etiketter. V2-standardkontraktet innehåller bland annat:
 
-```text
-docs/generated/objects/<object-type>/<ID>-<slug>.md
-```
-
-Exempel:
-
-```text
-docs/generated/objects/capabilities/CAP-001-utveckla-it-stod.md
-```
-
-## Arbetsvy och publiceringsvy
-
-Generatorn i steg 16 bör stödja minst två lägen:
-
-- `working`: visar `candidate`, `approved` och `deprecated`; visar confidence, evidenstyp och arbetsnoteringar när de finns.
-- `published`: visar som standard endast `approved`; utelämnar interna arbetsnoteringar och tekniska proveniensdetaljer som inte behövs för läsaren.
-
-`retired` ska normalt utelämnas från båda vyerna om inte historik uttryckligen efterfrågas.
-
-Detta är en presentationsregel och ändrar inte objektens status i modellen.
-
-## Gemensam katalogstruktur
-
-Varje katalog ska innehålla:
-
-1. H1 med objekttypens svenska pluralnamn.
-2. Kort genererad ingress om vad katalogen visar.
-3. Metadata med genereringsläge och modell-/projektrevision när informationen finns tillgänglig.
-4. En deterministiskt sorterad tabell.
-5. Vid behov kort sektion för relaterade kataloger.
-
-### Sortering
-
-Standard är:
-
-1. `name` normaliserat för alfabetisk sortering,
-2. `id` som stabil tie-breaker.
-
-För Förmågor grupperas först på `capability_type` (`business`, `it`) och därefter på namn. En framtida explicit ordningsnyckel får ersätta detta, men introduceras inte i steg 15.
-
-### Katalogkolumner
-
-| Typ | Standardkolumner |
+| Modellfält | Läsaretikett |
 |---|---|
-| Drivkraft | ID, Namn, Beskrivning, Kategori, Status |
-| Mål | ID, Namn, Beskrivning, Tidshorisont, Status |
-| Princip | ID, Namn, Principformulering, Status |
-| Förmåga | ID, Namn, Typ, Beskrivning, Status |
-| IT-stöd | ID, Namn, Beskrivning, Funktioner, Status |
-| Plattformstjänst | ID, Namn, Beskrivning, Konsumentomfång, Funktioner, Status |
-| Plattform | ID, Namn, Beskrivning, Teknik/produkter, Funktioner, Status |
-| Standard | ID, Namn, Typ, Referens/version, Obligatorisk, Status |
-| Lösningsmönster | ID, Namn, Problem/kontext, Status |
-| Referensarkitektur | ID, Namn, Scope/tillämpbarhet, Status |
+| `capability.in_scope` för IT-förmåga | **Stödjer** |
+| `capability.in_scope` för verksamhetsförmåga | **Omfattar** |
+| `capability.out_of_scope` | **Omfattar inte** |
+| `consumer_scope` | **Avsedda konsumenter** |
+| `product.product_kind` | **Produkttyp** |
 
-Långa listor i tabellceller ska komprimeras till korta kommaseparerade sammanfattningar. Fullständig information hör hemma på detaljsidan.
+Den kontextberoende etiketten för `in_scope` ändrar inte fältets semantik. Den gör endast presentationen mer naturlig för läsaren.
 
-## Gemensam detaljstruktur
+## Relationsetiketter
 
-Alla detaljsidor använder följande ordning när informationen finns:
+Relationstyper behåller stabila maskinnamn men får riktade läsaretiketter. Exempel:
 
-1. `# <Namn>`
-2. identitet och status,
-3. beskrivning,
-4. objekttypsspecifika attribut,
-5. funktioner (endast IT-stöd, Plattformstjänst och Plattform),
-6. relationer,
-7. proveniens/källor,
-8. alias, taggar och ägare,
-9. notes endast i `working`-läge.
+- `Platform Service --provided_by--> Platform` visas från tjänstens perspektiv som **Tillhandahålls av** och från Plattformens perspektiv som **Tillhandahåller**.
+- `Product --can_realize--> IT Support|Platform Service` visas som **Kan realisera** och omvänt **Kan realiseras av**.
+- `supports` visas som **Stödjer** / **Stöds av**.
 
-### Identitetsblock
+Presentationsetiketten får inte användas för att konvertera en relationstyp till en annan.
 
-Detaljsidan ska alltid visa minst:
+## Härledda navigationssektioner
 
-- ID,
-- objekttyp,
-- status.
+Kontraktet kan deklarera navigationssektioner som bygger på `derived-views/views.yaml`. Dessa sektioner är alltid:
 
-### Relationer
+- `source_of_truth: false`,
+- regenererbara,
+- read-only i presentationslagret,
+- förbjudna som underlag för write-back till den kanoniska modellen.
 
-Relationer grupperas efter semantisk relation och riktning. Presentationen får använda naturliga svenska etiketter, men den kanoniska relationstypen ska finnas tillgänglig, exempelvis i parentes eller metadata.
+Exempel är **Understöds av** på en Förmåga och **Tillhandahåller** på en Plattform. För Produkt kan sektionerna **Kan realisera IT-stöd** och **Kan realisera Plattformstjänster** visas, men med epistemisk not om att potential inte betyder faktiskt val eller faktisk användning.
 
-Exempel:
+## Tomma sektioner
 
-```markdown
-## Relationer
+Standardpolicyn är `omit`: en tom sektion visas inte. Kontraktet kan sätta `show_placeholder` globalt eller per navigationssektion om ett projekt behöver synliggöra avsaknad av data.
 
-### Stöds av
+## Projektanpassning
 
-- [Identitets- och behörighetssystem](../it-support/ITS-001-identitets-och-behorighetssystem.md) (`ITS-001`)
+`project-metamodel.yaml` och extensions får tillföra presentationssemantik enligt de kontrakt som redan etablerats i steg 4 och 14. Projektanpassningar ska vara delta ovanpå ett valt presentationskontrakt, inte kopior av hela basmodellen.
 
-### Styr
-
-- [Containerplattformstjänst](../platform-services/PLS-001-containerplattformstjanst.md) (`PLS-001`)
-```
-
-Om en relaterad detaljsida inte ingår i aktuell export ska namnet och ID:t ändå visas utan bruten länk.
-
-## Proveniens i Markdown
-
-### Working
-
-Visa per evidenspost när tillgängligt:
-
-- evidenstyp (`explicit`, `derived`, `proposed`, `external`),
-- källa och referens,
-- confidence,
-- rationale,
-- `derived_from`,
-- transferability för extern evidens.
-
-### Published
-
-Visa i första hand källor/referenser som är relevanta för läsaren. `proposed` ska fortfarande framgå som förslag om objektet publiceras i en granskningsleverans. Tekniska interna fält kan döljas, men får aldrig presenteras som starkare evidens än modellen anger.
-
-## Objekttypsprofiler
-
-### Drivkraft
-
-Detaljsidan prioriterar kategori, tidshorisont och evidens för varför drivkraften är relevant. Den ska inte omformulera drivkraften till ett mål.
-
-### Mål
-
-Detaljsidan prioriterar måltillstånd, tidshorisont och mått. Relationer till drivkrafter och förmågor är särskilt relevanta.
-
-### Princip
-
-Detaljsidan prioriterar `statement`, `rationale` och `implications`. Om `statement` saknas används inte beskrivningen automatiskt som en beslutad principformulering; saknaden synliggörs i arbetsvy.
-
-### Förmåga
-
-Detaljsidan visar `capability_type` tydligt och får inte lägga in process-, organisations- eller systembeskrivningar som om de vore förmågeattribut. Relevanta relationer till mål, IT-stöd och Plattformstjänster visas.
-
-### IT-stöd
-
-Detaljsidan prioriterar funktioner, livscykel och criticality när de finns. Förmågor som stöds och Plattformstjänster som används ska kunna visas via relationsregistret.
-
-### Plattformstjänst
-
-Detaljsidan prioriterar erbjudandet till konsumenten: funktioner, service level och consumer scope. Underliggande Plattformar visas genom `realized_by`.
-
-### Plattform
-
-Detaljsidan prioriterar teknisk grund, funktioner, teknik och produkter. Den ska tydligt skiljas från den konsumtionsorienterade Plattformstjänsten.
-
-### Standard
-
-Detaljsidan prioriterar standardtyp, referens, version och om den är obligatorisk. Relationen till styrda/begränsade objekt ska synliggöras.
-
-### Lösningsmönster
-
-Detaljsidan prioriterar problem, kontext, angreppssätt och konsekvenser. Den ska förbli generell och återanvändbar och inte fyllas med specifik lösningsdesign.
-
-### Referensarkitektur
-
-Detaljsidan prioriterar scope, applicability, building blocks och guidance. Den beskriver återanvändbar vägledning, inte en specifik implementationsarkitektur.
-
-## Mallkontrakt
-
-Mallarna under `templates/markdown/` använder enkla dubbla klamrar som **designmarkörer** i steg 15, exempelvis `{{name}}` och `{{catalog_rows}}`. De är ännu inte bundna till ett särskilt template-bibliotek. Steg 16 ska implementera renderingen deterministiskt och får vid behov ersätta markörerna med en intern representationsmodell så länge outputkontraktet består.
-
-Gemensamma markörer:
-
-- `{{name}}`
-- `{{id}}`
-- `{{status}}`
-- `{{description}}`
-- `{{metadata}}`
-- `{{relations}}`
-- `{{provenance}}`
-- `{{catalog_rows}}`
-
-Objekttypsspecifika markörer dokumenteras direkt i respektive mall.
-
-## Filnamn och länkar
-
-- Filnamn använder objektets stabila ID följt av en slug av namnet.
-- Slug ska vara gemener, ASCII där praktiskt möjligt och bindestrecksseparerad.
-- ID:t gör att en namnändring är spårbar även om filnamnet ändras.
-- Interna länkar ska beräknas från outputstrukturen, inte lagras i YAML-modellen.
-
-## Markdown-konventioner
-
-- ATX-rubriker (`#`, `##`, `###`).
-- Pipe-tabeller för kataloger.
-- Vanliga punktlistor för funktioner och relationer.
-- Inga HTML-tabeller i standardprofilen.
-- Ingen presentationsspecifik färgsättning eller layoutmetadata i YAML.
-- Svenska rubriker i svensk output; intern schema-/relationssemantik får fortsatt använda engelska nycklar.
-- Escape av `|`, radbrytningar och andra Markdown-känsliga tecken ska ske i generatorn.
-
-## Source of truth och ändringsregel
-
-Om en användare vill ändra innehållet i en genererad Markdown-fil ska EA Stödjare:
-
-1. identifiera motsvarande objekt/relationsdata i YAML,
-2. föreslå eller genomföra ändringen där,
-3. regenerera Markdown,
-4. inte handredigera den genererade filen som primär metod.
-
-Manuellt redaktionellt innehåll som inte hör hemma i EA-modellen ska i framtiden kunna hanteras som separat dokumentationskälla, men ett sådant system introduceras inte i v1 steg 15.
-
-## Profiler som medvetet inte införs nu
-
-- diagramprofiler,
-- ArchiMate-vyer,
-- presentationsslides,
-- dashboards/heatmaps,
-- lösningsarkitekturprofiler,
-- organisations- och processvyer.
-
-Dessa kan senare byggas ovanpå samma modell och relationsregister.
+Kontraktet är implementerat och används av den metamodellstyrda Markdown/Confluence/DOCX/PDF-genereringen. Projektanpassningar förblir presentationsdelta och ändrar inte kanonisk semantik.
 
 
-# KÄLLA: `docs/markdown-generation.md`
+# KÄLLA: `docs/metamodel-aware-generation.md`
 
-# Deterministisk Markdown-generering
+# Metamodell- och presentationsstyrd dokumentgenerering
 
 ## Syfte
 
-`scripts/generate_markdown.py` genererar katalog- och detaljvyer från den kanoniska YAML-modellen enligt `docs/documentation-profiles.md` och mallarna under `templates/markdown/`.
+Från v2 steg 26 genereras Markdown, Confluence markup, DOCX och PDF utifrån projektets **faktiskt aktiva metamodell** och det läsarorienterade presentationskontraktet. Generatorerna ska inte längre anta att alla projekt använder samma fasta uppsättning objekttyper.
 
-Generatorn ändrar aldrig YAML-modellen. `docs/generated/` är alltid ett derivat och kan regenereras från modellen.
+## Gemensamt generator-context
 
-## Användning
+`scripts/generator_context.py` är den gemensamma läsmodellen för dokumentgeneratorerna. Den:
 
-Från projektroten:
+1. hittar `model-definition/project-metamodel.yaml` eller `project-metamodel.yaml` när sådan finns,
+2. resolverar aktiva extensions,
+3. räknar fram aktiva respektive avaktiverade objekttyper och relationer,
+4. läser custom object types och deras `model_file`,
+5. applicerar presentationskontraktet samt projektspecifika/extension-bidragna etiketter och display patterns,
+6. exponerar endast objekt och relationer som gäller i valt `working`/`published`-läge.
 
-```bash
-python scripts/generate_markdown.py --project-root . --mode working
-```
+Legacy- och enklare projekt utan projektmetamodell behåller bakåtkompatibelt beteende: generatorn upptäcker de kanoniska modellfiler som faktiskt finns. Därmed tvingas inte äldre projekt att migrera enbart för att kunna exporteras.
 
-För publiceringsvy:
+## Aktiva kataloger
 
-```bash
-python scripts/generate_markdown.py --project-root . --mode published
-```
+Varje körning av Markdown och Confluence skapar `generation-manifest.json` i outputkatalogen. Manifestet är en härledd artefakt (`source_of_truth: false`) och listar exakt vilka objekttyper/kataloger som genererades.
 
-Alternativ outputkatalog kan anges med `--output-dir`.
+DOCX/PDF-exporten läser detta manifest i stället för en hårdkodad kataloglista. Därmed följer exempelvis `Product` och projektspecifika custom object types automatiskt med i sammansatta dokument när de är aktiva.
 
-## Lägen
+## Presentation contract
 
-- `working`: inkluderar `candidate`, `approved` och `deprecated` och visar mer proveniensinformation.
-- `published`: inkluderar endast `approved` och reducerar arbetsintern proveniens.
-- `retired` utelämnas i båda standardlägena.
+Generatorerna använder `presentation/presentation-contract.yaml` för:
+
+- objektvisning, normalt `Namn (ID)`,
+- kontextberoende fältetiketter, exempelvis `capability.in_scope` → **Stödjer** för IT-förmåga,
+- relationsetiketter, exempelvis `can_realize` → **Kan realisera / Kan realiseras av**,
+- projektspecifika och extension-bidragna etiketter.
+
+Presentation får aldrig ändra modellsemantik eller epistemiskt lager.
+
+## Boundary, funktioner och attribut
+
+Native v2-fält presenteras läsarorienterat:
+
+- `in_scope` / `out_of_scope` visas i egen **Avgränsning**-sektion,
+- embedded `functions` visas i **Funktioner**,
+- övriga deklarerade eller extension-bidragna attribut visas under **Egenskaper**.
+
+Custom object types kan genereras generiskt när deras `model_file` är deklarerad. En särskild typmall behövs alltså inte för grundläggande katalog- och detaljvisning.
+
+## Derived views
+
+Navigationssektioner i presentation contract använder de deklarerade derived views som läsmodell. Exempel:
+
+- Produkt → IT-stöd visas som **Kan realisera IT-stöd**,
+- Produkt → Plattformstjänst → Plattform visas som **Kan realisera Plattformstjänster**,
+- Förmåga → Plattformstjänst → Plattform används för **Understöds av**.
+
+Navigationsresultaten är alltid `source_of_truth: false`. De får inte skrivas tillbaka till den kanoniska modellen.
+
+`scripts/generate_derived_views.py` använder från steg 26 de kanoniska relationsfälten `source`/`target` och kan använda repositoryts standardkatalog även när det analyserade projektet är ett separat scenario.
 
 ## Determinism
 
-Generatorn använder:
+Samma modell, projektmetamodell, presentation contract och genereringsläge ska ge byte-stabil Markdown/Confluence-output. DOCX/PDF byggs från den genererade Markdown-strukturen och samma katalogmanifest.
 
-- stabil objektsortering,
-- stabila ID-baserade filnamn,
-- deterministiska sluggar,
-- relationer endast från `model/relations.yaml`,
-- källinformation endast från `model/sources.yaml`,
-- stabil gruppering av relationer och listor.
+## Legacy-kompatibilitet
 
-Samma modell, mallar, projektrevision och presentationsläge ska därför ge byte-identisk Markdown.
+- Legacy v1 behöver ingen `project-metamodel.yaml`.
+- Befintliga legacy-relationer behåller sina läsaretiketter.
+- Avsaknad av Product-fil i äldre projekt skapar inte en tom Produktkatalog.
+- Native v2-projekt med Product aktivt eller `products.yaml` i ett enklare scenario får Produkt i exporten.
 
-## Interna länkar
+## Source of truth
 
-Detaljsidor länkas med relativa länkar. Om ett relaterat objekt inte ingår i aktuell export visas namn/ID utan länk. YAML-modellen innehåller inga presentationslänkar.
+Markdown, Confluence, `generation-manifest.json`, DOCX, PDF och derived navigation är alltid härledda artefakter. Ändringar ska göras i kanonisk YAML, projektmetamodell eller presentationskontrakt och därefter regenereras.
 
-## Test
 
-`tests/generation/test_generate_markdown.py` kör generatorn två gånger och jämför hash av hela Markdown-trädet. Testet verifierar också att `published` filtrerar bort kandidater.
+# KÄLLA: `docs/structural-validation-v2.md`
+
+# Strukturell validering i EA Stödjare v2
+
+## Syfte
+
+`validate_project.py` är den gemensamma strukturella valideringsgrinden för EA Stödjare v2. Den ska inte gissa projektets semantik. Projektprofilen fastställs före modellvalidering och styr vilka kontrakt som appliceras.
+
+## Profilstyrd ordning
+
+1. Detektera projektprofil.
+2. Stoppa `unknown` och `invalid_explicit_model` innan modellsemantik appliceras.
+3. Native v2: validera manifest, projektmetamodell, base profile, aktiva extensions och effektiv objekt-/relationskatalog.
+4. Legacy v1: använd de frysta v1-schemasnapshotarna.
+5. Extended legacy rev80, omigrerad: använd rev80-rekonstruktionen och det äldre flat-manifestet utan att först kräva modernt manifestformat.
+6. Migrerad rev80: validera den deklarerade `extended_legacy`-kontraktet, inklusive 92 `provided_by`, bevarade supporting-filer och pensionerade ID:n.
+7. Validera informationslager, derived views, presentation contract och change-control när de är aktiva.
+8. Kontrollera deterministiska genererade artefakter när de finns.
+
+## Metamodellstyrning
+
+För native v2 resolveras `project-metamodel.yaml` mot base profile och extensions. Validering av modellfiler, custom object types, custom relations, attribute extensions, derived views och presentation contract sker mot den **effektiva** metamodellen. Avaktiverade standardtyper ska inte ge falska fel.
+
+## Derived-view reproducibility
+
+`derived-views/views.yaml` valideras som deklaration. Om `build/derived-views/` finns i projektet regenereras materialiserade vyer i en temporär katalog och jämförs byte-för-byte med den incheckade versionen. Materialiserade derived views är alltid `source_of_truth: false`.
+
+## Change-control och pensionerade ID:n
+
+När change-control är aktiverat kontrolleras baseline mot aktuell projektrevision/metamodellversion, freeze-policy, separata modell-/metamodellchangeloggar och retired-ID-registret. Ett pensionerat ID får inte förekomma i aktiva conceptual-, market-, actual- eller derived-data.
+
+## Maskinläsbar rapport
+
+`--json` skriver rapporten till stdout. `--report-file <path>` skriver samma rapport till fil. Rapporten följer `schemas/validation-report.schema.json` och innehåller:
+
+- `valid`,
+- detekterad `profile`,
+- utförda `stages`,
+- summering,
+- strukturerade fel och varningar.
 
 Exempel:
 
 ```bash
-python tests/generation/test_generate_markdown.py
+python scripts/validate_project.py --project-root . --repo-root . --report-file build/validation-report.json
 ```
 
-## Exempeloutput
+## Säkerhetsprincip
 
-`examples/minimal-model/docs/generated/` innehåller genererad `working`-output från den syntetiska minimalmodellen och fungerar som konkret referens för formatet.
-
-
-# KÄLLA: `docs/confluence-generation.md`
-
-# Confluence markup-generering
-
-## Syfte
-
-EA Stödjare kan från steg 17 generera **Confluence wiki markup** från samma kanoniska YAML-modell som används för Markdown-exporten. Confluence-exporten är ett presentationsderivat och får inte redigeras som en parallell source of truth.
-
-## Källa
-
-Generatorn läser endast projektets kanoniska modell och styrmetadata:
-
-- `model/*.yaml`
-- `model/relations.yaml`
-- `model/sources.yaml`
-- `project-manifest.json` för projektrevision
-
-Den läser inte genererad Markdown som informationskälla. Markdown och Confluence är därmed två deterministiska vyer av samma EA-modell.
-
-## Kommando
-
-Från projektroten:
-
-```bash
-python3 scripts/generate_confluence.py --project-root . --mode working
-```
-
-Standardkatalog är:
-
-```text
-exports/confluence/
-```
-
-Publiceringsläge:
-
-```bash
-python3 scripts/generate_confluence.py --project-root . --mode published
-```
-
-Precis som Markdown-generatorn innebär:
-
-- `working`: `candidate`, `approved` och `deprecated` får visas,
-- `published`: endast `approved` visas.
-
-## Outputstruktur
-
-```text
-exports/confluence/
-  drivkrafter.txt
-  mal.txt
-  principer.txt
-  formagor.txt
-  it-stod.txt
-  plattformstjanster.txt
-  plattformar.txt
-  standarder.txt
-  losningsmonster.txt
-  referensarkitekturer.txt
-  objects/
-    drivers/
-    goals/
-    principles/
-    capabilities/
-    it-support/
-    platform-services/
-    platforms/
-    standards/
-    solution-patterns/
-    reference-architectures/
-```
-
-Varje `.txt`-fil innehåller Confluence wiki markup som kan kopieras till en Confluence-sida eller användas som underlag för senare publiceringsautomation.
-
-## Renderingsregler
-
-- Rubriker använder `h1.`, `h2.` och `h3.`.
-- Katalogtabeller använder Confluence-formatet `|| header ||` och `| cell |`.
-- Listor använder `*`.
-- Genereringsmetadata visas i en `{info}`-panel.
-- Objektreferenser använder Confluence-sidlänkar med sidtiteln `ID – Namn`.
-- Relationer renderas i båda läsriktningarna men lagras fortsatt endast en gång i `relations.yaml`.
-- Funktioner hämtas från respektive objekts `functions[]`.
-- Proveniens och källreferenser hämtas från den kanoniska modellen.
-- `working` visar mer evidensmetadata än `published`.
-
-## Semantisk konsistens med Markdown
-
-Markdown och Confluence använder samma:
-
-- statusfiltrering,
-- objektsortering,
-- objekttyper,
-- relationer,
-- funktioner,
-- proveniens,
-- projektmetadata.
-
-De kan skilja sig i presentation och länksyntax men får inte skilja sig i EA-innehåll. Regressionstestet `tests/generation/test_generate_confluence.py` verifierar bland annat att båda formaten genererar samma uppsättning objektsidor och att publiceringsläget filtrerar kandidater på samma sätt.
-
-## Determinism
-
-Generatorn rensar tidigare `.txt`-output i målkatalogen före renderingen och skriver filer i deterministisk ordning. Två körningar mot oförändrad modell och samma projektrevision ska ge identiskt hashat outputträd.
-
-
-# KÄLLA: `docs/document-export.md`
-
-# DOCX- och PDF-export
-
-## Syfte
-
-`scripts/export_documents.py` skapar distributionsformat från den kanoniska EA-modellen utan att införa en parallell sanningskälla.
-
-Exportkedjan är:
-
-```text
-YAML-modell
-  -> deterministisk Markdown-generering
-  -> sammansatt distributionsdokument
-  -> Pandoc DOCX
-  -> LibreOffice PDF
-```
-
-DOCX och PDF är alltså alltid derivat. Ändringar ska göras i `model/*.yaml` och därefter regenereras.
-
-## Förutsättningar
-
-- Python 3
-- Pandoc
-- LibreOffice (`libreoffice` eller `soffice`)
-
-## Användning
-
-Från projektroten:
-
-```bash
-python scripts/export_documents.py --project-root . --mode published
-```
-
-Arbetsmaterial inklusive kandidater:
-
-```bash
-python scripts/export_documents.py --project-root . --mode working
-```
-
-Annan outputkatalog och filbas:
-
-```bash
-python scripts/export_documents.py \
-  --project-root . \
-  --mode published \
-  --output-dir exports/document \
-  --basename arkitekturdokumentation
-```
-
-## Innehåll och struktur
-
-Exporten innehåller:
-
-- dokumenttitel från projektmanifestet,
-- presentationsläge och projektrevision,
-- innehållsförteckning,
-- katalogavsnitt för samtliga objekttyper som ingår i aktuellt läge,
-- detaljsektioner för objekten,
-- relationer, funktioner och proveniens enligt Markdown-profilerna.
-
-Katalogerna följer den ordning som definierats för EA Stödjare v1: drivkrafter, mål, principer, förmågor, IT-stöd, plattformstjänster, plattformar, standarder, lösningsmönster och referensarkitekturer.
-
-## Layoutprinciper
-
-Version 1 använder avsiktligt en enkel och robust dokumentlayout:
-
-- Pandocs DOCX-standardformat,
-- rubrikhierarki som ger navigerbar innehållsförteckning,
-- Pandocs tabellrendering för katalogtabeller,
-- varje övergripande katalogavsnitt börjar på ny sida i DOCX/PDF,
-- tomma kataloger utelämnas i `published` men behålls i `working`,
-- DOCX som grund även för PDF-export så att formaten hålls nära varandra,
-- inga presentationsspecifika data lagras i YAML-modellen.
-
-Mer avancerad grafisk profil kan senare införas genom ett versionshanterat Pandoc-reference-DOCX utan att ändra informationsmodellen.
-
-## Determinism
-
-Samma:
-
-- YAML-modell,
-- projektrevision,
-- Markdown-generator,
-- presentationsläge,
-- Pandoc/LibreOffice-versioner
-
-ska ge semantiskt samma dokument. Binär DOCX/PDF kan innehålla verktygsspecifik metadata och betraktas därför inte som byte-deterministisk på samma sätt som Markdown/Confluence-exporten.
-
-## Verifiering
-
-`tests/generation/test_export_documents.py` verifierar att:
-
-- DOCX och PDF skapas,
-- båda filerna är icke-tomma,
-- DOCX innehåller projektets titel och förväntade EA-sektioner,
-- PDF kan parsas och innehåller förväntad text,
-- `published` inte tar med objekt med status `candidate`.
-
-Visuell QA av referensexporten görs dessutom genom rendering av både DOCX och PDF till sidbilder.
-
-
-# KÄLLA: `docs/structural-validation.md`
-
-# Strukturell validering
-
-## Syfte
-
-Steg 24 inför deterministisk strukturell validering av ett EA Stödjare-projekt. Valideringen ska hitta tekniska och referentiella fel innan semantisk LLM-granskning görs.
-
-Huvudverktyget är:
-
-```bash
-python scripts/validate_project.py --project-root .
-```
-
-Ett annat EA-projekt kan valideras mot denna repos schemas och generatorer:
-
-```bash
-python scripts/validate_project.py \
-  --project-root /sokvag/till/projekt \
-  --repo-root /sokvag/till/ea-stodjare
-```
-
-Exit code `0` betyder att inga blockerande strukturella fel hittades. Exit code `1` betyder att minst ett fel hittades.
-
-## Kontroller
-
-Validatorn kontrollerar följande lager.
-
-### Manifest och filintegritet
-
-- `project-manifest.json` finns och är giltig JSON.
-- manifestet följer `schemas/project-manifest.schema.json`.
-- filinventeringen är unik och deterministiskt sorterad.
-- obligatoriska registrerade filer finns.
-- SHA-256 stämmer för registrerade filer.
-- den kanoniska modellkatalog som manifestet pekar på finns.
-
-### Kanonisk YAML-modell
-
-- samtliga obligatoriska modellfiler finns,
-- YAML kan parsas,
-- filernas envelope följer modellformat v1,
-- `schema_version` och `object_type` är korrekta,
-- obligatoriska objektfält finns,
-- objekttyp matchar filen,
-- ID-prefix matchar objekttypen,
-- objekt-ID:n är globala och unika,
-- statusvärden är tillåtna,
-- `capability_type` är `business` eller `it`,
-- `functions[]` används endast där metamodel v1 tillåter det och har inget globalt ID.
-
-### Källor och proveniens
-
-- käll-ID följer formatet och är unika,
-- `source_type` är definierad,
-- refererade källor finns,
-- `derived_from` refererar befintliga objekt,
-- evidenstyper följer de obligatoriska reglerna för source/rationale,
-- confidence och transferability har tillåtna värden,
-- external-evidens använder en extern källtyp.
-
-### Relationer
-
-- relations-ID följer formatet och är unika,
-- source och target finns,
-- relationstypen är definierad,
-- source/target-kombinationen är tillåten enligt `schemas/relations.yaml`,
-- target constraints, exempelvis IT-förmåga för plattformstjänstens `supports`, följs,
-- förbjudna självrelationer upptäcks,
-- exakta dubblettrelationer upptäcks,
-- relationens proveniens valideras.
-
-### Genererade artefakter
-
-När lagrade genererade artefakter finns kontrolleras de som derivat:
-
-- Markdown regenereras i `working` och jämförs byte-för-byte med `docs/generated/`.
-- Confluence markup regenereras i `working` och jämförs byte-för-byte med `exports/confluence/`.
-- lagrade PDF-filer kontrolleras för PDF-signatur.
-- lagrade DOCX-filer kontrolleras för OOXML/ZIP-signatur.
-
-DOCX/PDF:s fullständiga reproducerbarhet och innehållskvalitet fortsätter att testas av de dedikerade exporttesterna eftersom binär metadata kan göra direkt byte-jämförelse olämplig.
-
-## Fel och varningar
-
-Validatorn använder stabila kodprefix:
-
-- `STR-MAN-*` – manifest/integritet,
-- `STR-MODEL-*` – modellformat,
-- `STR-ID-*` – identitet,
-- `STR-SRC-*` – källregister,
-- `STR-PROV-*` – proveniens,
-- `STR-REL-*` – relationer,
-- `STR-GEN-*` – genererade artefakter.
-
-Fel blockerar godkänd strukturell validering. Varningar rapporteras men ger exit code `0`.
-
-Maskinläsbart resultat fås med:
-
-```bash
-python scripts/validate_project.py --project-root . --json
-```
-
-## Avgränsning
-
-Steg 24 validerar sådant som kan avgöras deterministiskt. Den försöker inte ersätta:
-
-- objektspecifik semantisk kvalitet i `knowledge/quality-object.md`,
-- modellens helhetskvalitet i `knowledge/quality-model.md`,
-- bedömning av om en förmåga är välformulerad,
-- relevans/överförbarhet i research utöver formella proveniensregler,
-- om en arkitekturmodell är ändamålsenlig för organisationen.
-
-Dessa delar hör hemma i kvalitetsarbetsflödena och senare semantiska evals.
-
-## Regressionstest
-
-Kör:
-
-```bash
-python tests/validation/test_validate_project.py
-```
-
-Testsviten verifierar både giltiga projekt och avsiktligt trasiga varianter, bland annat dubblett-ID, saknad relationsreferens, otillåten relation, hash-avvikelse och stale Markdown.
+En grön validator betyder strukturell och deklarerad semantisk konsistens enligt den valda profilen. Den betyder inte att externa påståenden är sanna, att ett föreslaget arkitekturbeslut är korrekt eller att marknadsinformation bevisar faktisk organisationsanvändning.

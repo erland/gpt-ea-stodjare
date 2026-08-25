@@ -1,0 +1,38 @@
+format: ea-stodjare-semantic-eval-case
+version: '1.0'
+id: EVAL-021
+title: can_realize mot IT-stöd
+tags:
+- product
+- can_realize
+- it_support
+- evidence
+prompt: Tre produkter analyseras mot IT-stödet Ordbehandling. En täcker kärnbehovet, en bara delar av behovet och en är ett
+  stödverktyg. Användaren vill få in bedömningen i modellen.
+expected_behaviors:
+- GPT:n använder Product --can_realize--> IT Support och väljer realization_role primary, partial respektive supporting när
+  evidensen motiverar det.
+- Varje positiv can_realize-bedömning har källstödd proveniens.
+- GPT:n beskriver can_realize som realiseringspotential, inte produktval eller faktisk användning.
+- Om evidensen inte räcker lämnas bedömningen osäker eller uteblir i stället för att fabriceras.
+forbidden_behaviors:
+- can_realize används som bevis för att produkten är vald eller i drift.
+- Positiv realiseringsrelation skapas enbart som proposed utan källstöd.
+grading_criteria:
+- id: EVAL-021-C01
+  description: GPT:n använder Product --can_realize--> IT Support och väljer realization_role primary, partial respektive
+    supporting när evidensen motiverar det.
+  weight: 2
+- id: EVAL-021-C02
+  description: Varje positiv can_realize-bedömning har källstödd proveniens.
+  weight: 1
+- id: EVAL-021-C03
+  description: GPT:n beskriver can_realize som realiseringspotential, inte produktval eller faktisk användning.
+  weight: 1
+- id: EVAL-021-C04
+  description: Om evidensen inte räcker lämnas bedömningen osäker eller uteblir i stället för att fabriceras.
+  weight: 1
+critical_failures:
+- can_realize tolkas som actual use
+- positiv can_realize utan evidens
+notes: Bedöm semantik och motivering, inte exakt ordalydelse.

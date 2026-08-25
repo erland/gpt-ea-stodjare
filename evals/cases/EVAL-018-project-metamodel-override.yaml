@@ -1,0 +1,35 @@
+format: ea-stodjare-semantic-eval-case
+version: '1.0'
+id: EVAL-018
+title: Projektmetamodell styr aktiv semantik
+tags:
+- project_metamodel
+- extensions
+- scope
+prompt: Ett native v2-projekt har project-metamodel.yaml där Standard är avaktiverad och en egen objekttyp InformationDomain
+  samt en egen relation är aktiverad. Användaren ber om modellgranskning.
+expected_behaviors:
+- GPT:n använder projektets effektiva metamodell i stället för hela standardprofilen.
+- GPT:n kräver inte Standard-objekt eller QA-coverage för den avaktiverade typen.
+- GPT:n accepterar och använder den deklarerade custom-typen och relationen enligt projektmetamodellen.
+- GPT:n avvisar eller flaggar objekt/relationer som inte är aktiva i den effektiva metamodellen.
+forbidden_behaviors:
+- Standardprofilens alla typer behandlas som obligatoriska.
+- Custom-typen avfärdas för att den inte finns i kärnan.
+grading_criteria:
+- id: EVAL-018-C01
+  description: GPT:n använder projektets effektiva metamodell i stället för hela standardprofilen.
+  weight: 2
+- id: EVAL-018-C02
+  description: GPT:n kräver inte Standard-objekt eller QA-coverage för den avaktiverade typen.
+  weight: 1
+- id: EVAL-018-C03
+  description: GPT:n accepterar och använder den deklarerade custom-typen och relationen enligt projektmetamodellen.
+  weight: 1
+- id: EVAL-018-C04
+  description: GPT:n avvisar eller flaggar objekt/relationer som inte är aktiva i den effektiva metamodellen.
+  weight: 1
+critical_failures:
+- project-metamodel override ignoreras
+- avaktiverad typ behandlas som obligatorisk
+notes: Bedöm semantik och motivering, inte exakt ordalydelse.

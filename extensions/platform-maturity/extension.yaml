@@ -1,0 +1,49 @@
+schema_version: '2.0'
+extension:
+  id: ea.platform-maturity
+  version: '1.0'
+  namespace: ea.platform_maturity
+  description: Valfri extension för att bedöma mognad/strukturell tydlighet hos konceptuella
+    Plattformar utan att ändra plattformsobjektets grundsemantik.
+  compatible_base_profiles:
+  - id: ea-stodjare-v2
+    versions:
+    - '2.0'
+  requires: []
+  conflicts_with: []
+  contributions:
+    object_types: []
+    attribute_extensions:
+    - object_type: platform
+      attributes:
+      - name: maturity_class
+        type: enum
+        required: false
+        value_set: platform_maturity.maturity_class
+        description: Bedömning av hur sammanhållen och tydlig den konceptuella plattformsboundaryn
+          är.
+    relations: []
+    relation_qualifiers: []
+    value_sets:
+    - id: platform_maturity.maturity_class
+      description: Strukturell plattformsmognad återanvändbar från rev80.
+      values:
+      - cohesive_platform
+      - composite_platform
+      - specialized_platform
+      - conditional_platform
+      - boundary_watch
+    value_set_extensions: []
+    qa_rules:
+    - id: EXT_MATURITY_001
+      severity: info
+      description: Platform maturity är en bedömning av konceptuell struktur och får
+        inte användas som bevis för faktisk organisationsmognad eller produktrealisering.
+      applies_to:
+      - platform
+      check:
+        semantic_guard: conceptual_structure_only
+    presentation:
+      labels:
+        platform.maturity_class: Strukturell mognad
+      object_display_patterns: {}

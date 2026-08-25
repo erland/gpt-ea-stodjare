@@ -1,0 +1,172 @@
+relations_model:
+  name: EA Stödjare relationsmodell
+  version: "1.0-draft"
+  status: step-6-integrated
+  canonical_direction: source_relation_target
+  instance_id_prefix: REL-
+  notes:
+    - Inverse relations are presentation concerns and are not stored separately.
+    - Provenance metadata for relation instances is defined in development step 5.
+    - Canonical instance serialization is defined in schemas/model-format.yaml.
+
+relation_types:
+  influences:
+    display_name: påverkar
+    definition: >-
+      Källobjektet är en bidragande orsak eller påverkansfaktor för målobjektet
+      utan att ensamt realisera eller styra det.
+    allowed:
+      - source: driver
+        targets: [goal, principle]
+      - source: goal
+        targets: [principle, capability]
+    prefer_more_specific_when_known: true
+
+  supports:
+    display_name: stödjer
+    definition: >-
+      Källobjektet bidrar konkret till att målobjektet kan utövas eller uppnås
+      men är inte liktydigt med målobjektet.
+    allowed:
+      - source: it_support
+        targets: [capability]
+      - source: platform_service
+        targets: [capability]
+        target_constraints:
+          capability_type: it
+      - source: solution_pattern
+        targets: [capability]
+      - source: reference_architecture
+        targets: [capability]
+
+  uses:
+    display_name: använder
+    definition: >-
+      Källobjektet konsumerar eller använder målobjektet som en del av sin
+      funktion eller realisering.
+    allowed:
+      - source: it_support
+        targets: [platform_service]
+      - source: platform_service
+        targets: [platform_service]
+      - source: platform
+        targets: [platform_service]
+    prefer_more_specific_when_known: true
+
+  realized_by:
+    display_name: realiseras av
+    definition: >-
+      Källobjektet får sin konkreta realisering genom målobjektet.
+    allowed:
+      - source: platform_service
+        targets: [platform]
+      - source: reference_architecture
+        targets: [solution_pattern]
+
+  governed_by:
+    display_name: styrs av
+    definition: >-
+      Källobjektets utformning, användning eller utveckling ska följa ett
+      styrande målobjekt.
+    allowed:
+      - source: capability
+        targets: [principle, standard]
+      - source: it_support
+        targets: [principle, standard]
+      - source: platform_service
+        targets: [principle, standard]
+      - source: platform
+        targets: [principle, standard]
+      - source: solution_pattern
+        targets: [principle, standard]
+      - source: reference_architecture
+        targets: [principle, standard]
+
+  constrains:
+    display_name: begränsar
+    definition: >-
+      Källobjektet sätter en uttrycklig begränsning på vilka val eller
+      utformningar som är tillåtna för målobjektet.
+    allowed:
+      - source: standard
+        targets:
+          - it_support
+          - platform_service
+          - platform
+          - solution_pattern
+          - reference_architecture
+    duplicate_with_governed_by_discouraged: true
+
+  depends_on:
+    display_name: beror på
+    definition: >-
+      Källobjektet är beroende av att målobjektet finns eller fungerar för att
+      självt kunna fungera eller vara relevant.
+    allowed:
+      - source: capability
+        targets: [capability]
+      - source: it_support
+        targets: [it_support]
+      - source: platform_service
+        targets: [platform_service]
+      - source: platform
+        targets: [platform]
+      - source: solution_pattern
+        targets: [solution_pattern]
+      - source: reference_architecture
+        targets: [reference_architecture]
+    self_reference_allowed: false
+
+  derived_from:
+    display_name: härledd från
+    definition: >-
+      Källobjektets existens, formulering eller innehåll har härletts från
+      målobjektet.
+    allowed:
+      - source: goal
+        targets: [driver]
+      - source: principle
+        targets: [driver, goal]
+      - source: capability
+        targets: [goal]
+      - source: solution_pattern
+        targets: [principle]
+      - source: reference_architecture
+        targets: [principle, standard]
+
+  related_to:
+    display_name: relaterar till
+    definition: >-
+      Det finns en relevant arkitekturell koppling mellan objekten men
+      underlaget räcker ännu inte för en mer precis relation.
+    allowed:
+      - source: "*"
+        targets: ["*"]
+    fallback_only: true
+    self_reference_allowed: false
+
+validation_rules:
+  - id: REL-V001
+    rule: source_exists
+    severity: error
+  - id: REL-V002
+    rule: target_exists
+    severity: error
+  - id: REL-V003
+    rule: relation_type_defined
+    severity: error
+  - id: REL-V004
+    rule: source_target_combination_allowed
+    severity: error
+  - id: REL-V005
+    rule: no_self_reference_unless_explicitly_allowed
+    severity: error
+  - id: REL-V006
+    rule: no_exact_duplicate_relation
+    severity: error
+  - id: REL-V007
+    rule: related_to_only_when_more_specific_relation_unknown
+    severity: warning
+  - id: REL-V008
+    rule: relation_requires_evidence_derivation_or_explicit_proposal
+    severity: error

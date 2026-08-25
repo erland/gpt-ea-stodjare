@@ -1,245 +1,307 @@
 metamodel:
   name: EA Stödjare metamodel
-  version: "1.0-draft"
-  status: step-6-integrated
-  note: >-
-    Machine-readable domain specification of object types. Canonical instance
-    serialization is defined by schemas/model-format.yaml as of development step 6.
-
+  version: 2.0-draft
+  status: v2-step-9-product-object
+  note: Machine-readable domain specification of object types. Native v2 semantics include capability boundary, realization-neutral
+    platform services, conceptual/product-neutral platforms and Product as a supporting market/realization object; canonical
+    v1 semantics remain frozen in compatibility/ea-stodjare-v1.
 common:
   required_attributes:
-    - id
-    - type
-    - name
-    - description
-    - status
+  - id
+  - type
+  - name
+  - description
+  - status
   optional_attributes:
-    - aliases
-    - owner
-    - tags
-    - notes
-    - provenance
+  - aliases
+  - owner
+  - tags
+  - notes
+  - provenance
   statuses:
-    - candidate
-    - approved
-    - deprecated
-    - retired
-
+  - candidate
+  - approved
+  - deprecated
+  - retired
 object_types:
   driver:
     display_name: Drivkraft
     category: primary
     id_prefix: DRV-
-    definition: >-
-      An omständighet, kraft eller förändring som skapar behov av att
-      organisationen agerar, prioriterar eller förändras.
+    definition: An omständighet, kraft eller förändring som skapar behov av att organisationen agerar, prioriterar eller förändras.
     question: Varför behöver något förändras eller uppmärksammas?
     optional_attributes:
-      - category
-      - time_horizon
+    - category
+    - time_horizon
     not:
-      - goal
-      - principle
-      - capability
-
+    - goal
+    - principle
+    - capability
   goal:
     display_name: Mål
     category: primary
     id_prefix: GOAL-
-    definition: >-
-      Ett önskat framtida resultat eller tillstånd som organisationen vill
-      uppnå.
+    definition: Ett önskat framtida resultat eller tillstånd som organisationen vill uppnå.
     question: Vad vill vi uppnå?
     optional_attributes:
-      - target_state
-      - time_horizon
-      - measure
+    - target_state
+    - time_horizon
+    - measure
     not:
-      - driver
-      - principle
-      - activity
-
+    - driver
+    - principle
+    - activity
   principle:
     display_name: Princip
     category: primary
     id_prefix: PRN-
-    definition: >-
-      En varaktig styrande regel eller vägledning som ska påverka
-      arkitekturbeslut och utformning över flera initiativ eller lösningar.
+    definition: En varaktig styrande regel eller vägledning som ska påverka arkitekturbeslut och utformning över flera initiativ
+      eller lösningar.
     question: Vilken övergripande regel ska vägleda våra arkitekturbeslut?
     recommended_attributes:
-      - statement
-      - rationale
-      - implications
+    - statement
+    - rationale
+    - implications
     not:
-      - goal
-      - standard
-
+    - goal
+    - standard
   capability:
     display_name: Förmåga
     category: primary
     id_prefix: CAP-
-    definition: >-
-      En stabil beskrivning av vad organisationen eller dess IT-verksamhet
-      behöver kunna åstadkomma, oberoende av exakt organisation, process,
-      system eller teknisk realisering.
+    definition: En stabil beskrivning av vad organisationen eller dess IT-verksamhet behöver kunna åstadkomma, oberoende av
+      exakt organisation, process, system eller teknisk realisering.
     question: Vad behöver vi kunna göra eller åstadkomma?
     required_attributes:
-      - capability_type
+    - capability_type
     allowed_values:
       capability_type:
-        - business
-        - it
+      - business
+      - it
     optional_attributes:
-      - scope
-      - consumer_scope
+    - in_scope
+    - out_of_scope
+    - consumer_scope
     not:
-      - process
-      - organization
-      - function
-      - it_support
-
+    - process
+    - organization
+    - function
+    - it_support
+    attribute_semantics:
+      in_scope: 'Positiv boundary: vad förmågan omfattar eller möjliggör. För capability_type it ska innehållet beskriva tekniskt
+        möjliggörande, inte produkter, PLS-listor eller verksamhetsfunktionalitet som IT själv utför.'
+      out_of_scope: 'Negativ boundary: närliggande ansvar, beteenden eller områden som uttryckligen inte ingår i förmågan.'
+      consumer_scope: Vilka målgrupper, utvecklingsområden eller organisatoriska delar förmågan avses betjäna när detta är
+        känt och relevant.
+    presentation_semantics:
+      it.in_scope: Stödjer
+      business.in_scope: Omfattar
+      out_of_scope: Omfattar inte
+    legacy_attributes:
+      scope: Tillåtet endast genom v1-kompatibilitetsprofil eller explicit projektextension; får inte automatiskt tolkas som
+        enbart in_scope eller out_of_scope.
   it_support:
     display_name: IT-stöd
     category: primary
     id_prefix: ITS-
-    definition: >-
-      Ett informationssystem, en applikation eller en sammanhållen digital
-      tjänst som används för att stödja en eller flera verksamhets- eller
-      IT-förmågor.
+    definition: Ett informationssystem, en applikation eller en sammanhållen digital tjänst som används för att stödja en
+      eller flera verksamhets- eller IT-förmågor.
     question: Vilket konkret digitalt stöd används för att utföra arbetet?
     optional_attributes:
-      - functions
-      - lifecycle
-      - criticality
+    - functions
+    - lifecycle
+    - criticality
     supports_functions: true
     not:
-      - helpdesk
-      - capability
-      - platform_service
-      - platform
-
+    - helpdesk
+    - capability
+    - platform_service
+    - platform
   platform_service:
     display_name: Plattformstjänst
     category: primary
     id_prefix: PLS-
-    definition: >-
-      Ett standardiserat tekniskt eller gemensamt IT-erbjudande som kan
-      konsumeras av IT-stöd, utvecklingsteam eller andra interna konsumenter
-      och som abstraherar delar av den underliggande tekniska realiseringen.
-    question: Vilken gemensam teknisk tjänst erbjuder vi för konsumtion?
+    definition: Ett stabilt tekniskt erbjudande eller funktionalitetskontrakt som lösningar kan konsumera och som beskriver
+      vad som ska kunna erbjudas utan att låsa hur eller var realiseringen sker.
+    question: Vilken stabil teknisk funktionalitet eller vilket tekniskt erbjudande behöver kunna konsumeras?
     optional_attributes:
-      - functions
-      - service_level
-      - consumer_scope
+    - functions
+    - service_level
+    - consumer_scope
+    - realization_pattern
     supports_functions: true
     not:
-      - capability
-      - platform
-      - business_application
-
+    - capability
+    - platform
+    - business_application
+    - product_or_runtime_by_definition
+    allowed_values:
+      realization_pattern:
+      - single_product
+      - product_family
+      - composition
+      - framework_or_library
+      - managed_service
+      - saas
+      - mixed
+      - unknown
+    semantic_rules:
+    - realization_neutral_offer_not_shared_runtime_requirement
+    - may_be_realized_by_product_family_composition_framework_library_saas_or_other_mechanism
+    - consumer_value_is_distinct_from_technical_realization
+    - shared_or_centrally_operated_is_not_required
   platform:
     display_name: Plattform
     category: primary
     id_prefix: PLT-
-    definition: >-
-      En gemensam teknisk grund eller sammanhållen teknisk miljö som
-      realiserar eller möjliggör en eller flera plattformstjänster och/eller
-      tekniska funktioner.
-    question: Vilken teknisk grund realiserar våra gemensamma erbjudanden?
+    definition: En produktneutral konceptuell gruppering av Plattformstjänster som tillsammans utgör ett sammanhållet tekniskt
+      och förvaltningsmässigt erbjudandeområde.
+    question: Vilka stabila tekniska erbjudanden hör konceptuellt samman genom gemensamt syfte, livscykel, kompetens eller
+      förvaltningslogik?
     optional_attributes:
-      - functions
-      - technology
-      - products
+    - functions
+    - technology
+    - products
     supports_functions: true
     not:
-      - platform_service
-      - it_support
-      - product_by_default
-
+    - platform_service
+    - it_support
+    - product_or_product_family_by_default
+    - actual_organizational_offering_by_default
+    semantic_rules:
+    - product_neutral_boundary
+    - groups_platform_services_by_cohesive_technical_and_management_logic
+    - singleton_platform_can_be_legitimate
+    - composition_realization_is_legitimate
+    - shared_product_realization_does_not_imply_merge_or_dependency
+    - market_or_product_presence_does_not_prove_actual_organizational_platform_offering
+  product:
+    display_name: Produkt
+    category: supporting
+    id_prefix: PRD-
+    definition: Ett konkret marknadserbjudande, exempelvis applikationsprodukt, plattformsprodukt, infrastrukturprodukt, SaaS-tjänst,
+      ramverk, bibliotek, verktyg, SDK eller appliance, som kan realisera eller bidra till realiseringen av ett IT-stöd eller
+      en Plattformstjänst.
+    question: Vilket konkret marknadserbjudande kan vara relevant som möjlig realisering eller del av realisering?
+    required_attributes:
+    - product_kind
+    optional_attributes:
+    - vendor
+    - website
+    - lifecycle
+    - version
+    - market_notes
+    allowed_values:
+      product_kind:
+      - application_product
+      - platform_product
+      - infrastructure_product
+      - service_product
+      - framework
+      - library
+      - component_library
+      - data_access_framework
+      - build_tool
+      - testing_framework
+      - developer_tool
+      - sdk
+      - appliance
+      - other
+      - unknown
+    not:
+    - it_support
+    - platform_service
+    - platform
+    - actual_use_by_default
+    semantic_rules:
+    - product_is_market_or_realization_reference_not_architecture_need
+    - product_does_not_automatically_become_platform
+    - market_presence_does_not_prove_actual_organizational_use
+    - technical_capability_does_not_prove_organizational_offering
+    - product_may_be_relevant_to_it_support_or_platform_service
   standard:
     display_name: Standard
     category: primary
     id_prefix: STD-
-    definition: >-
-      En beslutad eller normativ specifikation, regel, teknikstandard,
-      informationsstandard eller annan konkret standardisering som styr eller
-      begränsar arkitekturens utformning.
+    definition: En beslutad eller normativ specifikation, regel, teknikstandard, informationsstandard eller annan konkret
+      standardisering som styr eller begränsar arkitekturens utformning.
     question: Vilken konkret standard, norm eller specifikation ska följas?
     optional_attributes:
-      - standard_type
-      - reference
-      - version
-      - mandatory
+    - standard_type
+    - reference
+    - version
+    - mandatory
     not:
-      - principle
-      - solution_pattern
-
+    - principle
+    - solution_pattern
   solution_pattern:
     display_name: Lösningsmönster
     category: secondary
     id_prefix: PAT-
-    definition: >-
-      En återanvändbar och vägledande lösningsstruktur för en återkommande typ
-      av arkitekturproblem, beskriven på en nivå som kan tillämpas i flera
-      lösningar.
+    definition: En återanvändbar och vägledande lösningsstruktur för en återkommande typ av arkitekturproblem, beskriven på
+      en nivå som kan tillämpas i flera lösningar.
     optional_attributes:
-      - problem
-      - context
-      - approach
-      - consequences
+    - problem
+    - context
+    - approach
+    - consequences
     not:
-      - specific_solution_design
-      - reference_architecture
-      - standard
-
+    - specific_solution_design
+    - reference_architecture
+    - standard
   reference_architecture:
     display_name: Referensarkitektur
     category: secondary
     id_prefix: RA-
-    definition: >-
-      En återanvändbar, vägledande arkitektur för ett definierat område som
-      beskriver centrala byggblock, ansvar, principer och relationer utan att
-      vara designen för en specifik implementation.
+    definition: En återanvändbar, vägledande arkitektur för ett definierat område som beskriver centrala byggblock, ansvar,
+      principer och relationer utan att vara designen för en specifik implementation.
     optional_attributes:
-      - scope
-      - applicability
-      - building_blocks
-      - guidance
+    - scope
+    - applicability
+    - building_blocks
+    - guidance
     not:
-      - specific_solution_architecture
-      - diagram_only
-      - solution_pattern
-
+    - specific_solution_architecture
+    - diagram_only
+    - solution_pattern
 embedded_concepts:
   function:
     display_name: Funktion
     standalone_object: false
     allowed_on:
-      - it_support
-      - platform_service
-      - platform
-    definition: >-
-      En konkret funktion som ett IT-stöd, en plattformstjänst eller en
-      plattform tillhandahåller. Funktion är underordnad information i v1 och
-      har inte egen global identitet.
-
+    - it_support
+    - platform_service
+    - platform
+    definition: En konkret funktion som ett IT-stöd, en plattformstjänst eller en plattform tillhandahåller. Funktion är underordnad
+      information i v2 och kan ha ett valfritt lokalt ID som endast är giltigt inom moderobjektet.
+    local_identity:
+      id_optional: true
+      scope: parent_object
+      globally_referenceable: false
+    optional_attributes:
+    - id
+    - description
+    - required
+    semantic_rules:
+    - local_id_does_not_create_global_ea_object
+    - local_id_may_support_parent_scoped_coverage_or_comparison
+    - function_is_not_global_relation_target
 explicitly_out_of_core_v1:
-  - organization
-  - stakeholder
-  - process
-  - activity
-  - information_object
-  - data_domain
-  - product
-  - technology
-  - project
-  - initiative
-  - roadmap
-  - transition_architecture
-  - kpi
-  - risk
-  - requirement
-  - constraint
-  - physical_component
-  - api_contract
+- organization
+- stakeholder
+- process
+- activity
+- information_object
+- data_domain
+- product
+- technology
+- project
+- initiative
+- roadmap
+- transition_architecture
+- kpi
+- risk
+- requirement
+- constraint
+- physical_component
+- api_contract

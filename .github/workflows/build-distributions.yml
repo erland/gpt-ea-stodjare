@@ -19,6 +19,20 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: requirements-dev.txt
+
+      - name: Install dependencies
+        run: |
+          python -m pip install -r requirements-dev.txt
+          sudo apt-get update
+          sudo apt-get install -y pandoc libreoffice poppler-utils
+
       - name: Resolve version
         id: version
         shell: bash
@@ -34,15 +48,22 @@ jobs:
             VERSION="$(tr -d '[:space:]' < VERSION)"
           fi
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
-      - name: Build distributions
-        run: python3 scripts/build_distributions.py --version "${{ steps.version.outputs.version }}"
-      - name: Validate distributions
-        run: python3 scripts/validate_distributions.py --version "${{ steps.version.outputs.version }}"
+
+      - name: Run mandatory v2 distribution gate
+        run: |
+          python scripts/run_v2_ci_gate.py \
+            --project-root . \
+            --mode ci \
+            --version "${{ steps.version.outputs.version }}" \
+            --report-file build/v2-distribution-gate.json
+
       - name: Upload workflow artifacts
         uses: actions/upload-artifact@v4
         with:
           name: ea-stodjare-gpt-v${{ steps.version.outputs.version }}
-          path: dist/*.zip
+          path: |
+            dist/*.zip
+            build/v2-distribution-gate.json
           retention-days: 14
 
   release-assets:

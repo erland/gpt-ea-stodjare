@@ -194,10 +194,13 @@ Kontroller:
 - **QO-CAP-004 (WARNING):** förmågan är alltför bred eller innehåller flera separerbara förmågor.
 - **QO-CAP-005 (WARNING):** förmågan är så smal att den snarare beskriver en enskild systemfunktion.
 - **QO-CAP-006 (WARNING):** `business`/`it` verkar inte stämma med vem som behöver kunna åstadkomma utfallet.
-- **QO-CAP-007 (INFO):** scope bör anges när samma namn annars kan förstås på flera nivåer.
+- **QO-CAP-007 (INFO):** `in_scope` och/eller `out_of_scope` bör anges när samma namn annars kan förstås på flera nivåer eller när boundaryn behöver förtydligas.
 - **QO-CAP-008 (INFO):** för en centralt tillhandahållen IT-förmåga bör `owner` och `consumer_scope` anges när ansvar respektive avsedda konsumenter är kända och relevanta.
+- **QO-CAP-009 (WARNING):** en IT-förmågas `in_scope` uttrycker produkter, Plattformstjänster eller verksamhetsfunktionalitet i stället för tekniskt möjliggörande för konsumenten.
+- **QO-CAP-010 (WARNING):** `in_scope` och `out_of_scope` motsäger eller duplicerar varandra.
+- **QO-CAP-011 (WARNING):** native v2 använder legacy-fältet `scope` utan explicit projektextension.
 
-För IT-förmågor ska frågan vara ungefär: `Vad behöver IT-verksamheten kunna tillhandahålla eller åstadkomma?`
+För IT-förmågor ska frågan vara ungefär: `Vad behöver IT-verksamheten kunna tillhandahålla eller möjliggöra?` Positiv boundary presenteras normalt som **Stödjer** och negativ boundary som **Omfattar inte**.
 
 ### IT-stöd
 

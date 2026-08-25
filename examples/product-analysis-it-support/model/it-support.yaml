@@ -1,0 +1,28 @@
+schema_version: '1.0'
+object_type: it_support
+objects:
+  - id: ITS-251
+    type: it_support
+    name: Ordbehandling
+    description: Produktoberoende digitalt stöd för att skapa, redigera, formatera och kvalitetssäkra textbaserade dokument.
+    status: approved
+    functions:
+      - id: create_document
+        name: Skapa dokument
+        description: Skapa nya textbaserade dokument.
+        required: true
+      - id: edit_format
+        name: Redigera och formatera text
+        description: Redigera innehåll och styra grundläggande layout och formatering.
+        required: true
+      - id: spelling_language
+        name: Stavnings- och språkstöd
+        description: Kontrollera stavning och ge grundläggande språkstöd.
+        required: true
+      - id: collaborate
+        name: Samredigera dokument
+        description: Flera användare kan arbeta i samma dokument.
+        required: false
+    provenance:
+      - evidence_type: explicit
+        source_id: SRC-251

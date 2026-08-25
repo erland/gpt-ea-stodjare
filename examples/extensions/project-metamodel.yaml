@@ -1,0 +1,34 @@
+schema_version: "2.0"
+project_metamodel:
+  id: extension-demo
+  version: "1.0"
+  base_profile:
+    id: ea-stodjare-v2
+    version: "2.0"
+    compatibility_mode: native
+  object_types:
+    enabled: [capability, platform_service, platform]
+    disabled: []
+    custom: []
+  attribute_extensions: []
+  relations:
+    enabled: [supports, provided_by, can_realize]
+    disabled: []
+    custom: []
+  relation_qualifiers: []
+  value_sets:
+    - id: realization_role
+      values: [primary, partial, supporting]
+  extensions:
+    - id: example.ownership
+      version: "1.0"
+      enabled: true
+  derived_views: []
+  presentation:
+    labels: {}
+  governance:
+    change_control: false
+    baseline_id: null
+    freeze_status: draft
+  notes:
+    - Extensionpaketet bidrar med ägarskapsdomän, relation, QA och presentation.

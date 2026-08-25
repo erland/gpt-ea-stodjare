@@ -37,7 +37,7 @@ Aktivera där Buildern erbjuder motsvarande funktion:
 
 - **Web/research:** På – central för aktuell omvärldsresearch, standarder och jämförelser.
 - **Filanalys/data analysis/code interpreter:** På – behövs för zip-projekt, YAML, validering, generering och export när miljön stödjer det.
-- **Image generation:** Inte nödvändig för v1; visualisering ligger utanför första versionens scope.
+- **Image generation:** Valfri; v2:s kärna kräver inte bildgenerering och modell-/diagramsemantik ska inte härledas från dekorativa bilder.
 
 ## Primära conversation starters
 
@@ -59,15 +59,17 @@ Se:
 - `docs/user-guide.md`
 - `knowledge/workflow-usage.md`
 
-## V1-scope att kontrollera i Builder-test
+## V2-beteende att kontrollera i Builder-test
 
 Builder-versionen ska tydligt kunna:
 
-- analysera underlag,
-- skilja explicit/derived/proposed/external,
-- föreslå EA-modeller med researchstöd,
-- klassificera centrala EA-objekt,
-- granska befintliga modeller,
-- arbeta med EA Stödjare-projekt och YAML som source of truth,
-- generera/hantera dokumentationsoutput när verktygsmiljön medger det,
-- hålla detaljerad lösningsarkitektur utanför scope.
+- detektera native v2, legacy v1, extended legacy och unknown innan projektsemantik används,
+- följa projektets faktiska metamodell och aktiva extensions i stället för en hårdkodad typkatalog,
+- skilja `explicit`/`derived`/`proposed`/`external` samt conceptual/market/actual,
+- skilja Produkt från IT-stöd, Plattformstjänst och Plattform samt förstå `can_realize` och `provided_by`,
+- arbeta boundary-first och använda review-flöden utan automatisk kanonisk mutation,
+- behandla derived views och presentation contract som icke-kanoniska,
+- migrera legacy-projekt konservativt och granskningsbart utan tyst semantisk normalisering,
+- köra metamodellstyrd QA och följa change-control/retired-ID-policy,
+- använda YAML som source of truth och regenerera dokumentationsoutput när miljön medger det,
+- hålla detaljerad lösningsarkitektur utanför standardmetamodellens scope om projektet inte uttryckligen utökar den.

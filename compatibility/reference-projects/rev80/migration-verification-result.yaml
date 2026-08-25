@@ -1,0 +1,61 @@
+schema_version: '1.0'
+verification:
+  id: rev80-migration-step24
+  source_revision: 80
+  source_manifest_sha256: c76cbf4dcbafaf130fed79f9095cc8176c2d88a568007b4b850d947fb73266c0
+  target_revision: 81
+  status: passed_extended_legacy_migration
+  counts:
+    capabilities: 13
+    it_supports: 10
+    platform_services: 92
+    platforms: 35
+    relations: 385
+    sources: 14
+    products: 295
+    realization_rows: 738
+    positive_realizations: 430
+    relation_roles: 55
+    deployment_products: 295
+    openness_products: 295
+    retired_actual_platforms: 10
+    supporting_yaml: 92
+    derived_view_files: 10
+    provided_by_converted: 92
+    relation_roles_applied: 55
+  governance:
+    baseline_id: IT-FORMAGEMODELL-CONCEPTUAL-v1.1
+    freeze_status: frozen
+    change_classes:
+    - editorial
+    - evidence_update
+    - controlled_model_change
+    - breaking_model_change
+  maturity_summary:
+    conceptual_platforms_reviewed: 35
+    cohesive_platforms: 19
+    composite_platforms: 3
+    specialized_platforms: 12
+    conditional_platforms: 1
+    boundary_watch_platforms: 0
+    ready_for_freeze: 34
+    ready_with_condition: 1
+    decision: Den konceptuella plattformsstrukturen är formellt fryst som baseline
+      v1.0 i revision 69. PLT-032 behålls med organisationsspecifik verifieringspunkt;
+      ingen olöst boundary blockerar baseline.
+  checks:
+    source_preserved: true
+    supporting_byte_preserved: true
+    all_pls_have_provided_by: true
+    all_relation_roles_preserved: true
+    retired_actual_platforms_preserved: true
+    market_data_not_promoted_to_actual_state: true
+    actual_platform_layer_remains_inactive: true
+    information_loss_hidden: false
+  deferred_native_normalization:
+  - market product catalog normalization to Product objects
+  - can_realize materialization
+  - deployment/openness attribute materialization
+  - platform maturity attribute materialization
+  - derived-view regeneration
+  - full governance-log normalization

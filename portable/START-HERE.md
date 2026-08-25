@@ -6,6 +6,6 @@ Detta paket gör den aktuella Custom GPT-konfigurationen användbar i en vanlig 
 2. Använd filerna i `knowledge/` som samma primära Knowledge som i Custom GPT Builder.
 3. `supporting/` innehåller maskinläsbara modeller, scheman och mallar som kan användas när uppgiften kräver projektarbete eller validering; de får inte överstyra instruktionen eller Builder Knowledge.
 4. Behåll YAML som source of truth för EA-projekt enligt instruktionen och Knowledge-paketet.
-5. Om användaren bifogar ett befintligt EA Stödjare-projekt ska dess manifest, modellfiler, revision och källregister behandlas enligt projektets ordinarie integritets- och proveniensregler.
+5. Om användaren bifogar ett befintligt EA Stödjare-projekt ska profil och faktisk metamodell fastställas först: native v2, legacy v1, extended legacy eller unknown. Därefter följs projektets egna integritets-, proveniens-, informationslager- och change-control-regler.
 
 Användarens aktuella instruktioner har alltid företräde framför paketets arbetsregler.

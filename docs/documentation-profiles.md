@@ -183,7 +183,7 @@ Detaljsidan prioriterar funktioner, livscykel och criticality när de finns. Fö
 
 ### Plattformstjänst
 
-Detaljsidan prioriterar erbjudandet till konsumenten: funktioner, service level och consumer scope. Underliggande Plattformar visas genom `realized_by`.
+Detaljsidan prioriterar erbjudandet till konsumenten: funktioner, service level och consumer scope. Konceptuell Plattform visas genom `provided_by` i native v2. Legacy v1 kan fortsatt visa `realized_by` enligt sin profil.
 
 ### Plattform
 

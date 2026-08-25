@@ -1,0 +1,94 @@
+schema_version: '1.0'
+source_of_truth: false
+views:
+  - id: capability-service-platform
+    description: Visar vilka Plattformstjänster som stödjer en Förmåga och deras konceptuella Plattform.
+    source_of_truth: false
+    anchor: {object_types: [capability], alias: capability}
+    join_path:
+      - {relation: supports, direction: reverse, target_types: [platform_service], alias: platform_service}
+      - {relation: provided_by, direction: forward, target_types: [platform], alias: platform}
+    filters: []
+    sort: [capability.name, platform_service.name, platform.name]
+    presentation_semantics: {title: 'Förmåga → Plattformstjänst → Plattform'}
+    regeneration_policy: on_source_change
+    deduplicate_rows: true
+  - id: platform-service-capability
+    description: Visar en Plattforms tjänster och vilka Förmågor de stödjer.
+    source_of_truth: false
+    anchor: {object_types: [platform], alias: platform}
+    join_path:
+      - {relation: provided_by, direction: reverse, target_types: [platform_service], alias: platform_service}
+      - {relation: supports, direction: forward, target_types: [capability], alias: capability}
+    filters: []
+    sort: [platform.name, platform_service.name, capability.name]
+    presentation_semantics: {title: 'Plattform → Plattformstjänst → Förmåga'}
+    regeneration_policy: on_source_change
+    deduplicate_rows: true
+  - id: product-it-support
+    description: Visar verifierade potentiella realiseringar från Produkt till IT-stöd utan att påstå faktisk användning.
+    source_of_truth: false
+    anchor: {object_types: [product], alias: product}
+    join_path:
+      - {relation: can_realize, direction: forward, target_types: [it_support], alias: it_support}
+    filters: []
+    sort: [product.name, it_support.name]
+    presentation_semantics: {title: 'Produkt → IT-stöd', epistemic_note: 'Kan realisera; innebär inte vald eller faktisk användning.'}
+    regeneration_policy: on_source_change
+    deduplicate_rows: true
+  - id: product-service-platform
+    description: Visar verifierad potentiell Produktrealisering av Plattformstjänster och deras konceptuella Plattform.
+    source_of_truth: false
+    anchor: {object_types: [product], alias: product}
+    join_path:
+      - {relation: can_realize, direction: forward, target_types: [platform_service], alias: platform_service}
+      - {relation: provided_by, direction: forward, target_types: [platform], alias: platform}
+    filters: []
+    sort: [product.name, platform_service.name, platform.name]
+    presentation_semantics: {title: 'Produkt → Plattformstjänst → Plattform', epistemic_note: 'Marknads-/potentialvy, inte actual state.'}
+    regeneration_policy: on_source_change
+    deduplicate_rows: true
+  - id: platform-dependencies
+    description: Härleder plattformsberoenden via beroenden eller användning mellan Plattformstjänster.
+    source_of_truth: false
+    anchor: {object_types: [platform], alias: source_platform}
+    join_path:
+      - {relation: provided_by, direction: reverse, target_types: [platform_service], alias: source_service}
+      - {relation: [depends_on, uses], direction: forward, target_types: [platform_service], alias: target_service}
+      - {relation: provided_by, direction: forward, target_types: [platform], alias: target_platform}
+    filters:
+      - {kind: not_equal, left: source_platform.id, right: target_platform.id}
+    sort: [source_platform.name, target_platform.name, source_service.name]
+    presentation_semantics: {title: 'Härledda plattformsberoenden'}
+    regeneration_policy: on_source_change
+    deduplicate_rows: true
+  - id: shared-realization
+    description: Identifierar IT-stöd eller Plattformstjänster som kan realiseras av flera Produkter.
+    source_of_truth: false
+    anchor: {object_types: [product], alias: product}
+    join_path:
+      - {relation: can_realize, direction: forward, target_types: [it_support, platform_service], alias: target}
+    filters: []
+    aggregation:
+      group_by: [target.id, target.name, target.object_type]
+      metrics:
+        - {name: product_count, operation: count_distinct, field: product.id}
+    sort: [target.object_type, target.name]
+    presentation_semantics: {title: 'Delad realiseringspotential'}
+    regeneration_policy: on_source_change
+    deduplicate_rows: true
+  - id: product-coverage
+    description: Sammanfattar hur många IT-stöd och Plattformstjänster varje Produkt har källstödd can_realize-relation till.
+    source_of_truth: false
+    anchor: {object_types: [product], alias: product}
+    join_path:
+      - {relation: can_realize, direction: forward, target_types: [it_support, platform_service], alias: target}
+    filters: []
+    aggregation:
+      group_by: [product.id, product.name]
+      metrics:
+        - {name: covered_target_count, operation: count_distinct, field: target.id}
+    sort: [product.name]
+    presentation_semantics: {title: 'Produktcoverage', epistemic_note: 'Coverage av verifierad potential, inte faktisk organisationscoverage.'}
+    regeneration_policy: on_source_change
+    deduplicate_rows: true
