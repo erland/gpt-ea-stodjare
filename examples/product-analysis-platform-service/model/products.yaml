@@ -1,0 +1,39 @@
+schema_version: '1.0'
+object_type: product
+objects:
+- id: PRD-261
+  type: product
+  name: Atlas Runtime
+  description: Syntetisk marknadsprodukt för Plattformstjänst-analys.
+  status: approved
+  product_kind: platform_product
+  vendor: Atlas Systems
+  provenance:
+  - evidence_type: external
+    source_id: SRC-EXT-261
+    confidence: high
+    transferability: high
+- id: PRD-262
+  type: product
+  name: Nimbus App Service
+  description: Syntetisk marknadsprodukt för Plattformstjänst-analys.
+  status: approved
+  product_kind: service_product
+  vendor: Nimbus Cloud
+  provenance:
+  - evidence_type: external
+    source_id: SRC-EXT-262
+    confidence: high
+    transferability: high
+- id: PRD-263
+  type: product
+  name: Telemetry Sidecar
+  description: Syntetisk marknadsprodukt för Plattformstjänst-analys.
+  status: approved
+  product_kind: infrastructure_product
+  vendor: Telemetry Labs
+  provenance:
+  - evidence_type: external
+    source_id: SRC-EXT-263
+    confidence: high
+    transferability: medium

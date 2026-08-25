@@ -6,59 +6,69 @@ import argparse
 
 BUNDLES = {
     "01-domain-model.md": [
-        "docs/metamodel.md",
-        "docs/relations.md",
-        "knowledge/classification-guide.md",
+        "docs/v2-design-principles.md",
+        "docs/runtime-domain-contract-v2.md",
+        "docs/information-layers.md",
     ],
     "02-evidence-and-research.md": [
-        "docs/provenance-model.md",
+        "docs/runtime-evidence-contract-v2.md",
         "docs/source-policy.md",
         "knowledge/workflow-research.md",
         "knowledge/conflicts-and-uncertainty.md",
     ],
     "03-analysis-and-modeling-workflows.md": [
-        "knowledge/workflow-extraction.md",
-        "knowledge/workflow-model-design.md",
-        "knowledge/workflow-update.md",
-        "knowledge/workflow-usage.md",
+        "docs/runtime-workflows-v2.md",
+        "knowledge/workflow-project-open.md",
+        "knowledge/workflow-boundary-first.md",
+        "docs/v1-to-v2-migration-engine.md",
+        "docs/rev80-migration-verification.md",
     ],
     "04-quality-assurance.md": [
-        "knowledge/quality-object.md",
-        "knowledge/quality-model.md",
+        "docs/runtime-quality-contract-v2.md",
+        "knowledge/quality-metamodel-aware.md",
+        "knowledge/change-control.md",
     ],
     "05-project-and-output.md": [
-        "docs/yaml-model-format.md",
-        "docs/project-format.md",
-        "knowledge/project-status-rules.md",
-        "docs/documentation-profiles.md",
-        "docs/markdown-generation.md",
-        "docs/confluence-generation.md",
-        "docs/document-export.md",
-        "docs/structural-validation.md",
+        "docs/runtime-project-output-v2.md",
+        "docs/backward-compatibility-contract.md",
+        "docs/project-metamodel-format.md",
+        "docs/derived-views.md",
+        "docs/presentation-contract.md",
+        "docs/metamodel-aware-generation.md",
+        "docs/structural-validation-v2.md",
     ],
 }
 
 INDEX = """# EA Stödjare – Builder Knowledge index
 
-Detta är det genererade Knowledge-paketet för Custom GPT-versionen av **EA Stödjare**.
+Detta är det genererade Knowledge-paketet för Custom GPT-versionen av **EA Stödjare v2**. Paketet innehåller detaljreglerna som avsiktligt hålls utanför den kompakta Builder-instruktionen.
 
 ## Läsordning
 
-1. `01-domain-model.md` – objekttyper, relationer och klassificering.
-2. `02-evidence-and-research.md` – proveniens, källpolicy, research, konflikter och osäkerhet.
-3. `03-analysis-and-modeling-workflows.md` – extraktion, modellförslag, inkrementella uppdateringar och normala användarflöden.
-4. `04-quality-assurance.md` – kvalitetskontroll för objekt och hela modeller.
-5. `05-project-and-output.md` – YAML-format, projektformat, status, dokumentation och export.
+1. `01-domain-model.md` – v2-principer, objekttyper, relationer, klassificering, informationslager och extensions.
+2. `02-evidence-and-research.md` – proveniens, källpolicy, lagerseparation, research, konflikter och osäkerhet.
+3. `03-analysis-and-modeling-workflows.md` – projektöppning, extraktion, boundary-first, modellarbete, uppdatering, användning och migration.
+4. `04-quality-assurance.md` – objekt-/modell-QA, metamodellstyrd QA och change-control.
+5. `05-project-and-output.md` – kompatibilitet, projektmetamodell, projektformat, derived views, presentation, dokumentation och export.
 
 ## Styrhierarki
 
-Builder-instruktionen i `custom-gpt/instructions.md` styr övergripande beteende. Dessa Knowledge-filer innehåller detaljregler. Om en detalj här motsäger Builder-instruktionen ska Builder-instruktionen följas och konflikten flaggas.
+Builder-instruktionen i `custom-gpt/instructions.md` styr övergripande beteende. Projektets detekterade profil och faktiska metamodell styr projektsemantiken. Dessa Knowledge-filer innehåller detaljregler. Om en detalj här motsäger Builder-instruktionen ska Builder-instruktionen följas och konflikten flaggas.
+
+## Projektprofiler
+
+Vid projektarbete ska profilen fastställas innan modellsemantik används:
+
+- native v2 → projektmetamodell + basprofil + aktiva extensions,
+- legacy v1 → fryst v1-kompatibilitetsprofil,
+- extended legacy → rekonstruerad/projektspecifik legacy-semantik,
+- unknown → ingen automatisk v2-tolkning.
 
 ## Source of truth
 
 Filerna i denna katalog är **genererade distributionsartefakter**. De ska inte handredigeras. Ändra i stället motsvarande kanoniska dokument under `docs/` eller `knowledge/` och kör `scripts/build_builder_knowledge.py`.
 
-Maskinläsbara schemas ligger kvar under `schemas/` i projektet och används av validering. Builder Knowledge är optimerat för LLM-läsning och återger därför främst de mänskligt läsbara semantiska reglerna.
+Maskinläsbara schemas ligger kvar under `schemas/` i projektet och används av validering. Builder Knowledge är optimerat för LLM-läsning och återger därför främst mänskligt läsbara semantiska regler. Derived views och presentation är aldrig source of truth.
 """
 
 HEADER = """<!-- GENERERAD FIL: ändra inte manuellt. -->

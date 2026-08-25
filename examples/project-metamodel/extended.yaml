@@ -1,0 +1,151 @@
+schema_version: '2.0'
+project_metamodel:
+  id: extended-platform-project
+  version: '1.1'
+  description: Exempel som demonstrerar projektutvidgningar inspirerade av rev80 utan
+    att vara en migration av referensprojektet.
+  base_profile:
+    id: ea-stodjare-v2
+    version: '2.0'
+    compatibility_mode: native
+  object_types:
+    enabled:
+    - capability
+    - it_support
+    - platform_service
+    - platform
+    - product
+    - standard
+    disabled:
+    - driver
+    - goal
+    custom:
+    - type: organization_unit
+      display_name: Organisationsenhet
+      id_prefix: ORG-
+      definition: Organisatorisk enhet som är relevant för ansvar och konsumtionskontext
+        i just detta projekt.
+      provenance_required: true
+      status_values:
+      - candidate
+      - approved
+      - deprecated
+      - retired
+      attributes:
+      - name: name
+        type: string
+        required: true
+      - name: description
+        type: string
+        required: false
+  attribute_extensions:
+  - object_type: capability
+    attributes:
+    - name: in_scope
+      type: array
+      item_type: string
+      required: false
+    - name: out_of_scope
+      type: array
+      item_type: string
+      required: false
+  - object_type: platform
+    attributes:
+    - name: maturity_class
+      type: enum
+      value_set: platform_maturity
+      required: false
+  relations:
+    enabled:
+    - supports
+    - uses
+    - related_to
+    - provided_by
+    - can_realize
+    disabled:
+    - influences
+    custom:
+    - type: owned_by
+      display_name: Ägs av
+      definition: Anger ansvarig organisatorisk enhet i detta projekt.
+      endpoints:
+      - source:
+        - capability
+        - platform
+        target:
+        - organization_unit
+      provenance_required: true
+  relation_qualifiers:
+  - name: relation_role
+    applies_to:
+    - related_to
+    type: enum
+    value_set: relation_role
+    description: Kvalificerar en generell related_to-relation utan att skapa ny hård
+      relationstyp.
+  - name: realization_role
+    applies_to:
+    - can_realize
+    type: enum
+    value_set: realization_role
+  value_sets:
+  - id: relation_role
+    values:
+    - responsibility_boundary
+    - cross_capability_support
+    - lifecycle_dependency
+    - operational_dependency
+  - id: realization_role
+    values:
+    - primary
+    - partial
+    - supporting
+  - id: platform_maturity
+    values:
+    - cohesive_platform
+    - composite_platform
+    - specialized_platform
+    - conditional_platform
+    - boundary_watch
+  extensions:
+  - id: product-deployment
+    version: '1.0'
+    enabled: true
+  - id: product-openness
+    version: '1.0'
+    enabled: true
+  derived_views:
+  - id: capability-service-platform
+    description: Navigationsvy från förmåga via PLS till konceptuell Plattform.
+    source_of_truth: false
+    join_path:
+    - capability
+    - supports:inverse
+    - platform_service
+    - provided_by
+    - platform
+    filters: {}
+    sort:
+    - capability.name
+    - platform_service.name
+    presentation_semantics:
+      heading: Understöds av
+    regeneration_policy: on_source_change
+  presentation:
+    contract: reader-oriented-v1
+    object_display_pattern: '{name} ({id})'
+    labels:
+      capability.in_scope: Stödjer
+      capability.out_of_scope: Omfattar inte
+      capability_traceability: Understöds av
+      platform_to_services: Tillhandahåller
+  governance:
+    change_control: true
+    baseline_id: EXAMPLE-CONCEPTUAL-v1
+    freeze_status: frozen
+    baseline_version: '1.0'
+    retired_id_registry: governance/retired-ids.yaml
+    model_changelog: governance/model-changelog.yaml
+    metamodel_changelog: governance/metamodel-changelog.yaml
+  notes:
+  - Detta exempel visar formatets uttryckskraft; det är inte den kanoniska v2-standardmetamodellen.

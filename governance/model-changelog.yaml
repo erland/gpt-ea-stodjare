@@ -1,0 +1,123 @@
+schema_version: '1.0'
+log_type: model
+changes:
+- id: CHG-MOD-008
+  revision: 59
+  change_class: editorial
+  summary: 'Post-release cleanup: ta bort superseded RC-/arbetsartefakter och ge permanenta
+    regressionsgrindar funktionsbaserade namn utan semantikändring.'
+  status: applied
+  affected_paths:
+  - README.md
+  - PROJECT_STATUS.md
+  - docs/full-end-to-end-regression.md
+  - docs/final-release-review-v2.0.0.md
+  - docs/release-notes-v2.0.0.md
+  - scripts/run_full_e2e_regression.py
+  - scripts/run_workflow_conformance.py
+  - scripts/run_v2_ci_gate.py
+  - tests/release
+  - compatibility/reports
+  - project-manifest.json
+  - governance/change-control.yaml
+  baseline_before: EA-STODJARE-V2@2.0.0-r58
+  baseline_after: EA-STODJARE-V2@2.0.0-r59
+  notes:
+  - Ingen modell- eller metamodellsemantik ändrad.
+  - Legacy v1/rev80 och migrationsunderlag behålls som aktiv regressionsevidens.
+- id: CHG-MOD-007
+  revision: 58
+  change_class: editorial
+  summary: Frys tekniskt verifierad RC2/r57 som slutlig 2.0.0 och synka releaseartefakter
+    utan modell- eller metamodelländring.
+  status: applied
+  affected_paths:
+  - VERSION
+  - README.md
+  - PROJECT_STATUS.md
+  - CHANGELOG.md
+  - revision-log.md
+  - governance/change-control.yaml
+  - evals/runtime/runtime-eval-status.yaml
+  - docs/final-release-review-v2.0.0.md
+  - docs/release-notes-v2.0.0.md
+  baseline_before: EA-STODJARE-V2-RC2@2.0.0-rc2-r57
+  baseline_after: EA-STODJARE-V2@2.0.0-r58
+  notes:
+  - Extern LLM-runtime-eval fortsatt ej exekverad; residualrisk accepterad för final
+    release.
+  - Ingen modell- eller metamodellsemantik ändrad.
+- id: CHG-MOD-006
+  revision: 57
+  change_class: editorial
+  summary: Operationalisera extern runtime-eval med reproducerbar run-katalog, målkonfigurationsfingeravtryck,
+    separata råsvar/bedömningar och kompletthetsgrind.
+  status: applied
+  affected_paths:
+  - PROJECT_STATUS.md
+  - revision-log.md
+  - evals/runtime
+  - scripts/prepare_runtime_eval_run.py
+  - scripts/assemble_runtime_eval_results.py
+  - tests/evals/test_runtime_eval_execution_workflow.py
+  baseline_before: EA-STODJARE-V2-RC2@2.0.0-rc2-r56
+  baseline_after: EA-STODJARE-V2-RC2@2.0.0-rc2-r57
+  notes:
+  - Ingen modell- eller metamodellsemantik ändrad; RC2-baslinjen förblir fryst.
+  - Runtime-eval räknas fortsatt som ej exekverad tills verkliga GPT-svar har samlats
+    in och bedömts.
+- id: CHG-MOD-005
+  revision: 56
+  change_class: controlled_model_change
+  summary: RC-hardening utan metamodelländring; synkronisera Builder Knowledge och
+    korrigera runtime-eval/release assurance.
+  status: applied
+  affected_paths:
+  - VERSION
+  - PROJECT_STATUS.md
+  - CHANGELOG.md
+  - custom-gpt/knowledge
+  - scripts/build_builder_knowledge.py
+  - evals/runtime
+  - scripts/prepare_runtime_eval_packet.py
+  - scripts/score_runtime_eval_results.py
+  - scripts/run_rc_hardening_workflow_conformance.py
+  - compatibility/reports/rc-hardening-v2.0.0-rc2.yaml
+  - docs/release-candidate-review-v2.0.0-rc2.md
+  baseline_before: EA-STODJARE-V2-RC1@2.0.0-rc1-r55
+  baseline_after: EA-STODJARE-V2-RC2@2.0.0-rc2-r56
+- id: CHG-MOD-004
+  revision: 55
+  change_class: controlled_model_change
+  summary: Frys v2.0.0-rc1 som releasekandidat efter slutlig helhetsrevision och 18/18
+    Definition of Done.
+  status: applied
+  affected_paths:
+  - VERSION
+  - README.md
+  - PROJECT_STATUS.md
+  - CHANGELOG.md
+  - docs/release-candidate-review-v2.0.0-rc1.md
+  - docs/migration-guide-v1-to-v2.md
+  - docs/release-notes-v2.0.0-rc1.md
+  - compatibility/reports/step32-release-candidate.yaml
+  - tests/release/test_step32_release_candidate.py
+  baseline_before: EA-STODJARE-V2-DRAFT@2.0-draft-r54
+  baseline_after: EA-STODJARE-V2-RC1@2.0.0-rc1-r55
+- id: CHG-MOD-003
+  revision: 54
+  change_class: controlled_model_change
+  summary: Lägg till full end-to-end-regression och syntetiskt produktanalys-scenario
+    för Plattformstjänst inför releasekandidat.
+  status: applied
+  affected_paths:
+  - scripts/run_step31_e2e_regression.py
+  - examples/product-analysis-platform-service
+  - tests/compatibility/test_platform_service_product_analysis_scenario.py
+  - tests/compatibility/test_legacy_edit_continuity.py
+  - tests/scenarios/test_research_model_proposal_v2.py
+  - tests/release/test_step31_end_to_end_regression.py
+  - docs/full-end-to-end-regression.md
+  - scripts/run_v2_ci_gate.py
+  baseline_before: EA-STODJARE-V2-DRAFT@2.0-draft-r53
+  baseline_after: EA-STODJARE-V2-DRAFT@2.0-draft-r54

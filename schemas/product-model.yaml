@@ -1,0 +1,40 @@
+product_model:
+  version: '1.0'
+  object_type: product
+  id_prefix: PRD-
+  role: supporting
+  required_fields:
+  - id
+  - type
+  - name
+  - description
+  - status
+  - product_kind
+  - provenance
+  product_kind_values:
+  - application_product
+  - platform_product
+  - infrastructure_product
+  - service_product
+  - framework
+  - library
+  - component_library
+  - data_access_framework
+  - build_tool
+  - testing_framework
+  - developer_tool
+  - sdk
+  - appliance
+  - other
+  - unknown
+  optional_fields:
+  - vendor
+  - website
+  - lifecycle
+  - version
+  - market_notes
+  epistemic_rules:
+  - product describes a concrete market offering, not an organizational need
+  - product capability and market presence are external/market facts unless organization-specific evidence exists
+  - actual organizational use must not be inferred from can-realize capability or market presence
+  - product is not automatically a platform

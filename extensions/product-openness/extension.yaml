@@ -1,0 +1,48 @@
+schema_version: '2.0'
+extension:
+  id: ea.product-openness
+  version: '1.0'
+  namespace: ea.product_openness
+  description: Valfri extension för källstödd klassificering av ett Produkts öppenhets-/licensmodell.
+  compatible_base_profiles:
+  - id: ea-stodjare-v2
+    versions:
+    - '2.0'
+  requires: []
+  conflicts_with: []
+  contributions:
+    object_types: []
+    attribute_extensions:
+    - object_type: product
+      attributes:
+      - name: openness
+        type: enum
+        required: false
+        value_set: product_openness.openness
+        description: Produktens öppenhets-/licenskaraktär enligt verifierbar produkt-
+          eller leverantörsinformation.
+    relations: []
+    relation_qualifiers: []
+    value_sets:
+    - id: product_openness.openness
+      description: Öppenhetsklassificering återanvändbar från rev80.
+      values:
+      - open_source
+      - open_core
+      - source_available
+      - proprietary
+      - unknown
+    value_set_extensions: []
+    qa_rules:
+    - id: EXT_OPEN_001
+      severity: warning
+      description: Openness ska bygga på källstöd; unknown används när klassificeringen
+        inte kan verifieras.
+      applies_to:
+      - product
+      check:
+        source_supported_or_unknown: true
+    presentation:
+      labels:
+        product.openness: Öppenhet
+      object_display_patterns: {}

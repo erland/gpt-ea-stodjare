@@ -1,0 +1,49 @@
+schema_version: '1.0'
+relations:
+  - id: REL-251
+    type: supports
+    source: ITS-251
+    target: CAP-251
+    status: approved
+    provenance:
+      - evidence_type: explicit
+        source_id: SRC-251
+  - id: REL-252
+    type: can_realize
+    source: PRD-251
+    target: ITS-251
+    status: approved
+    realization_role: primary
+    verification_status: verified
+    notes: Täcker samtliga obligatoriska funktioner i scenariot.
+    provenance:
+      - evidence_type: external
+        source_id: SRC-EXT-251
+        confidence: high
+        transferability: high
+  - id: REL-253
+    type: can_realize
+    source: PRD-252
+    target: ITS-251
+    status: approved
+    realization_role: partial
+    verification_status: verified
+    notes: Täcker dokumentredigering och samarbete men scenariot bedömer språkstödet som ofullständigt.
+    provenance:
+      - evidence_type: external
+        source_id: SRC-EXT-252
+        confidence: high
+        transferability: high
+  - id: REL-254
+    type: can_realize
+    source: PRD-253
+    target: ITS-251
+    status: approved
+    realization_role: supporting
+    verification_status: verified
+    notes: Bidrar endast med språkfunktioner och behöver kombineras med annan produkt.
+    provenance:
+      - evidence_type: external
+        source_id: SRC-EXT-253
+        confidence: high
+        transferability: medium

@@ -1,0 +1,41 @@
+schema_version: '1.0'
+relations:
+- id: REL-262
+  type: can_realize
+  source: PRD-261
+  target: PLS-261
+  status: approved
+  realization_role: primary
+  verification_status: verified
+  notes: Täcker kärnfunktionerna i det syntetiska scenariot.
+  provenance:
+  - evidence_type: external
+    source_id: SRC-EXT-261
+    confidence: high
+    transferability: high
+- id: REL-263
+  type: can_realize
+  source: PRD-262
+  target: PLS-261
+  status: approved
+  realization_role: partial
+  verification_status: verified
+  notes: Täcker körning men med annan tjänsteavgränsning.
+  provenance:
+  - evidence_type: external
+    source_id: SRC-EXT-262
+    confidence: high
+    transferability: high
+- id: REL-264
+  type: can_realize
+  source: PRD-263
+  target: PLS-261
+  status: approved
+  realization_role: supporting
+  verification_status: verified
+  notes: Bidrar med observability men realiserar inte tjänsten ensam.
+  provenance:
+  - evidence_type: external
+    source_id: SRC-EXT-263
+    confidence: high
+    transferability: medium

@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ea-stodjare.local/schemas/derived-view.schema.json",
+  "title": "EA Stödjare v2 derived view catalog",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "source_of_truth", "views"],
+  "properties": {
+    "schema_version": {"type": "string", "const": "1.0"},
+    "source_of_truth": {"const": false},
+    "views": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/view"}
+    }
+  },
+  "$defs": {
+    "joinStep": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["relation", "direction", "alias"],
+      "properties": {
+        "relation": {
+          "oneOf": [
+            {"type": "string", "minLength": 1},
+            {"type": "array", "items": {"type": "string", "minLength": 1}, "minItems": 1, "uniqueItems": true}
+          ]
+        },
+        "direction": {"type": "string", "enum": ["forward", "reverse"]},
+        "target_types": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "alias": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"}
+      }
+    },
+    "aggregation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["group_by", "metrics"],
+      "properties": {
+        "group_by": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+        "metrics": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "operation", "field"],
+            "properties": {
+              "name": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"},
+              "operation": {"type": "string", "enum": ["count", "count_distinct"]},
+              "field": {"type": "string"}
+            }
+          }
+        }
+      }
+    },
+    "view": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "description", "source_of_truth", "anchor", "join_path", "sort", "regeneration_policy", "presentation_semantics"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^[a-z][a-z0-9-]*$"},
+        "description": {"type": "string", "minLength": 1},
+        "source_of_truth": {"const": false},
+        "anchor": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["object_types", "alias"],
+          "properties": {
+            "object_types": {"type": "array", "items": {"type": "string"}, "minItems": 1, "uniqueItems": true},
+            "alias": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"}
+          }
+        },
+        "join_path": {"type": "array", "items": {"$ref": "#/$defs/joinStep"}},
+        "filters": {"type": "array", "items": {"type": "object", "additionalProperties": true}, "default": []},
+        "aggregation": {"$ref": "#/$defs/aggregation"},
+        "sort": {"type": "array", "items": {"type": "string"}},
+        "presentation_semantics": {"type": "object", "additionalProperties": true},
+        "regeneration_policy": {"type": "string", "enum": ["always", "on_source_change", "manual_rebuild"]},
+        "deduplicate_rows": {"type": "boolean", "default": true}
+      }
+    }
+  }
+}

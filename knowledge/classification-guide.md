@@ -23,8 +23,8 @@ När en kandidat identifieras ska EA Stödjare pröva frågorna i ungefär denna
 3. Beskriver den **en varaktig styrande regel för hur arkitekturbeslut ska fattas**? → Princip.
 4. Beskriver den **vad organisationen eller IT behöver kunna åstadkomma**, oberoende av specifik organisation, process eller lösning? → Förmåga.
 5. Beskriver den **ett konkret informationssystem, applikationsstöd eller digitalt stöd**? → IT-stöd.
-6. Beskriver den **ett konsumtionsbart tekniskt erbjudande till IT-stöd eller utvecklingsteam**? → Plattformstjänst.
-7. Beskriver den **den tekniska grund/miljö som realiserar tjänsterna**? → Plattform.
+6. Beskriver den **ett stabilt tekniskt erbjudande eller funktionalitetskontrakt som kan konsumeras, oberoende av hur eller var det realiseras**? → Plattformstjänst.
+7. Beskriver den **den sammanhållna plattformsnivån** snarare än själva konsumtionskontraktet? → Plattform (v2-semantiken revideras fullt i steg 8).
 8. Beskriver den **ett normerande tekniskt eller metodmässigt krav/regelverk**? → Standard.
 9. Beskriver den **ett återanvändbart sätt att lösa ett återkommande arkitekturproblem**? → Lösningsmönster.
 10. Beskriver den **en generell rekommenderad arkitekturstruktur för ett område**? → Referensarkitektur.
@@ -156,6 +156,20 @@ Om ja talar det för förmåga.
 
 ---
 
+## 6.1 Förmågeboundary i v2
+
+Native v2 använder `in_scope`, `out_of_scope` och `consumer_scope` i stället för det äldre generella `scope`.
+
+- `in_scope` beskriver den positiva boundaryn. För IT-förmågor ska den uttrycka **vilket tekniskt möjliggörande** konsumenten får.
+- `out_of_scope` anger närliggande ansvar eller beteenden som uttryckligen inte ingår.
+- `consumer_scope` anger vilka konsumentgrupper förmågan avses betjäna när det är relevant.
+
+För IT-förmågor får `in_scope` inte bli en lista över produkter eller Plattformstjänster och inte heller beskriva verksamhetsfunktionalitet som om IT själv utförde den. Användarsynligt bör `in_scope` normalt rubriceras **Stödjer** och `out_of_scope` **Omfattar inte**.
+
+Legacy v1-fältet `scope` tolkas enligt v1-profilen. Det får inte automatiskt omvandlas till positiv eller negativ boundary när ordalydelsen är tvetydig.
+
+---
+
 ## 7. Förmåga kontra funktion
 
 Detta är en central gränsdragning i EA Stödjare v1.
@@ -279,47 +293,69 @@ Detta är en heuristik, inte en absolut regel. En tjänst kan ha flera konsument
 
 ### Plattformstjänst
 
-Beskriver **erbjudandet** och hur en teknisk förmåga görs konsumtionsbar.
+Beskriver **det konsumerbara tekniska erbjudandet eller funktionalitetskontraktet**: vad en lösning eller teknisk konsument behöver kunna få tillgång till utan att låsa realisering.
 
 ### Plattform
 
-Beskriver **den tekniska realiseringsgrunden** bakom erbjudandet.
+Beskriver **den produktneutrala konceptuella hemvisten** för ett sammanhållet kluster av Plattformstjänster.
 
 Exempel:
 
-- Plattformstjänst: Containerplattformstjänst
-- Plattform: OpenShift-baserad containerplattform
+- Plattformstjänst: Köra containeriserade workloads
+- Plattform: Containerplattform
 
 - Plattformstjänst: Meddelandetjänst
-- Plattform: IBM MQ-plattform
+- Plattform: Integrationsplattform, om meddelandeområdet faktiskt ingår i ett sammanhållet integrationsnära erbjudandeområde
 
 ### Test
 
-Fråga:
+Fråga först:
 
-> Skulle vi fortfarande behöva beskriva erbjudandet även om den underliggande tekniska produkten byttes?
+> Är detta det tekniska erbjudande som konsumenten behöver, eller en konceptuell gruppering av flera sådana erbjudanden?
 
-Om ja är erbjudandet sannolikt en Plattformstjänst och realiseringen en Plattform.
+Om det är konsumtionslöftet: **Plattformstjänst**. Om det är den produktneutrala sammanhållningen/hemvisten: **Plattform**.
 
-En Plattform kan tillhandahålla funktioner direkt, men det gör den inte automatiskt till en Plattformstjänst.
+En Plattform behöver inte motsvara en viss runtime, produkt eller faktisk organisatorisk serviceinstans. En singleton-plattform kan vara legitim när tjänstelöfte, livscykel, kompetens eller förvaltning motiverar självständighet.
+
+Legacy v1 använder en bredare Plattform-semantik som teknisk grund/realisering. Tillämpa därför inte denna v2-gränsdragning retroaktivt utan kontrollerad migration.
 
 ---
 
-## 12. Plattform kontra produkt/teknik
+## 12. Produkt kontra IT-stöd, Plattformstjänst och Plattform
 
-Produkt/teknik är inte en egen kärnobjekttyp i v1.
+Native v2 har **Produkt** som generell stödjande objekttyp.
 
-En Plattform är en organisationellt relevant teknisk realiseringsmiljö eller sammanhållen teknisk grund. Den kan bestå av en eller flera produkter/tekniker.
+### Produkt kontra IT-stöd
+
+- **IT-stöd** beskriver det produktoberoende digitala stöd organisationen behöver eller använder som stöd för förmågor, exempelvis **Ordbehandling**.
+- **Produkt** beskriver ett konkret marknadserbjudande som kan bedömas som möjlig realisering, exempelvis en viss ordbehandlingsprodukt.
+
+Testfråga: *Skulle behovet fortfarande finnas om den nuvarande produkten byttes ut?* Om ja är behovsobjektet normalt IT-stöd och produktnamnet Produkt.
+
+### Produkt kontra Plattformstjänst
+
+- **Plattformstjänst** beskriver vilket stabilt tekniskt erbjudande/funktionalitetskontrakt som behöver kunna konsumeras.
+- **Produkt** är en möjlig marknadsrealisering eller del av realisering.
+
+### Produkt kontra Plattform
+
+- **Plattform** är produktneutral konceptuell gruppering av Plattformstjänster.
+- **Produkt** är ett konkret marknadserbjudande.
 
 Exempel:
 
-- Kubernetes är en teknik.
-- Red Hat OpenShift är en produkt/plattformsteknik.
-- Organisationens "Containerplattform Produktion" kan vara ett EA-objekt av typen Plattform som använder OpenShift.
+- Kubernetes – Produkt/tekniskt byggblock om det modelleras som konkret marknads-/realiseringsreferens, inte automatiskt Plattform.
+- Red Hat OpenShift – Produkt, inte automatiskt Plattform.
+- Containerplattform – kan vara konceptuell Plattform när den grupperar ett stabilt tjänsteerbjudande oberoende av produkt.
 
-EA Stödjare ska inte automatiskt skapa ett Plattform-objekt för varje namngiven produkt i en inventering. Kandidaten måste ha relevant identitet och betydelse i organisationens arkitekturmodell.
+### Kvalitetsfrågor
 
-Produktinformation kan i v1 beskrivas som attribut, exempelvis `technology` eller i beskrivning/taggar om schemat medger det.
+- Beskriver objektet **vad organisationen behöver** eller **vad marknaden erbjuder**?
+- Skulle IT-stödet eller Plattformens syfte fortfarande vara meningsfullt om produkten byttes?
+- Finns evidens för faktisk organisationsanvändning, eller endast marknadskapacitet?
+- Är ett produktnamn felaktigt på väg att bli Plattform bara därför att produkten har bred funktionalitet?
+
+EA Stödjare får inte skapa eller slå ihop Plattformar enbart utifrån produktöverlapp. Samma Produkt kan senare visa sig bidra till flera IT-stöd eller Plattformstjänster utan att dessa därför är samma arkitekturobjekt.
 
 ---
 
@@ -537,3 +573,8 @@ HUR ett område generellt struktureras → Referensarkitektur
 ```
 
 När verkligheten inte passar modellen ska EA Stödjare markera modellfrågan i stället för att förvränga verkligheten för att få en klassificering.
+
+## Funktion med lokal identitet i v2
+
+Funktion är fortsatt **inte en global EA-objekttyp**. Native v2 tillåter ett valfritt lokalt funktions-ID under IT-stöd, Plattformstjänst eller Plattform när projektet behöver stabil referens inom moderobjektet, exempelvis för produktjämförelse eller coverage. Lokal identitet får inte tolkas som att Funktionen kan få globala relationer.
+

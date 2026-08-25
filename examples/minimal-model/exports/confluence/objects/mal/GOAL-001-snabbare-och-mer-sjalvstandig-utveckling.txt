@@ -1,0 +1,28 @@
+h1. Snabbare och mer självständig utveckling (GOAL-001)
+
+{info:title=Genererad artefakt}
+Genererad från kanonisk YAML · läge working · projektrevision 5
+{info}
+
+* *ID:* GOAL-001
+* *Objekttyp:* goal
+* *Status:* candidate
+
+h2. Beskrivning
+
+Operativa utvecklingsområden ska kunna utveckla och förändra IT-stöd med kortare ledtid.
+
+h2. Egenskaper
+
+* *Måltillstånd:* Utvecklingsområden kan använda gemensamma IT-förmågor utan projektspecifik grundetablering.
+
+h2. Relationer
+
+h3. Påverkar ({{influences}})
+* [Gemensamma behov realiseras som återanvändbara tjänster|Gemensamma behov realiseras som återanvändbara tjänster (PRN-001)] ({{PRN-001}})
+
+h3. Påverkas av ({{influences}})
+* [Kortare ledtid för digital utveckling|Kortare ledtid för digital utveckling (DRV-001)] ({{DRV-001}})
+
+h2. Proveniens
+* *derived* — källa: Exempelorganisationens strategiska inriktning ({{SRC-001}})

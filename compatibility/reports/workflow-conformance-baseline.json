@@ -1,0 +1,39 @@
+{
+  "format": "ea-stodjare-workflow-conformance",
+  "version": "1.0",
+  "evidence_level": "deterministic_workflow_e2e_not_llm_runtime",
+  "passed": 5,
+  "total": 5,
+  "cases": [
+    {
+      "id": "simple_native_v2",
+      "status": "passed",
+      "test_node": "tests/compatibility/test_project_metamodel_format.py::test_minimal_can_disable_unused_standard_types",
+      "output": ".                                                                        [100%]\n1 passed in 0.81s\n"
+    },
+    {
+      "id": "project_extension",
+      "status": "passed",
+      "test_node": "tests/extensions/test_extension_mechanism.py::test_resolver_merges_object_relation_enum_qa_and_presentation",
+      "output": ".                                                                        [100%]\n1 passed in 0.84s\n"
+    },
+    {
+      "id": "research_model_proposal",
+      "status": "passed",
+      "test_node": "tests/scenarios/test_research_model_proposal_v2.py::test_research_model_proposal_keeps_external_and_organizational_claims_separate",
+      "output": ".                                                                        [100%]\n1 passed in 0.03s\n"
+    },
+    {
+      "id": "legacy_v1_edit",
+      "status": "passed",
+      "test_node": "tests/compatibility/test_legacy_edit_continuity.py::test_legacy_v1_can_be_edited_without_migration",
+      "output": ".                                                                        [100%]\n1 passed in 1.49s\n"
+    },
+    {
+      "id": "v1_to_v2_migration",
+      "status": "passed",
+      "test_node": "tests/compatibility/test_minimal_v1_migration_e2e.py::test_minimal_v1_to_v2_end_to_end_semantic_equivalence",
+      "output": ".                                                                        [100%]\n1 passed in 15.66s\n"
+    }
+  ]
+}

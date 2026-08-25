@@ -1,0 +1,218 @@
+provenance_model:
+  name: EA Stödjare proveniens- och evidensmodell
+  version: "1.0-draft"
+  status: step-6-integrated
+  applies_to:
+    - architecture_objects
+    - relations
+  notes:
+    - Canonical instance serialization is defined in schemas/model-format.yaml.
+    - Lifecycle status and evidence type are separate concerns.
+    - External research must not be silently converted into organization-specific fact.
+
+evidence_types:
+  explicit:
+    display_name: explicit
+    definition: Information explicitly stated in the user's or organization's source material.
+    source_required: true
+    derived_from_allowed: false
+    rationale_required: false
+    confidence_allowed: true
+    transferability_allowed: false
+
+  derived:
+    display_name: härledd
+    definition: A structured conclusion inferred from source material and/or established EA objects.
+    source_or_derived_from_required: true
+    rationale_required: true
+    confidence_allowed: true
+    transferability_allowed: false
+
+  proposed:
+    display_name: föreslagen
+    definition: A recommendation or candidate introduced by EA Stödjare rather than asserted as established fact.
+    source_required: false
+    derived_from_allowed: true
+    rationale_required: true
+    confidence_allowed: true
+    transferability_allowed: false
+    recommended_initial_object_status: candidate
+
+  external:
+    display_name: extern
+    definition: Evidence originating from external research, standards, frameworks or comparable organizations.
+    source_required: true
+    derived_from_allowed: false
+    rationale_required: false
+    confidence_allowed: true
+    transferability_allowed: true
+
+confidence_values:
+  high:
+    definition: Strong and reasonably unambiguous support.
+  medium:
+    definition: Reasonable support exists but material alternative interpretations remain.
+  low:
+    definition: Weak or incomplete support; validation is recommended before relying on the conclusion.
+
+transferability_values:
+  high:
+    definition: External context and use case are closely comparable to the target organization.
+  medium:
+    definition: Relevant comparison with meaningful contextual differences.
+  low:
+    definition: Limited comparison value; use mainly as inspiration or a weak signal.
+
+source_types:
+  internal_document:
+    external: false
+  internal_model:
+    external: false
+  internal_decision:
+    external: false
+  user_statement:
+    external: false
+  law_or_regulation:
+    external: true
+  standard:
+    external: true
+  framework:
+    external: true
+  authority_guidance:
+    external: true
+  industry_guidance:
+    external: true
+  peer_organization:
+    external: true
+  vendor_documentation:
+    external: true
+  research_or_report:
+    external: true
+  web_source:
+    external: true
+  other:
+    external: null
+
+source_fields:
+  id:
+    required: true
+    type: string
+    pattern: "^SRC-(EXT-)?[0-9]{3,}$"
+  title:
+    required: true
+    type: string
+  source_type:
+    required: true
+    type: enum
+    values:
+      - internal_document
+      - internal_model
+      - internal_decision
+      - user_statement
+      - law_or_regulation
+      - standard
+      - framework
+      - authority_guidance
+      - industry_guidance
+      - peer_organization
+      - vendor_documentation
+      - research_or_report
+      - web_source
+      - other
+  organization:
+    required: false
+    type: string
+  url:
+    required: false
+    type: string
+  publication_date:
+    required: false
+    type: date
+  accessed_at:
+    required: false
+    type: datetime
+  version:
+    required: false
+    type: string
+  notes:
+    required: false
+    type: string
+
+provenance_fields:
+  evidence_type:
+    required: true
+    type: enum
+    values: [explicit, derived, proposed, external]
+  source_id:
+    required: conditional
+    type: source_reference
+  reference:
+    required: false
+    type: string
+  quote:
+    required: false
+    type: string
+  derived_from:
+    required: conditional
+    type: reference_list
+  rationale:
+    required: conditional
+    type: string
+  confidence:
+    required: false
+    type: enum
+    values: [high, medium, low]
+  transferability:
+    required: false
+    type: enum
+    values: [high, medium, low]
+  recorded_at:
+    required: false
+    type: datetime
+  notes:
+    required: false
+    type: string
+
+validation_rules:
+  - id: PROV-V001
+    rule: evidence_type_defined
+    severity: error
+  - id: PROV-V002
+    rule: referenced_source_exists
+    severity: error
+  - id: PROV-V003
+    rule: derived_from_references_exist
+    severity: error
+  - id: PROV-V004
+    rule: explicit_requires_source
+    severity: error
+  - id: PROV-V005
+    rule: derived_requires_source_or_derived_from
+    severity: error
+  - id: PROV-V006
+    rule: derived_requires_rationale
+    severity: error
+  - id: PROV-V007
+    rule: proposed_requires_rationale
+    severity: error
+  - id: PROV-V008
+    rule: external_requires_external_source
+    severity: error
+  - id: PROV-V009
+    rule: confidence_value_allowed
+    severity: error
+  - id: PROV-V010
+    rule: transferability_value_allowed
+    severity: error
+  - id: PROV-V011
+    rule: transferability_only_for_external_evidence
+    severity: error
+  - id: PROV-V012
+    rule: material_object_or_relation_has_provenance
+    severity: error
+  - id: PROV-V013
+    rule: external_evidence_not_silently_promoted_to_internal_fact
+    severity: error
+  - id: PROV-V014
+    rule: proposed_object_should_normally_start_as_candidate
+    severity: warning

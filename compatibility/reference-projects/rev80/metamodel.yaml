@@ -1,0 +1,234 @@
+reference_project:
+  id: it-formagemodell-del3-rev80
+  compatibility_class: extended_legacy
+  source_revision: 80
+  source_manifest_sha256: c76cbf4dcbafaf130fed79f9095cc8176c2d88a568007b4b850d947fb73266c0
+  base_profile: ea-stodjare-v1
+  reconstruction_version: '1.0'
+  status: reference_reconstruction
+  purpose: Maskinläsbar rekonstruktion av den faktiskt använda modellsemantiken i rev80 för kompatibilitet och senare migration.
+    Innehåller inte rev80:s kanoniska verksamhetsdata.
+detection_signature:
+  manifest:
+    schema_version: '1.0'
+    revision: 80
+    root_directory: it-formagemodell-del3-rev80
+    file_count: 245
+  required_paths:
+  - model/capabilities.yaml
+  - model/it-support.yaml
+  - model/platform-services.yaml
+  - model/platforms.yaml
+  - model/relations.yaml
+  - supporting/market-product-catalog.yaml
+  - supporting/model-freeze-baseline.yaml
+  - supporting/documentation-presentation-model.yaml
+  canonical_counts_at_reference:
+    capabilities: 13
+    it_supports: 10
+    platform_services: 92
+    platforms: 35
+    relations: 385
+    sources: 14
+    market_products: 295
+canonical_core:
+  base_semantics: ea-stodjare-v1 with project-level semantic extensions
+  object_types:
+    capability:
+      id_pattern: CAP-IT-*
+      active_count: 13
+      extensions:
+      - in_scope
+      - out_of_scope
+      - consumer_scope
+      note: IT-förmågor använder explicit boundary. in_scope presenteras läsarorienterat som Stödjer.
+    it_support:
+      active_count: 10
+      embedded:
+      - functions
+    platform_service:
+      active_count: 92
+      embedded:
+      - functions
+      semantic_override: Realiseringsneutralt stabilt tekniskt erbjudande/funktionalitetskontrakt; inte normativt central
+        eller gemensam runtime.
+    platform:
+      active_count: 35
+      semantic_override: Aktiva PLT är konceptuella, produktneutrala plattformar som grupperar PLS.
+  relation_model:
+    active_types:
+      related_to: 71
+      supports: 119
+      realized_by: 92
+      uses: 103
+    source_target_patterns:
+    - type: realized_by
+      source_type: platform_service
+      target_type: platform
+      count: 92
+    - type: related_to
+      source_type: capability
+      target_type: capability
+      count: 55
+    - type: related_to
+      source_type: it_support
+      target_type: it_support
+      count: 1
+    - type: related_to
+      source_type: it_support
+      target_type: platform_service
+      count: 1
+    - type: related_to
+      source_type: platform_service
+      target_type: platform_service
+      count: 14
+    - type: supports
+      source_type: it_support
+      target_type: capability
+      count: 7
+    - type: supports
+      source_type: platform_service
+      target_type: capability
+      count: 112
+    - type: uses
+      source_type: it_support
+      target_type: it_support
+      count: 1
+    - type: uses
+      source_type: it_support
+      target_type: platform_service
+      count: 53
+    - type: uses
+      source_type: platform_service
+      target_type: platform_service
+      count: 49
+    semantic_overrides:
+      realized_by: I rev80 används PLS→PLT som konceptuell hemvist/tillhandahålls inom; detta ska inte automatiskt tolkas
+        som konkret teknisk realisering.
+      supports: Möjliggörande/spårbarhet; innebär inte att källobjektet är obligatorisk komponent i varje användning.
+project_extensions:
+  capability_boundary:
+    active: true
+    fields:
+    - in_scope
+    - out_of_scope
+    - consumer_scope
+    canonical_location: model/capabilities.yaml
+  market_product_reference:
+    active: true
+    entity_id_pattern: MKT-PRD-*
+    reference_count: 295
+    canonical_for_organization: false
+    primary_files:
+    - supporting/market-product-catalog.yaml
+    - supporting/market-product-kind-model.yaml
+  product_service_realization:
+    active: true
+    canonical_for_organization: false
+    primary_file: supporting/market-product-service-realization.yaml
+    roles:
+    - native_primary
+    - native_optional
+    - integrated
+    - supporting
+    - not_supported
+    note: Marknadspotential/produktkapacitet; inte bevis på faktisk organisationsanvändning.
+  product_deployment:
+    active: true
+    primary_file: supporting/market-product-deployment-model.yaml
+  product_openness:
+    active: true
+    primary_file: supporting/market-product-openness-model.yaml
+  relation_roles:
+    active: true
+    primary_file: supporting/relation-roles.yaml
+    roles:
+      responsibility_boundary: 24
+      cross_capability_support: 21
+      information_dependency: 2
+      lifecycle_dependency: 2
+      operational_dependency: 6
+    canonical_relations_remain_in: model/relations.yaml
+  platform_maturity:
+    active: true
+    primary_file: supporting/platform-structure-maturity-assessment.yaml
+    classes:
+    - cohesive_platform
+    - composite_platform
+    - specialized_platform
+    - conditional_platform
+    - boundary_watch
+  model_governance:
+    active: true
+    files:
+    - supporting/model-freeze-baseline.yaml
+    - supporting/model-change-control.yaml
+    baseline_id: IT-FORMAGEMODELL-CONCEPTUAL-v1.1
+    freeze_status: frozen
+    change_classes:
+    - editorial
+    - evidence_update
+    - controlled_model_change
+    - breaking_model_change
+  derived_views:
+    active: true
+    source_of_truth: false
+    path_pattern: supporting/query-*.yaml
+    rule: Regenereras från kanonisk modell/supporting evidence; får inte korrigera kanonisk data bakvägen.
+  presentation_contract:
+    active: true
+    primary_file: supporting/documentation-presentation-model.yaml
+    reader_id_pattern: Namn (ID)
+    key_labels:
+      capability.in_scope: Stödjer
+      capability.out_of_scope: Omfattar inte
+      capability_traceability: Understöds av
+      platform_to_services: Tillhandahåller
+retired_or_noncanonical_experiments:
+  actual_platform_layer:
+    active: false
+    assessment_file: supporting/actual-platform-offering-assessment.yaml
+    registry_file: supporting/retired-actual-platform-candidates.yaml
+    retired_candidate_count: 10
+    rule: Produkt-/teknikevidens räcker inte för att skapa ett separat faktiskt plattformserbjudande. Rev80 har 0 aktiva actual-platform-objekt
+      efter sanity review.
+epistemic_layers:
+  conceptual_model:
+    canonical: true
+    paths:
+    - model/
+  market_reference:
+    canonical_for_organization: false
+    paths:
+    - supporting/market-*
+    - supporting/public-platform-product-inventory.yaml
+  actual_organization_state:
+    fully_modeled: false
+    note: Faktisk produktanvändning/plattformserbjudande får inte infereras från marknadsdata.
+  derived_presentation:
+    canonical: false
+    paths:
+    - supporting/query-*
+    - docs/*oversikt*
+compatibility_rules:
+- id: REV80-C001
+  rule: Läs rev80 som v1-baserat extended legacy project; applicera inte framtida v2-standardsemantik utan explicit migration.
+- id: REV80-C002
+  rule: Bevara CAP in_scope/out_of_scope och consumer_scope som aktiv projektextension.
+- id: REV80-C003
+  rule: Tolka aktiva PLT som konceptuella plattformar.
+- id: REV80-C004
+  rule: Tolka PLS realized_by PLT som konceptuell hemvist i rev80, inte som faktisk produktrealisering.
+- id: REV80-C005
+  rule: Produktdata i supporting/ är marknadsreferens och får inte uppgraderas till organisationsfakta utan evidens.
+- id: REV80-C006
+  rule: Actual-platform-kandidaterna är pensionerade experiment och ska inte återaktiveras vid öppning eller migration.
+- id: REV80-C007
+  rule: Derived query/presentation views är inte source of truth.
+- id: REV80-C008
+  rule: Baseline/freeze och stable-ID/change-control ska respekteras vid fortsatt arbete.
+migration_notes_for_future_steps:
+- provided_by kan senare ersätta rev80:s konceptuella PLS realized_by PLT, men endast genom explicit migrering med rapport.
+- Marknadsprodukter kan senare mappas till v2 Product utan att påstå actual usage.
+- Deployment, openness och platform maturity lämpar sig som optional extensions.
+- Relation roles och derived views bör bevaras som explicit extension/reporting semantics.

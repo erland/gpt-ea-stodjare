@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ea-stodjare.local/schemas/retired-id-registry.schema.json",
+  "title": "EA Stödjare retired ID registry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "policy", "retired_ids"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "policy": {"const": "retire_never_reuse"},
+    "retired_ids": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "entity_kind", "retired_at_revision", "reason"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "entity_kind": {"enum": ["object", "relation", "source", "market_assertion", "actual_assertion", "derived_view", "extension", "other"]},
+          "object_type": {"type": ["string", "null"]},
+          "retired_at_revision": {"type": "integer", "minimum": 1},
+          "replacement_id": {"type": ["string", "null"]},
+          "reason": {"type": "string", "minLength": 1},
+          "change_ref": {"type": ["string", "null"]}
+        }
+      }
+    }
+  }
+}

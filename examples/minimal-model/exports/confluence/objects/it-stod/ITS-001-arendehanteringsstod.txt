@@ -1,0 +1,30 @@
+h1. Ärendehanteringsstöd (ITS-001)
+
+{info:title=Genererad artefakt}
+Genererad från kanonisk YAML · läge working · projektrevision 5
+{info}
+
+* *ID:* ITS-001
+* *Objekttyp:* it_support
+* *Status:* approved
+
+h2. Beskrivning
+
+Digitalt IT-stöd för registrering och hantering av verksamhetsärenden.
+
+h2. Funktioner
+
+* {"name": "Registrera ärende"}
+* {"name": "Tilldela ärende"}
+* {"name": "Följa ärendestatus"}
+
+h2. Relationer
+
+h3. Använder ({{uses}})
+* [Containerplattformstjänst|Containerplattformstjänst (PLS-001)] ({{PLS-001}})
+
+h3. Stödjer ({{supports}})
+* [Hantera ärenden digitalt|Hantera ärenden digitalt (CAP-001)] ({{CAP-001}})
+
+h2. Proveniens
+* *explicit* — källa: Exempelorganisationens befintliga IT-inventering ({{SRC-002}}); referens: Systempost 17

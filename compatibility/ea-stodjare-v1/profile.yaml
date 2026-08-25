@@ -1,0 +1,133 @@
+compatibility_profile:
+  id: ea-stodjare-v1
+  display_name: EA Stödjare v1 legacy compatibility profile
+  profile_version: '1.0'
+  source_release: 1.0.0-rc1
+  compatibility_class: legacy_v1
+  status: frozen_snapshot
+  immutable_semantics: true
+  purpose: Tolkar och redigerar legacy v1-projekt med v1-semantik även när huvudmodellen utvecklas i v2.
+detection:
+  manifest:
+    format: ea-stodjare-project
+    format_version: '1.0'
+    model_format_version: '1.0'
+    metamodel_version: '1.0'
+    relation_model_version: '1.0'
+    provenance_model_version: '1.0'
+  canonical_model_root_default: model
+  serialization: YAML
+  confidence: high_when_all_manifest_markers_match
+  fallback_signals:
+  - model/ innehåller v1:s fasta objektfiler
+  - objekt-ID följer v1-prefix
+  - schema_version är 1.0 i modellfiler
+  - relations.yaml använder v1:s relationstyper
+  rule: Om markörerna inte är entydiga ska projektet inte tvingas in i v1-profilen utan inventeras som unknown/extended legacy.
+snapshot_files:
+  schemas/object-types.yaml:
+    sha256: 02f27fd0e6bc0271382c2144f95017b133dbc49a3b168b57125a5aa928fd0773
+  schemas/relations.yaml:
+    sha256: 6b114b7e3f92c65e39a898a992794996fc79718f14f6233ba8b1d6cce364fc5f
+  schemas/provenance.yaml:
+    sha256: 0b4817606295f35705a4ead49ca5a20d76ee612e8bf56ed6d58c6a2c5c3b3eff
+  schemas/model-format.yaml:
+    sha256: 567243de6b9f106507178c13fb0f8952243c7344d240d7428889d41786e0bf67
+  schemas/project-manifest.schema.json:
+    sha256: eef9cc39667f346ee70cd9976d4d7590005fc4954e0cb13474f0111ed3076657
+canonical_file_structure:
+  object_files:
+    drivers.yaml: driver
+    goals.yaml: goal
+    principles.yaml: principle
+    capabilities.yaml: capability
+    it-support.yaml: it_support
+    platform-services.yaml: platform_service
+    platforms.yaml: platform
+    standards.yaml: standard
+    solution-patterns.yaml: solution_pattern
+    reference-architectures.yaml: reference_architecture
+  special_files:
+    sources.yaml: source_registry
+    relations.yaml: relation_registry
+identity:
+  object_id_prefixes:
+    driver: DRV-
+    goal: GOAL-
+    principle: PRN-
+    capability: CAP-
+    it_support: ITS-
+    platform_service: PLS-
+    platform: PLT-
+    standard: STD-
+    solution_pattern: PAT-
+    reference_architecture: RA-
+  relation_prefix: REL-
+  source_id_patterns:
+  - SRC-[0-9]{3,}
+  - SRC-EXT-[0-9]{3,}
+  stable_id_rule: ID behålls vid namnändring när semantisk identitet är oförändrad.
+lifecycle:
+  object_and_relation_statuses:
+  - candidate
+  - approved
+  - deprecated
+  - retired
+  project_lifecycle_statuses:
+  - draft
+  - active
+  - review
+  - approved
+  - archived
+provenance_summary:
+  evidence_types:
+  - explicit
+  - derived
+  - proposed
+  - external
+  confidence_values:
+  - high
+  - medium
+  - low
+  transferability_values:
+  - high
+  - medium
+  - low
+  material_objects_and_relations_require_provenance: true
+  external_must_not_be_silently_promoted_to_internal_fact: true
+legacy_semantic_guards:
+- id: V1-G001
+  concept: capability.scope
+  rule: scope är ett legitimt v1-attribut. Tolka eller migrera inte automatiskt till in_scope/out_of_scope.
+- id: V1-G002
+  concept: platform_service
+  rule: Använd v1-definitionen i snapshoten; applicera inte v2:s realiseringsneutrala definition bakåt utan migration.
+- id: V1-G003
+  concept: platform
+  rule: V1-platform har bredare teknisk grund/realisering-semantik. Anta inte automatiskt konceptuell v2-Plattform.
+- id: V1-G004
+  concept: realized_by
+  rule: PLS→Platform betyder v1:s realiseras av. Byt inte automatiskt till provided_by.
+- id: V1-G005
+  concept: product
+  rule: Product/technology är uttryckligen utanför v1-kärnan. Projektspecifika produktmodeller gör projektet till extended
+    legacy.
+- id: V1-G006
+  concept: function
+  rule: Funktion är embedded på IT-stöd, Plattformstjänst och Plattform och saknar global identitet i v1.
+editing_policy:
+  legacy_mode:
+  - Respektera snapshotens v1-semantik.
+  - Skapa nya objekt och relationer enligt v1-format om användaren inte valt migration.
+  - Skriv inte v2-only-attribut i v1-modellen utan explicit format-/metamodelländring.
+  - Bevara stabila ID:n och befintlig proveniens.
+  - Dokumentera om önskad funktion kräver project extension eller migration.
+migration_policy:
+  automatic_rewrite_forbidden_for:
+  - capability.scope
+  - platform semantic reinterpretation
+  - platform_service semantic reinterpretation
+  - realized_by to provided_by
+  - project-specific product models
+  original_project_overwrite_default: false
+  migration_requires_report: true

@@ -1,0 +1,50 @@
+schema_version: '1.0'
+regression: v2-full-end-to-end
+revision: 59
+executed_at: '2026-08-25T23:00:00+02:00'
+status: passed
+execution_mode: grouped_equivalent_of_gate
+scenarios:
+- id: simple_v2_project
+  status: passed
+- id: advanced_v2_extensions
+  status: passed
+- id: open_v1_without_migration
+  status: passed
+- id: continue_editing_v1
+  status: passed
+- id: migrate_v1
+  status: passed
+- id: open_rev80
+  status: passed
+- id: migrate_rev80
+  status: passed
+- id: product_analysis_it_support
+  status: passed
+- id: product_analysis_platform_service
+  status: passed
+- id: research_model_proposal
+  status: passed
+- id: derived_views
+  status: passed
+- id: export
+  status: passed
+verification_groups:
+- name: v2_extensions_and_legacy_editing
+  result: 26/26 passed
+- name: migration_rev80_and_product_analysis
+  result: 15/15 passed
+- name: research_derived_and_full_e2e_contract
+  result: 10/10 passed
+- name: export_smoke
+  result: Markdown/Confluence/DOCX/PDF passed
+- name: eval_builder_release_validator
+  result: 13/13 passed
+structural_validation:
+  errors: 0
+  warnings: 0
+notes:
+- Den sammanhållna grinden finns i scripts/run_full_e2e_regression.py.
+- Lokalt kördes samma tolv scenarier i mindre grupper eftersom dokumentexport gör
+  en enda körning längre än verktygets körfönster.
+- Full pytest ligger fortsatt kvar som obligatorisk CI/release-grind via --full-pytest.

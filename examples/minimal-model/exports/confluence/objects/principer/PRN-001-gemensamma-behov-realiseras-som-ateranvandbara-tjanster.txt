@@ -1,0 +1,34 @@
+h1. Gemensamma behov realiseras som återanvändbara tjänster (PRN-001)
+
+{info:title=Genererad artefakt}
+Genererad från kanonisk YAML · läge working · projektrevision 5
+{info}
+
+* *ID:* PRN-001
+* *Objekttyp:* principle
+* *Status:* candidate
+
+h2. Beskrivning
+
+Återkommande tekniska behov bör erbjudas gemensamt när det ger tydlig nytta och minskar duplicering.
+
+h2. Egenskaper
+
+* *Principformulering:* Gemensamma tekniska behov ska i första hand mötas genom återanvändbara plattformstjänster.
+* *Motivering:* Minskar dubbelarbete och ger en enhetlig konsumtionsmodell.
+* *Implikationer:* Plattformstjänster behöver tydliga erbjudanden och ansvar., Operativa IT-stöd bör återanvända gemensamma tjänster där de passar.
+
+h2. Relationer
+
+h3. Ligger till grund för ({{derived_from}})
+* [Standardiserad applikationskörning|Standardiserad applikationskörning (PAT-001)] ({{PAT-001}})
+
+h3. Påverkas av ({{influences}})
+* [Snabbare och mer självständig utveckling|Snabbare och mer självständig utveckling (GOAL-001)] ({{GOAL-001}})
+
+h3. Styr ({{governed_by}})
+* [Containerplattformstjänst|Containerplattformstjänst (PLS-001)] ({{PLS-001}})
+
+h2. Proveniens
+* *proposed*
+* *external* — källa: Extern referens för standardiserade plattformstjänster ({{SRC-EXT-001}}); referens: Exempel på standardiserade interna plattformserbjudanden

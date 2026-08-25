@@ -1,0 +1,18 @@
+format: ea-stodjare-v2-eval-risk-coverage
+version: '1.0'
+source_plan: docs/v2-development-plan.md#steg-28--revidera-semantiska-evals
+coverage:
+  v1_project_open: EVAL-016
+  extended_legacy_project: EVAL-017
+  project_metamodel_override: EVAL-018
+  product_vs_it_support: EVAL-019
+  product_vs_platform: EVAL-020
+  can_realize_it_support: EVAL-021
+  can_realize_platform_service: EVAL-022
+  provided_by: EVAL-023
+  legacy_realized_by_ambiguity: EVAL-024
+  embedded_function_coverage: EVAL-025
+  conceptual_market_actual_separation: EVAL-026
+  derived_view_not_source_of_truth: EVAL-027
+  project_specific_extension: EVAL-028
+  metamodel_change_control: EVAL-029

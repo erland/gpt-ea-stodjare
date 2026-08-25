@@ -1,0 +1,83 @@
+review_workflows:
+  name: EA Stödjare boundary-first modeling reviews
+  version: 2.0-draft
+  source_of_truth: false
+  principles:
+    - reviews_are_diagnostic_not_mutating
+    - boundary_before_product_match
+    - alternatives_before_merge_or_split
+    - evidence_before_canonical_change
+    - conceptual_market_actual_layers_remain_separate
+  result_levels: [pass, review, blocked]
+  workflows:
+    boundary_review:
+      applies_to: [capability, it_support, platform_service, platform]
+      purpose: Kontrollera att objektets positiva och negativa gräns är begriplig, stabil och på rätt abstraktionsnivå innan realisering eller produktmatchning diskuteras.
+      questions:
+        - Vilket konsumentvärde eller tekniskt möjliggörande avgränsar objektet?
+        - Vad ligger uttryckligen utanför gränsen?
+        - Blandas ansvar, process, produkt eller implementation in i definitionen?
+        - Finns närliggande objekt vars gräns överlappar väsentligt?
+        - Är gränsen begriplig utan kännedom om en specifik produkt?
+      evidence_required_for_change: true
+      qa_links: [QM-BND-001, QM-BND-002, QM-BND-003]
+
+    decomposition_review:
+      applies_to: [capability, it_support, platform_service, platform]
+      purpose: Bedöm om ett objekt innehåller flera självständiga ansvar eller erbjudanden som bör delas upp.
+      questions:
+        - Finns flera separata konsumentlöften eller livscykler i samma objekt?
+        - Kan delarna förändras, ägas eller konsumeras oberoende?
+        - Är uppdelningen semantiskt stabil eller bara tekniskt betingad?
+        - Skulle en uppdelning minska överlapp utan att skapa artificiell granularitet?
+      decision_options: [keep, split_candidate, needs_evidence]
+      evidence_required_for_change: true
+      qa_links: [QM-BND-004, QM-DUP-002]
+
+    merge_review:
+      applies_to: [capability, it_support, platform_service, platform]
+      purpose: Bedöm om två eller flera objekt egentligen beskriver samma stabila ansvar eller erbjudande.
+      questions:
+        - Har objekten samma konsumentvärde och huvudsakliga boundary?
+        - Är skillnaden endast namn, produkt, implementation eller historik?
+        - Har objekten olika livscykel, ansvar eller konsumentgrupp som motiverar separation?
+        - Skulle en sammanslagning förlora viktig semantik?
+      decision_options: [keep_separate, merge_candidate, needs_evidence]
+      evidence_required_for_change: true
+      qa_links: [QM-BND-005, QM-DUP-001, QM-DUP-002]
+
+    singleton_sanity_review:
+      applies_to: [platform]
+      purpose: Verifiera att en Plattform med en enda Plattformstjänst har en legitim konceptuell boundary och inte bara speglar en produkt.
+      questions:
+        - Finns ett självständigt konceptuellt tjänstelöfte som motiverar Plattformen?
+        - Är Plattformens identitet produktneutral?
+        - Kan Plattformstjänsten rimligen få annan realisering över tid utan att Plattformens identitet ändras?
+        - Skapar Plattformen analysvärde utöver att återge samma namn som tjänsten eller produkten?
+      decision_options: [valid_singleton, collapse_candidate, needs_evidence]
+      evidence_required_for_change: true
+      qa_links: [QM-BND-006, QO-PLT-006, QO-PLT-007]
+
+    product_stress_test:
+      applies_to: [it_support, platform_service, platform]
+      purpose: Testa om modellens semantik håller när flera alternativa produkter eller realiseringsmönster introduceras.
+      questions:
+        - Om nuvarande produkt ersätts, består objektets identitet och boundary?
+        - Kan flera produkter konkurrera om att realisera samma behov eller tjänst utan att modellen måste döpas om?
+        - Har produktfunktioner felaktigt skrivits in som arkitekturens egen definition?
+        - Skiljs can_realize från faktisk användning och faktisk organisationsstatus?
+      decision_options: [stable, product_coupled_review, needs_evidence]
+      evidence_required_for_change: false
+      qa_links: [QM-BND-007, QO-PRD-004, QO-PRD-005, QO-PLT-008]
+
+    composition_sanity_review:
+      applies_to: [platform_service, platform]
+      purpose: Kontrollera att komposition av flera produkter, komponenter eller tjänster inte skapar felaktig identitet eller otydlig boundary.
+      questions:
+        - Är kompositionen ett stabilt erbjudande snarare än en tillfällig lösningsdesign?
+        - Har komponenterna egna livscykler utan att behöva bli egna Plattformar?
+        - Är relationerna mellan delar och erbjudande uttryckta utan att göra implementation till konceptuell source of truth?
+        - Går kompositionen att förändra utan att konsumentlöftet byter identitet?
+      decision_options: [valid_composition, decomposition_candidate, needs_evidence]
+      evidence_required_for_change: true
+      qa_links: [QM-BND-008, QM-CON-002]

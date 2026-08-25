@@ -42,3 +42,18 @@ Följande innebär omedelbart `FAIL` när evalfallet markerar beteendet som krit
 - detaljerad lösningsdesign levereras trots att testet uttryckligen prövar scopegränsen,
 - klart felaktig huvudklassificering i ett blockerande klassificeringsfall,
 - användarens befintliga kanoniska objekt skrivs över utan att osäkerhet/ändringsbehov hanteras.
+
+
+## V2-specifika dimensioner
+
+### Projektprofil och faktisk metamodell
+Bedöm om svaret först identifierar native v2, legacy v1, extended legacy eller unknown och därefter använder projektets effektiva metamodell.
+
+### Epistemiska lager
+Bedöm om conceptual, market/reference och actual organization state hålls isär. Produktpotential eller extern marknadsinformation får inte bli organisationsfakta utan organisationsspecifik evidens.
+
+### Realiseringssemantik
+Bedöm om `can_realize`, `provided_by` och legacy `realized_by` används med sina avsedda betydelser. Särskilt tvetydig legacy-semantik måste leda till review, inte global sök/ersätt.
+
+### Härledning och governance
+Derived views är `source_of_truth: false`. Metamodelländringar ska hanteras via metamodel change-control och pensionerade ID:n får inte återanvändas.

@@ -1,172 +1,371 @@
 relations_model:
   name: EA Stödjare relationsmodell
-  version: "1.0-draft"
-  status: step-6-integrated
+  version: 2.0-draft
+  status: v2-step-12-relation-qualifiers
   canonical_direction: source_relation_target
   instance_id_prefix: REL-
   notes:
-    - Inverse relations are presentation concerns and are not stored separately.
-    - Provenance metadata for relation instances is defined in development step 5.
-    - Canonical instance serialization is defined in schemas/model-format.yaml.
-
+  - Inverse relations are presentation concerns and are not stored separately.
+  - Provenance metadata for relation instances is defined in development step 5.
+  - Canonical instance serialization is defined in schemas/model-format.yaml.
+  - Relation qualifier definitions are global; applicability is declared per relation type.
 relation_types:
   influences:
     display_name: påverkar
-    definition: >-
-      Källobjektet är en bidragande orsak eller påverkansfaktor för målobjektet
-      utan att ensamt realisera eller styra det.
+    definition: Källobjektet är en bidragande orsak eller påverkansfaktor för målobjektet utan att ensamt realisera eller styra det.
     allowed:
-      - source: driver
-        targets: [goal, principle]
-      - source: goal
-        targets: [principle, capability]
+    - source: driver
+      targets:
+      - goal
+      - principle
+    - source: goal
+      targets:
+      - principle
+      - capability
     prefer_more_specific_when_known: true
-
+    qualifiers:
+      verification_status:
+        required: false
+      notes:
+        required: false
   supports:
     display_name: stödjer
-    definition: >-
-      Källobjektet bidrar konkret till att målobjektet kan utövas eller uppnås
-      men är inte liktydigt med målobjektet.
+    definition: Källobjektet bidrar konkret till att målobjektet kan utövas eller uppnås men är inte liktydigt med målobjektet.
     allowed:
-      - source: it_support
-        targets: [capability]
-      - source: platform_service
-        targets: [capability]
-        target_constraints:
-          capability_type: it
-      - source: solution_pattern
-        targets: [capability]
-      - source: reference_architecture
-        targets: [capability]
-
+    - source: it_support
+      targets:
+      - capability
+    - source: platform_service
+      targets:
+      - capability
+      target_constraints:
+        capability_type: it
+    - source: solution_pattern
+      targets:
+      - capability
+    - source: reference_architecture
+      targets:
+      - capability
+    qualifiers:
+      relation_role:
+        required: false
+      strength:
+        required: false
+      mandatory:
+        required: false
+      verification_status:
+        required: false
+      boundary_basis:
+        required: false
+      notes:
+        required: false
   uses:
     display_name: använder
-    definition: >-
-      Källobjektet konsumerar eller använder målobjektet som en del av sin
-      funktion eller realisering.
+    definition: Källobjektet konsumerar eller använder målobjektet som en del av sin funktion eller realisering.
     allowed:
-      - source: it_support
-        targets: [platform_service]
-      - source: platform_service
-        targets: [platform_service]
-      - source: platform
-        targets: [platform_service]
+    - source: it_support
+      targets:
+      - platform_service
+    - source: platform_service
+      targets:
+      - platform_service
+    - source: platform
+      targets:
+      - platform_service
     prefer_more_specific_when_known: true
-
+    qualifiers:
+      relation_role:
+        required: false
+      strength:
+        required: false
+      mandatory:
+        required: false
+      verification_status:
+        required: false
+      notes:
+        required: false
+  provided_by:
+    display_name: tillhandahålls av
+    definition: Käll-Plattformstjänsten har sin konceptuella hemvist i och tillhandahålls inom mål-Plattformen. Relationen beskriver konceptuell gruppering och innebär inte konkret produktrealisering eller faktisk organisationsanvändning.
+    allowed:
+    - source: platform_service
+      targets:
+      - platform
+    semantic_rules:
+    - conceptual_home_not_concrete_implementation
+    - does_not_imply_actual_organizational_offering
+    - does_not_imply_mandatory_single_product_realization
+    qualifiers:
+      verification_status:
+        required: false
+      boundary_basis:
+        required: false
+      notes:
+        required: false
   realized_by:
     display_name: realiseras av
-    definition: >-
-      Källobjektet får sin konkreta realisering genom målobjektet.
+    definition: Källobjektet får sin konkreta realisering genom målobjektet. I native v2 används relationen inte för konceptuell hemvist mellan Plattformstjänst och Plattform.
     allowed:
-      - source: platform_service
-        targets: [platform]
-      - source: reference_architecture
-        targets: [solution_pattern]
-
+    - source: reference_architecture
+      targets:
+      - solution_pattern
+    qualifiers:
+      verification_status:
+        required: false
+      boundary_basis:
+        required: false
+      notes:
+        required: false
+  can_realize:
+    display_name: kan realisera
+    definition: Källprodukten har verifierade egenskaper som gör att den helt eller delvis kan realisera målobjektets behov eller tekniska erbjudande. Relationens existens betyder inte att produkten används eller är vald i organisationen.
+    allowed:
+    - source: product
+      targets:
+      - it_support
+      - platform_service
+    evidence_rules:
+    - positive_market_claim_requires_source_backed_evidence
+    - proposed_only_provenance_is_not_sufficient
+    - does_not_imply_actual_organizational_use_or_selection
+    qualifiers:
+      realization_role:
+        required: true
+        allowed_values:
+        - primary
+        - partial
+        - supporting
+        extensible_by_project: true
+      strength:
+        required: false
+      verification_status:
+        required: false
+      boundary_basis:
+        required: false
+      notes:
+        required: false
   governed_by:
     display_name: styrs av
-    definition: >-
-      Källobjektets utformning, användning eller utveckling ska följa ett
-      styrande målobjekt.
+    definition: Källobjektets utformning, användning eller utveckling ska följa ett styrande målobjekt.
     allowed:
-      - source: capability
-        targets: [principle, standard]
-      - source: it_support
-        targets: [principle, standard]
-      - source: platform_service
-        targets: [principle, standard]
-      - source: platform
-        targets: [principle, standard]
-      - source: solution_pattern
-        targets: [principle, standard]
-      - source: reference_architecture
-        targets: [principle, standard]
-
+    - source: capability
+      targets:
+      - principle
+      - standard
+    - source: it_support
+      targets:
+      - principle
+      - standard
+    - source: platform_service
+      targets:
+      - principle
+      - standard
+    - source: platform
+      targets:
+      - principle
+      - standard
+    - source: solution_pattern
+      targets:
+      - principle
+      - standard
+    - source: reference_architecture
+      targets:
+      - principle
+      - standard
+    qualifiers:
+      verification_status:
+        required: false
+      notes:
+        required: false
   constrains:
     display_name: begränsar
-    definition: >-
-      Källobjektet sätter en uttrycklig begränsning på vilka val eller
-      utformningar som är tillåtna för målobjektet.
+    definition: Källobjektet sätter en uttrycklig begränsning på vilka val eller utformningar som är tillåtna för målobjektet.
     allowed:
-      - source: standard
-        targets:
-          - it_support
-          - platform_service
-          - platform
-          - solution_pattern
-          - reference_architecture
+    - source: standard
+      targets:
+      - it_support
+      - platform_service
+      - platform
+      - solution_pattern
+      - reference_architecture
     duplicate_with_governed_by_discouraged: true
-
+    qualifiers:
+      strength:
+        required: false
+      mandatory:
+        required: false
+      verification_status:
+        required: false
+      notes:
+        required: false
   depends_on:
     display_name: beror på
-    definition: >-
-      Källobjektet är beroende av att målobjektet finns eller fungerar för att
-      självt kunna fungera eller vara relevant.
+    definition: Källobjektet är beroende av att målobjektet finns eller fungerar för att självt kunna fungera eller vara relevant.
     allowed:
-      - source: capability
-        targets: [capability]
-      - source: it_support
-        targets: [it_support]
-      - source: platform_service
-        targets: [platform_service]
-      - source: platform
-        targets: [platform]
-      - source: solution_pattern
-        targets: [solution_pattern]
-      - source: reference_architecture
-        targets: [reference_architecture]
+    - source: capability
+      targets:
+      - capability
+    - source: it_support
+      targets:
+      - it_support
+    - source: platform_service
+      targets:
+      - platform_service
+    - source: platform
+      targets:
+      - platform
+    - source: solution_pattern
+      targets:
+      - solution_pattern
+    - source: reference_architecture
+      targets:
+      - reference_architecture
     self_reference_allowed: false
-
+    qualifiers:
+      relation_role:
+        required: false
+      strength:
+        required: false
+      mandatory:
+        required: false
+      verification_status:
+        required: false
+      boundary_basis:
+        required: false
+      notes:
+        required: false
   derived_from:
     display_name: härledd från
-    definition: >-
-      Källobjektets existens, formulering eller innehåll har härletts från
-      målobjektet.
+    definition: Källobjektets existens, formulering eller innehåll har härletts från målobjektet.
     allowed:
-      - source: goal
-        targets: [driver]
-      - source: principle
-        targets: [driver, goal]
-      - source: capability
-        targets: [goal]
-      - source: solution_pattern
-        targets: [principle]
-      - source: reference_architecture
-        targets: [principle, standard]
-
+    - source: goal
+      targets:
+      - driver
+    - source: principle
+      targets:
+      - driver
+      - goal
+    - source: capability
+      targets:
+      - goal
+    - source: solution_pattern
+      targets:
+      - principle
+    - source: reference_architecture
+      targets:
+      - principle
+      - standard
+    qualifiers:
+      verification_status:
+        required: false
+      notes:
+        required: false
   related_to:
     display_name: relaterar till
-    definition: >-
-      Det finns en relevant arkitekturell koppling mellan objekten men
-      underlaget räcker ännu inte för en mer precis relation.
+    definition: Det finns en relevant arkitekturell koppling mellan objekten men underlaget räcker ännu inte för en mer precis relation.
     allowed:
-      - source: "*"
-        targets: ["*"]
+    - source: '*'
+      targets:
+      - '*'
     fallback_only: true
     self_reference_allowed: false
-
+    qualifiers:
+      relation_role:
+        required: false
+      strength:
+        required: false
+      verification_status:
+        required: false
+      boundary_basis:
+        required: false
+      notes:
+        required: false
 validation_rules:
-  - id: REL-V001
-    rule: source_exists
-    severity: error
-  - id: REL-V002
-    rule: target_exists
-    severity: error
-  - id: REL-V003
-    rule: relation_type_defined
-    severity: error
-  - id: REL-V004
-    rule: source_target_combination_allowed
-    severity: error
-  - id: REL-V005
-    rule: no_self_reference_unless_explicitly_allowed
-    severity: error
-  - id: REL-V006
-    rule: no_exact_duplicate_relation
-    severity: error
-  - id: REL-V007
-    rule: related_to_only_when_more_specific_relation_unknown
-    severity: warning
-  - id: REL-V008
-    rule: relation_requires_evidence_derivation_or_explicit_proposal
-    severity: error
+- id: REL-V001
+  rule: source_exists
+  severity: error
+- id: REL-V002
+  rule: target_exists
+  severity: error
+- id: REL-V003
+  rule: relation_type_defined
+  severity: error
+- id: REL-V004
+  rule: source_target_combination_allowed
+  severity: error
+- id: REL-V005
+  rule: no_self_reference_unless_explicitly_allowed
+  severity: error
+- id: REL-V006
+  rule: no_exact_duplicate_relation
+  severity: error
+- id: REL-V007
+  rule: related_to_only_when_more_specific_relation_unknown
+  severity: warning
+- id: REL-V008
+  rule: relation_requires_evidence_derivation_or_explicit_proposal
+  severity: error
+- id: REL-V009
+  rule: relation_qualifiers_allowed_and_values_valid
+  severity: error
+- id: REL-V010
+  rule: can_realize_requires_source_backed_evidence
+  severity: error
+- id: REL-V011
+  rule: native_v2_platform_service_platform_home_uses_provided_by_not_realized_by
+  severity: error
+- id: REL-V012
+  rule: relation_qualifier_is_applicable_to_relation_type
+  severity: error
+- id: REL-V013
+  rule: relation_qualifier_value_matches_declared_type_and_value_set
+  severity: error
+- id: REL-V014
+  rule: relation_qualifier_does_not_replace_relation_type_semantics
+  severity: warning
+qualifier_definitions:
+  relation_role:
+    type: enum
+    allowed_values:
+    - responsibility_boundary
+    - cross_capability_support
+    - information_dependency
+    - lifecycle_dependency
+    - operational_dependency
+    extensible_by_project: true
+    definition: Preciserar relationens arkitekturella roll när relationstypen ensam inte fångar hela analysinnebörden.
+  strength:
+    type: enum
+    allowed_values:
+    - structural
+    - typical
+    - optional
+    - informational
+    extensible_by_project: false
+    definition: Kvalificerar hur stark eller typisk relationen är utan att ersätta relationstypens semantik.
+  mandatory:
+    type: boolean
+    definition: Anger om relationen uttrycker ett obligatoriskt krav/beroende i den aktuella modellkontexten.
+  realization_role:
+    type: enum
+    allowed_values:
+    - primary
+    - partial
+    - supporting
+    extensible_by_project: true
+    definition: Anger produktens roll i realiseringen av ett IT-stöd eller en Plattformstjänst.
+  verification_status:
+    type: enum
+    allowed_values:
+    - verified
+    - partially_verified
+    - unverified
+    - unknown
+    extensible_by_project: false
+    definition: Anger hur väl relationspåståendet har verifierats; ersätter inte proveniens.
+  boundary_basis:
+    type: string
+    definition: Kort motivering till den boundary eller klassificering som relationen uttrycker.
+  notes:
+    type: string_or_list
+    definition: Kompletterande kommentar som inte förändrar relationstypens semantik.

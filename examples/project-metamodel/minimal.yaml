@@ -1,0 +1,48 @@
+schema_version: '2.0'
+project_metamodel:
+  id: minimal-ea-project
+  version: '1.0'
+  description: Enkel projektprofil som endast använder ett litet urval av standardmetamodellen.
+  base_profile:
+    id: ea-stodjare-v2
+    version: '2.0'
+    compatibility_mode: native
+  object_types:
+    enabled:
+    - capability
+    - it_support
+    - platform_service
+    - platform
+    disabled:
+    - driver
+    - goal
+    - principle
+    - standard
+    - solution_pattern
+    - reference_architecture
+    custom: []
+  attribute_extensions: []
+  relations:
+    enabled:
+    - supports
+    - uses
+    disabled:
+    - influences
+    - governed_by
+    - constrains
+    - depends_on
+    - derived_from
+    - related_to
+    custom: []
+  relation_qualifiers: []
+  value_sets: []
+  extensions: []
+  derived_views: []
+  presentation:
+    contract: reader-oriented-v1
+    object_display_pattern: '{name} ({id})'
+    labels: {}
+  governance:
+    change_control: false
+    baseline_id: null
+    freeze_status: draft

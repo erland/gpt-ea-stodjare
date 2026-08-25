@@ -1,0 +1,22 @@
+schema_version: '1.0'
+sources:
+- id: SRC-261
+  title: Syntetisk behovsbeskrivning för applikationskörning
+  source_type: internal_document
+  organization: Exempelorganisationen
+  notes: Syntetisk testkälla.
+- id: SRC-EXT-261
+  title: Atlas Runtime – syntetisk leverantörsdokumentation
+  source_type: vendor_documentation
+  organization: Atlas Systems
+  notes: Syntetisk extern testkälla.
+- id: SRC-EXT-262
+  title: Nimbus App Service – syntetisk leverantörsdokumentation
+  source_type: vendor_documentation
+  organization: Nimbus Cloud
+  notes: Syntetisk extern testkälla.
+- id: SRC-EXT-263
+  title: Telemetry Sidecar – syntetisk leverantörsdokumentation
+  source_type: vendor_documentation
+  organization: Telemetry Labs
+  notes: Syntetisk extern testkälla.

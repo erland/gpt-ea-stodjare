@@ -1,0 +1,77 @@
+{
+  "source_of_truth": false,
+  "mode": "working",
+  "revision": 5,
+  "catalogs": [
+    {
+      "type": "driver",
+      "title": "Drivkrafter",
+      "file": "drivkrafter.md",
+      "folder": "drivkrafter",
+      "object_count": 1
+    },
+    {
+      "type": "goal",
+      "title": "Mål",
+      "file": "mal.md",
+      "folder": "mal",
+      "object_count": 1
+    },
+    {
+      "type": "principle",
+      "title": "Principer",
+      "file": "principer.md",
+      "folder": "principer",
+      "object_count": 1
+    },
+    {
+      "type": "capability",
+      "title": "Förmågor",
+      "file": "formagor.md",
+      "folder": "formagor",
+      "object_count": 2
+    },
+    {
+      "type": "it_support",
+      "title": "IT-stöd",
+      "file": "it-stod.md",
+      "folder": "it-stod",
+      "object_count": 1
+    },
+    {
+      "type": "platform_service",
+      "title": "Plattformstjänster",
+      "file": "plattformstjanster.md",
+      "folder": "plattformstjanster",
+      "object_count": 1
+    },
+    {
+      "type": "platform",
+      "title": "Plattformar",
+      "file": "plattformar.md",
+      "folder": "plattformar",
+      "object_count": 1
+    },
+    {
+      "type": "standard",
+      "title": "Standarder",
+      "file": "standarder.md",
+      "folder": "standarder",
+      "object_count": 1
+    },
+    {
+      "type": "solution_pattern",
+      "title": "Lösningsmönster",
+      "file": "losningsmonster.md",
+      "folder": "losningsmonster",
+      "object_count": 1
+    },
+    {
+      "type": "reference_architecture",
+      "title": "Referensarkitekturer",
+      "file": "referensarkitekturer.md",
+      "folder": "referensarkitekturer",
+      "object_count": 1
+    }
+  ]
+}

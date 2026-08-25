@@ -1,0 +1,35 @@
+format: ea-stodjare-semantic-eval-case
+version: '1.0'
+id: EVAL-028
+title: Projektspecifik extension respekteras utan kärnförorening
+tags:
+- extensions
+- project_metamodel
+- classification
+prompt: Projektet aktiverar en deklarerad extension som lägger till objekttypen OwnershipDomain, relationen owns och en QA-regel.
+  Användaren ber GPT:n använda den i modellen.
+expected_behaviors:
+- GPT:n resolverar extensionen via projektmetamodellen och använder dess namespace/version.
+- Extensionens objekttyp, relation och QA-regel behandlas som giltiga i det aktuella projektet.
+- GPT:n gör inte extensionens semantik till generell v2-kärna för andra projekt.
+- Namespace-/kollisionsproblem flaggas i stället för att lösas genom tyst namnbyte.
+forbidden_behaviors:
+- Extensionen ignoreras eftersom den inte är standardkärna.
+- Extensionens objekttyp påstås vara obligatorisk i alla EA Stödjare v2-projekt.
+grading_criteria:
+- id: EVAL-028-C01
+  description: GPT:n resolverar extensionen via projektmetamodellen och använder dess namespace/version.
+  weight: 2
+- id: EVAL-028-C02
+  description: Extensionens objekttyp, relation och QA-regel behandlas som giltiga i det aktuella projektet.
+  weight: 1
+- id: EVAL-028-C03
+  description: GPT:n gör inte extensionens semantik till generell v2-kärna för andra projekt.
+  weight: 1
+- id: EVAL-028-C04
+  description: Namespace-/kollisionsproblem flaggas i stället för att lösas genom tyst namnbyte.
+  weight: 1
+critical_failures:
+- projektspecifik extension görs global kärnsemantik
+- namespace-kollision ignoreras
+notes: Bedöm semantik och motivering, inte exakt ordalydelse.

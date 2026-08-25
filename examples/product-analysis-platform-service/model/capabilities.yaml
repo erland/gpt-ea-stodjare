@@ -1,0 +1,17 @@
+schema_version: '1.0'
+object_type: capability
+objects:
+- id: CAP-261
+  type: capability
+  name: Tillhandahålla applikationskörning
+  description: Syntetisk IT-förmåga som behöver ett stabilt tekniskt körningserbjudande.
+  status: approved
+  capability_type: business
+  in_scope:
+  - skapa textbaserade dokument
+  - redigera och formatera innehåll
+  out_of_scope:
+  - dokumentarkivering och långtidsbevarande
+  provenance:
+  - evidence_type: explicit
+    source_id: SRC-261

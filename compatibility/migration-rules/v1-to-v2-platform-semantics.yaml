@@ -1,0 +1,30 @@
+migration_rule_set:
+  id: v1-to-v2-platform-semantics
+  source_profile: ea-stodjare-v1
+  target_profile: ea-stodjare-v2
+  automatic_rewrite_default: false
+  principle: Legacy platform objects remain valid under v1 semantics. Migration to
+    conceptual v2 Platform requires boundary review and must not be inferred from
+    product naming or existing realized_by relations alone.
+  rules:
+  - id: PLT-SEM-001
+    source_concept: platform
+    action: preserve identity and content by default
+    review: determine whether object represents conceptual service grouping, concrete
+      runtime/technical foundation, product-labeled environment, or mixed semantics
+    safe_change: retain stable ID only when conceptual identity is materially the
+      same
+    ambiguous_action: preserve legacy semantics and record migration issue
+  - id: PLT-SEM-002
+    source_fields:
+    - technology
+    - products
+    action: treat as realization/context evidence only
+    inference_rule: never define conceptual platform boundary or actual organizational
+      offering solely from product or technology presence
+  - id: PLT-SEM-003
+    source_relation: platform_service realized_by platform
+    action: do not rewrite in step 8
+    review: relation semantics are migrated separately when provided_by is introduced
+    ambiguous_action: keep legacy relation under v1 profile until controlled relation
+      migration

@@ -1,0 +1,36 @@
+format: ea-stodjare-semantic-eval-case
+version: '1.0'
+id: EVAL-016
+title: Öppna v1-projekt utan v2-omtolkning
+tags:
+- backward_compatibility
+- legacy_v1
+- project_open
+prompt: Användaren öppnar ett EA Stödjare v1-projekt som saknar project-metamodel.yaml och ber GPT:n fortsätta redigera modellen
+  utan migration.
+expected_behaviors:
+- GPT:n identifierar projektet som legacy v1 innan modellsemantik används.
+- GPT:n använder den frysta v1-profilens semantik, inklusive legacy scope och relationer, i stället för native v2-semantik.
+- GPT:n fortsätter kunna redigera projektet utan att kräva migration.
+- GPT:n erbjuder migration som ett separat kontrollerat val, inte som en implicit förändring.
+forbidden_behaviors:
+- Projektet antas vara native v2 bara för att GPT:n själv är v2.
+- Legacy scope skrivs automatiskt om till in_scope/out_of_scope.
+grading_criteria:
+- id: EVAL-016-C01
+  description: GPT:n identifierar projektet som legacy v1 innan modellsemantik används.
+  weight: 2
+- id: EVAL-016-C02
+  description: GPT:n använder den frysta v1-profilens semantik, inklusive legacy scope och relationer, i stället för native
+    v2-semantik.
+  weight: 1
+- id: EVAL-016-C03
+  description: GPT:n fortsätter kunna redigera projektet utan att kräva migration.
+  weight: 1
+- id: EVAL-016-C04
+  description: GPT:n erbjuder migration som ett separat kontrollerat val, inte som en implicit förändring.
+  weight: 1
+critical_failures:
+- v1-projekt omtolkas som native v2
+- migration genomförs utan användarens begäran
+notes: Bedöm semantik och motivering, inte exakt ordalydelse.

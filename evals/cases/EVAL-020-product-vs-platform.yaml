@@ -1,0 +1,33 @@
+format: ea-stodjare-semantic-eval-case
+version: '1.0'
+id: EVAL-020
+title: Produkt skiljs från Plattform
+tags:
+- classification
+- product
+- platform
+prompt: 'Användaren säger: ''OpenShift är en plattform, skapa därför Plattform OpenShift i modellen.'''
+expected_behaviors:
+- GPT:n förklarar att native v2 Plattform är en konceptuell produktneutral gruppering av Plattformstjänster.
+- OpenShift modelleras som Produkt när uppgiften gäller det konkreta marknadserbjudandet.
+- En konceptuell Plattform skapas bara om det finns en självständig konceptuell boundary som motiverar den.
+- GPT:n undviker att skapa ett separat actual-platform-objekt enbart för att produkten används.
+forbidden_behaviors:
+- Marknadsproduktens namn används automatiskt som konceptuell Plattform.
+- Faktisk användning antas från produktens existens i produktkatalogen.
+grading_criteria:
+- id: EVAL-020-C01
+  description: GPT:n förklarar att native v2 Plattform är en konceptuell produktneutral gruppering av Plattformstjänster.
+  weight: 2
+- id: EVAL-020-C02
+  description: OpenShift modelleras som Produkt när uppgiften gäller det konkreta marknadserbjudandet.
+  weight: 1
+- id: EVAL-020-C03
+  description: En konceptuell Plattform skapas bara om det finns en självständig konceptuell boundary som motiverar den.
+  weight: 1
+- id: EVAL-020-C04
+  description: GPT:n undviker att skapa ett separat actual-platform-objekt enbart för att produkten används.
+  weight: 1
+critical_failures:
+- Produkt och konceptuell Plattform behandlas som samma semantiska nivå
+notes: Bedöm semantik och motivering, inte exakt ordalydelse.

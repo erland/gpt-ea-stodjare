@@ -26,17 +26,15 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y pandoc libreoffice poppler-utils
 
-      - name: Validate and test
+      - name: Run mandatory v2 CI gate
         run: |
-          python scripts/validate_project.py --project-root .
-          python -m pytest -q
-          python tests/evals/test_eval_suite.py
-          python tests/builder/test_builder_knowledge.py
-          python tests/generation/test_generate_markdown.py
-          python tests/generation/test_generate_confluence.py
-          python tests/generation/test_export_documents.py
+          python scripts/run_v2_ci_gate.py \
+            --project-root . \
+            --mode ci \
+            --full-pytest \
+            --report-file build/v2-artifact-gate.json
 
-      - name: Generate reference Markdown
+      - name: Generate reference artifacts
         run: |
           rm -rf dist/reference
           mkdir -p dist/reference/markdown dist/reference/confluence dist/reference/document
@@ -46,6 +44,7 @@ jobs:
           python scripts/generate_confluence.py --project-root examples/minimal-model --mode published --output-dir "$GITHUB_WORKSPACE/dist/reference/confluence/published"
           python scripts/export_documents.py --project-root examples/minimal-model --mode working --output-dir "$GITHUB_WORKSPACE/dist/reference/document/working" --basename ea-dokumentation-working
           python scripts/export_documents.py --project-root examples/minimal-model --mode published --output-dir "$GITHUB_WORKSPACE/dist/reference/document/published" --basename ea-dokumentation-published
+          cp build/v2-artifact-gate.json dist/reference/v2-artifact-gate.json
 
       - name: Upload generated reference artifacts
         uses: actions/upload-artifact@v4

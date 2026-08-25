@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/ea-stodjare/project-compatibility-marker.schema.json",
+  "title": "EA Stödjare project compatibility marker",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["compatibility"],
+  "properties": {
+    "compatibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["profile"],
+      "properties": {
+        "profile": {"type": "string", "minLength": 1},
+        "mode": {"type": "string", "enum": ["legacy", "extended_legacy"]},
+        "reference_project": {"type": ["string", "null"]},
+        "notes": {"type": "array", "items": {"type": "string"}}
+      }
+    }
+  }
+}

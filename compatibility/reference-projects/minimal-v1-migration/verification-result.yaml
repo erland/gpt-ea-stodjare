@@ -1,0 +1,22 @@
+schema_version: '1.0'
+verification:
+  source_revision: 5
+  target_revision: 6
+  objects: 11
+  relations: 12
+  sources: 3
+  legacy_relation_equivalence:
+    legacy_realized_by: realized_by
+  checks:
+    object_ids_preserved: true
+    relation_ids_preserved: true
+    source_ids_preserved: true
+    objects_exactly_preserved: true
+    sources_exactly_preserved: true
+    object_provenance_preserved: true
+    relation_provenance_preserved: true
+    relations_semantically_equivalent: true
+    markdown_semantically_equivalent: true
+    confluence_semantically_equivalent: true
+    docx_pdf_generated_for_source_and_target: true
+  passed: true

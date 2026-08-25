@@ -1,0 +1,16 @@
+migration_id: v2-step10-product-can-realize
+from_profiles:
+- ea-stodjare-v1
+- extended-legacy
+to: native-v2
+rules:
+- case: legacy product-to-PLS supporting relation exists
+  action: do_not_auto_convert_without_semantic_and_evidence_review
+- case: market evidence supports product capability
+  action: may_create can_realize candidate with realization_role and preserved provenance
+- case: product is merely present or used in organization
+  action: must_not_infer can_realize
+- case: can_realize exists
+  action: must_not_infer actual organizational use, selection, or platform offering
+id_policy: preserve existing product and target IDs; new relation receives new REL
+  ID

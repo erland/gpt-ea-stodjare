@@ -9,7 +9,7 @@ permissions:
   contents: read
 
 jobs:
-  validate-and-test:
+  v2-gate:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -30,33 +30,20 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y pandoc libreoffice poppler-utils
 
-      - name: Validate project structure
-        run: python scripts/validate_project.py --project-root .
-
-      - name: Run pytest tests
-        run: python -m pytest -q
-
-      - name: Run script-style regression checks
+      - name: Run mandatory v2 CI gate
         run: |
-          python tests/evals/test_eval_suite.py
-          python tests/builder/test_builder_knowledge.py
-          python tests/generation/test_generate_markdown.py
-          python tests/generation/test_generate_confluence.py
-          python tests/generation/test_export_documents.py
+          python scripts/run_v2_ci_gate.py \
+            --project-root . \
+            --mode ci \
+            --full-pytest \
+            --report-file build/v2-ci-gate.json
 
-      - name: Verify Builder Knowledge is reproducible
-        run: |
-          tmp="$(mktemp -d)"
-          python scripts/build_builder_knowledge.py --root . --output "$tmp"
-          diff -ru custom-gpt/knowledge "$tmp"
-
-      - name: Smoke-test published document export
-        run: |
-          out="$(mktemp -d)"
-          python scripts/export_documents.py \
-            --project-root examples/minimal-model \
-            --mode published \
-            --output-dir "$out" \
-            --basename ea-dokumentation-published
-          test -s "$out/ea-dokumentation-published.docx"
-          test -s "$out/ea-dokumentation-published.pdf"
+      - name: Upload v2 CI report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ea-stodjare-v2-ci-report
+          path: |
+            build/v2-ci-gate.json
+            build/validation-report.json
+          if-no-files-found: warn

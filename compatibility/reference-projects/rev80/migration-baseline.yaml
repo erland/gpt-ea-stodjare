@@ -1,0 +1,17 @@
+schema_version: '1.0'
+expected:
+  capabilities: 13
+  it_supports: 10
+  platform_services: 92
+  platforms: 35
+  relations: 385
+  sources: 14
+  market_products: 295
+  supporting_yaml: 92
+  retired_actual_platforms: 10
+  provided_by_after_migration: 92
+  relation_roles: 55
+  deployment_products: 295
+  openness_products: 295
+  baseline_id: IT-FORMAGEMODELL-CONCEPTUAL-v1.1
+  freeze_status: frozen

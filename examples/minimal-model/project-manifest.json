@@ -33,6 +33,300 @@
       "sha256": "de7776f7b87fbfe8b9ae352f5781bc0839ece0256497e43742fd94ff56445b9d"
     },
     {
+      "path": "README.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "d993c4358c2c39631b4090ed94e73939ae6891970d051f7242bec4b2eaf844be"
+    },
+    {
+      "path": "docs/generated/drivkrafter.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "69b52939fb20a870bcda6bb186ff2277149307d270ce9884ec0ac7d65babb144"
+    },
+    {
+      "path": "docs/generated/formagor.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "72ec97e8a7a97ec46caf5d9a83404823e49167ca21b504f7b715d4c4ab26473b"
+    },
+    {
+      "path": "docs/generated/generation-manifest.json",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "e556381385cc55faf05294d3a3d385f2ce6fb62282b08472c12a7a853445dd61"
+    },
+    {
+      "path": "docs/generated/it-stod.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "b8883254c5f7fd5f134b3306542bbe9f5dc3a9c88ce4e61ac6bcb7707779f40e"
+    },
+    {
+      "path": "docs/generated/losningsmonster.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "cf3103236354d2ce190a5305f9b0e5732c3ba0c38d646002350f3c8c5dd2620b"
+    },
+    {
+      "path": "docs/generated/mal.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "00508cddea31a625ebf182651e9474583d8948cef452ecfde7f46e4fc750d1cb"
+    },
+    {
+      "path": "docs/generated/objects/drivkrafter/DRV-001-kortare-ledtid-for-digital-utveckling.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "3e1b918c86946295c255e9ee5e0b4735606b8fcc06f88fc14191c33fcd63c80a"
+    },
+    {
+      "path": "docs/generated/objects/formagor/CAP-001-hantera-arenden-digitalt.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "a05a44da9d1a7427f67fc7c7b259915dac2031ab6a02c6926aa219c0b9dc01bd"
+    },
+    {
+      "path": "docs/generated/objects/formagor/CAP-002-driftsatta-och-kora-applikationer.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "cb341ee96e26109aee9b7cfd698c1cb9d447cf4ef90bc2240ff2e1af510e6718"
+    },
+    {
+      "path": "docs/generated/objects/it-stod/ITS-001-arendehanteringsstod.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "0ef8f4008cd34d6cb311a4e272009e31c1373aa6a9bde5161135fcc667bf59c8"
+    },
+    {
+      "path": "docs/generated/objects/losningsmonster/PAT-001-standardiserad-applikationskorning.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "2ab74f528847341058a02e4ffda3b54ae45bebd0340f161251f1789ba8b2e41a"
+    },
+    {
+      "path": "docs/generated/objects/mal/GOAL-001-snabbare-och-mer-sjalvstandig-utveckling.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "d9b4598b22bfb7415fe9dfc71955ffae3c5d19c4be77a7975e1d0bd2513e8f65"
+    },
+    {
+      "path": "docs/generated/objects/plattformar/PLT-001-containerplattform.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "e60d2a4eddcd327ebb228885920568bcbb29d9504aaf1cf5fa4ae8d789d0726d"
+    },
+    {
+      "path": "docs/generated/objects/plattformstjanster/PLS-001-containerplattformstjanst.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "9d45b554962c1e53e3800b6ec7c6a50095b18bcd7c85c5c1489e3c3261be5539"
+    },
+    {
+      "path": "docs/generated/objects/principer/PRN-001-gemensamma-behov-realiseras-som-ateranvandbara-tjanster.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "e956c439f1ca72c3e9c8d1e7a508d013a1e4e980695cc151d64c644cbf0ec012"
+    },
+    {
+      "path": "docs/generated/objects/referensarkitekturer/RA-001-referensarkitektur-for-gemensam-applikationskorning.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "158029981fdcf82a23afbace8916d8bccdc168ac68902e9f0b9ddfdbcf9234f8"
+    },
+    {
+      "path": "docs/generated/objects/standarder/STD-001-standard-for-paketering-av-applikationer.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "5d88dd5a2dabb9e94863ffa1ca7f8b86f304181db77843da7f1a9080311fb56f"
+    },
+    {
+      "path": "docs/generated/plattformar.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "d8c766351cc2c2896e13c6d25a6f8ea3e5cb4924ef164131673d56e9219c5828"
+    },
+    {
+      "path": "docs/generated/plattformstjanster.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "00ffaf749ebf0cec5e49e2292d36675d08351dd7aa6f82db5d17db73336cdafc"
+    },
+    {
+      "path": "docs/generated/principer.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "926ef25ed72ce5c0459550f32535d13e8e996665da5724394e647f7857a0fe08"
+    },
+    {
+      "path": "docs/generated/referensarkitekturer.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "1f6f7414250d41b52eff1c585fae9faaad3b3aaaef6e1236a8cd7527d0a5423c"
+    },
+    {
+      "path": "docs/generated/standarder.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "d6f5ba18ce8e0dddd743f899191a3370b643c8bcf2c535dc8a153f3c194d28a7"
+    },
+    {
+      "path": "exports/confluence/drivkrafter.txt",
+      "role": "support",
+      "required": false,
+      "sha256": "a758d142e61c578059bff3f5a81f7ced2efe45610e276100eb94fc050f89f4d7"
+    },
+    {
+      "path": "exports/confluence/formagor.txt",
+      "role": "support",
+      "required": false,
+      "sha256": "5076649c3a4ea09dbe9d39a280f76fff5252128ca28010d0e2007afb829ffe6b"
+    },
+    {
+      "path": "exports/confluence/generation-manifest.json",
+      "role": "support",
+      "required": false,
+      "sha256": "249f543922cf03a260acbaee54411bba2c082e175ba664f08fde1b5699e927c6"
+    },
+    {
+      "path": "exports/confluence/it-stod.txt",
+      "role": "support",
+      "required": false,
+      "sha256": "5780e3c86f4f6dce73395b441cc12d79861906a70aa666d0bdc8c7c6e2dd1782"
+    },
+    {
+      "path": "exports/confluence/losningsmonster.txt",
+      "role": "support",
+      "required": false,
+      "sha256": "d74c462e2a4bb6828eed201107b7efa56f73e6ae9f34e56e458ec7a1b093b869"
+    },
+    {
+      "path": "exports/confluence/mal.txt",
+      "role": "support",
+      "required": false,
+      "sha256": "9af6eec3fbd7b53c2bc425aabade0bbdc11647a7fcea382d2cad4b01ba0ef783"
+    },
+    {
+      "path": "exports/confluence/objects/drivkrafter/DRV-001-kortare-ledtid-for-digital-utveckling.txt",
+      "role": "support",
+      "required": false,
+      "sha256": "8fb1b406fd2ac1bc54d68f3c8e5a33df5b8869797f800bc4c872e55e91342b99"
+    },
+    {
+      "path": "exports/confluence/objects/formagor/CAP-001-hantera-arenden-digitalt.txt",
+      "role": "support",
+      "required": false,
+      "sha256": "8c05b9c4fa5c96cc3c974e1bef97e2998614028572a6c36ed8f84741b14ce173"
+    },
+    {
+      "path": "exports/confluence/objects/formagor/CAP-002-driftsatta-och-kora-applikationer.txt",
+      "role": "support",
+      "required": false,
+      "sha256": "d7171956254123da46d1cdcb06df54d3fdf5faf1b626b21700ade211a68229b2"
+    },
+    {
+      "path": "exports/confluence/objects/it-stod/ITS-001-arendehanteringsstod.txt",
+      "role": "support",
+      "required": false,
+      "sha256": "5bf8eaccd43e49b85f806bd22221cb3e344783b1e71c9d24d58f67ad3998371e"
+    },
+    {
+      "path": "exports/confluence/objects/losningsmonster/PAT-001-standardiserad-applikationskorning.txt",
+      "role": "support",
+      "required": false,
+      "sha256": "fc35baeddeb5a827d1c4764dfd5e2f775e903bd8c0b103bbbfb7167d38b5d14c"
+    },
+    {
+      "path": "exports/confluence/objects/mal/GOAL-001-snabbare-och-mer-sjalvstandig-utveckling.txt",
+      "role": "support",
+      "required": false,
+      "sha256": "59fde5386fe0c6cc130592c949eef9c282fbb9c17127dc7a5c697ed9fe6c480d"
+    },
+    {
+      "path": "exports/confluence/objects/plattformar/PLT-001-containerplattform.txt",
+      "role": "support",
+      "required": false,
+      "sha256": "508d5cc24f91257efcf90b99c55c7351b26b540023141b57d129d23485446f32"
+    },
+    {
+      "path": "exports/confluence/objects/plattformstjanster/PLS-001-containerplattformstjanst.txt",
+      "role": "support",
+      "required": false,
+      "sha256": "c1077dca24ab6f1ec71af2a00677592b50624bf4016459efe3a57711dcaf8acf"
+    },
+    {
+      "path": "exports/confluence/objects/principer/PRN-001-gemensamma-behov-realiseras-som-ateranvandbara-tjanster.txt",
+      "role": "support",
+      "required": false,
+      "sha256": "f55610e940ba021ba89f66e75e3c9aff9d0b23a95a1f6359bd808c7c62b97f6d"
+    },
+    {
+      "path": "exports/confluence/objects/referensarkitekturer/RA-001-referensarkitektur-for-gemensam-applikationskorning.txt",
+      "role": "support",
+      "required": false,
+      "sha256": "240ccec0e1fcbe4ee669c8500f8657e6a6a558b4a749666464d7416d0ae7e552"
+    },
+    {
+      "path": "exports/confluence/objects/standarder/STD-001-standard-for-paketering-av-applikationer.txt",
+      "role": "support",
+      "required": false,
+      "sha256": "e946374429ebb44ed53a1f93ecc105ada516b679a83187b3f0afffae44b0bde8"
+    },
+    {
+      "path": "exports/confluence/plattformar.txt",
+      "role": "support",
+      "required": false,
+      "sha256": "b33f48436cded3619e03e86ac011963c19dc7733cb4e183efd0606528d540516"
+    },
+    {
+      "path": "exports/confluence/plattformstjanster.txt",
+      "role": "support",
+      "required": false,
+      "sha256": "d64ec09b706be2254c5f28d7d6620a79749bc16ac39330e109e024d10654e6dd"
+    },
+    {
+      "path": "exports/confluence/principer.txt",
+      "role": "support",
+      "required": false,
+      "sha256": "7e6df95f31a2ecfe46b29462f833c2ea1586dd81217913fa768f3d6199206259"
+    },
+    {
+      "path": "exports/confluence/referensarkitekturer.txt",
+      "role": "support",
+      "required": false,
+      "sha256": "88437f6e79368267cc913d620c56418adebefcfc521c2fcfddd670a04442e10d"
+    },
+    {
+      "path": "exports/confluence/standarder.txt",
+      "role": "support",
+      "required": false,
+      "sha256": "26aa86bfd93b98fee8303639e9896334b846c107ae9794f5751dc3b3e59856b1"
+    },
+    {
+      "path": "exports/document/ea-dokumentation-published.docx",
+      "role": "support",
+      "required": false,
+      "sha256": "426993ab0fd566cb8e49f00cd90ee7c43e79143e033143ed353e7b5792836274"
+    },
+    {
+      "path": "exports/document/ea-dokumentation-published.pdf",
+      "role": "support",
+      "required": false,
+      "sha256": "b95c98266ff43e4cbba71a45fbe933635de176ea35a800777d80b54f7ba6862b"
+    },
+    {
+      "path": "exports/document/ea-dokumentation-working.docx",
+      "role": "support",
+      "required": false,
+      "sha256": "0a1480cad7f341d59db6414c0efae8525902fd2f589856154172f75b89661cf8"
+    },
+    {
+      "path": "exports/document/ea-dokumentation-working.pdf",
+      "role": "support",
+      "required": false,
+      "sha256": "4cd8a5bfbb4547b20910e56d6ab622a7784c5daddfff560e7b1715f613afb256"
+    },
+    {
       "path": "model/capabilities.yaml",
       "role": "canonical_model",
       "required": true,

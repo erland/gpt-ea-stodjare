@@ -1,4 +1,4 @@
-# EA Stödjare – metamodel v1
+# EA Stödjare – metamodel v2 (under utveckling)
 
 ## 1. Syfte och status
 
@@ -11,7 +11,7 @@ Metamodellen definierar vilka typer av arkitekturobjekt som får ingå i den kan
 1. **Förmågor beskriver vad organisationen eller IT behöver kunna åstadkomma – inte hur.**
 2. **Funktion är inte ett eget globalt EA-objekt i v1.** Funktioner beskriver vad ett IT-stöd, en plattformstjänst eller en plattform tillhandahåller.
 3. **IT-stöd, plattformstjänst och plattform ska hållas isär.**
-4. **Produktnamn är inte automatiskt samma sak som plattformar.** En plattform kan realiseras av en eller flera produkter, men produktmodellering är inte en egen kärndomän i v1.
+4. **Produkt är ett stödjande realiserings-/marknadsobjekt, inte arkitekturbehovet i sig.** Produkt får inte automatiskt bli IT-stöd, Plattformstjänst eller Plattform.
 5. **Princip och standard ska hållas isär.** Principen uttrycker styrande arkitekturriktning; standarden uttrycker en mer konkret norm, regel, specifikation eller beslutad standardisering.
 6. **Sekundära objekt får inte användas som en bakväg till lösningsarkitektur.** Lösningsmönster och referensarkitekturer ska hållas på återanvändbar enterprise-/styrningsnivå.
 7. **Objekt ska ha stabil identitet.** Namn kan ändras utan att objektets ID ändras.
@@ -200,12 +200,15 @@ Exempel:
 ### Typiska attribut utöver kärnan
 
 - `capability_type` – obligatoriskt: `business` eller `it`,
-- `scope` – valfri precisering av avgränsning,
+- `in_scope` – positiv boundary: vad förmågan omfattar eller möjliggör,
+- `out_of_scope` – negativ boundary: vad som uttryckligen inte ingår,
 - `consumer_scope` – valfri lättviktig beskrivning av vilka målgrupper, utvecklingsområden eller organisatoriska delar som förmågan avses betjäna; särskilt relevant för IT-förmågor.
+
+I native v2 används inte legacy-fältet `scope`. Det tillhör v1-kompatibilitetsprofilen och får endast användas i v2 genom explicit projektextension. Ett legacy `scope` får inte automatiskt delas i `in_scope`/`out_of_scope` om betydelsen är tvetydig.
 
 ### Särskild regel
 
-EA Stödjare ska kunna beskriva vilka IT-förmågor ett stödjande utvecklingsområde behöver erbjuda utan att själva utvecklingsområdet måste bli en egen kärnobjekttyp i v1. Organisatoriskt ansvar kan uttryckas med `owner` och avsedda konsumenter med `consumer_scope`. Dessa är kontextattribut, inte egna organisationsobjekt eller relationer. Senare relations-/organisationsstöd införs endast om behovet motiverar det.
+EA Stödjare ska kunna beskriva vilka IT-förmågor ett stödjande utvecklingsområde behöver erbjuda utan att själva utvecklingsområdet måste bli en egen kärnobjekttyp. Organisatoriskt ansvar kan uttryckas med `owner` och avsedda konsumenter med `consumer_scope`. Dessa är kontextattribut, inte egna organisationsobjekt eller relationer. För `capability_type: it` ska `in_scope` beskriva vilket tekniskt möjliggörande förmågan ger konsumenterna; användarsynligt presenteras detta normalt som **Stödjer**. `out_of_scope` presenteras som **Omfattar inte**.
 
 ---
 
@@ -259,35 +262,41 @@ Funktionerna är underordnad information i v1 och har inte egna globala ID:n.
 
 ### Definition
 
-Ett standardiserat tekniskt eller gemensamt IT-erbjudande som kan konsumeras av IT-stöd, utvecklingsteam eller andra interna konsumenter och som abstraherar delar av den underliggande tekniska realiseringen.
+Ett **stabilt tekniskt erbjudande eller funktionalitetskontrakt** som lösningar kan konsumera och som beskriver **vad som ska kunna erbjudas utan att låsa hur eller var realiseringen sker**.
 
 Plattformstjänster svarar typiskt på frågan:
 
-> Vilken gemensam teknisk tjänst erbjuder vi som konsumenter kan använda?
+> Vilken stabil teknisk funktionalitet eller vilket tekniskt erbjudande behöver kunna konsumeras?
 
 Exempel:
 
-- containerplattformstjänst,
-- meddelandetjänst,
-- central logghantering,
-- objektlagringstjänst,
-- identitets-/autentiseringstjänst.
+- containerkörning som tekniskt erbjudande,
+- meddelandehantering,
+- logginsamling och sökning,
+- objektlagring,
+- autentiseringstjänst.
+
+En Plattformstjänst kan realiseras genom exempelvis en enskild produkt, en produktfamilj, en komposition av flera byggblock, ett ramverk eller bibliotek, en managed service, SaaS eller en blandad realisering. Den behöver **inte** innebära en centralt driftad eller gemensam runtime-instans.
 
 ### Är inte
 
-- den tekniska produkten eller plattformen som realiserar tjänsten – **Plattform**,
+- den konceptuella Plattform som grupperar erbjudanden,
 - ett verksamhetsnära system med egen verksamhetsfunktionalitet – normalt **IT-stöd**,
-- en abstrakt IT-förmåga.
+- en abstrakt IT-förmåga,
+- en viss produkt eller faktisk runtime enbart därför att produkten kan bidra till realiseringen.
 
 ### Typiska attribut utöver kärnan
 
-- `functions` – vad tjänsten erbjuder konsumenten,
+- `functions` – vad erbjudandet gör möjligt för konsumenten,
 - `service_level` – valfri referens/beskrivning,
-- `consumer_scope` – valfri målgrupp eller tillåten konsumenttyp.
+- `consumer_scope` – valfri målgrupp eller konsumenttyp,
+- `realization_pattern` – valfri realiseringskaraktär: `single_product`, `product_family`, `composition`, `framework_or_library`, `managed_service`, `saas`, `mixed` eller `unknown`.
+
+`realization_pattern` beskriver hur erbjudandet **kan eller typiskt behöver realiseras**. Fältet är inte evidens för att organisationen faktiskt har infört en viss realisering.
 
 ### Viktig gränsdragning
 
-En IT-förmåga beskriver **vad IT behöver kunna erbjuda/åstadkomma**. En plattformstjänst beskriver **det konkreta, konsumtionsbara erbjudandet** genom vilket delar av förmågan kan göras tillgänglig.
+En IT-förmåga beskriver **vad IT behöver kunna möjliggöra**. En Plattformstjänst beskriver **vilket stabilt tekniskt erbjudande/funktionalitetskontrakt som kan konsumeras**. Plattform och Produkt beskriver senare andra nivåer av gruppering respektive möjlig realisering och får inte bakas in i PLS-definitionen.
 
 ---
 
@@ -297,38 +306,83 @@ En IT-förmåga beskriver **vad IT behöver kunna erbjuda/åstadkomma**. En plat
 
 ### Definition
 
-En gemensam teknisk grund eller sammanhållen teknisk miljö som realiserar eller möjliggör en eller flera plattformstjänster och/eller tekniska funktioner.
+En produktneutral **konceptuell gruppering av Plattformstjänster** som tillsammans utgör ett sammanhållet tekniskt och förvaltningsmässigt erbjudandeområde.
 
 Plattformar svarar typiskt på frågan:
 
-> Vilken teknisk grund realiserar våra gemensamma tekniska erbjudanden?
+> Vilka stabila tekniska erbjudanden hör konceptuellt samman genom gemensamt syfte, livscykel, kompetens eller förvaltningslogik?
 
 Exempel:
 
-- OpenShift-baserad containerplattform,
-- central integrationsplattform,
-- identitetsplattform,
-- dataplattform.
+- Containerplattform – konceptuell hemvist för containerkörning, konfiguration/secrets och relaterade plattformstjänster,
+- Integrationsplattform – konceptuell hemvist för meddelande-, API- och andra integrationsnära plattformstjänster när de faktiskt bildar ett sammanhållet erbjudandeområde,
+- Observabilityplattform – konceptuell hemvist för logg-, metric- och tracingtjänster när deras boundary är sammanhållen.
 
 ### Är inte
 
-- automatiskt samma sak som en enskild produkt,
-- själva tjänsteerbjudandet till konsumenten – **Plattformstjänst**,
+- automatiskt samma sak som en enskild produkt eller produktfamilj,
+- ett påstående om att organisationen faktiskt har ett förvaltat plattformserbjudande med samma namn,
+- den konkreta tekniska realiseringen av varje ingående Plattformstjänst,
+- själva konsumtionskontraktet – **Plattformstjänst**,
 - ett verksamhetsnära IT-stöd.
 
 ### Typiska attribut utöver kärnan
 
-- `functions` – tekniska funktioner plattformen tillhandahåller,
-- `technology` – valfri teknisk beskrivning,
-- `products` – valfri lista över centrala produkter/tekniker som realiserar plattformen; dessa är attribut i v1, inte egna kärnobjekt.
+- `functions` – valfri sammanfattning av plattformens konceptuella funktionella område,
+- `technology` – valfri kontext om typisk teknik; får inte definiera plattformens identitet,
+- `products` – legacy-/övergångsattribut. Native v2 bör använda explicita Produkt-objekt; attributet får inte användas som grund för Plattformens boundary.
 
-### Produktregel
+### Semantiska regler
 
-Exempelvis kan `OpenShift` vara produkt/teknik i en bredare plattform eller, om organisationen faktiskt förvaltar den som en sammanhållen plattform, förekomma i plattformens namn. GPT:n ska klassificera utifrån **arkitekturrollen i organisationens modell**, inte enbart produktnamnet.
+- Plattformens identitet och boundary ska vara **produktneutral**.
+- Plattform grupperar normalt en eller flera Plattformstjänster; en singleton-plattform kan vara legitim om tjänstelöfte, livscykel, kompetens eller förvaltningslogik motiverar självständighet.
+- En Plattform får vara **kompositionsrealiserad**; ingen enskild produkt behöver täcka hela plattformens tjänsteutbud.
+- Att samma produkt bidrar till flera Plattformar innebär inte automatiskt att Plattformarna ska slås ihop eller att de är beroende av varandra.
+- Produktnärvaro eller marknadskapacitet är inte evidens för ett faktiskt organisatoriskt plattformserbjudande.
+
+### Legacy-kompatibilitet
+
+V1:s `platform` har bredare semantik som teknisk grund/realisering. Ett legacy v1-objekt får därför inte automatiskt omtolkas som konceptuell v2-Plattform. Vid kontrollerad migration ska objektets boundary, konsumtionslogik, livscykel och relationer granskas innan semantiken ändras.
 
 ---
 
-## 4.8 Standard (`standard`)
+## 4.8 Produkt (`product`)
+
+**ID-prefix:** `PRD-`
+
+### Definition
+
+Ett konkret marknadserbjudande – exempelvis applikationsprodukt, plattformsprodukt, infrastrukturprodukt, SaaS-tjänst, ramverk, bibliotek, verktyg, SDK eller appliance – som kan realisera eller bidra till realiseringen av ett IT-stöd eller en Plattformstjänst.
+
+Produkt är ett **stödjande** objekt. Det beskriver inte organisationens behov och är inte automatiskt ett bevis på faktisk användning.
+
+### Är inte
+
+- ett produktoberoende verksamhets-/IT-behov – **IT-stöd** eller **Plattformstjänst**,
+- en konceptuell gruppering av tekniska erbjudanden – **Plattform**,
+- automatiskt en faktiskt använd produkt i organisationen.
+
+### Obligatoriskt attribut
+
+- `product_kind` – exempelvis `application_product`, `platform_product`, `service_product`, `framework`, `library`, `developer_tool`, `sdk` eller `appliance`.
+
+### Typiska valfria attribut
+
+- `vendor`,
+- `website`,
+- `lifecycle`,
+- `version`,
+- `market_notes`.
+
+### Epistemisk regel
+
+Marknadsnärvaro, teknisk kapacitet och faktisk organisationsanvändning är skilda påståenden. Ett Produkt-objekt får därför inte i sig användas som evidens för att produkten används eller erbjuds i organisationen.
+
+Native v2 använder relationen `can_realize` för att uttrycka att en Produkt, med källstödd evidens, helt eller delvis kan realisera ett IT-stöd eller en Plattformstjänst. Standardroller är `primary`, `partial` och `supporting`. Relationens existens uttrycker potential och får inte tolkas som faktisk organisationsanvändning eller produktval.
+
+---
+
+## 4.9 Standard (`standard`)
 
 **ID-prefix:** `STD-`
 
@@ -515,7 +569,28 @@ Efter steg 3 är följande beslut styrande inför relationsmodell och YAML-schem
 2. Capability har undertyperna Business och IT.
 3. Solution Pattern och Reference Architecture stöds som sekundära objekt.
 4. Function är underordnad information på IT Support, Platform Service och Platform.
-5. Produkt/teknik är inte en egen kärnobjekttyp.
+5. Produkt är en generell stödjande objekttyp men ska inte driva arkitekturens behovs- eller plattformsgränser.
 6. Relationer mellan objekten definieras först i steg 4.
 7. Proveniensens struktur definieras först i steg 5.
 8. Exakt serialisering/YAML-schema fastställs först i steg 6; `schemas/object-types.yaml` i detta steg är en maskinläsbar domänspecifikation, inte det slutliga instanceschemat.
+
+## Funktion i native v2 – lokal identitet utan global objekttyp
+
+Funktion förblir ett embedded koncept på IT-stöd, Plattformstjänst och Plattform. En funktion kan i native v2 ha ett **valfritt lokalt ID** för exempelvis produktcoverage eller jämförelse inom just moderobjektet. ID:t är inte globalt, får återanvändas under ett annat moderobjekt och får inte användas som source/target i den globala relationstabellen.
+
+```yaml
+functions:
+  - id: F01
+    name: Samredigera dokument
+    description: Flera användare kan redigera samma dokument.
+    required: true
+  - name: Exportera till PDF
+```
+
+`required` är valfritt och beskriver endast om funktionen är obligatorisk i moderobjektets egen funktions-/behovsbeskrivning; det är inte ett generellt kravobjekt.
+
+
+
+## Informationslager i v2
+
+Den konceptuella metamodellen kompletteras av explicita epistemiska lager. `model/` beskriver konceptuell arkitektur, `market-reference/` marknadsreferens och `actual-state/` verifierad organisationsspecifik status. Lagren får inte tolkas som alternativa versioner av samma fakta: conceptual need ≠ product choice, market capability ≠ actual use och actual use ≠ organizational offering. Se `docs/information-layers.md`.

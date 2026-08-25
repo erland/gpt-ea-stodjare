@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ea-stodjare.local/schemas/change-log.schema.json",
+  "title": "EA Stödjare governed change log",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "log_type", "changes"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "log_type": {"enum": ["model", "metamodel"]},
+    "changes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "revision", "change_class", "summary", "status"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^CHG-[A-Z]+-[0-9]{3,}$"},
+          "revision": {"type": "integer", "minimum": 1},
+          "change_class": {"enum": ["editorial", "evidence_update", "controlled_model_change", "breaking_model_change", "metamodel_change"]},
+          "summary": {"type": "string", "minLength": 1},
+          "status": {"enum": ["proposed", "approved", "applied", "rejected"]},
+          "affected_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+          "affected_paths": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+          "evidence_refs": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+          "decision_ref": {"type": ["string", "null"]},
+          "baseline_before": {"type": ["string", "null"]},
+          "baseline_after": {"type": ["string", "null"]},
+          "notes": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    }
+  }
+}

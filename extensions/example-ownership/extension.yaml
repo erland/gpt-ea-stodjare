@@ -1,0 +1,62 @@
+schema_version: "2.0"
+extension:
+  id: example.ownership
+  version: "1.0"
+  namespace: example.ownership
+  description: Exempel-extension som visar kontrollerade projekttillägg utan ändring av kärnmetamodellen.
+  compatible_base_profiles:
+    - id: ea-stodjare-v2
+      versions: ["2.0"]
+  requires: []
+  conflicts_with: []
+  contributions:
+    object_types:
+      - type: ownership_domain
+        display_name: Ägarskapsdomän
+        id_prefix: OWN-
+        definition: Projektspecifik indelning för ägarskap och ansvar.
+        provenance_required: true
+        status_values: [candidate, approved, deprecated, retired]
+        attributes:
+          - name: name
+            type: string
+            required: true
+          - name: description
+            type: string
+            required: false
+    attribute_extensions:
+      - object_type: platform
+        attributes:
+          - name: stewardship_note
+            type: string
+            required: false
+            description: Projektspecifik förklarande notering om förvaltarskap.
+    relations:
+      - type: stewarded_by
+        display_name: Förvaltas inom
+        definition: Knyter ett konceptuellt objekt till projektets ägarskapsdomän.
+        endpoints:
+          - source: [platform, platform_service]
+            target: [ownership_domain]
+        provenance_required: true
+    relation_qualifiers: []
+    value_sets:
+      - id: ownership_level
+        values: [strategic, tactical, operational]
+    value_set_extensions:
+      - target: realization_role
+        add_values: [integrated]
+    qa_rules:
+      - id: EXT-OWN-001
+        severity: warning
+        description: Plattform med stewarded_by bör ha exakt en aktiv ägarskapsdomän.
+        applies_to: [platform]
+        check:
+          relation: stewarded_by
+          cardinality: one
+    presentation:
+      labels:
+        stewarded_by: Förvaltas inom
+        ownership_domain: Ägarskapsdomän
+      object_display_patterns:
+        ownership_domain: "{name} ({id})"

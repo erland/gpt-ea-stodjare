@@ -1,0 +1,41 @@
+reference_project: it-formagemodell-del3-rev80
+source_revision: 80
+files:
+- path: project-manifest.json
+  sha256: c76cbf4dcbafaf130fed79f9095cc8176c2d88a568007b4b850d947fb73266c0
+- path: BASELINE.md
+  sha256: 62b658e37f3a7987135eb1db88e2e8152bd4a42ae87c60aa8e3bfc7097097619
+- path: model/capabilities.yaml
+  sha256: edce464cf7f95c806c2b829da4cdc096d41b783d66b48de2c0a289a9e7937d5f
+- path: model/it-support.yaml
+  sha256: 7aab319b543841def8a93644662b04220cbe26f3e1cd7db52e3fc64910692886
+- path: model/platform-services.yaml
+  sha256: e0040365b2a6f3a3cffa182ad251b17ff8c3bbcb56ecd691baa58b7a3488cacd
+- path: model/platforms.yaml
+  sha256: 6424802d1a0979aefb6435c14275cb1937fa0bbed48a3813c47595abf4c6b538
+- path: model/relations.yaml
+  sha256: 05695bdb7e1bb87e9a66e5eac380032e638f75d95c4d8305dbccf18c6f98a729
+- path: model/sources.yaml
+  sha256: dc7d4949d99c576d06ff83c7f708d60057809b6ed75c6169a8dd1544c10b70b1
+- path: supporting/market-product-catalog.yaml
+  sha256: 3a40be6baf15f49167021f9e6cf9ecd9832a176b319347c01102abce2959a47f
+- path: supporting/market-product-service-realization.yaml
+  sha256: 143cac2e484ab6281558218ef0cb2006ef8cc4d9bc0c2cd091e034ad10694b46
+- path: supporting/market-product-deployment-model.yaml
+  sha256: 3d45fed9c733eb4dfa14c5f4cf30216c2eae3bd864b89a2979b3014008e3831b
+- path: supporting/market-product-openness-model.yaml
+  sha256: b532c186f65c5824bcc916632b2d73e12bd09201147445cdeb6da34ef11b2c4e
+- path: supporting/platform-structure-maturity-assessment.yaml
+  sha256: a6ac83381af354e0fe7b4b3fc5d9e3a9a65e30cb025663885f1752300f0f619a
+- path: supporting/relation-roles.yaml
+  sha256: 1bd2675fbd4bd3fa6930168fb1048722c44509d0559c5137600b915bd835d439
+- path: supporting/model-change-control.yaml
+  sha256: 70f4256b099d20903e6820fe4fbcbd040b288087a0fc084efe3bdf5838d40e49
+- path: supporting/model-freeze-baseline.yaml
+  sha256: 04686b8b80cb976de90ec242f31cb1bc62b94260f50fb16dbc67eef6a8479914
+- path: supporting/documentation-presentation-model.yaml
+  sha256: c19cfb4cf547d58e12cb1f2ce1e4eeab9639255f50659133597f8dfac88276f6
+- path: supporting/actual-platform-offering-assessment.yaml
+  sha256: 661da5c2ff88f1c52cbacbd980080620ddf832f03e7958afa21b6d30895b45f6
+- path: supporting/retired-actual-platform-candidates.yaml
+  sha256: de1d6477c5c1e0ea984aa971de4b6a435b6c0a66e03459ba193c93cb205c6bc4

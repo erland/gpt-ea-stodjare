@@ -1,0 +1,25 @@
+h1. Kortare ledtid för digital utveckling (DRV-001)
+
+{info:title=Genererad artefakt}
+Genererad från kanonisk YAML · läge working · projektrevision 5
+{info}
+
+* *ID:* DRV-001
+* *Objekttyp:* driver
+* *Status:* approved
+
+h2. Beskrivning
+
+Behov av att minska tiden från verksamhetsbehov till användbart IT-stöd.
+
+h2. Egenskaper
+
+* *Kategori:* verksamhetsutveckling
+
+h2. Relationer
+
+h3. Påverkar ({{influences}})
+* [Snabbare och mer självständig utveckling|Snabbare och mer självständig utveckling (GOAL-001)] ({{GOAL-001}})
+
+h2. Proveniens
+* *explicit* — källa: Exempelorganisationens strategiska inriktning ({{SRC-001}}); referens: Avsnitt 2

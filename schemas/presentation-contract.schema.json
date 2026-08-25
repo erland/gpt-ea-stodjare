@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ea-stodjare.local/schemas/presentation-contract.schema.json",
+  "title": "EA Stödjare reader-oriented presentation contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "contract", "source_of_truth", "object_display", "field_labels", "relation_labels", "navigation_sections"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "contract": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "version", "language"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "version": {"type": "string", "minLength": 1},
+        "language": {"type": "string", "pattern": "^[a-z]{2}(?:-[A-Z]{2})?$"},
+        "description": {"type": "string"}
+      }
+    },
+    "source_of_truth": {"const": false},
+    "principles": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "object_display": {
+      "type": "object", "additionalProperties": false,
+      "required": ["default_pattern", "id_visibility"],
+      "properties": {
+        "default_pattern": {"type": "string", "pattern": "\\{name\\}.*\\{id\\}"},
+        "id_visibility": {"enum": ["always", "detail_only", "never"]},
+        "patterns_by_type": {"type": "object", "additionalProperties": {"type": "string"}}
+      }
+    },
+    "field_labels": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": {"$ref": "#/$defs/labelRule"}
+      }
+    },
+    "relation_labels": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object", "additionalProperties": false,
+        "required": ["forward", "reverse"],
+        "properties": {"forward": {"type": "string"}, "reverse": {"type": "string"}}
+      }
+    },
+    "section_order": {
+      "type": "object",
+      "additionalProperties": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+    },
+    "empty_section_policy": {"enum": ["omit", "show_placeholder"]},
+    "navigation_sections": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "object", "additionalProperties": false,
+          "required": ["id", "title", "derived_view", "source_of_truth"],
+          "properties": {
+            "id": {"type": "string", "pattern": "^[a-z][a-z0-9_-]*$"},
+            "title": {"type": "string", "minLength": 1},
+            "derived_view": {"type": "string", "minLength": 1},
+            "source_of_truth": {"const": false},
+            "epistemic_note": {"type": "string"},
+            "when_empty": {"enum": ["omit", "show_placeholder"]}
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "labelRule": {
+      "oneOf": [
+        {"type": "string"},
+        {
+          "type": "object", "additionalProperties": false,
+          "required": ["default", "by_attribute"],
+          "properties": {
+            "default": {"type": "string"},
+            "by_attribute": {
+              "type": "object", "additionalProperties": false,
+              "required": ["attribute", "values"],
+              "properties": {
+                "attribute": {"type": "string"},
+                "values": {"type": "object", "additionalProperties": {"type": "string"}, "minProperties": 1}
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

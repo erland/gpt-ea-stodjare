@@ -1,0 +1,17 @@
+schema_version: '1.0'
+object_type: capability
+objects:
+  - id: CAP-251
+    type: capability
+    name: Skapa och bearbeta verksamhetsdokument
+    description: Förmåga att skapa, redigera och färdigställa textbaserade verksamhetsdokument.
+    status: approved
+    capability_type: business
+    in_scope:
+      - skapa textbaserade dokument
+      - redigera och formatera innehåll
+    out_of_scope:
+      - dokumentarkivering och långtidsbevarande
+    provenance:
+      - evidence_type: explicit
+        source_id: SRC-251

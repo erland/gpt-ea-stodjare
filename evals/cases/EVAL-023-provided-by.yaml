@@ -1,0 +1,35 @@
+format: ea-stodjare-semantic-eval-case
+version: '1.0'
+id: EVAL-023
+title: provided_by som konceptuell hemvist
+tags:
+- provided_by
+- platform_service
+- platform
+- classification
+prompt: En Plattformstjänst 'Containerorkestrering' hör konceptuellt till Plattform 'Applikationsplattform'. Användaren ber
+  GPT:n skapa rätt relation.
+expected_behaviors:
+- GPT:n använder Platform Service --provided_by--> Platform.
+- Relationen förklaras som konceptuell hemvist/tillhandahållande i modellen, inte som konkret produktrealisering.
+- GPT:n använder inte can_realize för PLS→Platform.
+- Presentationen kan använda läsarvänlig etikett Tillhandahålls av utan att ändra relationssemantiken.
+forbidden_behaviors:
+- PLS→Platform modelleras som native v2 realized_by.
+- Platform beskrivs som den konkreta produkt som kör tjänsten.
+grading_criteria:
+- id: EVAL-023-C01
+  description: GPT:n använder Platform Service --provided_by--> Platform.
+  weight: 2
+- id: EVAL-023-C02
+  description: Relationen förklaras som konceptuell hemvist/tillhandahållande i modellen, inte som konkret produktrealisering.
+  weight: 1
+- id: EVAL-023-C03
+  description: GPT:n använder inte can_realize för PLS→Platform.
+  weight: 1
+- id: EVAL-023-C04
+  description: Presentationen kan använda läsarvänlig etikett Tillhandahålls av utan att ändra relationssemantiken.
+  weight: 1
+critical_failures:
+- provided_by ersätts med konkret realiseringssemantik
+notes: Bedöm semantik och motivering, inte exakt ordalydelse.

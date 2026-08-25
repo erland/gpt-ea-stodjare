@@ -1,0 +1,32 @@
+h1. Containerplattform (PLT-001)
+
+{info:title=Genererad artefakt}
+Genererad från kanonisk YAML · läge working · projektrevision 5
+{info}
+
+* *ID:* PLT-001
+* *Objekttyp:* platform
+* *Status:* candidate
+
+h2. Beskrivning
+
+Gemensam teknisk plattform som realiserar containerplattformstjänsten.
+
+h2. Funktioner
+
+* {"name": "Schemalägga workloads"}
+* {"name": "Hantera containerkörning"}
+* {"name": "Tillhandahålla nätverksabstraktion"}
+
+h2. Egenskaper
+
+* *Teknik:* Containerorkestrering
+* *Produkter:* Exempelprodukt
+
+h2. Relationer
+
+h3. Realiserar ({{realized_by}})
+* [Containerplattformstjänst|Containerplattformstjänst (PLS-001)] ({{PLS-001}})
+
+h2. Proveniens
+* *proposed*

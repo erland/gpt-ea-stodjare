@@ -1,0 +1,30 @@
+schema_version: '1.0'
+layer: market_reference
+assertions:
+  - id: MKT-251
+    assertion_type: product_capability
+    subject: PRD-251
+    statement: Produkten stödjer dokumentframställning, formatering, språkstöd och samarbete enligt scenariots syntetiska leverantörskälla.
+    provenance:
+      - evidence_type: external
+        source_id: SRC-EXT-251
+        confidence: high
+        transferability: high
+  - id: MKT-252
+    assertion_type: product_capability
+    subject: PRD-252
+    statement: Produkten stödjer dokumentframställning, formatering och samarbete men har inte komplett språkstöd i scenariot.
+    provenance:
+      - evidence_type: external
+        source_id: SRC-EXT-252
+        confidence: high
+        transferability: high
+  - id: MKT-253
+    assertion_type: product_capability
+    subject: PRD-253
+    statement: Produkten bidrar med språkstöd men är inte en komplett ordbehandlingsprodukt.
+    provenance:
+      - evidence_type: external
+        source_id: SRC-EXT-253
+        confidence: high
+        transferability: medium

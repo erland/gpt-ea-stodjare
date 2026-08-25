@@ -1,0 +1,1139 @@
+{
+  "format": "ea-stodjare-runtime-eval-packet",
+  "version": "1.0",
+  "suite_version": "2.0",
+  "cases": [
+    {
+      "id": "EVAL-001",
+      "title": "Drivkraft kontra mål",
+      "blocking": true,
+      "prompt": "Ett strategidokument säger: 'Ökade krav på digital tillgänglighet och kortare ledtider förändrar verksamhetens förutsättningar. Till 2028 ska 90 procent av standardärendena kunna hanteras helt digitalt.' Klassificera de två utsagorna.",
+      "grading_criteria": [
+        {
+          "id": "EVAL-001-C01",
+          "description": "Den första utsagan klassificeras som drivkraft eller drivande förändring.",
+          "weight": 2
+        },
+        {
+          "id": "EVAL-001-C02",
+          "description": "Den andra utsagan klassificeras som mål eftersom den uttrycker ett önskat mätbart framtida tillstånd.",
+          "weight": 1
+        },
+        {
+          "id": "EVAL-001-C03",
+          "description": "Motiveringen skiljer orsak/förändringstryck från önskat resultat.",
+          "weight": 1
+        }
+      ],
+      "critical_failures": [
+        "Felklassificering av båda huvudutsagorna"
+      ],
+      "expected_behaviors": [
+        "Den första utsagan klassificeras som drivkraft eller drivande förändring.",
+        "Den andra utsagan klassificeras som mål eftersom den uttrycker ett önskat mätbart framtida tillstånd.",
+        "Motiveringen skiljer orsak/förändringstryck från önskat resultat."
+      ],
+      "forbidden_behaviors": [
+        "Båda utsagorna klassificeras som mål utan reservation.",
+        "GPT:n skapar nya organisationsfakta som inte finns i texten."
+      ]
+    },
+    {
+      "id": "EVAL-002",
+      "title": "Förmåga kontra funktion",
+      "blocking": true,
+      "prompt": "Underlaget innehåller 'Hantera digitala identiteter' och 'Autentisera användare med multifaktor'. Avgör om de bör modelleras som förmåga respektive funktion.",
+      "grading_criteria": [
+        {
+          "id": "EVAL-002-C01",
+          "description": "Hantera digitala identiteter behandlas som kandidat till förmåga.",
+          "weight": 2
+        },
+        {
+          "id": "EVAL-002-C02",
+          "description": "Autentisera användare med multifaktor behandlas som funktion hos IT-stöd/plattformstjänst, inte som självständig förmåga utan ytterligare kontext.",
+          "weight": 1
+        },
+        {
+          "id": "EVAL-002-C03",
+          "description": "Svaret förklarar skillnaden mellan organisatorisk förmåga och konkret tillhandahållen funktion.",
+          "weight": 1
+        }
+      ],
+      "critical_failures": [
+        "Kärnskillnaden förmåga/funktion missas"
+      ],
+      "expected_behaviors": [
+        "Hantera digitala identiteter behandlas som kandidat till förmåga.",
+        "Autentisera användare med multifaktor behandlas som funktion hos IT-stöd/plattformstjänst, inte som självständig förmåga utan ytterligare kontext.",
+        "Svaret förklarar skillnaden mellan organisatorisk förmåga och konkret tillhandahållen funktion."
+      ],
+      "forbidden_behaviors": [
+        "Funktionen läggs som obligatorisk nod mellan förmåga och IT-stöd.",
+        "Båda behandlas som förmågor utan diskussion."
+      ]
+    },
+    {
+      "id": "EVAL-003",
+      "title": "IT-stöd kontra plattformstjänst",
+      "blocking": true,
+      "prompt": "Organisationen har 'Ärendehantering' som stöd för handläggning och erbjuder 'Central logghantering' till många utvecklingsteam. Klassificera objekten.",
+      "grading_criteria": [
+        {
+          "id": "EVAL-003-C01",
+          "description": "Ärendehantering klassificeras som IT-stöd.",
+          "weight": 2
+        },
+        {
+          "id": "EVAL-003-C02",
+          "description": "Central logghantering klassificeras som plattformstjänst om den är ett återanvändbart erbjudande till flera konsumenter.",
+          "weight": 1
+        },
+        {
+          "id": "EVAL-003-C03",
+          "description": "Svaret gör klassificeringen kontextberoende när underlaget inte räcker.",
+          "weight": 1
+        }
+      ],
+      "critical_failures": [
+        "De två objekttypernas huvudskillnad missas"
+      ],
+      "expected_behaviors": [
+        "Ärendehantering klassificeras som IT-stöd.",
+        "Central logghantering klassificeras som plattformstjänst om den är ett återanvändbart erbjudande till flera konsumenter.",
+        "Svaret gör klassificeringen kontextberoende när underlaget inte räcker."
+      ],
+      "forbidden_behaviors": [
+        "Central logghantering klassificeras automatiskt som IT-stöd bara för att den är IT-relaterad."
+      ]
+    },
+    {
+      "id": "EVAL-004",
+      "title": "Plattformstjänst kontra plattform",
+      "blocking": true,
+      "prompt": "Ett underlag nämner 'Containerplattform som tjänst' och 'OpenShift-klustret'. Hur bör de modelleras?",
+      "grading_criteria": [
+        {
+          "id": "EVAL-004-C01",
+          "description": "Containerplattform som tjänst behandlas som plattformstjänst/erbjudande.",
+          "weight": 2
+        },
+        {
+          "id": "EVAL-004-C02",
+          "description": "OpenShift-klustret behandlas som plattform/teknisk realisering.",
+          "weight": 1
+        },
+        {
+          "id": "EVAL-004-C03",
+          "description": "En rimlig relation realiseras av/realized_by föreslås utan att göra produktvalet till universell sanning.",
+          "weight": 1
+        }
+      ],
+      "critical_failures": [
+        "Plattformstjänst och plattform blandas ihop"
+      ],
+      "expected_behaviors": [
+        "Containerplattform som tjänst behandlas som plattformstjänst/erbjudande.",
+        "OpenShift-klustret behandlas som plattform/teknisk realisering.",
+        "En rimlig relation realiseras av/realized_by föreslås utan att göra produktvalet till universell sanning."
+      ],
+      "forbidden_behaviors": [
+        "Begreppen slås ihop till en enda objekttyp.",
+        "OpenShift beskrivs som en verksamhetsförmåga."
+      ]
+    },
+    {
+      "id": "EVAL-005",
+      "title": "Explicit, derived och proposed",
+      "blocking": true,
+      "prompt": "Underlaget säger uttryckligen 'Vi ska minska leverantörsberoendet'. Användaren frågar vilka arkitekturprinciper detta kan innebära.",
+      "grading_criteria": [
+        {
+          "id": "EVAL-005-C01",
+          "description": "Minska leverantörsberoendet markeras som explicit drivkraft/mål beroende på kontext, inte automatiskt som princip.",
+          "weight": 2
+        },
+        {
+          "id": "EVAL-005-C02",
+          "description": "En princip om utbytbarhet/modularitet får föreslås men markeras som derived eller proposed beroende på härledningens styrka.",
+          "weight": 1
+        },
+        {
+          "id": "EVAL-005-C03",
+          "description": "Implikationer märks som rekommendationer om de inte står i underlaget.",
+          "weight": 1
+        }
+      ],
+      "critical_failures": [
+        "Eget förslag presenteras som explicit fakta"
+      ],
+      "expected_behaviors": [
+        "Minska leverantörsberoendet markeras som explicit drivkraft/mål beroende på kontext, inte automatiskt som princip.",
+        "En princip om utbytbarhet/modularitet får föreslås men markeras som derived eller proposed beroende på härledningens styrka.",
+        "Implikationer märks som rekommendationer om de inte står i underlaget."
+      ],
+      "forbidden_behaviors": [
+        "GPT:n påstår att underlaget innehåller en princip om standardiserade API:er när det inte gör det.",
+        "Förslag presenteras som explicit organisationsbeslut."
+      ]
+    },
+    {
+      "id": "EVAL-006",
+      "title": "Research för möjlig modelllucka",
+      "blocking": true,
+      "prompt": "En stödjande IT-organisation har dokumenterade IT-förmågor för build, test och deployment men inget om observability. Användaren ber GPT:n undersöka om modellen kan sakna något utifrån aktuell praxis.",
+      "grading_criteria": [
+        {
+          "id": "EVAL-006-C01",
+          "description": "GPT:n behandlar observability som en möjlig lucka, inte bekräftad arkitekturlucka.",
+          "weight": 2
+        },
+        {
+          "id": "EVAL-006-C02",
+          "description": "Extern research prioriterar relevanta auktoritativa/primära källor och aktuell praxis.",
+          "weight": 1
+        },
+        {
+          "id": "EVAL-006-C03",
+          "description": "Externa källor skiljs från intern modell och slutsatsen markeras som proposed/external-stödd.",
+          "weight": 1
+        },
+        {
+          "id": "EVAL-006-C04",
+          "description": "Överförbarhet till organisationens kontext diskuteras.",
+          "weight": 1
+        }
+      ],
+      "critical_failures": [
+        "Fabricerad källa",
+        "Extern rekommendation presenteras som intern sanning"
+      ],
+      "expected_behaviors": [
+        "GPT:n behandlar observability som en möjlig lucka, inte bekräftad arkitekturlucka.",
+        "Extern research prioriterar relevanta auktoritativa/primära källor och aktuell praxis.",
+        "Externa källor skiljs från intern modell och slutsatsen markeras som proposed/external-stödd.",
+        "Överförbarhet till organisationens kontext diskuteras."
+      ],
+      "forbidden_behaviors": [
+        "GPT:n hävdar utan research att observability måste vara en separat förmåga.",
+        "En enskild leverantörsmodell beskrivs som universell best practice."
+      ]
+    },
+    {
+      "id": "EVAL-007",
+      "title": "Dubblettidentifiering",
+      "blocking": false,
+      "prompt": "Förmågekatalogen innehåller 'Identitets- och behörighetshantering', 'IAM' och 'Hantera identiteter och access'. Bedöm om det finns dubbletter.",
+      "grading_criteria": [
+        {
+          "id": "EVAL-007-C01",
+          "description": "GPT:n identifierar sannolik överlappning men kräver semantisk verifiering före sammanslagning.",
+          "weight": 2
+        },
+        {
+          "id": "EVAL-007-C02",
+          "description": "Alias och namnnormering föreslås där lämpligt.",
+          "weight": 1
+        },
+        {
+          "id": "EVAL-007-C03",
+          "description": "Stabila ID:n och relationer beaktas innan eventuell sammanslagning.",
+          "weight": 1
+        }
+      ],
+      "critical_failures": [],
+      "expected_behaviors": [
+        "GPT:n identifierar sannolik överlappning men kräver semantisk verifiering före sammanslagning.",
+        "Alias och namnnormering föreslås där lämpligt.",
+        "Stabila ID:n och relationer beaktas innan eventuell sammanslagning."
+      ],
+      "forbidden_behaviors": [
+        "Objekten slås ihop enbart på namnlikhet utan kontroll av scope."
+      ]
+    },
+    {
+      "id": "EVAL-008",
+      "title": "Luckanalys utan falsk säkerhet",
+      "blocking": false,
+      "prompt": "En full EA-v1-modell innehåller ett godkänt mål och flera IT-stöd men inga dokumenterade förmågor mellan dem. Vad bör GPT:n säga?",
+      "grading_criteria": [
+        {
+          "id": "EVAL-008-C01",
+          "description": "GPT:n identifierar en dokumentations-/spårbarhetslucka.",
+          "weight": 2
+        },
+        {
+          "id": "EVAL-008-C02",
+          "description": "GPT:n skiljer dokumentationslucka från bekräftad faktisk arkitekturlucka.",
+          "weight": 1
+        },
+        {
+          "id": "EVAL-008-C03",
+          "description": "GPT:n föreslår nästa analyssteg för att identifiera relevanta förmågor.",
+          "weight": 1
+        }
+      ],
+      "critical_failures": [],
+      "expected_behaviors": [
+        "GPT:n identifierar en dokumentations-/spårbarhetslucka.",
+        "GPT:n skiljer dokumentationslucka från bekräftad faktisk arkitekturlucka.",
+        "GPT:n föreslår nästa analyssteg för att identifiera relevanta förmågor."
+      ],
+      "forbidden_behaviors": [
+        "GPT:n drar slutsatsen att organisationen saknar förmågor i verkligheten."
+      ]
+    },
+    {
+      "id": "EVAL-009",
+      "title": "Modellförslag för organisation",
+      "blocking": true,
+      "prompt": "En myndighet vill skapa en IT-förmågemodell för ett stödjande utvecklingsområde som ska möjliggöra operativa teams utveckling av IT-stöd. Underlaget är kortfattat. Ta fram ett angreppssätt och ett första modellförslag.",
+      "grading_criteria": [
+        {
+          "id": "EVAL-009-C01",
+          "description": "GPT:n börjar med kontext, uppdrag och konsumtionsbehov snarare än produktlista.",
+          "weight": 2
+        },
+        {
+          "id": "EVAL-009-C02",
+          "description": "Flera rimliga strukturprinciper/alternativ övervägs när det finns verkliga val.",
+          "weight": 1
+        },
+        {
+          "id": "EVAL-009-C03",
+          "description": "Förslaget använder IT-förmågor och kan koppla dem till plattformstjänster utan att blanda ihop nivåerna.",
+          "weight": 1
+        },
+        {
+          "id": "EVAL-009-C04",
+          "description": "Research används där den kan förbättra modellen och markeras som extern.",
+          "weight": 1
+        },
+        {
+          "id": "EVAL-009-C05",
+          "description": "Förslaget märks som skiss/granskningsförslag, inte facit.",
+          "weight": 1
+        }
+      ],
+      "critical_failures": [
+        "Förslaget presenteras som beslutad intern modell"
+      ],
+      "expected_behaviors": [
+        "GPT:n börjar med kontext, uppdrag och konsumtionsbehov snarare än produktlista.",
+        "Flera rimliga strukturprinciper/alternativ övervägs när det finns verkliga val.",
+        "Förslaget använder IT-förmågor och kan koppla dem till plattformstjänster utan att blanda ihop nivåerna.",
+        "Research används där den kan förbättra modellen och markeras som extern.",
+        "Förslaget märks som skiss/granskningsförslag, inte facit."
+      ],
+      "forbidden_behaviors": [
+        "Modellen byggs primärt som en lista över produkter.",
+        "GPT:n hävdar att en viss modell är rätt för myndigheten utan tillräcklig evidens."
+      ]
+    },
+    {
+      "id": "EVAL-010",
+      "title": "Otillräckligt underlag",
+      "blocking": true,
+      "prompt": "Användaren visar en enda mening: 'Vi använder en integrationsplattform.' och frågar vilka fem integrationsförmågor organisationen har.",
+      "grading_criteria": [
+        {
+          "id": "EVAL-010-C01",
+          "description": "GPT:n säger att underlaget inte räcker för att fastställa fem befintliga förmågor.",
+          "weight": 2
+        },
+        {
+          "id": "EVAL-010-C02",
+          "description": "GPT:n kan erbjuda kandidater/hypoteser men markerar dem tydligt som proposed.",
+          "weight": 1
+        },
+        {
+          "id": "EVAL-010-C03",
+          "description": "GPT:n anger vilken ytterligare information som skulle stärka bedömningen.",
+          "weight": 1
+        }
+      ],
+      "critical_failures": [
+        "Fabricerade interna fakta"
+      ],
+      "expected_behaviors": [
+        "GPT:n säger att underlaget inte räcker för att fastställa fem befintliga förmågor.",
+        "GPT:n kan erbjuda kandidater/hypoteser men markerar dem tydligt som proposed.",
+        "GPT:n anger vilken ytterligare information som skulle stärka bedömningen."
+      ],
+      "forbidden_behaviors": [
+        "GPT:n hittar på fem befintliga organisationsförmågor och beskriver dem som fakta."
+      ]
+    },
+    {
+      "id": "EVAL-011",
+      "title": "Motstridiga källor",
+      "blocking": true,
+      "prompt": "Dokument A säger att Plattform X är strategisk och ska användas långsiktigt. Ett nyare dokument B säger att Plattform X ska avvecklas. Ingen beslutsstatus framgår. Hur ska modellen hanteras?",
+      "grading_criteria": [
+        {
+          "id": "EVAL-011-C01",
+          "description": "GPT:n registrerar eller beskriver konflikten öppet.",
+          "weight": 2
+        },
+        {
+          "id": "EVAL-011-C02",
+          "description": "Källornas datum/auktoritet vägs in men en version väljs inte tyst som kanonisk sanning.",
+          "weight": 1
+        },
+        {
+          "id": "EVAL-011-C03",
+          "description": "Objektets livscykelstatus och konfliktstatus hålls semantiskt isär.",
+          "weight": 1
+        },
+        {
+          "id": "EVAL-011-C04",
+          "description": "Ett besluts-/verifieringsbehov föreslås.",
+          "weight": 1
+        }
+      ],
+      "critical_failures": [
+        "Motstridiga källor löses genom tyst val"
+      ],
+      "expected_behaviors": [
+        "GPT:n registrerar eller beskriver konflikten öppet.",
+        "Källornas datum/auktoritet vägs in men en version väljs inte tyst som kanonisk sanning.",
+        "Objektets livscykelstatus och konfliktstatus hålls semantiskt isär.",
+        "Ett besluts-/verifieringsbehov föreslås."
+      ],
+      "forbidden_behaviors": [
+        "GPT:n väljer automatiskt dokument B som sanning enbart för att det är nyare.",
+        "Den äldre källan raderas ur proveniens."
+      ]
+    },
+    {
+      "id": "EVAL-012",
+      "title": "Scopegräns mot lösningsarkitektur",
+      "blocking": true,
+      "prompt": "Användaren frågar EA Stödjare: 'Designa exakt Kubernetes-namespace-struktur, nätverkspolicies och Helm charts för vårt nya system.'",
+      "grading_criteria": [
+        {
+          "id": "EVAL-012-C01",
+          "description": "GPT:n identifierar att uppgiften är detaljerad lösnings-/implementationsarkitektur och utanför v1-scope.",
+          "weight": 2
+        },
+        {
+          "id": "EVAL-012-C02",
+          "description": "GPT:n kan hjälpa på EA-nivå, exempelvis relevanta principer, plattformstjänster, standarder eller krav på erbjudandet.",
+          "weight": 1
+        },
+        {
+          "id": "EVAL-012-C03",
+          "description": "Svaret undviker att leverera den efterfrågade detaljdesignen som om det vore EA Stödjares kärnuppgift.",
+          "weight": 1
+        }
+      ],
+      "critical_failures": [
+        "Detaljerad lösningsdesign levereras trots explicit scope-test"
+      ],
+      "expected_behaviors": [
+        "GPT:n identifierar att uppgiften är detaljerad lösnings-/implementationsarkitektur och utanför v1-scope.",
+        "GPT:n kan hjälpa på EA-nivå, exempelvis relevanta principer, plattformstjänster, standarder eller krav på erbjudandet.",
+        "Svaret undviker att leverera den efterfrågade detaljdesignen som om det vore EA Stödjares kärnuppgift."
+      ],
+      "forbidden_behaviors": [
+        "GPT:n producerar fullständig namespace-, nätverks- och Helm-design utan scopeanmärkning."
+      ]
+    },
+    {
+      "id": "EVAL-013",
+      "title": "IT-förmågor för stödjande utvecklingsområde",
+      "blocking": true,
+      "prompt": "Ett stödjande utvecklingsområde ska göra det möjligt för operativa utvecklingsområden att utveckla och förvalta IT-stöd. Föreslå vilka slags IT-förmågor som bör utredas.",
+      "grading_criteria": [
+        {
+          "id": "EVAL-013-C01",
+          "description": "Förslagen formuleras som vad IT-organisationen behöver kunna möjliggöra, inte som produktnamn.",
+          "weight": 2
+        },
+        {
+          "id": "EVAL-013-C02",
+          "description": "Exempel kan omfatta bygg/test, deployment, integration, observability, identitet/secrets eller data beroende på kontext.",
+          "weight": 1
+        },
+        {
+          "id": "EVAL-013-C03",
+          "description": "Plattformstjänster hålls separata från IT-förmågorna.",
+          "weight": 1
+        },
+        {
+          "id": "EVAL-013-C04",
+          "description": "Förslagen markeras som kandidater och bör valideras mot lokala behov.",
+          "weight": 1
+        }
+      ],
+      "critical_failures": [
+        "Produktlista presenteras som IT-förmågemodell"
+      ],
+      "expected_behaviors": [
+        "Förslagen formuleras som vad IT-organisationen behöver kunna möjliggöra, inte som produktnamn.",
+        "Exempel kan omfatta bygg/test, deployment, integration, observability, identitet/secrets eller data beroende på kontext.",
+        "Plattformstjänster hålls separata från IT-förmågorna.",
+        "Förslagen markeras som kandidater och bör valideras mot lokala behov."
+      ],
+      "forbidden_behaviors": [
+        "OpenShift, GitHub och Kafka listas som IT-förmågor utan abstraktion."
+      ]
+    },
+    {
+      "id": "EVAL-014",
+      "title": "Princip kontra standard",
+      "blocking": false,
+      "prompt": "Klassificera 'Information ska skyddas utifrån skyddsvärde' och 'TLS 1.3 ska användas för extern trafik där tekniskt möjligt'.",
+      "grading_criteria": [
+        {
+          "id": "EVAL-014-C01",
+          "description": "Den första behandlas som kandidat till princip eftersom den uttrycker övergripande styrande riktning.",
+          "weight": 2
+        },
+        {
+          "id": "EVAL-014-C02",
+          "description": "Den andra behandlas som standard/konkret norm eftersom den anger en specificerad teknisk regel.",
+          "weight": 1
+        },
+        {
+          "id": "EVAL-014-C03",
+          "description": "Svaret noterar att organisatorisk beslutsstatus fortfarande måste verifieras.",
+          "weight": 1
+        }
+      ],
+      "critical_failures": [],
+      "expected_behaviors": [
+        "Den första behandlas som kandidat till princip eftersom den uttrycker övergripande styrande riktning.",
+        "Den andra behandlas som standard/konkret norm eftersom den anger en specificerad teknisk regel.",
+        "Svaret noterar att organisatorisk beslutsstatus fortfarande måste verifieras."
+      ],
+      "forbidden_behaviors": [
+        "Båda klassificeras som samma objekttyp utan motivering."
+      ]
+    },
+    {
+      "id": "EVAL-015",
+      "title": "Överförbarhet av externt exempel",
+      "blocking": true,
+      "prompt": "Användaren ber: 'Hitta hur en stor internationell bank strukturerar sin plattformsorganisation och använd samma modell för vår svenska myndighet.'",
+      "grading_criteria": [
+        {
+          "id": "EVAL-015-C01",
+          "description": "GPT:n kan använda banken som jämförelseexempel men bedömer skillnader i uppdrag, reglering, styrning och skala.",
+          "weight": 2
+        },
+        {
+          "id": "EVAL-015-C02",
+          "description": "Fler källor eller jämförelser används om de behövs för att undvika överanpassning till ett enda exempel.",
+          "weight": 1
+        },
+        {
+          "id": "EVAL-015-C03",
+          "description": "Den organisationsspecifika modellen markeras som proposed och motiveras utifrån lokal kontext.",
+          "weight": 1
+        },
+        {
+          "id": "EVAL-015-C04",
+          "description": "GPT:n säger uttryckligen att samma modell inte följer automatiskt av jämförelseexemplet.",
+          "weight": 1
+        }
+      ],
+      "critical_failures": [
+        "Enskilt externt exempel behandlas som universell sanning"
+      ],
+      "expected_behaviors": [
+        "GPT:n kan använda banken som jämförelseexempel men bedömer skillnader i uppdrag, reglering, styrning och skala.",
+        "Fler källor eller jämförelser används om de behövs för att undvika överanpassning till ett enda exempel.",
+        "Den organisationsspecifika modellen markeras som proposed och motiveras utifrån lokal kontext.",
+        "GPT:n säger uttryckligen att samma modell inte följer automatiskt av jämförelseexemplet."
+      ],
+      "forbidden_behaviors": [
+        "Bankens modell kopieras och benämns best practice för myndigheten utan överförbarhetsanalys."
+      ]
+    },
+    {
+      "id": "EVAL-016",
+      "title": "Öppna v1-projekt utan v2-omtolkning",
+      "blocking": true,
+      "prompt": "Användaren öppnar ett EA Stödjare v1-projekt som saknar project-metamodel.yaml och ber GPT:n fortsätta redigera modellen utan migration.",
+      "grading_criteria": [
+        {
+          "id": "EVAL-016-C01",
+          "description": "GPT:n identifierar projektet som legacy v1 innan modellsemantik används.",
+          "weight": 2
+        },
+        {
+          "id": "EVAL-016-C02",
+          "description": "GPT:n använder den frysta v1-profilens semantik, inklusive legacy scope och relationer, i stället för native v2-semantik.",
+          "weight": 1
+        },
+        {
+          "id": "EVAL-016-C03",
+          "description": "GPT:n fortsätter kunna redigera projektet utan att kräva migration.",
+          "weight": 1
+        },
+        {
+          "id": "EVAL-016-C04",
+          "description": "GPT:n erbjuder migration som ett separat kontrollerat val, inte som en implicit förändring.",
+          "weight": 1
+        }
+      ],
+      "critical_failures": [
+        "v1-projekt omtolkas som native v2",
+        "migration genomförs utan användarens begäran"
+      ],
+      "expected_behaviors": [
+        "GPT:n identifierar projektet som legacy v1 innan modellsemantik används.",
+        "GPT:n använder den frysta v1-profilens semantik, inklusive legacy scope och relationer, i stället för native v2-semantik.",
+        "GPT:n fortsätter kunna redigera projektet utan att kräva migration.",
+        "GPT:n erbjuder migration som ett separat kontrollerat val, inte som en implicit förändring."
+      ],
+      "forbidden_behaviors": [
+        "Projektet antas vara native v2 bara för att GPT:n själv är v2.",
+        "Legacy scope skrivs automatiskt om till in_scope/out_of_scope."
+      ]
+    },
+    {
+      "id": "EVAL-017",
+      "title": "Öppna extended legacy-projekt säkert",
+      "blocking": true,
+      "prompt": "Användaren öppnar ett äldre projekt med v1-kärna men egna produkt-, deployment- och relationsrollfiler och ber GPT:n analysera det.",
+      "grading_criteria": [
+        {
+          "id": "EVAL-017-C01",
+          "description": "GPT:n klassificerar projektet som extended legacy när tilläggen är tydliga och läser projektets faktiska semantik före analys.",
+          "weight": 2
+        },
+        {
+          "id": "EVAL-017-C02",
+          "description": "GPT:n bevarar projektspecifika tillägg som projektfakta och upphöjer dem inte automatiskt till native v2-kärna.",
+          "weight": 1
+        },
+        {
+          "id": "EVAL-017-C03",
+          "description": "GPT:n skiljer market/reference-data från actual organization state om projektet gör det.",
+          "weight": 1
+        },
+        {
+          "id": "EVAL-017-C04",
+          "description": "GPT:n markerar okända eller tvetydiga extensions som sådana i stället för att gissa.",
+          "weight": 1
+        }
+      ],
+      "critical_failures": [
+        "extended legacy plattas ut till v2 med informationsförlust",
+        "projektspecifik semantik hittas på"
+      ],
+      "expected_behaviors": [
+        "GPT:n klassificerar projektet som extended legacy när tilläggen är tydliga och läser projektets faktiska semantik före analys.",
+        "GPT:n bevarar projektspecifika tillägg som projektfakta och upphöjer dem inte automatiskt till native v2-kärna.",
+        "GPT:n skiljer market/reference-data från actual organization state om projektet gör det.",
+        "GPT:n markerar okända eller tvetydiga extensions som sådana i stället för att gissa."
+      ],
+      "forbidden_behaviors": [
+        "Projektspecifika tillägg ignoreras eftersom de inte finns i standardmodellen.",
+        "Marknadsdata behandlas som faktisk organisationsstatus."
+      ]
+    },
+    {
+      "id": "EVAL-018",
+      "title": "Projektmetamodell styr aktiv semantik",
+      "blocking": true,
+      "prompt": "Ett native v2-projekt har project-metamodel.yaml där Standard är avaktiverad och en egen objekttyp InformationDomain samt en egen relation är aktiverad. Användaren ber om modellgranskning.",
+      "grading_criteria": [
+        {
+          "id": "EVAL-018-C01",
+          "description": "GPT:n använder projektets effektiva metamodell i stället för hela standardprofilen.",
+          "weight": 2
+        },
+        {
+          "id": "EVAL-018-C02",
+          "description": "GPT:n kräver inte Standard-objekt eller QA-coverage för den avaktiverade typen.",
+          "weight": 1
+        },
+        {
+          "id": "EVAL-018-C03",
+          "description": "GPT:n accepterar och använder den deklarerade custom-typen och relationen enligt projektmetamodellen.",
+          "weight": 1
+        },
+        {
+          "id": "EVAL-018-C04",
+          "description": "GPT:n avvisar eller flaggar objekt/relationer som inte är aktiva i den effektiva metamodellen.",
+          "weight": 1
+        }
+      ],
+      "critical_failures": [
+        "project-metamodel override ignoreras",
+        "avaktiverad typ behandlas som obligatorisk"
+      ],
+      "expected_behaviors": [
+        "GPT:n använder projektets effektiva metamodell i stället för hela standardprofilen.",
+        "GPT:n kräver inte Standard-objekt eller QA-coverage för den avaktiverade typen.",
+        "GPT:n accepterar och använder den deklarerade custom-typen och relationen enligt projektmetamodellen.",
+        "GPT:n avvisar eller flaggar objekt/relationer som inte är aktiva i den effektiva metamodellen."
+      ],
+      "forbidden_behaviors": [
+        "Standardprofilens alla typer behandlas som obligatoriska.",
+        "Custom-typen avfärdas för att den inte finns i kärnan."
+      ]
+    },
+    {
+      "id": "EVAL-019",
+      "title": "Produkt skiljs från IT-stöd",
+      "blocking": true,
+      "prompt": "Användaren säger: 'Microsoft Word är vårt IT-stöd för ordbehandling. Lägg in Word som IT-stöd och funktionerna som Word har.'",
+      "grading_criteria": [
+        {
+          "id": "EVAL-019-C01",
+          "description": "GPT:n skiljer produktneutralt IT-stöd från konkret Produkt och föreslår exempelvis IT-stöd Ordbehandling samt Word som Produkt om underlaget stödjer det.",
+          "weight": 2
+        },
+        {
+          "id": "EVAL-019-C02",
+          "description": "IT-stödets funktioner formuleras som behov/funktionalitet och inte som en kopia av en viss produkts feature-lista.",
+          "weight": 1
+        },
+        {
+          "id": "EVAL-019-C03",
+          "description": "Produktens möjliga realisering hanteras via relation/evidens, inte genom att byta objekttyp på IT-stödet.",
+          "weight": 1
+        },
+        {
+          "id": "EVAL-019-C04",
+          "description": "Faktisk användning markeras endast om organisationsspecifik evidens finns.",
+          "weight": 1
+        }
+      ],
+      "critical_failures": [
+        "Produkt och IT-stöd kollapsas till samma objekt"
+      ],
+      "expected_behaviors": [
+        "GPT:n skiljer produktneutralt IT-stöd från konkret Produkt och föreslår exempelvis IT-stöd Ordbehandling samt Word som Produkt om underlaget stödjer det.",
+        "IT-stödets funktioner formuleras som behov/funktionalitet och inte som en kopia av en viss produkts feature-lista.",
+        "Produktens möjliga realisering hanteras via relation/evidens, inte genom att byta objekttyp på IT-stödet.",
+        "Faktisk användning markeras endast om organisationsspecifik evidens finns."
+      ],
+      "forbidden_behaviors": [
+        "Word modelleras direkt som IT-stöd enbart för att det används för ordbehandling.",
+        "Produktens marknadsfunktioner skrivs in som organisationens krav utan analys."
+      ]
+    },
+    {
+      "id": "EVAL-020",
+      "title": "Produkt skiljs från Plattform",
+      "blocking": true,
+      "prompt": "Användaren säger: 'OpenShift är en plattform, skapa därför Plattform OpenShift i modellen.'",
+      "grading_criteria": [
+        {
+          "id": "EVAL-020-C01",
+          "description": "GPT:n förklarar att native v2 Plattform är en konceptuell produktneutral gruppering av Plattformstjänster.",
+          "weight": 2
+        },
+        {
+          "id": "EVAL-020-C02",
+          "description": "OpenShift modelleras som Produkt när uppgiften gäller det konkreta marknadserbjudandet.",
+          "weight": 1
+        },
+        {
+          "id": "EVAL-020-C03",
+          "description": "En konceptuell Plattform skapas bara om det finns en självständig konceptuell boundary som motiverar den.",
+          "weight": 1
+        },
+        {
+          "id": "EVAL-020-C04",
+          "description": "GPT:n undviker att skapa ett separat actual-platform-objekt enbart för att produkten används.",
+          "weight": 1
+        }
+      ],
+      "critical_failures": [
+        "Produkt och konceptuell Plattform behandlas som samma semantiska nivå"
+      ],
+      "expected_behaviors": [
+        "GPT:n förklarar att native v2 Plattform är en konceptuell produktneutral gruppering av Plattformstjänster.",
+        "OpenShift modelleras som Produkt när uppgiften gäller det konkreta marknadserbjudandet.",
+        "En konceptuell Plattform skapas bara om det finns en självständig konceptuell boundary som motiverar den.",
+        "GPT:n undviker att skapa ett separat actual-platform-objekt enbart för att produkten används."
+      ],
+      "forbidden_behaviors": [
+        "Marknadsproduktens namn används automatiskt som konceptuell Plattform.",
+        "Faktisk användning antas från produktens existens i produktkatalogen."
+      ]
+    },
+    {
+      "id": "EVAL-021",
+      "title": "can_realize mot IT-stöd",
+      "blocking": true,
+      "prompt": "Tre produkter analyseras mot IT-stödet Ordbehandling. En täcker kärnbehovet, en bara delar av behovet och en är ett stödverktyg. Användaren vill få in bedömningen i modellen.",
+      "grading_criteria": [
+        {
+          "id": "EVAL-021-C01",
+          "description": "GPT:n använder Product --can_realize--> IT Support och väljer realization_role primary, partial respektive supporting när evidensen motiverar det.",
+          "weight": 2
+        },
+        {
+          "id": "EVAL-021-C02",
+          "description": "Varje positiv can_realize-bedömning har källstödd proveniens.",
+          "weight": 1
+        },
+        {
+          "id": "EVAL-021-C03",
+          "description": "GPT:n beskriver can_realize som realiseringspotential, inte produktval eller faktisk användning.",
+          "weight": 1
+        },
+        {
+          "id": "EVAL-021-C04",
+          "description": "Om evidensen inte räcker lämnas bedömningen osäker eller uteblir i stället för att fabriceras.",
+          "weight": 1
+        }
+      ],
+      "critical_failures": [
+        "can_realize tolkas som actual use",
+        "positiv can_realize utan evidens"
+      ],
+      "expected_behaviors": [
+        "GPT:n använder Product --can_realize--> IT Support och väljer realization_role primary, partial respektive supporting när evidensen motiverar det.",
+        "Varje positiv can_realize-bedömning har källstödd proveniens.",
+        "GPT:n beskriver can_realize som realiseringspotential, inte produktval eller faktisk användning.",
+        "Om evidensen inte räcker lämnas bedömningen osäker eller uteblir i stället för att fabriceras."
+      ],
+      "forbidden_behaviors": [
+        "can_realize används som bevis för att produkten är vald eller i drift.",
+        "Positiv realiseringsrelation skapas enbart som proposed utan källstöd."
+      ]
+    },
+    {
+      "id": "EVAL-022",
+      "title": "can_realize mot Plattformstjänst",
+      "blocking": true,
+      "prompt": "Användaren vill bedöma om en containerplattformprodukt, ett ramverk och en SaaS-tjänst kan realisera olika Plattformstjänster.",
+      "grading_criteria": [
+        {
+          "id": "EVAL-022-C01",
+          "description": "GPT:n använder Product --can_realize--> Platform Service oberoende av product_kind när semantiken och evidensen stödjer det.",
+          "weight": 2
+        },
+        {
+          "id": "EVAL-022-C02",
+          "description": "Plattformstjänsten förblir realiseringsneutral och definieras inte utifrån den analyserade produkten.",
+          "weight": 1
+        },
+        {
+          "id": "EVAL-022-C03",
+          "description": "realization_role används för att precisera produktens bidrag.",
+          "weight": 1
+        },
+        {
+          "id": "EVAL-022-C04",
+          "description": "GPT:n håller marknadspotential separat från faktisk organisationsrealisering.",
+          "weight": 1
+        }
+      ],
+      "critical_failures": [
+        "PLS görs produktberoende",
+        "can_realize blandas ihop med actual state"
+      ],
+      "expected_behaviors": [
+        "GPT:n använder Product --can_realize--> Platform Service oberoende av product_kind när semantiken och evidensen stödjer det.",
+        "Plattformstjänsten förblir realiseringsneutral och definieras inte utifrån den analyserade produkten.",
+        "realization_role används för att precisera produktens bidrag.",
+        "GPT:n håller marknadspotential separat från faktisk organisationsrealisering."
+      ],
+      "forbidden_behaviors": [
+        "Plattformstjänsten byter namn/definition till produktnamnet.",
+        "Endast platform_product tillåts realisera Plattformstjänst."
+      ]
+    },
+    {
+      "id": "EVAL-023",
+      "title": "provided_by som konceptuell hemvist",
+      "blocking": true,
+      "prompt": "En Plattformstjänst 'Containerorkestrering' hör konceptuellt till Plattform 'Applikationsplattform'. Användaren ber GPT:n skapa rätt relation.",
+      "grading_criteria": [
+        {
+          "id": "EVAL-023-C01",
+          "description": "GPT:n använder Platform Service --provided_by--> Platform.",
+          "weight": 2
+        },
+        {
+          "id": "EVAL-023-C02",
+          "description": "Relationen förklaras som konceptuell hemvist/tillhandahållande i modellen, inte som konkret produktrealisering.",
+          "weight": 1
+        },
+        {
+          "id": "EVAL-023-C03",
+          "description": "GPT:n använder inte can_realize för PLS→Platform.",
+          "weight": 1
+        },
+        {
+          "id": "EVAL-023-C04",
+          "description": "Presentationen kan använda läsarvänlig etikett Tillhandahålls av utan att ändra relationssemantiken.",
+          "weight": 1
+        }
+      ],
+      "critical_failures": [
+        "provided_by ersätts med konkret realiseringssemantik"
+      ],
+      "expected_behaviors": [
+        "GPT:n använder Platform Service --provided_by--> Platform.",
+        "Relationen förklaras som konceptuell hemvist/tillhandahållande i modellen, inte som konkret produktrealisering.",
+        "GPT:n använder inte can_realize för PLS→Platform.",
+        "Presentationen kan använda läsarvänlig etikett Tillhandahålls av utan att ändra relationssemantiken."
+      ],
+      "forbidden_behaviors": [
+        "PLS→Platform modelleras som native v2 realized_by.",
+        "Platform beskrivs som den konkreta produkt som kör tjänsten."
+      ]
+    },
+    {
+      "id": "EVAL-024",
+      "title": "Legacy realized_by migreras inte blint",
+      "blocking": true,
+      "prompt": "Ett v1-projekt har flera PLS→PLT realized_by-relationer men dokumentationen säger inte om de betyder konceptuell hemvist eller konkret realisering. Användaren ber GPT:n migrera till v2.",
+      "grading_criteria": [
+        {
+          "id": "EVAL-024-C01",
+          "description": "GPT:n identifierar den semantiska tvetydigheten före konvertering.",
+          "weight": 2
+        },
+        {
+          "id": "EVAL-024-C02",
+          "description": "Relationernas ID, endpoints och proveniens bevaras medan tvetydiga relationer lämnas för review, exempelvis som legacy_realized_by.",
+          "weight": 1
+        },
+        {
+          "id": "EVAL-024-C03",
+          "description": "provided_by skapas först när konceptuell hemvist kan verifieras.",
+          "weight": 1
+        },
+        {
+          "id": "EVAL-024-C04",
+          "description": "GPT:n redovisar migrationsosäkerheten explicit i plan/rapport.",
+          "weight": 1
+        }
+      ],
+      "critical_failures": [
+        "blind realized_by→provided_by migration",
+        "relationsdata eller proveniens tappas"
+      ],
+      "expected_behaviors": [
+        "GPT:n identifierar den semantiska tvetydigheten före konvertering.",
+        "Relationernas ID, endpoints och proveniens bevaras medan tvetydiga relationer lämnas för review, exempelvis som legacy_realized_by.",
+        "provided_by skapas först när konceptuell hemvist kan verifieras.",
+        "GPT:n redovisar migrationsosäkerheten explicit i plan/rapport."
+      ],
+      "forbidden_behaviors": [
+        "Alla realized_by sök/ersätts automatiskt till provided_by.",
+        "Tvetydiga relationer raderas för att få v2-valideringen grön."
+      ]
+    },
+    {
+      "id": "EVAL-025",
+      "title": "Embedded Funktion används för coverage utan globalisering",
+      "blocking": true,
+      "prompt": "IT-stödet Ordbehandling har fyra embedded functions med lokala ID:n. Användaren vill jämföra två produkter och se vilka funktioner de täcker.",
+      "grading_criteria": [
+        {
+          "id": "EVAL-025-C01",
+          "description": "GPT:n använder funktionerna som lokalt scoped delar av IT-stödet och kan referera deras lokala ID:n i analysen.",
+          "weight": 2
+        },
+        {
+          "id": "EVAL-025-C02",
+          "description": "Coverage-analysen får stödja can_realize-bedömningen men gör inte Funktion till global EA-objekttyp.",
+          "weight": 1
+        },
+        {
+          "id": "EVAL-025-C03",
+          "description": "Samma lokala funktions-ID kan endast förstås i kombination med sitt moderobjekt.",
+          "weight": 1
+        },
+        {
+          "id": "EVAL-025-C04",
+          "description": "GPT:n skiljer funktionscoverage från faktisk produktanvändning.",
+          "weight": 1
+        }
+      ],
+      "critical_failures": [
+        "embedded Funktion globaliseras",
+        "lokalt ID behandlas som globalt stabilt EA-ID"
+      ],
+      "expected_behaviors": [
+        "GPT:n använder funktionerna som lokalt scoped delar av IT-stödet och kan referera deras lokala ID:n i analysen.",
+        "Coverage-analysen får stödja can_realize-bedömningen men gör inte Funktion till global EA-objekttyp.",
+        "Samma lokala funktions-ID kan endast förstås i kombination med sitt moderobjekt.",
+        "GPT:n skiljer funktionscoverage från faktisk produktanvändning."
+      ],
+      "forbidden_behaviors": [
+        "Globala relationer skapas direkt till ett lokalt funktions-ID.",
+        "Funktioner lyfts automatiskt till globala objekt för att möjliggöra coverage."
+      ]
+    },
+    {
+      "id": "EVAL-026",
+      "title": "Conceptual, market och actual hålls isär",
+      "blocking": true,
+      "prompt": "En leverantörskälla visar att Produkt A stöder samredigering. En intern källa visar att organisationen använder Produkt B. Användaren frågar vilka produkter organisationen använder och vilka som kan stödja behovet.",
+      "grading_criteria": [
+        {
+          "id": "EVAL-026-C01",
+          "description": "GPT:n placerar produktkapabiliteten som market/reference-evidens och den interna användningen som actual-state-evidens.",
+          "weight": 2
+        },
+        {
+          "id": "EVAL-026-C02",
+          "description": "GPT:n kan säga att Produkt A kan stödja behovet utan att säga att organisationen använder Produkt A.",
+          "weight": 1
+        },
+        {
+          "id": "EVAL-026-C03",
+          "description": "GPT:n kan säga att Produkt B används utan att automatiskt anta att den täcker alla behov.",
+          "weight": 1
+        },
+        {
+          "id": "EVAL-026-C04",
+          "description": "Organisationsspecifik actual state kräver organisationsspecifik explicit eller härledd evidens.",
+          "weight": 1
+        }
+      ],
+      "critical_failures": [
+        "market capability presenteras som actual use",
+        "actual use presenteras som full funktionell coverage"
+      ],
+      "expected_behaviors": [
+        "GPT:n placerar produktkapabiliteten som market/reference-evidens och den interna användningen som actual-state-evidens.",
+        "GPT:n kan säga att Produkt A kan stödja behovet utan att säga att organisationen använder Produkt A.",
+        "GPT:n kan säga att Produkt B används utan att automatiskt anta att den täcker alla behov.",
+        "Organisationsspecifik actual state kräver organisationsspecifik explicit eller härledd evidens."
+      ],
+      "forbidden_behaviors": [
+        "Leverantörsdokumentation används ensam för att påstå att organisationen använder Produkt A.",
+        "Intern användning av Produkt B används som bevis för alla marknadsfunktioner hos B."
+      ]
+    },
+    {
+      "id": "EVAL-027",
+      "title": "Derived view är aldrig source of truth",
+      "blocking": true,
+      "prompt": "En genererad vy visar ett härlett plattformsberoende som inte finns som kanonisk relation. Användaren säger: 'Skriv in det i modellen så att vyn och modellen matchar.'",
+      "grading_criteria": [
+        {
+          "id": "EVAL-027-C01",
+          "description": "GPT:n förklarar att derived view är source_of_truth false och kan regenereras från kanonisk modell.",
+          "weight": 2
+        },
+        {
+          "id": "EVAL-027-C02",
+          "description": "GPT:n spårar härledningen tillbaka till de kanoniska relationer som producerar vyn.",
+          "weight": 1
+        },
+        {
+          "id": "EVAL-027-C03",
+          "description": "En ny kanonisk relation skapas bara om den har egen semantisk motivering/evidens och går genom normal change-control.",
+          "weight": 1
+        },
+        {
+          "id": "EVAL-027-C04",
+          "description": "GPT:n föreslår att regenerera vyn efter kanoniska ändringar, inte att skriva tillbaka view-resultatet automatiskt.",
+          "weight": 1
+        }
+      ],
+      "critical_failures": [
+        "derived view skrivs tillbaka automatiskt till kanonisk modell"
+      ],
+      "expected_behaviors": [
+        "GPT:n förklarar att derived view är source_of_truth false och kan regenereras från kanonisk modell.",
+        "GPT:n spårar härledningen tillbaka till de kanoniska relationer som producerar vyn.",
+        "En ny kanonisk relation skapas bara om den har egen semantisk motivering/evidens och går genom normal change-control.",
+        "GPT:n föreslår att regenerera vyn efter kanoniska ändringar, inte att skriva tillbaka view-resultatet automatiskt."
+      ],
+      "forbidden_behaviors": [
+        "Härledd view-rad kopieras automatiskt in som kanonisk relation.",
+        "Derived view behandlas som en alternativ source of truth."
+      ]
+    },
+    {
+      "id": "EVAL-028",
+      "title": "Projektspecifik extension respekteras utan kärnförorening",
+      "blocking": true,
+      "prompt": "Projektet aktiverar en deklarerad extension som lägger till objekttypen OwnershipDomain, relationen owns och en QA-regel. Användaren ber GPT:n använda den i modellen.",
+      "grading_criteria": [
+        {
+          "id": "EVAL-028-C01",
+          "description": "GPT:n resolverar extensionen via projektmetamodellen och använder dess namespace/version.",
+          "weight": 2
+        },
+        {
+          "id": "EVAL-028-C02",
+          "description": "Extensionens objekttyp, relation och QA-regel behandlas som giltiga i det aktuella projektet.",
+          "weight": 1
+        },
+        {
+          "id": "EVAL-028-C03",
+          "description": "GPT:n gör inte extensionens semantik till generell v2-kärna för andra projekt.",
+          "weight": 1
+        },
+        {
+          "id": "EVAL-028-C04",
+          "description": "Namespace-/kollisionsproblem flaggas i stället för att lösas genom tyst namnbyte.",
+          "weight": 1
+        }
+      ],
+      "critical_failures": [
+        "projektspecifik extension görs global kärnsemantik",
+        "namespace-kollision ignoreras"
+      ],
+      "expected_behaviors": [
+        "GPT:n resolverar extensionen via projektmetamodellen och använder dess namespace/version.",
+        "Extensionens objekttyp, relation och QA-regel behandlas som giltiga i det aktuella projektet.",
+        "GPT:n gör inte extensionens semantik till generell v2-kärna för andra projekt.",
+        "Namespace-/kollisionsproblem flaggas i stället för att lösas genom tyst namnbyte."
+      ],
+      "forbidden_behaviors": [
+        "Extensionen ignoreras eftersom den inte är standardkärna.",
+        "Extensionens objekttyp påstås vara obligatorisk i alla EA Stödjare v2-projekt."
+      ]
+    },
+    {
+      "id": "EVAL-029",
+      "title": "Metamodelländring följer change-control",
+      "blocking": true,
+      "prompt": "På en review-baseline vill användaren lägga till en ny global relationstyp och samtidigt pensionera ett gammalt objekttyp-ID. Användaren ber GPT:n bara ändra YAML-filerna snabbt.",
+      "grading_criteria": [
+        {
+          "id": "EVAL-029-C01",
+          "description": "GPT:n klassificerar ändringen som metamodel_change, inte vanlig controlled_model_change.",
+          "weight": 2
+        },
+        {
+          "id": "EVAL-029-C02",
+          "description": "Ändringen förs till metamodellchangeloggen och följer projektets approval/baseline-policy.",
+          "weight": 1
+        },
+        {
+          "id": "EVAL-029-C03",
+          "description": "Pensionerade stabila ID:n registreras och får inte återanvändas.",
+          "weight": 1
+        },
+        {
+          "id": "EVAL-029-C04",
+          "description": "GPT:n skiljer metamodelländringen från eventuella efterföljande modellmigreringar och derived outputs.",
+          "weight": 1
+        }
+      ],
+      "critical_failures": [
+        "metamodel_change kringgår change-control",
+        "pensionerat ID återanvänds"
+      ],
+      "expected_behaviors": [
+        "GPT:n klassificerar ändringen som metamodel_change, inte vanlig controlled_model_change.",
+        "Ändringen förs till metamodellchangeloggen och följer projektets approval/baseline-policy.",
+        "Pensionerade stabila ID:n registreras och får inte återanvändas.",
+        "GPT:n skiljer metamodelländringen från eventuella efterföljande modellmigreringar och derived outputs."
+      ],
+      "forbidden_behaviors": [
+        "Metamodelländringen loggas endast som vanlig modelländring.",
+        "Ett pensionerat ID återanvänds för den nya typen eller relationen."
+      ]
+    }
+  ]
+}

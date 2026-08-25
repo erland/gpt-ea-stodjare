@@ -1,0 +1,37 @@
+format: ea-stodjare-semantic-eval-case
+version: '1.0'
+id: EVAL-022
+title: can_realize mot Plattformstjänst
+tags:
+- product
+- can_realize
+- platform_service
+- evidence
+prompt: Användaren vill bedöma om en containerplattformprodukt, ett ramverk och en SaaS-tjänst kan realisera olika Plattformstjänster.
+expected_behaviors:
+- GPT:n använder Product --can_realize--> Platform Service oberoende av product_kind när semantiken och evidensen stödjer
+  det.
+- Plattformstjänsten förblir realiseringsneutral och definieras inte utifrån den analyserade produkten.
+- realization_role används för att precisera produktens bidrag.
+- GPT:n håller marknadspotential separat från faktisk organisationsrealisering.
+forbidden_behaviors:
+- Plattformstjänsten byter namn/definition till produktnamnet.
+- Endast platform_product tillåts realisera Plattformstjänst.
+grading_criteria:
+- id: EVAL-022-C01
+  description: GPT:n använder Product --can_realize--> Platform Service oberoende av product_kind när semantiken och evidensen
+    stödjer det.
+  weight: 2
+- id: EVAL-022-C02
+  description: Plattformstjänsten förblir realiseringsneutral och definieras inte utifrån den analyserade produkten.
+  weight: 1
+- id: EVAL-022-C03
+  description: realization_role används för att precisera produktens bidrag.
+  weight: 1
+- id: EVAL-022-C04
+  description: GPT:n håller marknadspotential separat från faktisk organisationsrealisering.
+  weight: 1
+critical_failures:
+- PLS görs produktberoende
+- can_realize blandas ihop med actual state
+notes: Bedöm semantik och motivering, inte exakt ordalydelse.

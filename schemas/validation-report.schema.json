@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ea-stodjare.local/schemas/validation-report.schema.json",
+  "title": "EA Stödjare validation report",
+  "type": "object",
+  "required": ["schema_version", "valid", "profile", "stages", "summary", "errors", "warnings"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "valid": {"type": "boolean"},
+    "profile": {
+      "type": ["object", "null"],
+      "properties": {
+        "classification": {"type": "string"},
+        "confidence": {"type": "string"},
+        "selected_profile": {"type": ["string", "null"]},
+        "evidence": {"type": "array", "items": {"type": "string"}},
+        "blockers": {"type": "array", "items": {"type": "string"}},
+        "next_action": {"type": "string"}
+      },
+      "additionalProperties": true
+    },
+    "stages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "status"],
+        "properties": {
+          "name": {"type": "string"},
+          "status": {"enum": ["passed", "failed", "skipped"]},
+          "detail": {"type": "string"}
+        },
+        "additionalProperties": false
+      }
+    },
+    "summary": {
+      "type": "object",
+      "required": ["errors", "warnings"],
+      "properties": {"errors": {"type": "integer", "minimum": 0}, "warnings": {"type": "integer", "minimum": 0}},
+      "additionalProperties": false
+    },
+    "errors": {"type": "array", "items": {"$ref": "#/$defs/finding"}},
+    "warnings": {"type": "array", "items": {"$ref": "#/$defs/finding"}}
+  },
+  "$defs": {
+    "finding": {
+      "type": "object",
+      "required": ["code", "severity", "message"],
+      "properties": {
+        "code": {"type": "string"},
+        "severity": {"enum": ["error", "warning"]},
+        "message": {"type": "string"},
+        "path": {"type": ["string", "null"]}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,111 @@
+schema_version: '1.0'
+log_type: metamodel
+changes:
+- id: CHG-META-001
+  revision: 44
+  change_class: metamodel_change
+  summary: Inför generell v2 change-control med baseline, freeze-status, retired-ID-registry
+    och separata modell-/metamodellloggar.
+  status: applied
+  affected_paths:
+  - schemas/change-control.schema.json
+  - schemas/retired-id-registry.schema.json
+  - schemas/change-log.schema.json
+  - governance/change-control.yaml
+  - governance/retired-ids.yaml
+  - governance/model-changelog.yaml
+  - governance/metamodel-changelog.yaml
+  baseline_before: null
+  baseline_after: EA-STODJARE-V2-DRAFT@2.0-draft-r44
+- id: CHG-META-002
+  revision: 45
+  change_class: metamodel_change
+  summary: Inför säker, reproducerbar v1→v2-migrationsmotor och migreringsrapportkontrakt.
+  status: applied
+  affected_paths:
+  - schemas/migration-report.schema.json
+  - scripts/migrate_v1_to_v2.py
+  - docs/v1-to-v2-migration-engine.md
+  - tests/compatibility/test_v1_to_v2_migration_engine.py
+  baseline_before: EA-STODJARE-V2-DRAFT@2.0-draft-r44
+  baseline_after: EA-STODJARE-V2-DRAFT@2.0-draft-r45
+- id: CHG-META-003
+  revision: 46
+  change_class: metamodel_change
+  summary: Verifiera minimal v1→v2-migration end-to-end och förstärk generell migrationsverifiering
+    samt legacy-relationens läsarpresentation.
+  status: applied
+  affected_paths:
+  - scripts/verify_v1_v2_migration.py
+  - scripts/generate_markdown.py
+  - scripts/generate_confluence.py
+  - compatibility/reference-projects/minimal-v1-migration/verification-baseline.yaml
+  - compatibility/reference-projects/minimal-v1-migration/verification-result.yaml
+  - docs/minimal-v1-migration-verification.md
+  - tests/compatibility/test_minimal_v1_migration_e2e.py
+  baseline_before: EA-STODJARE-V2-DRAFT@2.0-draft-r45
+  baseline_after: EA-STODJARE-V2-DRAFT@2.0-draft-r46
+- id: CHG-META-004
+  revision: 47
+  change_class: metamodel_change
+  summary: Verifiera extended-legacy migration mot rev80 och inför adapter för äldre
+    flat-manifest utan att dölja projektspecifik semantik.
+  status: applied
+  affected_paths:
+  - scripts/migrate_rev80_to_v2.py
+  - scripts/detect_project_profile.py
+  - scripts/validate_project.py
+  - compatibility/reference-projects/rev80/migration-baseline.yaml
+  - compatibility/reference-projects/rev80/migration-verification-result.yaml
+  - docs/rev80-migration-verification.md
+  - tests/compatibility/test_rev80_migration_step24.py
+  baseline_before: EA-STODJARE-V2-DRAFT@2.0-draft-r46
+  baseline_after: EA-STODJARE-V2-DRAFT@2.0-draft-r47
+- id: CHG-META-005
+  revision: 49
+  change_class: metamodel_change
+  summary: Gör dokumentgeneratorerna konsumentmedvetna om effektiv projektmetamodell,
+    presentation contract och derived navigation.
+  status: applied
+  affected_paths:
+  - scripts/generator_context.py
+  - scripts/generate_markdown.py
+  - scripts/generate_confluence.py
+  - scripts/export_documents.py
+  - scripts/generate_derived_views.py
+  - docs/metamodel-aware-generation.md
+  - tests/generation/test_metamodel_presentation_generation_v2.py
+  baseline_before: EA-STODJARE-V2-DRAFT@2.0-draft-r48
+  baseline_after: EA-STODJARE-V2-DRAFT@2.0-draft-r49
+- id: CHG-META-006
+  revision: 52
+  change_class: metamodel_change
+  summary: Samordna strukturell validering till en profil- och metamodellstyrd v2-grind
+    med extended-legacy och reproducerbarhetskontroller.
+  status: applied
+  affected_paths:
+  - scripts/validate_project.py
+  - schemas/validation-report.schema.json
+  - docs/structural-validation-v2.md
+  - tests/compatibility/test_structural_validator_v2.py
+  baseline_before: EA-STODJARE-V2-DRAFT@2.0-draft-r51
+  baseline_after: EA-STODJARE-V2-DRAFT@2.0-draft-r52
+- id: CHG-META-007
+  revision: 53
+  change_class: metamodel_change
+  summary: Gör v2-kompatibilitets- och releasekontraktet obligatoriskt och centralt
+    i CI/release.
+  status: applied
+  affected_paths:
+  - scripts/run_v2_ci_gate.py
+  - .github/workflows/ci.yml
+  - .github/workflows/build-artifacts.yml
+  - .github/workflows/build-distributions.yml
+  - .github/workflows/release.yml
+  - scripts/package_release.py
+  - docs/ci-release-v2.md
+  - tests/release/test_v2_ci_release_gate.py
+  - scripts/run_generation_regression.py
+  - scripts/run_generation_smoke.py
+  baseline_before: EA-STODJARE-V2-DRAFT@2.0-draft-r52
+  baseline_after: EA-STODJARE-V2-DRAFT@2.0-draft-r53

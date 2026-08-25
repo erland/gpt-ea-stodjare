@@ -1,10 +1,8 @@
 h1. Plattformstjänster
 
 {info:title=Genererad artefakt}
-Genererad från kanonisk YAML · läge working · projektrevision 5
+Genererad från kanonisk YAML · läge working · projektrevision 5 · presentationskontrakt ea-reader-oriented-sv
 {info}
 
-Denna katalog visar plattformstjänster i EA-modellen.
-
-|| ID || Namn || Beskrivning || Konsumentomfång || Funktioner || Status ||
-| PLS-001 | [Containerplattformstjänst|PLS-001 – Containerplattformstjänst] | Gemensamt tjänsteerbjudande för att driftsätta och köra containeriserade applikationer. | Operativa utvecklingsområden | Driftsätta containeriserade applikationer, Skala applikationsworkloads, Hantera applikationskonfiguration | candidate |
+|| ID || Namn || Beskrivning || Status ||
+| PLS-001 | [Containerplattformstjänst|Containerplattformstjänst (PLS-001)] | Gemensamt tjänsteerbjudande för att driftsätta och köra containeriserade applikationer. | candidate |

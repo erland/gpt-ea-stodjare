@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/ea-stodjare/migration-report.schema.json",
+  "title": "EA Stödjare v1 to v2 migration report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "migration"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "migration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["engine_version", "source", "target", "status", "summary", "transformations", "issues", "information_preservation"],
+      "properties": {
+        "engine_version": {"type": "string"},
+        "source": {"$ref": "#/$defs/projectRef"},
+        "target": {"$ref": "#/$defs/projectRef"},
+        "status": {"enum": ["planned", "applied", "applied_with_review_required"]},
+        "summary": {
+          "type": "object",
+          "additionalProperties": {"type": "integer", "minimum": 0}
+        },
+        "transformations": {"type": "array", "items": {"$ref": "#/$defs/transformation"}},
+        "issues": {"type": "array", "items": {"$ref": "#/$defs/issue"}},
+        "information_preservation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["original_overwritten", "stable_ids_preserved", "canonical_source_content_deleted", "derived_artifacts_may_be_regenerated"],
+          "properties": {
+            "original_overwritten": {"const": false},
+            "stable_ids_preserved": {"type": "boolean"},
+            "canonical_source_content_deleted": {"const": false},
+            "derived_artifacts_may_be_regenerated": {"type": "boolean"}
+          }
+        },
+        "notes": {"type": "array", "items": {"type": "string"}}
+      }
+    }
+  },
+  "$defs": {
+    "projectRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["profile", "revision", "fingerprint"],
+      "properties": {
+        "profile": {"type": "string"},
+        "revision": {"type": "integer", "minimum": 0},
+        "fingerprint": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "transformation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rule", "action", "count", "details"],
+      "properties": {
+        "rule": {"type": "string"},
+        "action": {"enum": ["preserved", "transformed", "declared_extension", "removed_derived", "review_required"]},
+        "count": {"type": "integer", "minimum": 0},
+        "details": {"type": "string"},
+        "ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+      }
+    },
+    "issue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "severity", "message", "resolution"],
+      "properties": {
+        "code": {"type": "string"},
+        "severity": {"enum": ["info", "warning", "review_required"]},
+        "message": {"type": "string"},
+        "resolution": {"type": "string"},
+        "ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+      }
+    }
+  }
+}

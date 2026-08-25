@@ -1,0 +1,31 @@
+h1. Driftsätta och köra applikationer (CAP-002)
+
+{info:title=Genererad artefakt}
+Genererad från kanonisk YAML · läge working · projektrevision 5
+{info}
+
+* *ID:* CAP-002
+* *Objekttyp:* capability
+* *Status:* candidate
+
+h2. Beskrivning
+
+IT-förmåga att driftsätta, exekvera och livscykelhantera applikationsworkloads i en gemensam körmiljö.
+
+h2. Egenskaper
+
+* *Förmågetyp:* it
+
+h2. Relationer
+
+h3. Relaterar till ({{related_to}})
+* [Referensarkitektur för gemensam applikationskörning|Referensarkitektur för gemensam applikationskörning (RA-001)] ({{RA-001}})
+
+h3. Stöds av ({{supports}})
+* [Containerplattformstjänst|Containerplattformstjänst (PLS-001)] ({{PLS-001}})
+
+h3. Är beroende för ({{depends_on}})
+* [Hantera ärenden digitalt|Hantera ärenden digitalt (CAP-001)] ({{CAP-001}})
+
+h2. Proveniens
+* *proposed*

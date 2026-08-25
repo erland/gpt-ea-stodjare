@@ -1,10 +1,8 @@
 h1. Standarder
 
 {info:title=Genererad artefakt}
-Genererad från kanonisk YAML · läge working · projektrevision 5
+Genererad från kanonisk YAML · läge working · projektrevision 5 · presentationskontrakt ea-reader-oriented-sv
 {info}
 
-Denna katalog visar standarder i EA-modellen.
-
-|| ID || Namn || Standardtyp || Referens/version || Obligatorisk || Status ||
-| STD-001 | [Standard för paketering av applikationer|STD-001 – Standard för paketering av applikationer] | teknikstandard |  | true | candidate |
+|| ID || Namn || Beskrivning || Status ||
+| STD-001 | [Standard för paketering av applikationer|Standard för paketering av applikationer (STD-001)] | Exempelstandard som anger ett gemensamt paketeringssätt för applikationer som använder containerplattformstjänsten. | candidate |

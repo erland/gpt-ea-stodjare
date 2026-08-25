@@ -9,18 +9,6 @@ import subprocess
 import tempfile
 from pathlib import Path
 
-CATALOGS = [
-    ('drivkrafter.md', 'Drivkrafter'),
-    ('mal.md', 'Mål'),
-    ('principer.md', 'Principer'),
-    ('formagor.md', 'Förmågor'),
-    ('it-stod.md', 'IT-stöd'),
-    ('plattformstjanster.md', 'Plattformstjänster'),
-    ('plattformar.md', 'Plattformar'),
-    ('standarder.md', 'Standarder'),
-    ('losningsmonster.md', 'Lösningsmönster'),
-    ('referensarkitekturer.md', 'Referensarkitekturer'),
-]
 
 
 def run(cmd: list[str], cwd: Path | None = None) -> None:
@@ -60,10 +48,11 @@ def promote_detail_headings(text: str) -> str:
 
 
 def assemble(project_root: Path, md_root: Path, mode: str) -> str:
-    manifest = json.loads((project_root / 'project-manifest.json').read_text(encoding='utf-8'))
-    project = manifest['project']
-    title = project['name']
-    revision = project['revision']
+    manifest_path = project_root / 'project-manifest.json'
+    manifest = json.loads(manifest_path.read_text(encoding='utf-8')) if manifest_path.exists() else {}
+    project = manifest.get('project', {})
+    title = project.get('name', project_root.name)
+    revision = project.get('revision', '-')
     lang = project.get('language', 'sv-SE')
 
     parts = [
@@ -80,7 +69,12 @@ def assemble(project_root: Path, md_root: Path, mode: str) -> str:
         '',
     ]
 
-    for catalog_file, catalog_title in CATALOGS:
+    generation_manifest = md_root / 'generation-manifest.json'
+    if generation_manifest.exists():
+        catalogs = [(x['file'], x['title']) for x in json.loads(generation_manifest.read_text(encoding='utf-8')).get('catalogs', [])]
+    else:
+        catalogs = []
+    for catalog_file, catalog_title in catalogs:
         path = md_root / catalog_file
         if not path.exists():
             continue

@@ -1,0 +1,35 @@
+format: ea-stodjare-semantic-eval-case
+version: '1.0'
+id: EVAL-029
+title: Metamodelländring följer change-control
+tags:
+- change_control
+- metamodel
+- governance
+prompt: På en review-baseline vill användaren lägga till en ny global relationstyp och samtidigt pensionera ett gammalt objekttyp-ID.
+  Användaren ber GPT:n bara ändra YAML-filerna snabbt.
+expected_behaviors:
+- GPT:n klassificerar ändringen som metamodel_change, inte vanlig controlled_model_change.
+- Ändringen förs till metamodellchangeloggen och följer projektets approval/baseline-policy.
+- Pensionerade stabila ID:n registreras och får inte återanvändas.
+- GPT:n skiljer metamodelländringen från eventuella efterföljande modellmigreringar och derived outputs.
+forbidden_behaviors:
+- Metamodelländringen loggas endast som vanlig modelländring.
+- Ett pensionerat ID återanvänds för den nya typen eller relationen.
+grading_criteria:
+- id: EVAL-029-C01
+  description: GPT:n klassificerar ändringen som metamodel_change, inte vanlig controlled_model_change.
+  weight: 2
+- id: EVAL-029-C02
+  description: Ändringen förs till metamodellchangeloggen och följer projektets approval/baseline-policy.
+  weight: 1
+- id: EVAL-029-C03
+  description: Pensionerade stabila ID:n registreras och får inte återanvändas.
+  weight: 1
+- id: EVAL-029-C04
+  description: GPT:n skiljer metamodelländringen från eventuella efterföljande modellmigreringar och derived outputs.
+  weight: 1
+critical_failures:
+- metamodel_change kringgår change-control
+- pensionerat ID återanvänds
+notes: Bedöm semantik och motivering, inte exakt ordalydelse.

@@ -1,0 +1,19 @@
+migration_rule_set:
+  id: v1-to-v2-platform-service-semantics
+  source_profile: ea-stodjare-v1
+  target_profile: ea-stodjare-v2
+  automatic_rewrite_default: false
+  principle: >-
+    Legacy platform_service objects remain valid. Migration must review semantic wording;
+    no object is reclassified merely because v2 removes the shared/central-runtime implication.
+  rules:
+    - id: PLS-SEM-001
+      source_concept: platform_service
+      action: preserve identity and content by default
+      review: definition/name/description may imply shared or centrally operated runtime
+      safe_change: editorial clarification when meaning is unchanged
+      ambiguous_action: preserve legacy semantics and record migration issue
+    - id: PLS-SEM-002
+      source_field: realization_pattern
+      action: optional enrichment only
+      inference_rule: never infer actual organizational realization from market/product knowledge alone

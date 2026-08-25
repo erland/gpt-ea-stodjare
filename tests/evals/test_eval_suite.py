@@ -20,15 +20,18 @@ def main() -> int:
     validator = Draft202012Validator(schema)
 
     assert suite["format"] == "ea-stodjare-semantic-eval-suite"
-    assert suite["version"] == "1.0"
+    assert suite["version"] == "2.0"
     cases = suite["cases"]
-    assert len(cases) >= 12, "Eval-sviten är för liten för v1"
+    assert len(cases) >= 29, "Eval-sviten saknar v1-regression eller v2-riskfall"
     ids = [case["id"] for case in cases]
     assert len(ids) == len(set(ids)), "Dubblett-ID i eval-suite"
 
     required_tags = {
         "classification", "evidence", "research", "gap_analysis",
-        "model_design", "uncertainty", "conflict", "scope"
+        "model_design", "uncertainty", "conflict", "scope",
+        "backward_compatibility", "extended_legacy", "project_metamodel",
+        "product", "can_realize", "provided_by", "function",
+        "information_layers", "derived_views", "extensions", "change_control"
     }
     found_tags = set()
     blocking = 0
@@ -47,7 +50,14 @@ def main() -> int:
 
     missing = required_tags - found_tags
     assert not missing, f"Saknade obligatoriska testområden: {sorted(missing)}"
-    assert blocking >= 8, "För få blockerande v1-fall"
+    assert blocking >= 22, "För få blockerande v1/v2-fall"
+    v2_ids = {f"EVAL-{i:03d}" for i in range(16, 30)}
+    assert v2_ids.issubset(set(ids)), "Ett eller flera obligatoriska v2-riskfall saknas"
+    coverage = yaml.safe_load((ROOT / "evals/v2-risk-coverage.yaml").read_text(encoding="utf-8"))
+    assert coverage["format"] == "ea-stodjare-v2-eval-risk-coverage"
+    assert len(coverage["coverage"]) == 14, "V2-riskkartan ska täcka planens 14 riskområden"
+    assert set(coverage["coverage"].values()) == v2_ids, "V2-riskkartan och evalfallen avviker"
+
     assert suite["release_gate"]["minimum_weighted_score_percent"] >= 80
 
     print(f"OK: {len(cases)} semantiska evalfall validerade; {blocking} blockerande.")

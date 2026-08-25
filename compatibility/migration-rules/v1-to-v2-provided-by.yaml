@@ -1,0 +1,27 @@
+migration_rule:
+  id: MIG-REL-PROVIDED-BY-001
+  from_profile: ea-stodjare-v1
+  to_profile: ea-stodjare-v2
+  source_pattern:
+    relation: realized_by
+    source_type: platform_service
+    target_type: platform
+  target_relation: provided_by
+  automatic: false
+  classification:
+    conceptual_home:
+      action: may_convert_to_provided_by
+      requires:
+        - evidence_or_project_semantics_show_conceptual_home
+        - no_claim_of_concrete_product_or_runtime_realization_is_lost
+    concrete_or_ambiguous_realization:
+      action: preserve_and_flag_for_review
+  known_reference_cases:
+    rev80:
+      interpretation: conceptual_home
+      recommended_action: controlled_conversion_to_provided_by
+  invariants:
+    - preserve_relation_id_when_semantics_are_equivalent_and_project_migration_policy_allows
+    - preserve_provenance
+    - never_infer_actual_organizational_offering
+    - never_infer_product_selection

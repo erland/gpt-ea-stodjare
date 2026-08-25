@@ -1,0 +1,91 @@
+schema_version: "1.0"
+detection_contract:
+  id: ea-stodjare-project-profile-detection
+  purpose: >-
+    Identifiera vilken metamodellsemantik som ska laddas innan projektdata tolkas.
+  no_guessing: true
+  priority:
+    - explicit_project_metamodel
+    - explicit_legacy_marker
+    - v1_manifest_profile
+    - extended_legacy_reconstruction
+    - unknown
+
+signals:
+  explicit_project_metamodel:
+    path: project-metamodel.yaml
+    schema: schemas/project-metamodel.schema.json
+    result_class: native_v2
+    confidence: high
+    rule: >-
+      Om filen finns men inte validerar ska projektet klassas som invalid_explicit_model,
+      inte falla tillbaka till en annan profil.
+
+  explicit_legacy_marker:
+    path: project-compatibility.yaml
+    schema: schemas/project-compatibility-marker.schema.json
+    result_class_from_mode: true
+    confidence: high
+    supported_profiles:
+      - ea-stodjare-v1
+    rule: >-
+      En explicit markör får inte kringgå en ogiltig project-metamodel.yaml eftersom den
+      explicit nya modellen har högre prioritet och måste rättas först.
+
+  v1_manifest_profile:
+    manifest_path: project-manifest.json
+    profile: compatibility/ea-stodjare-v1/profile.yaml
+    required_manifest_markers:
+      format: ea-stodjare-project
+      format_version: "1.0"
+      model.model_format_version: "1.0"
+      model.metamodel_version: "1.0"
+      model.relation_model_version: "1.0"
+      model.provenance_model_version: "1.0"
+    result_class: legacy_v1
+    confidence: high
+    rule: >-
+      Exakta manifestmarkörer räcker för legacy v1 om inga tydliga project extensions
+      som ändrar modellsemantiken finns.
+
+  extended_legacy_reconstruction:
+    base_profile: ea-stodjare-v1
+    generic_extension_signals:
+      - supporting/market-product-catalog.yaml
+      - supporting/relation-roles.yaml
+      - supporting/model-freeze-baseline.yaml
+      - supporting/documentation-presentation-model.yaml
+    known_reference_profiles:
+      - id: it-formagemodell-del3-rev80
+        reconstruction: compatibility/reference-projects/rev80/metamodel.yaml
+        fingerprints: compatibility/reference-projects/rev80/source-fingerprints.yaml
+    result_class: extended_legacy
+    confidence:
+      known_reference: high
+      generic_extensions: medium
+    rule: >-
+      Extended legacy ska användas när en v1-baserad modell har tydliga semantiska
+      extensions. En känd referenssnapshot får identifieras exakt; generiska extensions
+      ska inventeras innan modellen ändras.
+
+  unknown:
+    result_class: unknown
+    confidence: low
+    rule: >-
+      Okänd eller motsägelsefull modell får inte tolkas med v2-standardprofilen av
+      bekvämlighet. Inventera format och semantik innan kanoniska ändringar görs.
+
+result_contract:
+  required_fields:
+    - classification
+    - confidence
+    - selected_profile
+    - evidence
+    - blockers
+    - next_action
+  classifications:
+    - native_v2
+    - legacy_v1
+    - extended_legacy
+    - invalid_explicit_model
+    - unknown
