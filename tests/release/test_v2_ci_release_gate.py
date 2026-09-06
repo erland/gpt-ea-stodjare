@@ -39,7 +39,8 @@ def test_workflows_use_central_gate_and_release_is_blocking():
     artifacts = (ROOT / ".github/workflows/build-artifacts.yml").read_text(encoding="utf-8")
     assert "run_v2_ci_gate.py" in ci and "--full-pytest" in ci
     assert "run_v2_ci_gate.py" in release and "--mode release" in release and "--full-pytest" in release
-    assert release.index("run_v2_ci_gate.py") < release.index("package_release.py") < release.index("gh release create")
+    assert release.index("run_v2_ci_gate.py") < release.index("package_release.py")
+    assert "gh release create" not in release
     assert "v2-release-gate.json" in release
     assert "run_v2_ci_gate.py" in dist
     assert "run_v2_ci_gate.py" in artifacts
