@@ -2670,7 +2670,7 @@
       "path": "tests/release/test_v2_ci_release_gate.py",
       "role": "support",
       "required": false,
-      "sha256": "003e314a9406ef5b23e206a509e142ed71f5ce1513f1adfce058bbe4ae27b3ff"
+      "sha256": "c8a478ef3d45a9925237a1670e39eb2ea202ce5408f5eaeb804d7f69d8892e97"
     },
     {
       "path": "tests/release/test_workflow_conformance_contract.py",
