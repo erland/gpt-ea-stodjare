@@ -1,0 +1,56 @@
+name: Update manifest hash once
+
+on:
+  push:
+    branches:
+      - fix/release-artifact-path
+
+permissions:
+  contents: write
+
+jobs:
+  update-manifest:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: fix/release-artifact-path
+
+      - name: Update workflow hash in project manifest
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+
+          workflow = Path('.github/workflows/build-distributions.yml')
+          manifest_path = Path('project-manifest.json')
+          digest = hashlib.sha256(workflow.read_bytes()).hexdigest()
+
+          manifest = json.loads(manifest_path.read_text(encoding='utf-8'))
+          for entry in manifest.get('files', []):
+              if entry.get('path') == '.github/workflows/build-distributions.yml':
+                  entry['sha256'] = digest
+                  break
+          else:
+              raise SystemExit('build-distributions.yml is missing from project-manifest.json')
+
+          manifest_path.write_text(
+              json.dumps(manifest, ensure_ascii=False, indent=2) + '\n',
+              encoding='utf-8',
+          )
+          print(f'Updated manifest hash to {digest}')
+          PY
+
+      - name: Remove one-time workflow and commit manifest
+        shell: bash
+        run: |
+          rm .github/workflows/update-manifest-hash-once.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add project-manifest.json .github/workflows/update-manifest-hash-once.yml
+          git commit -m 'Update manifest hash for release workflow'
+          git push origin HEAD:fix/release-artifact-path
