@@ -1,0 +1,48 @@
+name: Update test manifest once
+
+on:
+  push:
+    branches:
+      - fix/manual-release-only
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: fix/manual-release-only
+
+      - name: Update manifest hash
+        run: |
+          python - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+
+          target = Path('tests/release/test_v2_ci_release_gate.py')
+          digest = hashlib.sha256(target.read_bytes()).hexdigest()
+          manifest_path = Path('project-manifest.json')
+          data = json.loads(manifest_path.read_text(encoding='utf-8'))
+          for item in data['files']:
+              if item['path'] == str(target):
+                  item['sha256'] = digest
+                  break
+          else:
+              raise SystemExit(f'{target} not found in manifest')
+          manifest_path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+          print(digest)
+          PY
+
+      - name: Remove one-time workflow and commit
+        run: |
+          rm .github/workflows/update-test-manifest-once.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add project-manifest.json .github/workflows/update-test-manifest-once.yml
+          git commit -m 'Update manifest hash for release workflow test'
+          git push origin HEAD:fix/manual-release-only
