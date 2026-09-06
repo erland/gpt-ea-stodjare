@@ -36,7 +36,7 @@
       "path": ".github/workflows/build-distributions.yml",
       "role": "support",
       "required": false,
-      "sha256": "0e77516c265f5412d4fddd2ac385497c3fed8f8043e572f9a99c9125db9e666e"
+      "sha256": "7bfa6eb6cee81ca1969463c4eb1dd949ec19bbdd71395835e6c55eebfa33ebb6"
     },
     {
       "path": ".github/workflows/ci.yml",
