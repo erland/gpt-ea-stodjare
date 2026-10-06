@@ -1548,37 +1548,37 @@
       "path": "exports/confluence/drivkrafter.txt",
       "role": "support",
       "required": false,
-      "sha256": "7e329f0001332f4b891a53bf3bfaa35da4f18e06fdd1601f65a9f33264b616f8"
+      "sha256": "89046ac0012c6fcd7117c70dc905d16c56944ed23c3007702cec6e5cb9da9729"
     },
     {
       "path": "exports/confluence/formagor.txt",
       "role": "support",
       "required": false,
-      "sha256": "a5beaa145b1c3f8e3d45069ae5551d92fd0432804f99cce28be941eeed569372"
+      "sha256": "601f59f61b2eb81969dcfdec450fa78975043e76809b5f5982d7bc9fb667e1fd"
     },
     {
       "path": "exports/confluence/generation-manifest.json",
       "role": "support",
       "required": false,
-      "sha256": "d28b7ed590745bad92352e3bd5d59b6309d3822f0565ebfba2257641a89cfc17"
+      "sha256": "23772ed06b67b25d13125acb262b1a450de8c6fa55150781a26411cc00ff523c"
     },
     {
       "path": "exports/confluence/it-stod.txt",
       "role": "support",
       "required": false,
-      "sha256": "3828f23c7772e64c1f57741eb82a988d2f29f992172fe7ba73fefe4445cf1e99"
+      "sha256": "de3ebcce376c6ff1dce218e0c21c6680ebcdcb9184971af8ac95a3ffc04f18c3"
     },
     {
       "path": "exports/confluence/losningsmonster.txt",
       "role": "support",
       "required": false,
-      "sha256": "18b884ae66ba1d91819189f71895d54c6c235a19f55df4b0aa716a04d96f5a3d"
+      "sha256": "7371bbd9ad5121c1e811394fb5b1f61ee7e2d937da95ee111c87517a649b6851"
     },
     {
       "path": "exports/confluence/mal.txt",
       "role": "support",
       "required": false,
-      "sha256": "e2f2a88e709e227d13f5ffe6d06ddf35e8739e970c781aefb294b6b2791f2c46"
+      "sha256": "914ac0813b70c8690e717deae6d7f3f43d7a3e07f2cbcc1f31f9bd3d538cb0a6"
     },
     {
       "path": "exports/confluence/plattformar.txt",
