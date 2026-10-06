@@ -17,6 +17,7 @@ REQUIRED_COVERAGE = {
     "eval_definitions",
     "generators",
     "gpt_distributions",
+    "runtime_parity",
     "release_unpack_and_validate",
     "full_end_to_end_regression",
 }
@@ -29,6 +30,7 @@ def test_v2_gate_declares_all_plan_step_30_coverage():
     assert "--full-pytest" in text
     assert "package_release.py" in text
     assert "validate_distributions.py" in text
+    assert "validate_runtime_parity.py" in text
     assert "run_full_e2e_regression.py" in text
 
 
@@ -43,7 +45,20 @@ def test_workflows_use_central_gate_and_release_is_blocking():
     assert "gh release create" not in release
     assert "v2-release-gate.json" in release
     assert "run_v2_ci_gate.py" in dist
+    assert "DELIVERY-MANIFEST.json" in dist
+    assert "SHA256SUMS.txt" in dist
     assert "run_v2_ci_gate.py" in artifacts
+
+def test_openai_plugin_is_a_first_class_distribution():
+    builder=(ROOT/"scripts/build_distributions.py").read_text(encoding="utf-8")
+    validator=(ROOT/"scripts/validate_distributions.py").read_text(encoding="utf-8")
+    project=(ROOT/"gpt-project.yaml").read_text(encoding="utf-8")
+    parity=(ROOT/"runtime-parity.yaml").read_text(encoding="utf-8")
+    assert "ea-stodjare-openai-plugin-v" in builder
+    assert "plugin.json" in builder and "runtime-contract.json" in builder
+    assert "ea-stodjare-openai-plugin-v" in validator
+    assert "ready_runtime_dependent" in project
+    assert "openai_plugin:" in parity and "active: true" in parity
 
 
 def test_release_packager_has_structural_preflight_metadata():
