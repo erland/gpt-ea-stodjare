@@ -1584,37 +1584,37 @@
       "path": "exports/confluence/plattformar.txt",
       "role": "support",
       "required": false,
-      "sha256": "4179a86118a9b7c119ace509988fbc6fa90d23ffa15062c1c8997a791529dd98"
+      "sha256": "d138b2a3a42f8d4b1c5fd2bf1c331781f12a16ba439b04bc4537d19ddfc2878b"
     },
     {
       "path": "exports/confluence/plattformstjanster.txt",
       "role": "support",
       "required": false,
-      "sha256": "bf748ea91dbecf308bfed4a52b1fcce30c8145242d5c337d61d22ec976713545"
+      "sha256": "005765d49604637cbcecc10c0e3d4f1f7dc96e1ffa298092f26d4f2989c93c41"
     },
     {
       "path": "exports/confluence/principer.txt",
       "role": "support",
       "required": false,
-      "sha256": "234196ffb01af9e31d3c615261f03dc5e83ab8b17e6ef46ec191cd712a0f8a04"
+      "sha256": "fc7c9d5901aa2f059664652b4a10a3fac0696c5498672939c82f930d4beefb4a"
     },
     {
       "path": "exports/confluence/produkter.txt",
       "role": "support",
       "required": false,
-      "sha256": "c62e16fccc36b72f6549a57f653a975921afaa1624646a3ae30af1b69cc655b9"
+      "sha256": "d6dd71efa9235ff0d494f8beefc7990a7b58fdf45a118dbd6dfc657d70ff8269"
     },
     {
       "path": "exports/confluence/referensarkitekturer.txt",
       "role": "support",
       "required": false,
-      "sha256": "fc4ac4c1870e3f6797ba041cb2d1559630b926fe86a60a0d191b033f75f3d242"
+      "sha256": "602e144d79907cf084542c9d55ab991f087ef0bcfe61120169478947f8e0ee4f"
     },
     {
       "path": "exports/confluence/standarder.txt",
       "role": "support",
       "required": false,
-      "sha256": "b2e5d5247383744c1c7f2ca76a209f78e92f1361e92af8215e211e5bd5ec57a2"
+      "sha256": "89079b498f15ff6b95d1bb9a452e9567ae927c7d9ea1004a5db512c5b9748aa4"
     },
     {
       "path": "exports/document/ea-dokumentation.docx",
