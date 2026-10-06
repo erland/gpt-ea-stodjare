@@ -1,0 +1,185 @@
+schema_version: 1
+project:
+  id: ea-stodjare
+  name: EA Stödjare
+  language: sv
+  version: 2.0.0
+
+analysis:
+  profile: stateful_modeling
+  rationale: Stateful enterprise-architecture-modellering med kanonisk YAML, projektspecifik metamodell, change-control, migration och regenererbara derivat.
+  runtime:
+    strategy: peer_candidates
+    candidates:
+      - runtime_id: chatgpt_chat
+        suitability: ready
+        activate_by_default: true
+        reason: Portable Chat bär instruktion, Knowledge och strukturerade stödresurser.
+      - runtime_id: chatgpt_custom
+        suitability: ready
+        activate_by_default: true
+        reason: Custom GPT bär samma metodik och Builder Knowledge inom plattformsgränserna.
+      - runtime_id: claude_project
+        suitability: reduced
+        activate_by_default: false
+        reason: Instruktioner och referenser kan paketeras men fil-, execution- och state-paritet är inte verifierad.
+      - runtime_id: opencode
+        suitability: reduced
+        activate_by_default: false
+        reason: Lokal fil/exekvering passar men runtimeparitet och distributionskontrakt är inte verifierade.
+      - runtime_id: openai_plugin
+        suitability: ready
+        activate_by_default: true
+        reason: Skills-first kan bära canonical metodik och deklarerade runtimeverktyg när hosten erbjuder workspace, filskrivning, code execution och persistent state.
+
+migration:
+  target: gpt-builder-1.5.1
+
+instructions:
+  canonical: custom-gpt/instructions.md
+
+knowledge:
+  canonical_root: custom-gpt/knowledge
+  files:
+    - 00-knowledge-index.md
+    - 01-domain-model.md
+    - 02-evidence-and-research.md
+    - 03-analysis-and-modeling-workflows.md
+    - 04-quality-assurance.md
+    - 05-project-and-output.md
+
+runtime:
+  chat_zip:
+    enabled: true
+    role: peer_distribution
+    artifact: dist/ea-stodjare-chat-v{version}.zip
+  custom_gpt:
+    enabled: true
+    role: peer_distribution
+    artifact: dist/ea-stodjare-custom-gpt-v{version}.zip
+  openai_plugin:
+    enabled: true
+    role: peer_distribution
+    mode: skills_first
+    compatibility: ready_runtime_dependent
+    entrypoint: skills/ea-stodjare/SKILL.md
+    artifact: dist/ea-stodjare-openai-plugin-v{version}.zip
+    filesystem_read: required_host_runtime
+    filesystem_write: required_host_runtime
+    code_execution: required_host_runtime
+    persistent_state: required_host_runtime
+    web_research: conditional_host_runtime
+    state_authority: project_files
+    conversation_fallback: false
+    mcp_generated: false
+
+capabilities:
+  filesystem:
+    read: required
+    write: required_for_project_changes
+  code_execution:
+    level: required_for_verified_project_changes
+  persistent_state:
+    level: required_for_stateful_project_management
+  web:
+    level: conditional
+    reason: Required when standards, frameworks, market/product data or current practice must be researched.
+  structured_data:
+    level: required
+  external_tools:
+    level: conditional
+    reason: Pandoc and LibreOffice are required only for DOCX/PDF export.
+
+workspace_state:
+  workspace:
+    requirement: required_for_project_work
+    persistence: required
+    separate_from_assistant: true
+  state:
+    authority: project_files
+    conversation_fallback: false
+    canonical_sources:
+      - project-manifest.json
+      - project-metamodel.yaml
+      - model/
+      - market-reference/
+      - actual-state/
+      - governance/
+
+tools:
+  runtime_scripts:
+    required:
+      - scripts/validate_project.py
+      - scripts/detect_project_profile.py
+      - scripts/resolve_project_metamodel.py
+      - scripts/resolve_quality_rules.py
+      - scripts/change_control.py
+    recommended:
+      - scripts/generate_derived_views.py
+      - scripts/generate_markdown.py
+      - scripts/generate_confluence.py
+      - scripts/generator_context.py
+      - scripts/presentation_contract.py
+      - scripts/export_documents.py
+      - scripts/docx-pagebreak.lua
+      - scripts/migrate_v1_to_v2.py
+      - scripts/migrate_rev80_to_v2.py
+      - scripts/verify_v1_v2_migration.py
+  build_only_scripts:
+    - scripts/build_distributions.py
+    - scripts/validate_distributions.py
+    - scripts/build_builder_knowledge.py
+    - scripts/package_release.py
+    - scripts/run_v2_ci_gate.py
+    - scripts/run_full_e2e_regression.py
+
+artifacts:
+  outputs:
+    project_model:
+      format: yaml
+      persistence: persistent
+    markdown:
+      format: markdown
+      persistence: derived
+    confluence:
+      format: text
+      persistence: derived
+    docx:
+      format: docx
+      persistence: derived
+      host_dependencies: [pandoc]
+    pdf:
+      format: pdf
+      persistence: derived
+      host_dependencies: [pandoc, libreoffice]
+    runtime_package:
+      format: zip
+      persistence: persistent
+
+runtime_parity:
+  model: runtime-parity.yaml
+  registered_runtimes:
+    - chatgpt_chat
+    - chatgpt_custom
+    - claude_project
+    - opencode
+    - openai_plugin
+  compared_categories:
+    - behavior
+    - capability
+    - artifact
+    - workspace_state
+    - tool
+
+build:
+  chat: true
+  custom_gpt: true
+  plugin: true
+
+release:
+  artifacts:
+    - chat_zip
+    - custom_gpt_zip
+    - plugin_zip
+    - sha256_checksums
+    - delivery_manifest
