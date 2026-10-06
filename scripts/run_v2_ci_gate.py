@@ -95,6 +95,7 @@ def main() -> int:
             "eval_definitions",
             "generators",
             "gpt_distributions",
+            "runtime_parity",
             "release_unpack_and_validate",
             "full_end_to_end_regression",
             "release_contract",
@@ -120,6 +121,7 @@ def main() -> int:
         ("migration", [py, "-m", "pytest", "-q", "tests/compatibility/test_v1_to_v2_migration_engine.py"]),
         ("eval_definitions", [py, "tests/evals/test_eval_suite.py"]),
         ("builder_knowledge", [py, "tests/builder/test_builder_knowledge.py"]),
+        ("runtime_parity", [py, "scripts/validate_runtime_parity.py"]),
         ("generators", [py, "scripts/run_generation_smoke.py"]),
         ("full_end_to_end_regression", [py, "scripts/run_full_e2e_regression.py", "--project-root", ".", "--report-file", "build/full-e2e-report.json"]),
         ("release_contract", [py, "-m", "pytest", "-q", "tests/release/test_release_contract.py"]),
@@ -131,7 +133,7 @@ def main() -> int:
             print(json.dumps(report, ensure_ascii=False, indent=2))
             return 1
 
-    # Build and validate both end-user GPT distribution formats.
+    # Build and validate all active end-user GPT distribution formats.
     if not step("build_gpt_distributions", [py, "scripts/build_distributions.py", "--version", version]):
         write_report(report_path, report); print(json.dumps(report, ensure_ascii=False, indent=2)); return 1
     if not step("gpt_distributions", [py, "scripts/validate_distributions.py", "--version", version]):
