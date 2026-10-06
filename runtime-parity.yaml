@@ -1,0 +1,37 @@
+schema_version: 1
+reference: canonical_contract
+registered_runtimes:
+  - chatgpt_chat
+  - chatgpt_custom
+  - claude_project
+  - opencode
+  - openai_plugin
+compared_categories:
+  - behavior
+  - capability
+  - artifact
+  - workspace_state
+  - tool
+runtimes:
+  chatgpt_chat:
+    suitability: ready
+    active: true
+  chatgpt_custom:
+    suitability: ready
+    active: true
+  claude_project:
+    suitability: reduced
+    active: false
+  opencode:
+    suitability: reduced
+    active: false
+  openai_plugin:
+    suitability: ready
+    active: true
+    compatibility: ready_runtime_dependent
+notes:
+  - OpenAI Plugin är skills-first och bevarar canonical instruktion, Builder Knowledge och project-first/metamodel-first-regler.
+  - Full verifierad projektändring kräver filesystem read/write, code execution och persistent workspace-state.
+  - Projektfiler är auktoritativ state; chattminne är aldrig fallback för ett öppnat EA-projekt.
+  - Webbresearch är villkorligt krav för uppgifter om aktuell standard, ramverk, marknad, produkt eller praxis.
+  - DOCX/PDF-export kräver externa hostverktyg utöver Python.
