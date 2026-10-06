@@ -462,37 +462,37 @@
       "path": "docs/generated/plattformar.md",
       "role": "documentation_source",
       "required": false,
-      "sha256": "977bc5d6e20d7cf6fbf7eb6bcca699f2cb881507e092aea83398bfc2917fa5bf"
+      "sha256": "d0e328b945feb2cf596f9fde8ffbf7a0efe85e812a8332ded15705fe289e7e08"
     },
     {
       "path": "docs/generated/plattformstjanster.md",
       "role": "documentation_source",
       "required": false,
-      "sha256": "fac5b451fe3b972c56f22e2d736e14d8c9fa51d5521c2c92754566eb4dbe8d9b"
+      "sha256": "2f8409a4b06a7396375980966ae0c430e89fbd5207ff22564b148ddb892ada7e"
     },
     {
       "path": "docs/generated/principer.md",
       "role": "documentation_source",
       "required": false,
-      "sha256": "044766123c762c531d4b0124c38315384c4b93181b88ae2e0ca274c46a05c109"
+      "sha256": "ce17117ff519755044403005a2c4265baf829577b1c1d97f86ec9098ea129ecc"
     },
     {
       "path": "docs/generated/produkter.md",
       "role": "documentation_source",
       "required": false,
-      "sha256": "dea0197c1cdd6a9673bc1aac40ba4e64a409bf192319bc9c56827c2f397454b9"
+      "sha256": "4cea40a8e8b56b648dbfa18a30cb6931435e69adb292331a78b4e74a6d35cfdf"
     },
     {
       "path": "docs/generated/referensarkitekturer.md",
       "role": "documentation_source",
       "required": false,
-      "sha256": "4526675897d300d818a25d2c742a47ebaad6fc31ce339fc3d1f67c8e344ea18e"
+      "sha256": "f555bacde32bc90236ab0a4361a2da22d8ca4352dddbb7f4ff17a91a1c4eb8bf"
     },
     {
       "path": "docs/generated/standarder.md",
       "role": "documentation_source",
       "required": false,
-      "sha256": "0adc6d22fb1c2d9e63ad61dd1843cc0f56c05f73e6fd475e216c6966487652b4"
+      "sha256": "5dcb8009903d45872c83ccb3b099e75a5198e8d40bfcac34fd0143587dd9018c"
     },
     {
       "path": "docs/information-layers.md",
