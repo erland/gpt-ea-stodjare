@@ -3,14 +3,14 @@ change_control:
   enabled: true
   baseline:
     id: EA-STODJARE-V2
-    version: 2.0.0-r59
+    version: 2.0.0-r60
     freeze_status: frozen
-    model_revision: 59
+    model_revision: 60
     metamodel_version: '2.0'
-    created_at: '2026-08-25T23:00:00+02:00'
+    created_at: '2026-10-06T04:05:00+02:00'
     notes:
-    - Slutlig 2.0.0-baslinje efter post-release cleanup r59; ingen modell- eller metamodellsemantik
-      ändrad jämfört med r58.
+    - Runtime-/distributionsrevision r60 lägger till GPT Byggaren 1.5.1 OpenAI Plugin utan ändring av modell- eller metamodellsemantik.
+    - Slutlig 2.0.0-modellsemantik är oförändrad jämfört med r59.
     - Extern LLM-runtime-eval är inte exekverad och redovisas som accepterad residualrisk,
       inte som passed.
     - V1.0.0-rc1 bevaras separat som fryst legacy-profil.
