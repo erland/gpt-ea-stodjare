@@ -480,3 +480,15 @@ Kör de 29 fallen mot den faktiska EA Stödjare-distributionen, importera/bedöm
 - Ersatt historiskt Step32 release-candidate-test med permanent final release contract.
 - Behållit v1-/rev80-/migrationsunderlag som aktiv regressionsevidens.
 - Ingen modell- eller metamodellsemantik ändrad.
+
+## Revision 60 – GPT Byggaren 1.5.1 OpenAI Plugin
+
+- Lagt till `gpt-project.yaml` och `runtime-parity.yaml` som plattformsneutrala runtimekontrakt.
+- Aktiverat OpenAI Plugin som skills-first `ready_runtime_dependent` peer-runtime.
+- Paketerat Builder Knowledge, templates och nödvändiga schema/extension/presentation/compatibility-resurser för runtimeverktygen.
+- Paketerat projektprofil-, metamodell-, QA-, change-control-, migration- och generatorverktyg som deklarerade script resources.
+- Exkluderat CI-, eval- och releaseinfrastruktur från pluginruntime.
+- Infört `SHA256SUMS.txt` och `DELIVERY-MANIFEST.json` för GPT-distributionerna.
+- Kopplat runtime parity och pluginvalidering till den centrala v2 CI/release-grinden.
+- Ingen EA-modell- eller metamodellsemantik ändrad; frozen 2.0.0-baslinje kvarstår.
+
