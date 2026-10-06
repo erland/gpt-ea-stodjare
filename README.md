@@ -1,6 +1,6 @@
 # EA Stödjare
 
-**Aktuell release:** **2.0.0**, revision 59  
+**Aktuell release:** **2.0.0**, revision 60  
 **Status:** released / frozen  
 **Legacy:** v1.0.0-rc1 bevaras som fryst kompatibilitetsprofil
 
@@ -63,9 +63,17 @@ Markdown, Confluence, DOCX och PDF genereras utifrån faktisk projektmetamodell,
 
 Se [`docs/metamodel-aware-generation.md`](docs/metamodel-aware-generation.md).
 
-## Custom GPT och portable chat
+## Runtime-distributioner
 
-Distributionerna använder v2-anpassade Builder Instructions och deterministiskt Builder Knowledge. Projektprofil och projektmetamodell ska alltid identifieras före semantisk tolkning. Legacy v1 och extended legacy får inte implicit migreras.
+EA Stödjare har tre aktiva peer-distributioner från samma v2-semantik:
+
+- **Custom GPT** – Builder Instructions och deterministiskt Builder Knowledge.
+- **Portable Chat** – samma instruktion/Knowledge plus stödjande schemas, modell och mallar.
+- **OpenAI Plugin** – skills-first `ready_runtime_dependent` runtime enligt GPT Byggaren 1.5.1.
+
+Pluginen kräver hostens fil read/write, code execution och persistent workspace-state för verifierade projektändringar. Projektfiler är auktoritativ state och chattminne är inte fallback. Aktuell extern research är ett villkorligt krav för standarder, ramverk, praxis och marknads-/produktdata.
+
+Runtimeverktyg för profil/metamodell, QA, change-control, migration och generering paketeras som script resources. CI-/releaseverktyg och MCP-wrapper ingår inte. Projektprofil och projektmetamodell ska alltid identifieras före semantisk tolkning; legacy v1 och extended legacy får aldrig implicit migreras.
 
 ## Verifiering
 
@@ -76,6 +84,7 @@ python3 scripts/validate_project.py --project-root .
 python3 scripts/run_workflow_conformance.py --project-root .
 python3 scripts/run_full_e2e_regression.py --project-root . --report-file build/full-e2e-report.json
 python3 scripts/run_v2_ci_gate.py --project-root . --version 2.0.0
+python3 scripts/validate_runtime_parity.py
 ```
 
 `run_full_e2e_regression.py` täcker tolv arbetskedjor: native v2, extensions, legacy-redigering, v1- och rev80-migration, produktanalys för IT-stöd och Plattformstjänst, researchbaserat modellförslag, derived views och dokumentexport.
