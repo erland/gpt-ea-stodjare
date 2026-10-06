@@ -1,6 +1,6 @@
 # IT-stöd
 
-> Genererad från kanonisk YAML · läge `working` · projektrevision `59` · presentationskontrakt `ea-reader-oriented-sv`
+> Genererad från kanonisk YAML · läge `working` · projektrevision `60` · presentationskontrakt `ea-reader-oriented-sv`
 
 Denna katalog visar it-stöd i EA-modellen.
 
