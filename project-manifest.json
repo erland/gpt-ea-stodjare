@@ -57,10 +57,28 @@
       "sha256": "071271e29304ca31a25896e1097f2c18018ca2daac31956064bd5d914f7c17c3"
     },
     {
-      "path": "actual-state/assertions.yaml",
+      "path": "CHANGELOG.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "3ece23aa2e36e44b93c3050de4008bdafaf2dd2298ac37fac0493c0d06bdf985"
+    },
+    {
+      "path": "PROJECT_STATUS.md",
+      "role": "documentation_source",
+      "required": true,
+      "sha256": "cc71ca906521f5e62fd076708e06a8cc0969c593fda03bda62008d2fda30c7f3"
+    },
+    {
+      "path": "README.md",
+      "role": "documentation_source",
+      "required": true,
+      "sha256": "6f5b77cb68acc0f8f2189d5528e14f9f9dff33fe29af2916ef14266b3868605f"
+    },
+    {
+      "path": "VERSION",
       "role": "support",
       "required": false,
-      "sha256": "ec4a030cc20af67835cbd2572c7f697340843df9d705d96cd21b361002f75cb9"
+      "sha256": "c28fcca53637bc88e124af1725df13cb98c69dedefd62fb3cdbe1cdb6b760624"
     },
     {
       "path": "actual-state/README.md",
@@ -69,22 +87,22 @@
       "sha256": "3f3ee41d92b521736add128def2e4b29f48b1e4f2de0dc4e4e8ff6bf79f2e4e5"
     },
     {
-      "path": "CHANGELOG.md",
-      "role": "documentation_source",
-      "required": false,
-      "sha256": "3ece23aa2e36e44b93c3050de4008bdafaf2dd2298ac37fac0493c0d06bdf985"
-    },
-    {
-      "path": "compatibility/ea-stodjare-v1/profile.yaml",
+      "path": "actual-state/assertions.yaml",
       "role": "support",
       "required": false,
-      "sha256": "c4ab40603093d795ef0cc2d36451368fe61715933dbacfcab76bc2c7cbd330f4"
+      "sha256": "ec4a030cc20af67835cbd2572c7f697340843df9d705d96cd21b361002f75cb9"
     },
     {
       "path": "compatibility/ea-stodjare-v1/README.md",
       "role": "documentation_source",
       "required": false,
       "sha256": "7febabe86be3f0e2c7ea52fe828683aecd23321ab13e680c3a3150d8d757a40d"
+    },
+    {
+      "path": "compatibility/ea-stodjare-v1/profile.yaml",
+      "role": "support",
+      "required": false,
+      "sha256": "c4ab40603093d795ef0cc2d36451368fe61715933dbacfcab76bc2c7cbd330f4"
     },
     {
       "path": "compatibility/ea-stodjare-v1/schemas/model-format.yaml",
@@ -183,6 +201,12 @@
       "sha256": "2845bcb1fb5bfe6f2cd98aa0f7d098fe1382a001db1ad141293443e822611387"
     },
     {
+      "path": "compatibility/reference-projects/rev80/README.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "926acb0f47fdbe6080ce5d5346594a9cc82601fd1d47c053b2fbd3f95d6be00b"
+    },
+    {
       "path": "compatibility/reference-projects/rev80/extension-inventory.yaml",
       "role": "support",
       "required": false,
@@ -211,12 +235,6 @@
       "role": "support",
       "required": false,
       "sha256": "609eb22774abf080bf3326ab235bbed12ac839c5c90ec3a5706e845bb56562ab"
-    },
-    {
-      "path": "compatibility/reference-projects/rev80/README.md",
-      "role": "documentation_source",
-      "required": false,
-      "sha256": "926acb0f47fdbe6080ce5d5346594a9cc82601fd1d47c053b2fbd3f95d6be00b"
     },
     {
       "path": "compatibility/reference-projects/rev80/source-fingerprints.yaml",
@@ -723,6 +741,12 @@
       "sha256": "b857dc673313fef247b0f9e5e677fc7f040c6289dc38d22a01bf8c47b279a4ac"
     },
     {
+      "path": "evals/README.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "ddb1a951e92283c795f277038ab3307a880eae4cc61dd3ea0a54046454e332c9"
+    },
+    {
       "path": "evals/cases/EVAL-001-driver-vs-goal.yaml",
       "role": "support",
       "required": false,
@@ -903,12 +927,6 @@
       "sha256": "b9a86f1f2fb9f19c68de1a06c644de6c0f4fd44bdfdcc5ed2ee1a49cd2c08045"
     },
     {
-      "path": "evals/README.md",
-      "role": "documentation_source",
-      "required": false,
-      "sha256": "ddb1a951e92283c795f277038ab3307a880eae4cc61dd3ea0a54046454e332c9"
-    },
-    {
       "path": "evals/rubrics/research-grading.md",
       "role": "documentation_source",
       "required": false,
@@ -961,6 +979,18 @@
       "role": "support",
       "required": false,
       "sha256": "245a669c3a7aba1768c75d73a22067d86441995f470f823ec0c0f92967984932"
+    },
+    {
+      "path": "examples/minimal-model/PROJECT_STATUS.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "de7776f7b87fbfe8b9ae352f5781bc0839ece0256497e43742fd94ff56445b9d"
+    },
+    {
+      "path": "examples/minimal-model/README.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "d993c4358c2c39631b4090ed94e73939ae6891970d051f7242bec4b2eaf844be"
     },
     {
       "path": "examples/minimal-model/docs/generated/drivkrafter.md",
@@ -1311,22 +1341,16 @@
       "sha256": "5c34851c4b84e2ba2cd1af4e033379b004ff7fc14034daa98cfd378b4c346af0"
     },
     {
-      "path": "examples/minimal-model/PROJECT_STATUS.md",
-      "role": "documentation_source",
-      "required": false,
-      "sha256": "de7776f7b87fbfe8b9ae352f5781bc0839ece0256497e43742fd94ff56445b9d"
-    },
-    {
-      "path": "examples/minimal-model/README.md",
-      "role": "documentation_source",
-      "required": false,
-      "sha256": "d993c4358c2c39631b4090ed94e73939ae6891970d051f7242bec4b2eaf844be"
-    },
-    {
       "path": "examples/minimal-model/revision-log.md",
       "role": "documentation_source",
       "required": false,
       "sha256": "92ad02f257cafaec61d4a310770f82868d61b27839693784e3c7c8c83ee6fede"
+    },
+    {
+      "path": "examples/product-analysis-it-support/README.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "b061ee2ad4ca7db01f1111a31bead5a175b5f1ed75d66229b13bd5342259b6a5"
     },
     {
       "path": "examples/product-analysis-it-support/actual-state/assertions.yaml",
@@ -1425,10 +1449,10 @@
       "sha256": "ed770a02cedcb44fddf85ed59ba47024aa7d056779d1015007a245559c4b75f7"
     },
     {
-      "path": "examples/product-analysis-it-support/README.md",
+      "path": "examples/product-analysis-platform-service/README.md",
       "role": "documentation_source",
       "required": false,
-      "sha256": "b061ee2ad4ca7db01f1111a31bead5a175b5f1ed75d66229b13bd5342259b6a5"
+      "sha256": "79c5a1862c93dff3053a4c38861995412cee89893a042ff1d9a79ba14c3c2442"
     },
     {
       "path": "examples/product-analysis-platform-service/actual-state/assertions.yaml",
@@ -1525,12 +1549,6 @@
       "role": "support",
       "required": false,
       "sha256": "ed770a02cedcb44fddf85ed59ba47024aa7d056779d1015007a245559c4b75f7"
-    },
-    {
-      "path": "examples/product-analysis-platform-service/README.md",
-      "role": "documentation_source",
-      "required": false,
-      "sha256": "79c5a1862c93dff3053a4c38861995412cee89893a042ff1d9a79ba14c3c2442"
     },
     {
       "path": "examples/project-metamodel/extended.yaml",
@@ -1845,16 +1863,16 @@
       "sha256": "20d45bbfab8ba9b4533afa7a9c2ef0b6123ec6514cb5b2e67e3fa107d28b9da3"
     },
     {
-      "path": "market-reference/assertions.yaml",
-      "role": "support",
-      "required": false,
-      "sha256": "5f3921730cd070cba362601ddda4bae4b75ebc3d2fc0e56f62dde6b968839975"
-    },
-    {
       "path": "market-reference/README.md",
       "role": "documentation_source",
       "required": false,
       "sha256": "1dcea2b7b2c30ce9362d9d868c41b3828d32d818024474cbc8ea6b9049ab81a7"
+    },
+    {
+      "path": "market-reference/assertions.yaml",
+      "role": "support",
+      "required": false,
+      "sha256": "5f3921730cd070cba362601ddda4bae4b75ebc3d2fc0e56f62dde6b968839975"
     },
     {
       "path": "model/capabilities.yaml",
@@ -1945,18 +1963,6 @@
       "role": "support",
       "required": false,
       "sha256": "7ba3697a3ac5ed330d554f9d36e1933edf2df2f4162f033bf9a330e4df0b4b48"
-    },
-    {
-      "path": "PROJECT_STATUS.md",
-      "role": "documentation_source",
-      "required": true,
-      "sha256": "cc71ca906521f5e62fd076708e06a8cc0969c593fda03bda62008d2fda30c7f3"
-    },
-    {
-      "path": "README.md",
-      "role": "documentation_source",
-      "required": true,
-      "sha256": "6f5b77cb68acc0f8f2189d5528e14f9f9dff33fe29af2916ef14266b3868605f"
     },
     {
       "path": "requirements-dev.txt",
@@ -2779,12 +2785,6 @@
       "role": "support",
       "required": false,
       "sha256": "a0c3b3d88400dbb193e44d0261b8df0fc53b98278ad530e02172db88966585a9"
-    },
-    {
-      "path": "VERSION",
-      "role": "support",
-      "required": false,
-      "sha256": "c28fcca53637bc88e124af1725df13cb98c69dedefd62fb3cdbe1cdb6b760624"
     }
   ],
   "information_layers": {
