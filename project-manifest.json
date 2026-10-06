@@ -6,9 +6,9 @@
     "name": "EA Stödjare – utvecklings- och referensprojekt",
     "kind": "ea_model_template",
     "language": "sv-SE",
-    "revision": 59,
+    "revision": 60,
     "created_at": "2026-08-20T17:50:00+02:00",
-    "updated_at": "2026-08-25T23:00:00+02:00",
+    "updated_at": "2026-10-06T04:05:00+02:00",
     "lifecycle_status": "approved"
   },
   "model": {
@@ -36,7 +36,7 @@
       "path": ".github/workflows/build-distributions.yml",
       "role": "support",
       "required": false,
-      "sha256": "7bfa6eb6cee81ca1969463c4eb1dd949ec19bbdd71395835e6c55eebfa33ebb6"
+      "sha256": "640a8b7c8ff08bc038f728f0f27b56dc230fd214ca67ae82a9c85a615b745dad"
     },
     {
       "path": ".github/workflows/ci.yml",
@@ -48,7 +48,7 @@
       "path": ".github/workflows/release.yml",
       "role": "support",
       "required": false,
-      "sha256": "e716706e1d5dcaa9d78dbdb9310e39c56be5d83c737ed641a4127fea2d054655"
+      "sha256": "01128d00a9cd6a129ef04a6df44daa8e39d71aa69db509ead7a95994b814df12"
     },
     {
       "path": ".gitignore",
@@ -57,28 +57,10 @@
       "sha256": "071271e29304ca31a25896e1097f2c18018ca2daac31956064bd5d914f7c17c3"
     },
     {
-      "path": "CHANGELOG.md",
-      "role": "documentation_source",
-      "required": false,
-      "sha256": "3ece23aa2e36e44b93c3050de4008bdafaf2dd2298ac37fac0493c0d06bdf985"
-    },
-    {
-      "path": "PROJECT_STATUS.md",
-      "role": "documentation_source",
-      "required": true,
-      "sha256": "22ad3255c6c378f382ba473954595f1d32d441fc02e583697faa1244408c5fcc"
-    },
-    {
-      "path": "README.md",
-      "role": "documentation_source",
-      "required": true,
-      "sha256": "edf4eaa7c917241e3226e6f3e48d0f38180b4dd8ad9bc9b6688196b1c1bed2f8"
-    },
-    {
-      "path": "VERSION",
+      "path": "actual-state/assertions.yaml",
       "role": "support",
       "required": false,
-      "sha256": "c28fcca53637bc88e124af1725df13cb98c69dedefd62fb3cdbe1cdb6b760624"
+      "sha256": "ec4a030cc20af67835cbd2572c7f697340843df9d705d96cd21b361002f75cb9"
     },
     {
       "path": "actual-state/README.md",
@@ -87,22 +69,22 @@
       "sha256": "3f3ee41d92b521736add128def2e4b29f48b1e4f2de0dc4e4e8ff6bf79f2e4e5"
     },
     {
-      "path": "actual-state/assertions.yaml",
-      "role": "support",
-      "required": false,
-      "sha256": "ec4a030cc20af67835cbd2572c7f697340843df9d705d96cd21b361002f75cb9"
-    },
-    {
-      "path": "compatibility/ea-stodjare-v1/README.md",
+      "path": "CHANGELOG.md",
       "role": "documentation_source",
       "required": false,
-      "sha256": "7febabe86be3f0e2c7ea52fe828683aecd23321ab13e680c3a3150d8d757a40d"
+      "sha256": "3ece23aa2e36e44b93c3050de4008bdafaf2dd2298ac37fac0493c0d06bdf985"
     },
     {
       "path": "compatibility/ea-stodjare-v1/profile.yaml",
       "role": "support",
       "required": false,
       "sha256": "c4ab40603093d795ef0cc2d36451368fe61715933dbacfcab76bc2c7cbd330f4"
+    },
+    {
+      "path": "compatibility/ea-stodjare-v1/README.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "7febabe86be3f0e2c7ea52fe828683aecd23321ab13e680c3a3150d8d757a40d"
     },
     {
       "path": "compatibility/ea-stodjare-v1/schemas/model-format.yaml",
@@ -201,12 +183,6 @@
       "sha256": "2845bcb1fb5bfe6f2cd98aa0f7d098fe1382a001db1ad141293443e822611387"
     },
     {
-      "path": "compatibility/reference-projects/rev80/README.md",
-      "role": "documentation_source",
-      "required": false,
-      "sha256": "926acb0f47fdbe6080ce5d5346594a9cc82601fd1d47c053b2fbd3f95d6be00b"
-    },
-    {
       "path": "compatibility/reference-projects/rev80/extension-inventory.yaml",
       "role": "support",
       "required": false,
@@ -235,6 +211,12 @@
       "role": "support",
       "required": false,
       "sha256": "609eb22774abf080bf3326ab235bbed12ac839c5c90ec3a5706e845bb56562ab"
+    },
+    {
+      "path": "compatibility/reference-projects/rev80/README.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "926acb0f47fdbe6080ce5d5346594a9cc82601fd1d47c053b2fbd3f95d6be00b"
     },
     {
       "path": "compatibility/reference-projects/rev80/source-fingerprints.yaml",
@@ -579,6 +561,12 @@
       "sha256": "af5057d081c8a1298a309aee5b032f9a18cdc805e674537a2cfb2f568ea95691"
     },
     {
+      "path": "docs/openai-plugin-runtime.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "725bfc3297d7c95560e20d19381e7e9feaa7ed0b919d520617b26de35d54933e"
+    },
+    {
       "path": "docs/optional-rev80-extensions.md",
       "role": "documentation_source",
       "required": false,
@@ -733,12 +721,6 @@
       "role": "documentation_source",
       "required": false,
       "sha256": "b857dc673313fef247b0f9e5e677fc7f040c6289dc38d22a01bf8c47b279a4ac"
-    },
-    {
-      "path": "evals/README.md",
-      "role": "documentation_source",
-      "required": false,
-      "sha256": "ddb1a951e92283c795f277038ab3307a880eae4cc61dd3ea0a54046454e332c9"
     },
     {
       "path": "evals/cases/EVAL-001-driver-vs-goal.yaml",
@@ -921,6 +903,12 @@
       "sha256": "b9a86f1f2fb9f19c68de1a06c644de6c0f4fd44bdfdcc5ed2ee1a49cd2c08045"
     },
     {
+      "path": "evals/README.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "ddb1a951e92283c795f277038ab3307a880eae4cc61dd3ea0a54046454e332c9"
+    },
+    {
       "path": "evals/rubrics/research-grading.md",
       "role": "documentation_source",
       "required": false,
@@ -973,18 +961,6 @@
       "role": "support",
       "required": false,
       "sha256": "245a669c3a7aba1768c75d73a22067d86441995f470f823ec0c0f92967984932"
-    },
-    {
-      "path": "examples/minimal-model/PROJECT_STATUS.md",
-      "role": "documentation_source",
-      "required": false,
-      "sha256": "de7776f7b87fbfe8b9ae352f5781bc0839ece0256497e43742fd94ff56445b9d"
-    },
-    {
-      "path": "examples/minimal-model/README.md",
-      "role": "documentation_source",
-      "required": false,
-      "sha256": "d993c4358c2c39631b4090ed94e73939ae6891970d051f7242bec4b2eaf844be"
     },
     {
       "path": "examples/minimal-model/docs/generated/drivkrafter.md",
@@ -1335,16 +1311,22 @@
       "sha256": "5c34851c4b84e2ba2cd1af4e033379b004ff7fc14034daa98cfd378b4c346af0"
     },
     {
+      "path": "examples/minimal-model/PROJECT_STATUS.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "de7776f7b87fbfe8b9ae352f5781bc0839ece0256497e43742fd94ff56445b9d"
+    },
+    {
+      "path": "examples/minimal-model/README.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "d993c4358c2c39631b4090ed94e73939ae6891970d051f7242bec4b2eaf844be"
+    },
+    {
       "path": "examples/minimal-model/revision-log.md",
       "role": "documentation_source",
       "required": false,
       "sha256": "92ad02f257cafaec61d4a310770f82868d61b27839693784e3c7c8c83ee6fede"
-    },
-    {
-      "path": "examples/product-analysis-it-support/README.md",
-      "role": "documentation_source",
-      "required": false,
-      "sha256": "b061ee2ad4ca7db01f1111a31bead5a175b5f1ed75d66229b13bd5342259b6a5"
     },
     {
       "path": "examples/product-analysis-it-support/actual-state/assertions.yaml",
@@ -1443,10 +1425,10 @@
       "sha256": "ed770a02cedcb44fddf85ed59ba47024aa7d056779d1015007a245559c4b75f7"
     },
     {
-      "path": "examples/product-analysis-platform-service/README.md",
+      "path": "examples/product-analysis-it-support/README.md",
       "role": "documentation_source",
       "required": false,
-      "sha256": "79c5a1862c93dff3053a4c38861995412cee89893a042ff1d9a79ba14c3c2442"
+      "sha256": "b061ee2ad4ca7db01f1111a31bead5a175b5f1ed75d66229b13bd5342259b6a5"
     },
     {
       "path": "examples/product-analysis-platform-service/actual-state/assertions.yaml",
@@ -1543,6 +1525,12 @@
       "role": "support",
       "required": false,
       "sha256": "ed770a02cedcb44fddf85ed59ba47024aa7d056779d1015007a245559c4b75f7"
+    },
+    {
+      "path": "examples/product-analysis-platform-service/README.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "79c5a1862c93dff3053a4c38861995412cee89893a042ff1d9a79ba14c3c2442"
     },
     {
       "path": "examples/project-metamodel/extended.yaml",
@@ -1746,7 +1734,7 @@
       "path": "governance/change-control.yaml",
       "role": "governance",
       "required": false,
-      "sha256": "54ec6604f7fc9c8b733655c1a94df1a4b9b5b8537c07fb1b5b61c51fbaf39508"
+      "sha256": "e6b7b8c312465b1931cf7e7fe554e7ca9cf9cfe33cfa2c478c342a7e694736c7"
     },
     {
       "path": "governance/metamodel-changelog.yaml",
@@ -1758,13 +1746,19 @@
       "path": "governance/model-changelog.yaml",
       "role": "governance",
       "required": false,
-      "sha256": "2bb3b8b0e5fecf8ff91cad992f425bdcbb4a248fa6572104bd9c7247421c5a62"
+      "sha256": "d0f9172ab9a8bfc6c904ec3670ca762f8747154941c255452813b9259624446f"
     },
     {
       "path": "governance/retired-ids.yaml",
       "role": "governance",
       "required": false,
       "sha256": "5fb0623506f9c861f06ef173d06bb8fa7dedf7a8d3c6c417f3e2470c3bf39264"
+    },
+    {
+      "path": "gpt-project.yaml",
+      "role": "support",
+      "required": false,
+      "sha256": "6927b86f248ca63424451c3cb4684a16634151f1141309bb68e20cbed926bc9b"
     },
     {
       "path": "knowledge/change-control.md",
@@ -1851,16 +1845,16 @@
       "sha256": "20d45bbfab8ba9b4533afa7a9c2ef0b6123ec6514cb5b2e67e3fa107d28b9da3"
     },
     {
-      "path": "market-reference/README.md",
-      "role": "documentation_source",
-      "required": false,
-      "sha256": "1dcea2b7b2c30ce9362d9d868c41b3828d32d818024474cbc8ea6b9049ab81a7"
-    },
-    {
       "path": "market-reference/assertions.yaml",
       "role": "support",
       "required": false,
       "sha256": "5f3921730cd070cba362601ddda4bae4b75ebc3d2fc0e56f62dde6b968839975"
+    },
+    {
+      "path": "market-reference/README.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "1dcea2b7b2c30ce9362d9d868c41b3828d32d818024474cbc8ea6b9049ab81a7"
     },
     {
       "path": "model/capabilities.yaml",
@@ -1953,6 +1947,18 @@
       "sha256": "7ba3697a3ac5ed330d554f9d36e1933edf2df2f4162f033bf9a330e4df0b4b48"
     },
     {
+      "path": "PROJECT_STATUS.md",
+      "role": "documentation_source",
+      "required": true,
+      "sha256": "cc71ca906521f5e62fd076708e06a8cc0969c593fda03bda62008d2fda30c7f3"
+    },
+    {
+      "path": "README.md",
+      "role": "documentation_source",
+      "required": true,
+      "sha256": "6f5b77cb68acc0f8f2189d5528e14f9f9dff33fe29af2916ef14266b3868605f"
+    },
+    {
       "path": "requirements-dev.txt",
       "role": "support",
       "required": false,
@@ -1962,7 +1968,13 @@
       "path": "revision-log.md",
       "role": "documentation_source",
       "required": true,
-      "sha256": "45563dc2565599ffe63eccce5e44d8999868b2929c212b287e6f92d6d3ffc088"
+      "sha256": "ec50f5c6736dd82ce201b4d1c65c6cd2a26c8ecfefadb65e6efc986dc5025450"
+    },
+    {
+      "path": "runtime-parity.yaml",
+      "role": "support",
+      "required": false,
+      "sha256": "73812aa4b9178994ae9a21dc785d026b9855a2d2b3568e0997e9ce0f966bf860"
     },
     {
       "path": "schemas/change-control.schema.json",
@@ -2124,7 +2136,7 @@
       "path": "scripts/build_distributions.py",
       "role": "support",
       "required": false,
-      "sha256": "db567ebf18e03d453439ae58c6e6106c57a556252dd790c0366bbc6073f11c00"
+      "sha256": "fc28cfa6d55337f94974c6e6924fa150abe8f575be316c8e1f6b902cb11789de"
     },
     {
       "path": "scripts/change_control.py",
@@ -2244,7 +2256,7 @@
       "path": "scripts/run_v2_ci_gate.py",
       "role": "support",
       "required": false,
-      "sha256": "741984279244fb4c0396172906030b63b544d01c42229b49879931590b83b879"
+      "sha256": "8b8c1f4bcdab5e4dc7ce94239f6f8bf43784a71ce7f618de6bc423e7ad06d1b9"
     },
     {
       "path": "scripts/run_workflow_conformance.py",
@@ -2262,13 +2274,19 @@
       "path": "scripts/validate_distributions.py",
       "role": "support",
       "required": false,
-      "sha256": "df8d2ae0676a09bcd0912028f78bf87dc89438a656a658b4f85aedc306bb4293"
+      "sha256": "22ca4d0ea28c14c1003c0f905de0f1c47938d4ed365c79bc053e04ae520bf163"
     },
     {
       "path": "scripts/validate_project.py",
       "role": "support",
       "required": false,
       "sha256": "cd8728cf6575e9cd7772ac515eef80f37a6f5524f9d31796975a1e8681dd3ec5"
+    },
+    {
+      "path": "scripts/validate_runtime_parity.py",
+      "role": "support",
+      "required": false,
+      "sha256": "95c5779287fbe0da6bc2b181a42a9062e225daac726da8841ad8fc84808d167e"
     },
     {
       "path": "scripts/verify_v1_v2_migration.py",
@@ -2670,7 +2688,7 @@
       "path": "tests/release/test_v2_ci_release_gate.py",
       "role": "support",
       "required": false,
-      "sha256": "c8a478ef3d45a9925237a1670e39eb2ea202ce5408f5eaeb804d7f69d8892e97"
+      "sha256": "2f35916d57cf2ef45168f0c59df6a91086c998783728c311fbba714e5d0e5479"
     },
     {
       "path": "tests/release/test_workflow_conformance_contract.py",
@@ -2761,6 +2779,12 @@
       "role": "support",
       "required": false,
       "sha256": "a0c3b3d88400dbb193e44d0261b8df0fc53b98278ad530e02172db88966585a9"
+    },
+    {
+      "path": "VERSION",
+      "role": "support",
+      "required": false,
+      "sha256": "c28fcca53637bc88e124af1725df13cb98c69dedefd62fb3cdbe1cdb6b760624"
     }
   ],
   "information_layers": {
