@@ -68,5 +68,7 @@ jobs:
           path: |
             dist/ea-stodjare-*.zip
             dist/ea-stodjare-*.release.json
+            dist/SHA256SUMS.txt
+            dist/DELIVERY-MANIFEST.json
             dist/v2-release-gate.json
           if-no-files-found: error
