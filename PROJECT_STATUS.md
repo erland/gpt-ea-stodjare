@@ -3,18 +3,18 @@
 ## Aktuell status
 
 - **Release:** 2.0.0
-- **Revision:** 59
+- **Revision:** 60
 - **Livscykelstatus:** released / frozen
 - **Standardmetamodell:** v2.0
 - **Relationsmodell:** v2.0
 - **Legacy-baslinje:** v1.0.0-rc1, fryst under `compatibility/ea-stodjare-v1/`
-- **Senast strukturellt verifierad:** 2026-08-25
+- **Senast strukturellt verifierad:** 2026-10-06
 
 `PROJECT_STATUS.md` är projektets mänskligt läsbara återupptagningspunkt. Kanonisk EA-modell finns i `model/`; projektets effektiva metamodell deklareras genom `project-metamodel.yaml` och resolveras mot basprofil och aktiva extensions.
 
 ## Releasebaslinje 2.0.0
 
-V2 är färdigutvecklad och fryst. Revision 59 är ett post-release cleanup-pass och ändrar ingen modell- eller metamodellsemantik. Historiska RC1/RC2-artefakter som inte längre användes har tagits bort, medan permanenta regressionsgrindar har fått funktionsbaserade namn.
+V2 är färdigutvecklad och fryst. Revision 60 lägger till GPT Byggaren 1.5.1 OpenAI Plugin som runtime/distributionsstöd utan att ändra modell- eller metamodellsemantik. Historiska RC1/RC2-artefakter som inte längre användes har tagits bort, medan permanenta regressionsgrindar har fått funktionsbaserade namn.
 
 V2 omfattar bland annat:
 
@@ -29,7 +29,7 @@ V2 omfattar bland annat:
 - icke-destruktiv v1→v2-migration,
 - extended-legacy/rev80-kompatibilitet,
 - Markdown/Confluence/DOCX/PDF-generering,
-- Builder Instructions, Builder Knowledge och portable-chat-distribution,
+- Builder Instructions, Builder Knowledge, portable-chat- och OpenAI Plugin-distribution,
 - 29 semantiska evaldefinitioner med fail-closed runtime-evalprotokoll.
 
 ## Permanent verifiering
@@ -43,6 +43,7 @@ Följande är aktiva release- och regressionsgrindar:
 - `scripts/run_generation_smoke.py` – dokumentgeneratorer.
 - `scripts/build_builder_knowledge.py` / Builder-tester – distributionskonsistens.
 - `scripts/package_release.py` – deterministisk releasepaketering och efterföljande unpack/revalidate via CI-grinden.
+- `scripts/validate_runtime_parity.py` – GPT Byggaren 1.5.1 runtime/parity-grind för Chat, Custom GPT och OpenAI Plugin.
 
 Permanenta baslinjer finns i:
 
@@ -69,3 +70,4 @@ De 29 semantiska evalfallen är definierade och runtimeprotokollet är implement
 3. Ändra inte fryst v2-semantik utan explicit change-control-beslut.
 4. Kör relevant regression samt `scripts/run_v2_ci_gate.py` före release.
 5. Höj revision och uppdatera manifest/integritet för varje paketerad ändring.
+6. För OpenAI Plugin: bevara project-files som state authority och paketera endast deklarerade runtime-scripts, aldrig CI/releaseverktyg.

@@ -63,6 +63,8 @@ jobs:
           name: ea-stodjare-gpt-v${{ steps.version.outputs.version }}
           path: |
             dist/*.zip
+            dist/SHA256SUMS.txt
+            dist/DELIVERY-MANIFEST.json
             build/v2-distribution-gate.json
           retention-days: 14
 
@@ -82,4 +84,4 @@ jobs:
       - name: Attach distributions to GitHub Release
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release upload "${{ github.event.release.tag_name }}" dist/*.zip --clobber --repo "${{ github.repository }}"
+        run: gh release upload "${{ github.event.release.tag_name }}" dist/*.zip dist/SHA256SUMS.txt dist/DELIVERY-MANIFEST.json --clobber --repo "${{ github.repository }}"

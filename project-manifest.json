@@ -6,9 +6,9 @@
     "name": "EA Stödjare – utvecklings- och referensprojekt",
     "kind": "ea_model_template",
     "language": "sv-SE",
-    "revision": 59,
+    "revision": 60,
     "created_at": "2026-08-20T17:50:00+02:00",
-    "updated_at": "2026-08-25T23:00:00+02:00",
+    "updated_at": "2026-10-06T04:05:00+02:00",
     "lifecycle_status": "approved"
   },
   "model": {
@@ -36,7 +36,7 @@
       "path": ".github/workflows/build-distributions.yml",
       "role": "support",
       "required": false,
-      "sha256": "7bfa6eb6cee81ca1969463c4eb1dd949ec19bbdd71395835e6c55eebfa33ebb6"
+      "sha256": "640a8b7c8ff08bc038f728f0f27b56dc230fd214ca67ae82a9c85a615b745dad"
     },
     {
       "path": ".github/workflows/ci.yml",
@@ -48,7 +48,7 @@
       "path": ".github/workflows/release.yml",
       "role": "support",
       "required": false,
-      "sha256": "e716706e1d5dcaa9d78dbdb9310e39c56be5d83c737ed641a4127fea2d054655"
+      "sha256": "01128d00a9cd6a129ef04a6df44daa8e39d71aa69db509ead7a95994b814df12"
     },
     {
       "path": ".gitignore",
@@ -66,13 +66,13 @@
       "path": "PROJECT_STATUS.md",
       "role": "documentation_source",
       "required": true,
-      "sha256": "22ad3255c6c378f382ba473954595f1d32d441fc02e583697faa1244408c5fcc"
+      "sha256": "cc71ca906521f5e62fd076708e06a8cc0969c593fda03bda62008d2fda30c7f3"
     },
     {
       "path": "README.md",
       "role": "documentation_source",
       "required": true,
-      "sha256": "edf4eaa7c917241e3226e6f3e48d0f38180b4dd8ad9bc9b6688196b1c1bed2f8"
+      "sha256": "6f5b77cb68acc0f8f2189d5528e14f9f9dff33fe29af2916ef14266b3868605f"
     },
     {
       "path": "VERSION",
@@ -444,73 +444,73 @@
       "path": "docs/generated/drivkrafter.md",
       "role": "documentation_source",
       "required": false,
-      "sha256": "3ffa28c7df2f65914e1a48aa14634023b43e19a4f35f5ea37d9b60df0fcc42b4"
+      "sha256": "e5769917401ee4d5ca5eb9522a47ef6bf777baea3ade862602b9aa7f5ced3fcc"
     },
     {
       "path": "docs/generated/formagor.md",
       "role": "documentation_source",
       "required": false,
-      "sha256": "1475af8033c3d357c3054e8526b44ffa872ebb9f54d032ebf5eb0ea6660ab9ad"
+      "sha256": "8e65081ef37a62448174ff9e55f6026660f3bcce89c2907b2a3520807c1f3999"
     },
     {
       "path": "docs/generated/generation-manifest.json",
       "role": "documentation_source",
       "required": false,
-      "sha256": "b48e6249c5a23cf07e319a9ea825f80e243a21a515d5bd93173989d80bb38367"
+      "sha256": "3743e9967d068fe7d57ed7b273ceee2437e183adf058d492d55a611f7b788cd0"
     },
     {
       "path": "docs/generated/it-stod.md",
       "role": "documentation_source",
       "required": false,
-      "sha256": "0881832faa60645faf9b000056d56473d03223457ee3a73d3de6242d766c450e"
+      "sha256": "fc55f39aba7b70e36bca54e063aa3b587f634482fc648cdd3e368de2db83c32e"
     },
     {
       "path": "docs/generated/losningsmonster.md",
       "role": "documentation_source",
       "required": false,
-      "sha256": "f31f62a81242267c94fec176db0e9670516f33253b618bcb8cb2267a49d4f1f7"
+      "sha256": "dfdefc7634abd944f0b665f0086c26c27153aa701887f4c0b5044d2eb327ed9b"
     },
     {
       "path": "docs/generated/mal.md",
       "role": "documentation_source",
       "required": false,
-      "sha256": "26f0850dd4c0030e715e355e3c487189faa75d622f7f7070735cf5a3f7c5f380"
+      "sha256": "3caa48f3778e6151d6d2350830b1e9f6d0390314879ce6be4a0206fe114deca6"
     },
     {
       "path": "docs/generated/plattformar.md",
       "role": "documentation_source",
       "required": false,
-      "sha256": "977bc5d6e20d7cf6fbf7eb6bcca699f2cb881507e092aea83398bfc2917fa5bf"
+      "sha256": "d0e328b945feb2cf596f9fde8ffbf7a0efe85e812a8332ded15705fe289e7e08"
     },
     {
       "path": "docs/generated/plattformstjanster.md",
       "role": "documentation_source",
       "required": false,
-      "sha256": "fac5b451fe3b972c56f22e2d736e14d8c9fa51d5521c2c92754566eb4dbe8d9b"
+      "sha256": "2f8409a4b06a7396375980966ae0c430e89fbd5207ff22564b148ddb892ada7e"
     },
     {
       "path": "docs/generated/principer.md",
       "role": "documentation_source",
       "required": false,
-      "sha256": "044766123c762c531d4b0124c38315384c4b93181b88ae2e0ca274c46a05c109"
+      "sha256": "ce17117ff519755044403005a2c4265baf829577b1c1d97f86ec9098ea129ecc"
     },
     {
       "path": "docs/generated/produkter.md",
       "role": "documentation_source",
       "required": false,
-      "sha256": "dea0197c1cdd6a9673bc1aac40ba4e64a409bf192319bc9c56827c2f397454b9"
+      "sha256": "4cea40a8e8b56b648dbfa18a30cb6931435e69adb292331a78b4e74a6d35cfdf"
     },
     {
       "path": "docs/generated/referensarkitekturer.md",
       "role": "documentation_source",
       "required": false,
-      "sha256": "4526675897d300d818a25d2c742a47ebaad6fc31ce339fc3d1f67c8e344ea18e"
+      "sha256": "f555bacde32bc90236ab0a4361a2da22d8ca4352dddbb7f4ff17a91a1c4eb8bf"
     },
     {
       "path": "docs/generated/standarder.md",
       "role": "documentation_source",
       "required": false,
-      "sha256": "0adc6d22fb1c2d9e63ad61dd1843cc0f56c05f73e6fd475e216c6966487652b4"
+      "sha256": "5dcb8009903d45872c83ccb3b099e75a5198e8d40bfcac34fd0143587dd9018c"
     },
     {
       "path": "docs/information-layers.md",
@@ -577,6 +577,12 @@
       "role": "documentation_source",
       "required": false,
       "sha256": "af5057d081c8a1298a309aee5b032f9a18cdc805e674537a2cfb2f568ea95691"
+    },
+    {
+      "path": "docs/openai-plugin-runtime.md",
+      "role": "documentation_source",
+      "required": false,
+      "sha256": "725bfc3297d7c95560e20d19381e7e9feaa7ed0b919d520617b26de35d54933e"
     },
     {
       "path": "docs/optional-rev80-extensions.md",
@@ -1560,73 +1566,73 @@
       "path": "exports/confluence/drivkrafter.txt",
       "role": "support",
       "required": false,
-      "sha256": "7e329f0001332f4b891a53bf3bfaa35da4f18e06fdd1601f65a9f33264b616f8"
+      "sha256": "89046ac0012c6fcd7117c70dc905d16c56944ed23c3007702cec6e5cb9da9729"
     },
     {
       "path": "exports/confluence/formagor.txt",
       "role": "support",
       "required": false,
-      "sha256": "a5beaa145b1c3f8e3d45069ae5551d92fd0432804f99cce28be941eeed569372"
+      "sha256": "601f59f61b2eb81969dcfdec450fa78975043e76809b5f5982d7bc9fb667e1fd"
     },
     {
       "path": "exports/confluence/generation-manifest.json",
       "role": "support",
       "required": false,
-      "sha256": "d28b7ed590745bad92352e3bd5d59b6309d3822f0565ebfba2257641a89cfc17"
+      "sha256": "23772ed06b67b25d13125acb262b1a450de8c6fa55150781a26411cc00ff523c"
     },
     {
       "path": "exports/confluence/it-stod.txt",
       "role": "support",
       "required": false,
-      "sha256": "3828f23c7772e64c1f57741eb82a988d2f29f992172fe7ba73fefe4445cf1e99"
+      "sha256": "de3ebcce376c6ff1dce218e0c21c6680ebcdcb9184971af8ac95a3ffc04f18c3"
     },
     {
       "path": "exports/confluence/losningsmonster.txt",
       "role": "support",
       "required": false,
-      "sha256": "18b884ae66ba1d91819189f71895d54c6c235a19f55df4b0aa716a04d96f5a3d"
+      "sha256": "7371bbd9ad5121c1e811394fb5b1f61ee7e2d937da95ee111c87517a649b6851"
     },
     {
       "path": "exports/confluence/mal.txt",
       "role": "support",
       "required": false,
-      "sha256": "e2f2a88e709e227d13f5ffe6d06ddf35e8739e970c781aefb294b6b2791f2c46"
+      "sha256": "914ac0813b70c8690e717deae6d7f3f43d7a3e07f2cbcc1f31f9bd3d538cb0a6"
     },
     {
       "path": "exports/confluence/plattformar.txt",
       "role": "support",
       "required": false,
-      "sha256": "4179a86118a9b7c119ace509988fbc6fa90d23ffa15062c1c8997a791529dd98"
+      "sha256": "d138b2a3a42f8d4b1c5fd2bf1c331781f12a16ba439b04bc4537d19ddfc2878b"
     },
     {
       "path": "exports/confluence/plattformstjanster.txt",
       "role": "support",
       "required": false,
-      "sha256": "bf748ea91dbecf308bfed4a52b1fcce30c8145242d5c337d61d22ec976713545"
+      "sha256": "005765d49604637cbcecc10c0e3d4f1f7dc96e1ffa298092f26d4f2989c93c41"
     },
     {
       "path": "exports/confluence/principer.txt",
       "role": "support",
       "required": false,
-      "sha256": "234196ffb01af9e31d3c615261f03dc5e83ab8b17e6ef46ec191cd712a0f8a04"
+      "sha256": "fc7c9d5901aa2f059664652b4a10a3fac0696c5498672939c82f930d4beefb4a"
     },
     {
       "path": "exports/confluence/produkter.txt",
       "role": "support",
       "required": false,
-      "sha256": "c62e16fccc36b72f6549a57f653a975921afaa1624646a3ae30af1b69cc655b9"
+      "sha256": "d6dd71efa9235ff0d494f8beefc7990a7b58fdf45a118dbd6dfc657d70ff8269"
     },
     {
       "path": "exports/confluence/referensarkitekturer.txt",
       "role": "support",
       "required": false,
-      "sha256": "fc4ac4c1870e3f6797ba041cb2d1559630b926fe86a60a0d191b033f75f3d242"
+      "sha256": "602e144d79907cf084542c9d55ab991f087ef0bcfe61120169478947f8e0ee4f"
     },
     {
       "path": "exports/confluence/standarder.txt",
       "role": "support",
       "required": false,
-      "sha256": "b2e5d5247383744c1c7f2ca76a209f78e92f1361e92af8215e211e5bd5ec57a2"
+      "sha256": "89079b498f15ff6b95d1bb9a452e9567ae927c7d9ea1004a5db512c5b9748aa4"
     },
     {
       "path": "exports/document/ea-dokumentation.docx",
@@ -1746,7 +1752,7 @@
       "path": "governance/change-control.yaml",
       "role": "governance",
       "required": false,
-      "sha256": "54ec6604f7fc9c8b733655c1a94df1a4b9b5b8537c07fb1b5b61c51fbaf39508"
+      "sha256": "e6b7b8c312465b1931cf7e7fe554e7ca9cf9cfe33cfa2c478c342a7e694736c7"
     },
     {
       "path": "governance/metamodel-changelog.yaml",
@@ -1758,13 +1764,19 @@
       "path": "governance/model-changelog.yaml",
       "role": "governance",
       "required": false,
-      "sha256": "2bb3b8b0e5fecf8ff91cad992f425bdcbb4a248fa6572104bd9c7247421c5a62"
+      "sha256": "d0f9172ab9a8bfc6c904ec3670ca762f8747154941c255452813b9259624446f"
     },
     {
       "path": "governance/retired-ids.yaml",
       "role": "governance",
       "required": false,
       "sha256": "5fb0623506f9c861f06ef173d06bb8fa7dedf7a8d3c6c417f3e2470c3bf39264"
+    },
+    {
+      "path": "gpt-project.yaml",
+      "role": "support",
+      "required": false,
+      "sha256": "6927b86f248ca63424451c3cb4684a16634151f1141309bb68e20cbed926bc9b"
     },
     {
       "path": "knowledge/change-control.md",
@@ -1962,7 +1974,13 @@
       "path": "revision-log.md",
       "role": "documentation_source",
       "required": true,
-      "sha256": "45563dc2565599ffe63eccce5e44d8999868b2929c212b287e6f92d6d3ffc088"
+      "sha256": "ec50f5c6736dd82ce201b4d1c65c6cd2a26c8ecfefadb65e6efc986dc5025450"
+    },
+    {
+      "path": "runtime-parity.yaml",
+      "role": "support",
+      "required": false,
+      "sha256": "73812aa4b9178994ae9a21dc785d026b9855a2d2b3568e0997e9ce0f966bf860"
     },
     {
       "path": "schemas/change-control.schema.json",
@@ -2124,7 +2142,7 @@
       "path": "scripts/build_distributions.py",
       "role": "support",
       "required": false,
-      "sha256": "db567ebf18e03d453439ae58c6e6106c57a556252dd790c0366bbc6073f11c00"
+      "sha256": "fc28cfa6d55337f94974c6e6924fa150abe8f575be316c8e1f6b902cb11789de"
     },
     {
       "path": "scripts/change_control.py",
@@ -2244,7 +2262,7 @@
       "path": "scripts/run_v2_ci_gate.py",
       "role": "support",
       "required": false,
-      "sha256": "741984279244fb4c0396172906030b63b544d01c42229b49879931590b83b879"
+      "sha256": "8b8c1f4bcdab5e4dc7ce94239f6f8bf43784a71ce7f618de6bc423e7ad06d1b9"
     },
     {
       "path": "scripts/run_workflow_conformance.py",
@@ -2262,13 +2280,19 @@
       "path": "scripts/validate_distributions.py",
       "role": "support",
       "required": false,
-      "sha256": "df8d2ae0676a09bcd0912028f78bf87dc89438a656a658b4f85aedc306bb4293"
+      "sha256": "22ca4d0ea28c14c1003c0f905de0f1c47938d4ed365c79bc053e04ae520bf163"
     },
     {
       "path": "scripts/validate_project.py",
       "role": "support",
       "required": false,
       "sha256": "cd8728cf6575e9cd7772ac515eef80f37a6f5524f9d31796975a1e8681dd3ec5"
+    },
+    {
+      "path": "scripts/validate_runtime_parity.py",
+      "role": "support",
+      "required": false,
+      "sha256": "95c5779287fbe0da6bc2b181a42a9062e225daac726da8841ad8fc84808d167e"
     },
     {
       "path": "scripts/verify_v1_v2_migration.py",
@@ -2670,7 +2694,7 @@
       "path": "tests/release/test_v2_ci_release_gate.py",
       "role": "support",
       "required": false,
-      "sha256": "c8a478ef3d45a9925237a1670e39eb2ea202ce5408f5eaeb804d7f69d8892e97"
+      "sha256": "2f35916d57cf2ef45168f0c59df6a91086c998783728c311fbba714e5d0e5479"
     },
     {
       "path": "tests/release/test_workflow_conformance_contract.py",
