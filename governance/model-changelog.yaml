@@ -1,6 +1,33 @@
 schema_version: '1.0'
 log_type: model
 changes:
+- id: CHG-MOD-009
+  revision: 60
+  change_class: editorial
+  summary: "Lägg till GPT Byggaren 1.5.1 OpenAI Plugin som stateful, script-aware peer-runtime utan ändring av EA-modell eller metamodell."
+  status: applied
+  affected_paths:
+  - gpt-project.yaml
+  - runtime-parity.yaml
+  - scripts/build_distributions.py
+  - scripts/validate_distributions.py
+  - scripts/validate_runtime_parity.py
+  - scripts/run_v2_ci_gate.py
+  - .github/workflows/build-distributions.yml
+  - .github/workflows/release.yml
+  - README.md
+  - PROJECT_STATUS.md
+  - docs/openai-plugin-runtime.md
+  - tests/release/test_v2_ci_release_gate.py
+  - project-manifest.json
+  - governance/change-control.yaml
+  - revision-log.md
+  baseline_before: EA-STODJARE-V2@2.0.0-r59
+  baseline_after: EA-STODJARE-V2@2.0.0-r60
+  notes:
+  - Ingen modell- eller metamodellsemantik ändrad.
+  - Projektfiler förblir auktoritativ state; chattminne är inte fallback.
+  - Pluginen genererar ingen MCP-wrapper.
 - id: CHG-MOD-008
   revision: 59
   change_class: editorial
