@@ -132,3 +132,9 @@ För OpenAI Plugin i ChatGPT Chat, när värden inte kan köra de inbyggda Skill
 Vid publicerad version 2.2.1 hämtas [EA Engine ZIP](https://github.com/erland/gpt-ea-stodjare/releases/download/v2.2.1/ea-stodjare-engine-2.2.1.zip) från samma release som Plugin ZIP och bifogas i ChatGPT när körning krävs och direktåtkomst saknas. ZIP:en valideras med `engine-package.json`, filernas SHA-256 och `python scripts/selftest_ea_engine.py`. Exekvering kräver kompatibel Python-miljö och deklarerade PyYAML/jsonschema/referencing-beroenden; ingen bifogad ZIP garanterar åtkomst till ett användarprojekt eller externa system.
 
 Bygget kör `scripts/check_packaged_skill_dependencies.py` efter kanonisk distributionsvalidering. Den kontrollerar de fyra runtimes som innehåller fristående Skill-skript (Chat ZIP, Plugin, Claude Skills och OpenCode), deras isolerade importer samt Engine ZIP:ens självtest. Claude Project använder istället sammanställda instruktioner.
+
+## Ett kanoniskt projektpaket (från och med distributionsrelease 2.2.1)
+
+GitHub Release innehåller ett komplett projektarkiv, `ea-stodjare-project-<version>.zip`, skapat av GPT Byggarens kanoniska motor. De fem runtimearkiven och den separata `ea-stodjare-engine-<version>.zip` publiceras bredvid projektpaketet. Tidigare `ea-stodjare-<version>.zip` skapades av det äldre `scripts/package_release.py` och publiceras inte längre automatiskt. Skriptet behålls som historiskt verktyg för äldre arbetsflöden och tas inte bort innan eventuella externa beroenden har bedömts.
+
+Releasegrinden packar upp och strukturvaliderar nu just det kanoniska projektarkivet. Det äldre `.release.json`-sidopaketet produceras inte heller av releaseflödet. `DELIVERY-MANIFEST.json` och `SHA256SUMS.txt` fortsätter att levereras från GPT Byggaren.
