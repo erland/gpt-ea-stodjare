@@ -40,7 +40,15 @@ def test_runtime_engine_resources_are_explicit_and_selftest_exists() -> None:
     assert engine["enabled"] is True
     assert engine["release_repository"] == "erland/gpt-ea-stodjare"
     assert (ROOT / engine["selftest"]).is_file()
-    assert all((ROOT / resource).is_file() for resource in engine["resources"])
+    for resource in engine["resources"]:
+        target = ROOT / resource
+        assert target.exists(), f"Missing Engine resource: {resource}"
+        if target.is_dir():
+            assert any(p.is_file() for p in target.rglob("*")), (
+                f"Empty Engine resource directory: {resource}"
+            )
+        else:
+            assert target.is_file(), f"Invalid Engine resource: {resource}"
     all_skill_scripts = {path for skill in config["skills"]["definitions"]
                          for path in skill["scripts"]}
     assert all_skill_scripts <= set(engine["resources"])
