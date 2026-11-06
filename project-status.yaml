@@ -2,13 +2,10 @@ schema_version: 1
 project_id: ea-stodjare
 version: 2.0.0
 phase: migration
-status: verification_pending
-current_step: full-regression-and-host-parity
+status: github_ci_verified_host_parity_pending
+current_step: host-parity-and-release-review
 blocking_issues:
-- full_ea_ci_gate_not_completed
 - external_runtime_parity_unverified
-- github_actions_not_executed_on_github
 next_step:
-  id: verify-migrated-ci
-  title: Kör GitHub Actions på en PR och verifiera fem runtime-distributioner i sina
-    värdar
+  id: verify-host-parity
+  title: Verifiera värdspecifika runtimefunktioner och genomför slutlig releasegranskning
