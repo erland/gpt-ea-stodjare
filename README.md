@@ -138,3 +138,11 @@ Bygget kör `scripts/check_packaged_skill_dependencies.py` efter kanonisk distri
 GitHub Release innehåller ett komplett projektarkiv, `ea-stodjare-project-<version>.zip`, skapat av GPT Byggarens kanoniska motor. De fem runtimearkiven och den separata `ea-stodjare-engine-<version>.zip` publiceras bredvid projektpaketet. Tidigare `ea-stodjare-<version>.zip` skapades av det äldre `scripts/package_release.py` och publiceras inte längre automatiskt. Skriptet behålls som historiskt verktyg för äldre arbetsflöden och tas inte bort innan eventuella externa beroenden har bedömts.
 
 Releasegrinden packar upp och strukturvaliderar nu just det kanoniska projektarkivet. Det äldre `.release.json`-sidopaketet produceras inte heller av releaseflödet. `DELIVERY-MANIFEST.json` och `SHA256SUMS.txt` fortsätter att levereras från GPT Byggaren.
+
+## Runtime Engine 2.2.2 – fristående integration
+
+Från och med v2.2.2 innehåller `ea-stodjare-engine-<version>.zip` inte bara Python-skript utan även `schemas/`, `extensions/`, `compatibility/`, `presentation/`, `derived-views/`, Markdown-mallar och ett oföränderligt exempelprojekt för självtest. Dessa är verktygens egna referensresurser; **användarens faktiska EA-projekt** ska fortfarande tillhandahållas separat.
+
+Vid körning ska `--repo-root` eller motsvarande peka på uppackad Engine-rot och `--project-root` på ett användarprojekt eller en arbetskopia. Engine ersätter inte användarens data och ingen vanlig modelländring görs av självtestet. Plugin för v2.2.2 ska hänvisa till motsvarande versionsbunden Engine ZIP från samma GitHub Release.
+
+`python scripts/selftest_ea_engine.py` verifierar SHA-256/importer och exekverar nu också profilidentifiering, strukturvalidering, QA-upplösning, härledda vyer, deterministisk Markdown/Confluence, och v1→v2-migrering mot en temporär kopia av det medföljande testprojektet. Dokumentexport provas när både pandoc och LibreOffice är installerade; annars redovisas just det steget som `BLOCKED`, inte `PASS`. Fullständiga hosttester i ChatGPT Plugin måste fortfarande göras separat.
