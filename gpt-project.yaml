@@ -3,7 +3,7 @@ project:
   id: ea-stodjare
   name: EA Stödjare
   language: sv
-  version: 2.0.0
+  version: 2.2.1
   description: Enterprise architecture-stöd med verifierbar kanonisk YAML-modell,
     evidens, metamodell och kontrollerad migrering.
 development:
@@ -234,6 +234,7 @@ skills:
     - scripts/detect_project_profile.py
     - scripts/resolve_project_metamodel.py
     - scripts/change_control.py
+    - scripts/validate_project.py
     - scripts/migrate_v1_to_v2.py
     - scripts/migrate_rev80_to_v2.py
     - scripts/verify_v1_v2_migration.py
@@ -246,6 +247,8 @@ skills:
     - custom-gpt/knowledge/05-project-and-output.md
     assets: []
     scripts:
+    - scripts/detect_project_profile.py
+    - scripts/resolve_project_metamodel.py
     - scripts/validate_project.py
     - scripts/resolve_quality_rules.py
     - scripts/generate_derived_views.py
@@ -254,6 +257,34 @@ skills:
     - scripts/generator_context.py
     - scripts/presentation_contract.py
     - scripts/export_documents.py
+engine:
+  enabled: true
+  release_repository: erland/gpt-ea-stodjare
+  selftest: scripts/selftest_ea_engine.py
+  required_files:
+  - scripts/selftest_ea_engine.py
+  - scripts/validate_project.py
+  - scripts/resolve_project_metamodel.py
+  resources:
+  - scripts/validate_project.py
+  - scripts/detect_project_profile.py
+  - scripts/resolve_project_metamodel.py
+  - scripts/resolve_quality_rules.py
+  - scripts/change_control.py
+  - scripts/generate_derived_views.py
+  - scripts/generate_markdown.py
+  - scripts/generate_confluence.py
+  - scripts/generator_context.py
+  - scripts/presentation_contract.py
+  - scripts/export_documents.py
+  - scripts/migrate_v1_to_v2.py
+  - scripts/migrate_rev80_to_v2.py
+  - scripts/verify_v1_v2_migration.py
+  - scripts/selftest_ea_engine.py
+  python_dependencies:
+  - PyYAML>=6.0,<7
+  - jsonschema>=4.20,<5
+  - referencing>=0.30
 capabilities:
   contract_version: 1
   requirements:
