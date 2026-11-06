@@ -96,3 +96,11 @@ De 29 semantiska evalfallen är definierade och runtimeprotokollet är implement
 - `engine.enabled: true` aktiverar en separat EA Stödjare Engine ZIP med endast explicit deklarerade runtimeverktyg och ett exekverbart självtest.
 - Obligatorisk CI-grind provar isolerade Python-importer inuti paketerade Skills och Engine ZIP:ens integritet/självtest.
 - Full GitHub Actions-verifiering på denna PR återstår. Hostparitet i verklig ChatGPT Plugin/Claude/OpenCode är inte verifierad.
+
+## Konsoliderad projektleverans (2.2.1, PR #10)
+
+- Endast `ea-stodjare-project-<version>.zip` publiceras automatiskt som komplett projektpaket.
+- Extra `ea-stodjare-<version>.zip` och `ea-stodjare-<version>.release.json` tas bort från automatisk release.
+- Kanoniskt projektarkiv packas upp och körs genom `validate_project.py` i obligatorisk CI/release-gate.
+- `scripts/package_release.py` bevaras för historisk kompatibilitet men anropas inte automatiskt. Externa konsumenter av äldre format behöver vid behov migrera.
+- Fullständig GitHub CI för ändringen måste verifieras på PR #10.
