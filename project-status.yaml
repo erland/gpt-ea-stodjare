@@ -1,6 +1,6 @@
 schema_version: 1
 project_id: ea-stodjare
-version: 2.2.1
+version: 2.0.0
 phase: migration
 status: runtime_skill_dependency_fix_ci_pending
 current_step: package-runtime-engine-and-verify-isolated-scripts
