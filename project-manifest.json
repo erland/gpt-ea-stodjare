@@ -2772,7 +2772,7 @@
       "path": "tests/release/test_skill_runtime_dependencies.py",
       "role": "support",
       "required": false,
-      "sha256": "e17a71f858a4e107738931cb2ed47725dfd5132ab73356b588f4c2f1abc8e197"
+      "sha256": "3c815b2fbe7630f2d3414883dd1a8369dadde4eeb333422b1fc6b80531717e5f"
     },
     {
       "path": "tests/release/test_v2_ci_release_gate.py",
