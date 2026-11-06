@@ -43,7 +43,7 @@ Följande är aktiva release- och regressionsgrindar:
 - `scripts/run_generation_smoke.py` – dokumentgeneratorer.
 - `scripts/build_builder_knowledge.py` / Builder-tester – distributionskonsistens.
 - `scripts/package_release.py` – deterministisk releasepaketering och efterföljande unpack/revalidate via CI-grinden.
-- `scripts/validate_runtime_parity.py` – GPT Byggaren 1.5.1 runtime/parity-grind för Chat, Custom GPT och OpenAI Plugin.
+- `scripts/validate_runtime_parity.py` – deklarativ runtime/paritetsgrind för Chat ZIP, OpenAI Plugin, Claude Project, Claude Skills och OpenCode.
 
 Permanenta baslinjer finns i:
 
@@ -79,5 +79,6 @@ De 29 semantiska evalfallen är definierade och runtimeprotokollet är implement
 - En enda Skill (`ea-stodjare`) används för att inte genomföra en ogranskad uppdelning av det ursprungliga beteendet. Den ursprungliga kanoniska instruktionen finns kvar i `custom-gpt/instructions.md`.
 - Canonical Engine 1.6.33 har installerats efter godkänt självtest. Fem runtime-ZIP har byggts och motorns distributionsvalidering passerade.
 - Äldre Custom GPT-distribution har avaktiverats enligt aktuellt byggkontrakt; legacy-underlag finns kvar.
-- EA Stödjares fulla CI/E2E-gate är **inte godkänd** i denna arbetskörning (körning avbröts av tidsgräns). Externa hosttester för Plugin, Claude och OpenCode är inte utförda.
-- Innan merge/release: granska 1.5.1-specifika workflows i `.github/workflows/`, synkronisera referenser och kör om full `scripts/run_v2_ci_gate.py` i CI; kontrollera hostfunktioner, scriptberoenden och dokument-/paritetskontrakt.
+- GitHub Actions CI #42164185604 (inklusive `--full-pytest`) och distributionsbygge #42164185577 har passerat på PR #8, commit `11856798f8c9df655eb53660b1cb4ed00a4f5a66`.
+- Externa funktionella värdtester för Chat, Plugin, Claude och OpenCode är inte utförda. Byggresultat bevisar inte funktionell runtimeparitet.
+- CI- och release-workflows använder den versionslåsta motorn 1.6.33. Slutlig releasegranskning ska skilja passerad CI från externa hosttester och redovisa kvarstående begränsningar.
