@@ -4,23 +4,36 @@ on:
   push:
     tags:
       - 'v*.*.*'
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: 'Existing release tag to publish or repair (e.g. v2.2.0)'
+        required: true
+        type: string
 
 permissions:
   contents: write
 
+concurrency:
+  group: release-${{ github.event_name == 'workflow_dispatch' && inputs.release_tag || github.ref_name }}
+  cancel-in-progress: false
+
 jobs:
   release:
     runs-on: ubuntu-latest
+    env:
+      RELEASE_TAG: ${{ github.event_name == 'workflow_dispatch' && inputs.release_tag || github.ref_name }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          ref: ${{ env.RELEASE_TAG }}
 
       - name: Validate tag
         shell: bash
         run: |
-          [[ "$GITHUB_REF_NAME" =~ ^v[0-9]+\.[0-9]+\.[0-9]+([+-][0-9A-Za-z.-]+)?$ ]] || {
+          [[ "$RELEASE_TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+([+-][0-9A-Za-z.-]+)?$ ]] || {
             echo "Taggen måste följa vMAJOR.MINOR.PATCH, exempelvis v1.0.0" >&2
             exit 1
           }
@@ -47,27 +60,27 @@ jobs:
           python scripts/run_v2_ci_gate.py \
             --project-root . \
             --mode release \
-            --version "${GITHUB_REF_NAME#v}" \
+            --version "${RELEASE_TAG#v}" \
             --full-pytest \
             --report-file dist/v2-release-gate.json
 
       - name: Build release package
-        run: python scripts/package_release.py --project-root . --output-dir dist
+        run: python scripts/package_release.py --project-root . --output-dir dist --version "${RELEASE_TAG#v}"
 
       - name: Verify final release package can be unpacked and validated
         shell: bash
         run: |
           tmp="$(mktemp -d)"
-          unzip -q "dist/ea-stodjare-${GITHUB_REF_NAME#v}.zip" -d "$tmp"
-          python "$tmp/ea-stodjare-${GITHUB_REF_NAME#v}/scripts/validate_project.py" \
-            --project-root "$tmp/ea-stodjare-${GITHUB_REF_NAME#v}" \
-            --repo-root "$tmp/ea-stodjare-${GITHUB_REF_NAME#v}" \
+          unzip -q "dist/ea-stodjare-${RELEASE_TAG#v}.zip" -d "$tmp"
+          python "$tmp/ea-stodjare-${RELEASE_TAG#v}/scripts/validate_project.py" \
+            --project-root "$tmp/ea-stodjare-${RELEASE_TAG#v}" \
+            --repo-root "$tmp/ea-stodjare-${RELEASE_TAG#v}" \
             --no-generated
 
       - name: Upload workflow artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ea-stodjare-${{ github.ref_name }}
+          name: ea-stodjare-${{ env.RELEASE_TAG }}
           path: |
             dist/ea-stodjare-*.zip
             dist/ea-stodjare-*.release.json
@@ -87,4 +100,9 @@ jobs:
           if (( ${#assets[@]} == 0 )); then
             echo 'No release assets were produced' >&2; exit 1
           fi
-          gh release create "$GITHUB_REF_NAME" "${assets[@]}" --verify-tag --generate-notes --repo "$GITHUB_REPOSITORY"
+          if gh release view "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "Release $RELEASE_TAG already exists; uploading verified assets without modifying release metadata"
+            gh release upload "$RELEASE_TAG" "${assets[@]}" --clobber --repo "$GITHUB_REPOSITORY"
+          else
+            gh release create "$RELEASE_TAG" "${assets[@]}" --verify-tag --generate-notes --repo "$GITHUB_REPOSITORY"
+          fi
