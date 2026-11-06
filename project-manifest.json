@@ -90,7 +90,7 @@
       "path": "VERSION",
       "role": "support",
       "required": false,
-      "sha256": "6bd9a5f394c0a6443442aeaded891981bf8f8ab17f38e8fe34a48cf7273bd5bb"
+      "sha256": "c28fcca53637bc88e124af1725df13cb98c69dedefd62fb3cdbe1cdb6b760624"
     },
     {
       "path": "actual-state/README.md",
@@ -1824,7 +1824,7 @@
       "path": "gpt-project.yaml",
       "role": "support",
       "required": false,
-      "sha256": "8c8dbce68df30df2ecfcae2bea6dda8851475c998edfcbe09c9c6236de04afb0"
+      "sha256": "a09f508bc9cdc6220f7e7afe414262091f43fa0cd58ed296871e592c200ec40d"
     },
     {
       "path": "knowledge/change-control.md",
@@ -2022,7 +2022,7 @@
       "path": "project-status.yaml",
       "role": "support",
       "required": false,
-      "sha256": "a8df1da40970a3046a876568dcb0121f3f8e442f9a72956abc7fab39f8f11cf0"
+      "sha256": "23300f2be00c3daec911928f213fefc354640281137c9f0b88ac7ebc64e5ab59"
     },
     {
       "path": "requirements-dev.txt",
