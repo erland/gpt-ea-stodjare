@@ -263,6 +263,7 @@ engine:
   selftest: scripts/selftest_ea_engine.py
   required_files:
   - scripts/selftest_ea_engine.py
+  - scripts/docx-pagebreak.lua
   - scripts/validate_project.py
   - scripts/resolve_project_metamodel.py
   - schemas/project-metamodel.schema.json
@@ -289,6 +290,7 @@ engine:
   - scripts/migrate_rev80_to_v2.py
   - scripts/verify_v1_v2_migration.py
   - scripts/selftest_ea_engine.py
+  - scripts/docx-pagebreak.lua
   - schemas
   - extensions
   - compatibility
