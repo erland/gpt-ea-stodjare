@@ -78,19 +78,19 @@
       "path": "PROJECT_STATUS.md",
       "role": "documentation_source",
       "required": true,
-      "sha256": "718c6c6cea9a37269eb3c3ffcac356c69e88174ebdffcf1d821f0331e0a4f2a0"
+      "sha256": "d8cb4c3f82f302292e1cf36a89ae813ccfef6fde8f724b5bc6ebfa63e87e1b89"
     },
     {
       "path": "README.md",
       "role": "documentation_source",
       "required": true,
-      "sha256": "67e4197c53a7c4747a557214a7214975841670d26f03da07b91b556a063b97ea"
+      "sha256": "5b77a2eaa6a11b872b3059f99c0b7e83d35765a0043755bad38d9fa092fda534"
     },
     {
       "path": "VERSION",
       "role": "support",
       "required": false,
-      "sha256": "c28fcca53637bc88e124af1725df13cb98c69dedefd62fb3cdbe1cdb6b760624"
+      "sha256": "fe650098093fad42070e8a2cacfb216a6c416af57bd26dd6ff479fef69f8bc71"
     },
     {
       "path": "actual-state/README.md",
@@ -1824,7 +1824,7 @@
       "path": "gpt-project.yaml",
       "role": "support",
       "required": false,
-      "sha256": "88df184f7c0fa377f0b966332d47dc4fee98b021a7304f1e2c3828090bd1fa65"
+      "sha256": "667ebc19b6ae415129a2cac1d59dba0408c219c48b9aaf26e1f4e8310391592a"
     },
     {
       "path": "knowledge/change-control.md",
@@ -2022,7 +2022,7 @@
       "path": "project-status.yaml",
       "role": "support",
       "required": false,
-      "sha256": "78d313ebeecdf7918b778a84070be3ef27d7eb8f17588a0aa46b7b3d7a673786"
+      "sha256": "15b1be641761c2b45ee79815a52407ef19f3dc714f00688b656e1fd546aa2c02"
     },
     {
       "path": "requirements-dev.txt",
@@ -2211,6 +2211,12 @@
       "sha256": "f0fc059ebfe4fbbdd9abcfcfb6aabce61b5302ce822298fbe4edc64d2ee7282a"
     },
     {
+      "path": "scripts/check_packaged_skill_dependencies.py",
+      "role": "support",
+      "required": false,
+      "sha256": "11c184ad0c745e06592efa0be3fee1fd6b7d6689456d5c28ce48ad40e25a80cd"
+    },
+    {
       "path": "scripts/detect_project_profile.py",
       "role": "support",
       "required": false,
@@ -2322,7 +2328,7 @@
       "path": "scripts/run_v2_ci_gate.py",
       "role": "support",
       "required": false,
-      "sha256": "92e76d7aad5741a67e4f26187919bcb9b0075ff7da2cb4fa255825d002908593"
+      "sha256": "1a9cf720273c7ff9380aa3a6f7139b6f9d81e0a9520056984163c045667155f5"
     },
     {
       "path": "scripts/run_workflow_conformance.py",
@@ -2335,6 +2341,12 @@
       "role": "support",
       "required": false,
       "sha256": "9439bc29e646b8998c8529767e5ed1406de8d032ca616066cc286bc20729968d"
+    },
+    {
+      "path": "scripts/selftest_ea_engine.py",
+      "role": "support",
+      "required": false,
+      "sha256": "35bd6004adb8fb3cdeb9e9316184935fe4190c963842abab54d6fb54e3457558"
     },
     {
       "path": "scripts/validate_distributions.py",
@@ -2749,6 +2761,12 @@
       "role": "support",
       "required": false,
       "sha256": "11e0045810afe656bb6be274573e8be555d66a14d265de073331c237432425b7"
+    },
+    {
+      "path": "tests/release/test_skill_runtime_dependencies.py",
+      "role": "support",
+      "required": false,
+      "sha256": "e17a71f858a4e107738931cb2ed47725dfd5132ab73356b588f4c2f1abc8e197"
     },
     {
       "path": "tests/release/test_v2_ci_release_gate.py",
