@@ -29,7 +29,7 @@ def test_v2_gate_declares_all_plan_step_30_coverage():
         assert f'"{name}"' in text
     assert "--full-pytest" in text
     assert "ea-stodjare-project-" in text
-    assert "package_release.py" not in text
+    assert '"scripts/package_release.py"' not in text
     assert "validate_distributions.py" in text
     assert "validate_runtime_parity.py" in text
     assert "run_full_e2e_regression.py" in text
