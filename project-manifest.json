@@ -78,13 +78,13 @@
       "path": "PROJECT_STATUS.md",
       "role": "documentation_source",
       "required": true,
-      "sha256": "48272cbbfe9dbe7c9b9f4c86f8f45b7e2b4ce3c10dcdc5e93dd2d176bdcfc0f3"
+      "sha256": "718c6c6cea9a37269eb3c3ffcac356c69e88174ebdffcf1d821f0331e0a4f2a0"
     },
     {
       "path": "README.md",
       "role": "documentation_source",
       "required": true,
-      "sha256": "ec4b4927465f88f35ddb8884bddfc543a01d904cbf3649a9d8b2b991378c3938"
+      "sha256": "67e4197c53a7c4747a557214a7214975841670d26f03da07b91b556a063b97ea"
     },
     {
       "path": "VERSION",
@@ -103,6 +103,42 @@
       "role": "support",
       "required": false,
       "sha256": "ec4a030cc20af67835cbd2572c7f697340843df9d705d96cd21b361002f75cb9"
+    },
+    {
+      "path": "canonical/SKILL-ARCHITECTURE.md",
+      "role": "support",
+      "required": false,
+      "sha256": "9dc1024a2dc193e40a8f22b39fbd6154d65932e2df45fb6d97f9ca2536a9071d"
+    },
+    {
+      "path": "canonical/assembly.json",
+      "role": "support",
+      "required": false,
+      "sha256": "a8b826cfa27a4b8ae0a79016b31ef2c92a615512be9483e198715b78a27f5ed3"
+    },
+    {
+      "path": "canonical/core.md",
+      "role": "support",
+      "required": false,
+      "sha256": "80e1ddcab1715dd8f0c7a1eef765c2fc3ced898389e31f8a437ecbd5daa02195"
+    },
+    {
+      "path": "canonical/skills/modeling-and-research/behavior.md",
+      "role": "support",
+      "required": false,
+      "sha256": "3fca3ca750ba6fa74cf59ec470cb9972b22b102967a36dbc92b47d8261d5d317"
+    },
+    {
+      "path": "canonical/skills/project-lifecycle/behavior.md",
+      "role": "support",
+      "required": false,
+      "sha256": "c07de1bdaab7041f08c1243c094cb33fdbec4bea8bc45408277f3c3e8aa82b24"
+    },
+    {
+      "path": "canonical/skills/quality-and-publication/behavior.md",
+      "role": "support",
+      "required": false,
+      "sha256": "db4d6708fea5ad4a24460ff0c37389ce692b8187f5fb75094ab37c843ade247b"
     },
     {
       "path": "compatibility/ea-stodjare-v1/README.md",
@@ -1788,7 +1824,7 @@
       "path": "gpt-project.yaml",
       "role": "support",
       "required": false,
-      "sha256": "d591e0b058448214d6b6f29300807e4789bd11151f1c78aeb28aed6077482246"
+      "sha256": "88df184f7c0fa377f0b966332d47dc4fee98b021a7304f1e2c3828090bd1fa65"
     },
     {
       "path": "knowledge/change-control.md",
@@ -1887,6 +1923,12 @@
       "sha256": "5f3921730cd070cba362601ddda4bae4b75ebc3d2fc0e56f62dde6b968839975"
     },
     {
+      "path": "migration/MIGRATION-1.6.33.md",
+      "role": "support",
+      "required": false,
+      "sha256": "16d1a3cc13c8a4db3d00dc7b34074e5570041630922165f57ce03c504397cb06"
+    },
+    {
       "path": "model/capabilities.yaml",
       "role": "canonical_model",
       "required": true,
@@ -1980,7 +2022,7 @@
       "path": "project-status.yaml",
       "role": "support",
       "required": false,
-      "sha256": "3b06be667c6fd6a05692cb15dd0c313520a62b0fdc6324e376cde9d8f19b8d53"
+      "sha256": "78d313ebeecdf7918b778a84070be3ef27d7eb8f17588a0aa46b7b3d7a673786"
     },
     {
       "path": "requirements-dev.txt",
