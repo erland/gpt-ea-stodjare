@@ -19,6 +19,12 @@
 - Generatorsmoke: Markdown, Confluence, DOCX och PDF: PASS.
 - Omfattande EA CI-gate kördes, men exekveringen nådde miljöns tidsgräns efter sju godkända delsteg. Den ska därför **inte** betraktas som genomförd eller godkänd.
 
+## Verifierat på GitHub (PR #8, 2026-11-06)
+
+- CI-körning #42164185604: success, inklusive obligatorisk full pytest-grind.
+- Distributionsbygge #42164185577: success, med versionslåst engine 1.6.33.
+- Dessa körningar gäller commit `11856798f8c9df655eb53660b1cb4ed00a4f5a66`. Tidigare lokala tidsgränser är historiska observationer.
+
 ## Kända kvarstående kontroller
 
 1. Kör GitHub Actions för en PR och kontrollera att den publicerade engine-ZIP-filen motsvarar SHA-256 `9638ce2b9300423ace6c055ef824284154788d9d8e6e54459f875fe56ff69885`. Självtest och installering körs före grinden.
@@ -28,4 +34,4 @@
 
 ## Återstående risk
 
-Detta steg bedömer inte funktionell språkmodell-paritet och har inte kört Github-hostade workflows. Projektets egen omfattande regressionsgrind är fortfarande inte slutverifierad.
+GitHub-hostade CI- och distributionsflöden har passerat, men funktionell språkmodell-paritet och värdspecifika funktionstester är fortfarande inte verifierade.
