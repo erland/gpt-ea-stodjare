@@ -1824,7 +1824,7 @@
       "path": "gpt-project.yaml",
       "role": "support",
       "required": false,
-      "sha256": "97fc3659cf77f94c9a9ff5abc15dfdb45cf741c54f010d38db0d487c0cf42bd6"
+      "sha256": "c3850c170d8c62378aedb22cc59c8070c9820a437498b8e945b1a8590ab0c4c4"
     },
     {
       "path": "knowledge/change-control.md",
