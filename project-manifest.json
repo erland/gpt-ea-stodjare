@@ -72,19 +72,19 @@
       "path": "MIGRATION-CI-1.6.33.md",
       "role": "support",
       "required": false,
-      "sha256": "56b3457c5d04ce5310153ba390789438d522d892123306021c3da565b642e045"
+      "sha256": "69d0186e214483ab11b8616c19491e68f7f1c7c8c8c06fa4f5308584d91f13ee"
     },
     {
       "path": "PROJECT_STATUS.md",
       "role": "documentation_source",
       "required": true,
-      "sha256": "b0bf410a3b36f6d08d416850fc6f2afb9578dda49b96e6afedb54ef2ef711897"
+      "sha256": "48272cbbfe9dbe7c9b9f4c86f8f45b7e2b4ce3c10dcdc5e93dd2d176bdcfc0f3"
     },
     {
       "path": "README.md",
       "role": "documentation_source",
       "required": true,
-      "sha256": "4de495f6e4758ab0f2eb2c8899bda4db654d2b2c6c885141f4ccda6709460f50"
+      "sha256": "ec4b4927465f88f35ddb8884bddfc543a01d904cbf3649a9d8b2b991378c3938"
     },
     {
       "path": "VERSION",
@@ -1980,7 +1980,7 @@
       "path": "project-status.yaml",
       "role": "support",
       "required": false,
-      "sha256": "eb11465481d726254e19d8f292e67767177d241528913f49078788cfa83e332d"
+      "sha256": "3b06be667c6fd6a05692cb15dd0c313520a62b0fdc6324e376cde9d8f19b8d53"
     },
     {
       "path": "requirements-dev.txt",
