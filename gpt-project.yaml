@@ -263,8 +263,17 @@ engine:
   selftest: scripts/selftest_ea_engine.py
   required_files:
   - scripts/selftest_ea_engine.py
+  - scripts/docx-pagebreak.lua
   - scripts/validate_project.py
   - scripts/resolve_project_metamodel.py
+  - schemas/project-metamodel.schema.json
+  - schemas/project-manifest.schema.json
+  - schemas/object-quality-rules.yaml
+  - presentation/presentation-contract.yaml
+  - extensions/registry.yaml
+  - compatibility/ea-stodjare-v1/profile.yaml
+  - derived-views/views.yaml
+  - examples/minimal-model/project-manifest.json
   resources:
   - scripts/validate_project.py
   - scripts/detect_project_profile.py
@@ -281,6 +290,14 @@ engine:
   - scripts/migrate_rev80_to_v2.py
   - scripts/verify_v1_v2_migration.py
   - scripts/selftest_ea_engine.py
+  - scripts/docx-pagebreak.lua
+  - schemas
+  - extensions
+  - compatibility
+  - presentation
+  - derived-views
+  - templates/markdown
+  - examples/minimal-model
   python_dependencies:
   - PyYAML>=6.0,<7
   - jsonschema>=4.20,<5
