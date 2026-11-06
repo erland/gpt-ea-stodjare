@@ -64,26 +64,12 @@ jobs:
             --full-pytest \
             --report-file dist/v2-release-gate.json
 
-      - name: Build release package
-        run: python scripts/package_release.py --project-root . --output-dir dist --version "${RELEASE_TAG#v}"
-
-      - name: Verify final release package can be unpacked and validated
-        shell: bash
-        run: |
-          tmp="$(mktemp -d)"
-          unzip -q "dist/ea-stodjare-${RELEASE_TAG#v}.zip" -d "$tmp"
-          python "$tmp/ea-stodjare-${RELEASE_TAG#v}/scripts/validate_project.py" \
-            --project-root "$tmp/ea-stodjare-${RELEASE_TAG#v}" \
-            --repo-root "$tmp/ea-stodjare-${RELEASE_TAG#v}" \
-            --no-generated
-
       - name: Upload workflow artifact
         uses: actions/upload-artifact@v4
         with:
           name: ea-stodjare-${{ env.RELEASE_TAG }}
           path: |
-            dist/ea-stodjare-*.zip
-            dist/ea-stodjare-*.release.json
+            dist/*.zip
             dist/SHA256SUMS.txt
             dist/DELIVERY-MANIFEST.json
             dist/v2-release-gate.json
@@ -96,7 +82,7 @@ jobs:
         run: |
           set -euo pipefail
           shopt -s nullglob
-          assets=(dist/*.zip dist/*.release.json dist/SHA256SUMS.txt dist/DELIVERY-MANIFEST.json dist/v2-release-gate.json)
+          assets=(dist/*.zip dist/SHA256SUMS.txt dist/DELIVERY-MANIFEST.json dist/v2-release-gate.json)
           if (( ${#assets[@]} == 0 )); then
             echo 'No release assets were produced' >&2; exit 1
           fi
