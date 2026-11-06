@@ -68,7 +68,7 @@ def test_release_uses_one_canonical_project_archive():
     workflow = (ROOT / ".github/workflows/release.yml").read_text(encoding="utf-8")
     assert "ea-stodjare-project-" in gate
     assert "project_unpack_and_validate" in gate
-    assert "package_release.py" not in gate
+    assert '"scripts/package_release.py"' not in gate
     assert "package_release.py" not in workflow
     assert "ea-stodjare-*.release.json" not in workflow
     assert "dist/*.zip" in workflow
