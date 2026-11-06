@@ -95,6 +95,7 @@ def main() -> int:
             "eval_definitions",
             "generators",
             "gpt_distributions",
+            "isolated_skill_and_engine_imports",
             "runtime_parity",
             "release_unpack_and_validate",
             "full_end_to_end_regression",
@@ -138,6 +139,13 @@ def main() -> int:
         write_report(report_path, report); print(json.dumps(report, ensure_ascii=False, indent=2)); return 1
     if not step("gpt_distributions", [py, "scripts/validate_distributions.py", "--project-root", "."]):
         write_report(report_path, report); print(json.dumps(report, ensure_ascii=False, indent=2)); return 1
+
+    if not step("isolated_skill_and_engine_imports",
+                [py, "scripts/check_packaged_skill_dependencies.py",
+                 "--project-root", ".", "--version", version]):
+        write_report(report_path, report)
+        print(json.dumps(report, ensure_ascii=False, indent=2))
+        return 1
 
     # Release package is always smoke-tested in CI as well as on tag releases.
     # Keep the temporary release-gate directory until process exit. Some document
