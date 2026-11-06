@@ -2,8 +2,8 @@ schema_version: 1
 project_id: ea-stodjare
 version: 2.0.0
 phase: migration
-status: modular_skills_ci_pending
-current_step: modular-skills-and-host-parity
+status: runtime_skill_dependency_fix_ci_pending
+current_step: package-runtime-engine-and-verify-isolated-scripts
 blocking_issues:
 - external_runtime_parity_unverified
 next_step:

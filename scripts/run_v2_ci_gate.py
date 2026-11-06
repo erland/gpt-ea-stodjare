@@ -10,7 +10,7 @@ The gate makes the release contract explicit and machine-readable. It verifies:
 - Builder Knowledge reproducibility,
 - metamodel/presentation-aware generators,
 - GPT distributions,
-- deterministic release package unpack-and-validate.
+- canonical GPT Byggaren project ZIP unpack-and-validate.
 
 Use --full-pytest in CI/release to add the complete pytest suite after the focused gates.
 """
@@ -95,8 +95,9 @@ def main() -> int:
             "eval_definitions",
             "generators",
             "gpt_distributions",
+            "isolated_skill_and_engine_imports",
             "runtime_parity",
-            "release_unpack_and_validate",
+            "project_unpack_and_validate",
             "full_end_to_end_regression",
             "release_contract",
         ],
@@ -139,30 +140,45 @@ def main() -> int:
     if not step("gpt_distributions", [py, "scripts/validate_distributions.py", "--project-root", "."]):
         write_report(report_path, report); print(json.dumps(report, ensure_ascii=False, indent=2)); return 1
 
-    # Release package is always smoke-tested in CI as well as on tag releases.
-    # Keep the temporary release-gate directory until process exit. Some document
-    # toolchains may leave transient lock files; cleanup is not part of validation.
-    out = Path(tempfile.mkdtemp(prefix="ea-stodjare-release-gate-"))
-    if not step("release_package_build", [py, "scripts/package_release.py", "--project-root", ".", "--output-dir", str(out), "--version", version]):
-        write_report(report_path, report); print(json.dumps(report, ensure_ascii=False, indent=2)); return 1
-    archive = out / f"ea-stodjare-{version}.zip"
-    unpack = out / "unpacked"
-    try:
-        with zipfile.ZipFile(archive) as zf:
-            bad = zf.testzip()
-            if bad:
-                raise RuntimeError(f"Korrupt releasezip: {bad}")
-            zf.extractall(unpack)
-    except Exception as exc:
-        report["steps"].append({"name": "release_unpack", "status": "failed", "returncode": 1, "error": str(exc)})
-        report["failed_step"] = "release_unpack"
+    if not step("isolated_skill_and_engine_imports",
+                [py, "scripts/check_packaged_skill_dependencies.py",
+                 "--project-root", ".", "--version", version]):
         write_report(report_path, report)
         print(json.dumps(report, ensure_ascii=False, indent=2))
         return 1
-    report["steps"].append({"name": "release_unpack", "status": "passed", "returncode": 0})
-    released_root = unpack / f"ea-stodjare-{version}"
-    if not step("release_unpack_and_validate", [py, str(released_root / "scripts" / "validate_project.py"), "--project-root", str(released_root), "--repo-root", str(released_root), "--no-generated"]):
-        write_report(report_path, report); print(json.dumps(report, ensure_ascii=False, indent=2)); return 1
+
+    # The canonical GPT Byggaren project archive is the only project deliverable.
+    # Preserve the release unpack-and-validate check without producing a second
+    # EA-specific ZIP through scripts/package_release.py.
+    project_archive = root / "dist" / f"ea-stodjare-project-{version}.zip"
+    unpack = Path(tempfile.mkdtemp(prefix="ea-stodjare-project-gate-"))
+    try:
+        with zipfile.ZipFile(project_archive) as zf:
+            bad = zf.testzip()
+            if bad:
+                raise RuntimeError(f"Korrupt projektarkiv: {bad}")
+            members = zf.namelist()
+            if any(
+                name.startswith("/") or ".." in Path(name).parts
+                for name in members
+            ):
+                raise RuntimeError("Osäker sökväg i kanoniskt projektarkiv")
+            zf.extractall(unpack)
+    except Exception as exc:
+        report["steps"].append({"name": "project_unpack", "status": "failed",
+                                "returncode": 1, "error": str(exc)})
+        report["failed_step"] = "project_unpack"
+        write_report(report_path, report)
+        print(json.dumps(report, ensure_ascii=False, indent=2))
+        return 1
+    report["steps"].append({"name": "project_unpack", "status": "passed", "returncode": 0})
+    if not step("project_unpack_and_validate",
+                [py, str(unpack / "scripts" / "validate_project.py"),
+                 "--project-root", str(unpack), "--repo-root", str(unpack),
+                 "--no-generated"]):
+        write_report(report_path, report)
+        print(json.dumps(report, ensure_ascii=False, indent=2))
+        return 1
 
     if args.full_pytest:
         if not step("full_pytest", [py, "-m", "pytest", "-q"]):

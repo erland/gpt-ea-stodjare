@@ -88,3 +88,19 @@ De 29 semantiska evalfallen är definierade och runtimeprotokollet är implement
 - Tre Skills med gemensam kärna och separat ansvar har aktiverats.
 - Samtliga avsnitt i ursprunglig instruktion är bevarade och spårade i `canonical/assembly.json`.
 - Fem distributioner har byggts och validerats lokalt. GitHub-kontroll efter denna förändring och externa värdtester återstår.
+
+## Runtime-Skill-beroenden och separat Engine (2.2.1, PR under granskning)
+
+- `quality-and-publication` deklarerar nu `detect_project_profile.py` och `resolve_project_metamodel.py` utöver tidigare skript.
+- `project-lifecycle` deklarerar nu `validate_project.py`, som används vid v1-migration.
+- `engine.enabled: true` aktiverar en separat EA Stödjare Engine ZIP med endast explicit deklarerade runtimeverktyg och ett exekverbart självtest.
+- Obligatorisk CI-grind provar isolerade Python-importer inuti paketerade Skills och Engine ZIP:ens integritet/självtest.
+- Full GitHub Actions-verifiering på denna PR återstår. Hostparitet i verklig ChatGPT Plugin/Claude/OpenCode är inte verifierad.
+
+## Konsoliderad projektleverans (2.2.1, PR #10)
+
+- Endast `ea-stodjare-project-<version>.zip` publiceras automatiskt som komplett projektpaket.
+- Extra `ea-stodjare-<version>.zip` och `ea-stodjare-<version>.release.json` tas bort från automatisk release.
+- Kanoniskt projektarkiv packas upp och körs genom `validate_project.py` i obligatorisk CI/release-gate.
+- `scripts/package_release.py` bevaras för historisk kompatibilitet men anropas inte automatiskt. Externa konsumenter av äldre format behöver vid behov migrera.
+- Fullständig GitHub CI för ändringen måste verifieras på PR #10.
