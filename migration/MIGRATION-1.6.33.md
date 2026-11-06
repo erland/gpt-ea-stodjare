@@ -10,8 +10,8 @@ Källprojekt: EA Stödjare 2.0.0 (revision 60), ursprungligen byggt för GPT Byg
 2. **Projektmodell – klar med granskningsnotering:** fem peer-runtimes med separat OpenAI Plugin, avaktiverad Custom GPT, en enda Skill för att bevara ursprungligt beteende. 1.5.1-kontrakt arkiverat.
 3. **Motor – klar:** bifogad kanonisk Engine 1.6.33 självtestad, integritetsverifierad och installerad.
 4. **Fem distributioner – byggda:** Chat ZIP, Plugin, Claude Project, Claude Skills och OpenCode. Kanonisk distributionsvalidator: PASS.
-5. **Dokumentation/hygien – delvis klar:** README och PROJECT_STATUS uppdaterade och gamla källfiler bevarade. Projektets äldre release-/CI-workflows behöver granskas före merge. Inga osäkra automatiska borttagningar.
-6. **Slutverifiering – öppen:** full EA-domän CI/E2E och externa hosttester har inte passerat. ZIP-build får inte likställas med funktionell runtimeparitet.
+5. **Dokumentation/hygien – delvis klar:** README och PROJECT_STATUS uppdaterade och gamla källfiler bevarade. CI- och release-workflows är migrerade till versionslåst engine 1.6.33. Inga osäkra automatiska borttagningar.
+6. **Slutverifiering – öppen:** full EA-domän CI/E2E och distributionsbygge har passerat på GitHub PR #8; externa hosttester återstår. ZIP-build får inte likställas med funktionell runtimeparitet.
 
 ## Teknisk granskning före release
 
