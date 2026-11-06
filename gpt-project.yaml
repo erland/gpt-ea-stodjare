@@ -4,182 +4,989 @@ project:
   name: EA Stödjare
   language: sv
   version: 2.0.0
-
-analysis:
-  profile: stateful_modeling
-  rationale: Stateful enterprise-architecture-modellering med kanonisk YAML, projektspecifik metamodell, change-control, migration och regenererbara derivat.
-  runtime:
-    strategy: peer_candidates
-    candidates:
-      - runtime_id: chatgpt_chat
-        suitability: ready
-        activate_by_default: true
-        reason: Portable Chat bär instruktion, Knowledge och strukturerade stödresurser.
-      - runtime_id: chatgpt_custom
-        suitability: ready
-        activate_by_default: true
-        reason: Custom GPT bär samma metodik och Builder Knowledge inom plattformsgränserna.
-      - runtime_id: claude_project
-        suitability: reduced
-        activate_by_default: false
-        reason: Instruktioner och referenser kan paketeras men fil-, execution- och state-paritet är inte verifierad.
-      - runtime_id: opencode
-        suitability: reduced
-        activate_by_default: false
-        reason: Lokal fil/exekvering passar men runtimeparitet och distributionskontrakt är inte verifierade.
-      - runtime_id: openai_plugin
-        suitability: ready
-        activate_by_default: true
-        reason: Skills-first kan bära canonical metodik och deklarerade runtimeverktyg när hosten erbjuder workspace, filskrivning, code execution och persistent state.
-
-migration:
-  target: gpt-builder-1.5.1
-
-instructions:
-  canonical: custom-gpt/instructions.md
-
-knowledge:
-  canonical_root: custom-gpt/knowledge
-  files:
-    - 00-knowledge-index.md
-    - 01-domain-model.md
-    - 02-evidence-and-research.md
-    - 03-analysis-and-modeling-workflows.md
-    - 04-quality-assurance.md
-    - 05-project-and-output.md
-
+  description: Enterprise architecture-stöd med verifierbar kanonisk YAML-modell,
+    evidens, metamodell och kontrollerad migrering.
+development:
+  plan: docs/v2-development-plan.md
+  status: project-status.yaml
+  human_readable_status: PROJECT_STATUS.md
+  project_documentation:
+  - README.md
+  - PROJECT_STATUS.md
+structure:
+  canonical_root: custom-gpt
+  instructions:
+    path: custom-gpt
+    required: true
+  conversation_starters:
+    path: src/conversation-starters
+    required: false
+  runtime_policy:
+    path: src/runtime-policy
+    required: false
+  knowledge:
+    path: custom-gpt/knowledge
+    required: true
+  templates:
+    path: templates
+    required: false
+  schemas:
+    path: schemas
+    required: false
+  scripts:
+    path: scripts
+    required: false
+  tests:
+    path: tests
+    required: false
+  evals:
+    path: evals
+    required: false
+  research:
+    path: research
+    required: false
+  build:
+    path: build
+    generated: true
+    create_when_needed: true
+  dist:
+    path: dist
+    generated: true
+    create_when_needed: true
 runtime:
+  primary: none
   chat_zip:
     enabled: true
+    bundle_distribution_engine: false
     role: peer_distribution
-    artifact: dist/ea-stodjare-chat-v{version}.zip
+    allow_richer_runtime_than_custom_gpt: true
+    entrypoint: START-HERE.md
+    schema: schemas/chat-zip-runtime.schema.json
+    policy: src/runtime-policy/chat-zip-runtime-policy.md
+    model: docs/chat-zip-runtime.md
+    start_here_template: templates/START-HERE.chat.md.tpl
+    layout:
+      assistant: assistant
+      knowledge: knowledge
+      schemas: schemas
+      scripts: scripts
+      templates: templates
+      runtime: runtime
+    include:
+      instructions:
+      - custom-gpt/instructions.md
+      knowledge:
+      - custom-gpt/knowledge/**
+      schemas:
+      - schemas/**
+      scripts:
+      - scripts/**
+    exclude:
+    - docs/**
+    - tests/**
+    - evals/**
+    - research/**
+    - .github/**
+    - .git/**
+    - build/**
+    - dist/**
+    - project-status.yaml
+    - PROJECT.md
+    - STATUS.md
+    manifest:
+      required: true
+      checksums: true
+    deterministic_build: true
+    omit_empty_runtime_directories: true
+  claude:
+    enabled: true
+    role: peer_distribution
+    mode: claude_project
+    schema: schemas/claude-portable-runtime.schema.json
+    policy: src/runtime-policy/claude-portable-runtime-policy.md
+    model: docs/claude-portable-runtime.md
+    project:
+      instructions: project/instructions.md
+      knowledge: project/knowledge
+      runtime_contract: project/runtime-contract.json
+    templates:
+      readme: templates/README.claude.md.tpl
+    validation:
+      require_instructions: true
+      require_runtime_contract: true
+  opencode:
+    enabled: true
+    role: peer_distribution
+    mode: opencode_workspace
+    schema: schemas/opencode-runtime.schema.json
+    policy: src/runtime-policy/opencode-runtime-policy.md
+    model: docs/opencode-runtime.md
+    layout:
+      instructions: AGENTS.md
+      config: opencode.json
+      tools: .opencode/tools
+      runtime_scripts: scripts
+      runtime_contract: .opencode/runtime-contract.json
+      knowledge: knowledge
+    templates:
+      readme: templates/README.opencode.md.tpl
+    skills:
+      enabled: true
+      directory: .opencode/skills
+      definitions:
+      - id: gpt-project-workflow
+        name: gpt-project-workflow
+        description: Planera, återuppta och fortsätt ett GPT Byggaren-projekt utifrån
+          faktisk projektstatus.
+        references:
+        - docs/dynamic-planning.md
+        - docs/resume-flow.md
+        - docs/next-step-recommendation.md
+    validation:
+      require_agents_md: true
+      require_runtime_contract: true
+  plugin:
+    enabled: true
+    role: peer_distribution
+    mode: openai_plugin
+    schema: schemas/plugin-runtime.schema.json
+    policy: src/runtime-policy/plugin-runtime-policy.md
+    model: docs/plugin-runtime.md
+    layout:
+      manifest_file: plugin.json
+      skills: skills
+      references: references
+      assets: assets
+      scripts: scripts
+    templates:
+      readme: templates/README.plugin.md.tpl
+    validation:
+      require_manifest: true
+      require_skill: true
+      require_skill_frontmatter: true
   custom_gpt:
-    enabled: true
+    enabled: false
     role: peer_distribution
-    artifact: dist/ea-stodjare-custom-gpt-v{version}.zip
-  openai_plugin:
-    enabled: true
-    role: peer_distribution
-    mode: skills_first
-    compatibility: ready_runtime_dependent
-    entrypoint: skills/ea-stodjare/SKILL.md
-    artifact: dist/ea-stodjare-openai-plugin-v{version}.zip
-    filesystem_read: required_host_runtime
-    filesystem_write: required_host_runtime
-    code_execution: required_host_runtime
-    persistent_state: required_host_runtime
-    web_research: conditional_host_runtime
-    state_authority: project_files
-    conversation_fallback: false
-    mcp_generated: false
-
+    compilation_mode: adaptive
+    allow_reduced_functionality: true
+    platform_limits:
+      instruction_max_characters: 8000
+      knowledge_max_files: 20
+    notes:
+    - Platform limits are configuration values and must be easy to update.
+    - Custom GPT and Chat ZIP are peer distribution targets derived from the same
+      canonical contract.
+    schema: schemas/custom-gpt-compilation.schema.json
+    policy: src/runtime-policy/custom-gpt-compilation-policy.md
+    model: docs/custom-gpt-compilation.md
+    instruction:
+      mode: compressed
+      max_characters: 8000
+    knowledge:
+      strategy: hybrid
+      max_files: 20
+    builder:
+      instructions: builder/instructions.md
+      conversation_starters: builder/conversation-starters.md
+      capabilities: builder/capabilities.md
+      runtime_contract: builder/runtime-contract.json
+      knowledge_package: builder/knowledge-package
+    templates:
+      readme: templates/README.custom-gpt.md.tpl
+      compatibility: templates/COMPATIBILITY.md.tpl
+      capabilities: templates/capabilities.md.tpl
+    compatibility:
+      report_required: true
+      parity_symbols:
+        equivalent: ✓
+        reduced: '~'
+        missing: '-'
+    validation:
+      block_on_instruction_limit: true
+      block_on_knowledge_limit: true
+      block_on_misleading_core_functionality: true
+skills:
+  contract_version: 1
+  mode: inferred
+  resource_policy: explicit
+  definitions:
+  - id: ea-stodjare
+    name: EA Stödjare
+    description: Modellera, analysera, kvalitetssäkra och dokumentera enterprise architecture
+      med projektstyrd metamodell och evidens.
+    references:
+    - custom-gpt/knowledge/00-knowledge-index.md
+    - custom-gpt/knowledge/01-domain-model.md
+    - custom-gpt/knowledge/02-evidence-and-research.md
+    - custom-gpt/knowledge/03-analysis-and-modeling-workflows.md
+    - custom-gpt/knowledge/04-quality-assurance.md
+    - custom-gpt/knowledge/05-project-and-output.md
+    assets: []
+    scripts:
+    - scripts/validate_project.py
+    - scripts/detect_project_profile.py
+    - scripts/resolve_project_metamodel.py
+    - scripts/resolve_quality_rules.py
+    - scripts/change_control.py
+    - scripts/generate_derived_views.py
+    - scripts/generate_markdown.py
+    - scripts/generate_confluence.py
+    - scripts/generator_context.py
+    - scripts/presentation_contract.py
+    - scripts/export_documents.py
+    - scripts/migrate_v1_to_v2.py
+    - scripts/migrate_rev80_to_v2.py
+    - scripts/verify_v1_v2_migration.py
 capabilities:
-  filesystem:
-    read: required
-    write: required_for_project_changes
-  code_execution:
-    level: required_for_verified_project_changes
-  persistent_state:
-    level: required_for_stateful_project_management
-  web:
-    level: conditional
-    reason: Required when standards, frameworks, market/product data or current practice must be researched.
-  structured_data:
-    level: required
-  external_tools:
-    level: conditional
-    reason: Pandoc and LibreOffice are required only for DOCX/PDF export.
-
-workspace_state:
-  workspace:
-    requirement: required_for_project_work
-    persistence: required
-    separate_from_assistant: true
-  state:
-    authority: project_files
-    conversation_fallback: false
-    canonical_sources:
-      - project-manifest.json
-      - project-metamodel.yaml
-      - model/
-      - market-reference/
-      - actual-state/
-      - governance/
-
+  contract_version: 1
+  requirements:
+    web:
+      level: recommended
+    filesystem:
+      read: required
+      write: required
+    code_execution:
+      level: required
+    structured_data:
+      level: required
+    persistent_state:
+      level: required
+    external_tools:
+      level: optional
 tools:
-  runtime_scripts:
-    required:
-      - scripts/validate_project.py
-      - scripts/detect_project_profile.py
-      - scripts/resolve_project_metamodel.py
-      - scripts/resolve_quality_rules.py
-      - scripts/change_control.py
-    recommended:
-      - scripts/generate_derived_views.py
-      - scripts/generate_markdown.py
-      - scripts/generate_confluence.py
-      - scripts/generator_context.py
-      - scripts/presentation_contract.py
-      - scripts/export_documents.py
-      - scripts/docx-pagebreak.lua
-      - scripts/migrate_v1_to_v2.py
-      - scripts/migrate_rev80_to_v2.py
-      - scripts/verify_v1_v2_migration.py
-  build_only_scripts:
-    - scripts/build_distributions.py
-    - scripts/validate_distributions.py
-    - scripts/build_builder_knowledge.py
-    - scripts/package_release.py
-    - scripts/run_v2_ci_gate.py
-    - scripts/run_full_e2e_regression.py
-
-artifacts:
-  outputs:
-    project_model:
-      format: yaml
-      persistence: persistent
-    markdown:
-      format: markdown
-      persistence: derived
-    confluence:
-      format: text
-      persistence: derived
-    docx:
-      format: docx
-      persistence: derived
-      host_dependencies: [pandoc]
-    pdf:
-      format: pdf
-      persistence: derived
-      host_dependencies: [pandoc, libreoffice]
-    runtime_package:
-      format: zip
-      persistence: persistent
-
-runtime_parity:
-  model: runtime-parity.yaml
-  registered_runtimes:
-    - chatgpt_chat
-    - chatgpt_custom
-    - claude_project
-    - opencode
-    - openai_plugin
-  compared_categories:
-    - behavior
-    - capability
-    - artifact
-    - workspace_state
-    - tool
-
+  contract_version: 1
+  tools:
+  - id: validate-project
+    type: script
+    requirement: recommended
+    purpose: 'EA Stödjare projektspecifik runtimeoperation: validate_project'
+    script: scripts/validate_project.py
+    deterministic: true
+    mutates_workspace: false
+    working_directory: workspace
+    runtime_fallback: manual
+  - id: detect-project-profile
+    type: script
+    requirement: recommended
+    purpose: 'EA Stödjare projektspecifik runtimeoperation: detect_project_profile'
+    script: scripts/detect_project_profile.py
+    deterministic: true
+    mutates_workspace: false
+    working_directory: workspace
+    runtime_fallback: manual
+  - id: resolve-project-metamodel
+    type: script
+    requirement: recommended
+    purpose: 'EA Stödjare projektspecifik runtimeoperation: resolve_project_metamodel'
+    script: scripts/resolve_project_metamodel.py
+    deterministic: true
+    mutates_workspace: false
+    working_directory: workspace
+    runtime_fallback: manual
+  - id: resolve-quality-rules
+    type: script
+    requirement: recommended
+    purpose: 'EA Stödjare projektspecifik runtimeoperation: resolve_quality_rules'
+    script: scripts/resolve_quality_rules.py
+    deterministic: true
+    mutates_workspace: false
+    working_directory: workspace
+    runtime_fallback: manual
+  - id: change-control
+    type: script
+    requirement: recommended
+    purpose: 'EA Stödjare projektspecifik runtimeoperation: change_control'
+    script: scripts/change_control.py
+    deterministic: true
+    mutates_workspace: true
+    working_directory: workspace
+    runtime_fallback: manual
+  - id: generate-derived-views
+    type: script
+    requirement: recommended
+    purpose: 'EA Stödjare projektspecifik runtimeoperation: generate_derived_views'
+    script: scripts/generate_derived_views.py
+    deterministic: true
+    mutates_workspace: true
+    working_directory: workspace
+    runtime_fallback: manual
+  - id: generate-markdown
+    type: script
+    requirement: recommended
+    purpose: 'EA Stödjare projektspecifik runtimeoperation: generate_markdown'
+    script: scripts/generate_markdown.py
+    deterministic: true
+    mutates_workspace: true
+    working_directory: workspace
+    runtime_fallback: manual
+  - id: generate-confluence
+    type: script
+    requirement: recommended
+    purpose: 'EA Stödjare projektspecifik runtimeoperation: generate_confluence'
+    script: scripts/generate_confluence.py
+    deterministic: true
+    mutates_workspace: true
+    working_directory: workspace
+    runtime_fallback: manual
+  - id: generator-context
+    type: script
+    requirement: recommended
+    purpose: 'EA Stödjare projektspecifik runtimeoperation: generator_context'
+    script: scripts/generator_context.py
+    deterministic: true
+    mutates_workspace: true
+    working_directory: workspace
+    runtime_fallback: manual
+  - id: presentation-contract
+    type: script
+    requirement: recommended
+    purpose: 'EA Stödjare projektspecifik runtimeoperation: presentation_contract'
+    script: scripts/presentation_contract.py
+    deterministic: true
+    mutates_workspace: true
+    working_directory: workspace
+    runtime_fallback: manual
+  - id: export-documents
+    type: script
+    requirement: recommended
+    purpose: 'EA Stödjare projektspecifik runtimeoperation: export_documents'
+    script: scripts/export_documents.py
+    deterministic: true
+    mutates_workspace: true
+    working_directory: workspace
+    runtime_fallback: manual
+  - id: migrate-v1-to-v2
+    type: script
+    requirement: recommended
+    purpose: 'EA Stödjare projektspecifik runtimeoperation: migrate_v1_to_v2'
+    script: scripts/migrate_v1_to_v2.py
+    deterministic: true
+    mutates_workspace: true
+    working_directory: workspace
+    runtime_fallback: manual
+  - id: migrate-rev80-to-v2
+    type: script
+    requirement: recommended
+    purpose: 'EA Stödjare projektspecifik runtimeoperation: migrate_rev80_to_v2'
+    script: scripts/migrate_rev80_to_v2.py
+    deterministic: true
+    mutates_workspace: true
+    working_directory: workspace
+    runtime_fallback: manual
+  - id: verify-v1-v2-migration
+    type: script
+    requirement: recommended
+    purpose: 'EA Stödjare projektspecifik runtimeoperation: verify_v1_v2_migration'
+    script: scripts/verify_v1_v2_migration.py
+    deterministic: true
+    mutates_workspace: true
+    working_directory: workspace
+    runtime_fallback: manual
+analysis:
+  model: docs/analysis-model.md
+  recommendation_schema: schemas/analysis-recommendation.schema.json
+  policy: src/runtime-policy/analysis-policy.md
+  profiles:
+  - simple
+  - standard
+  - zip_first_advanced
+  - workflow_research_heavy
+  infer_technical_choices_from_use_case: true
+  ask_only_for_unresolved_business_choices: true
+project_hygiene:
+  enabled: true
+  history_source: git
+  remove_obsolete_work_files: true
+  remove_temporary_files: true
+  remove_caches: true
+  remove_local_test_outputs: true
+  avoid_duplicate_canonical_sources: true
+  run_before_release: true
+  model: docs/project-hygiene.md
+  schema: schemas/project-hygiene.schema.json
+  policy: src/runtime-policy/project-hygiene-policy.md
+  classify_files: true
+  safe_auto_remove_only: true
+  review_when_uncertain: true
+  validate_internal_references: true
+  validate_distribution_contents: true
+  final_hygiene_is_release_gate: true
+  final_model: docs/final-project-hygiene.md
+  final_policy: src/runtime-policy/final-hygiene-policy.md
+  report_schema: schemas/project-hygiene-report.schema.json
+  script: scripts/project_hygiene.py
+  modes:
+  - checkpoint
+  - final
+  final_is_release_gate: true
+  safe_auto_clean:
+  - build/**
+  - dist/**
+  - '**/__pycache__/**'
+  - '**/.pytest_cache/**'
+  - '**/.mypy_cache/**'
+  - '**/.ruff_cache/**'
+  - '**/*.tmp'
+  - '**/*.temp'
+  - '**/.DS_Store'
 build:
-  chat: true
-  custom_gpt: true
-  plugin: true
-
+  deterministic: true
+  create_manifest: true
+  create_checksums: true
+  build_project_zip: true
+  build_chat_zip: true
+  build_custom_gpt_zip: false
+  build_claude_project_zip: true
+  build_claude_skills_zip: true
+  build_opencode_zip: true
+  build_plugin_zip: true
+  direct_downloads_without_github: true
 release:
-  artifacts:
+  github:
+    optional: false
+    version_source: github_release_tag
+    tag_pattern: v{semver}
+    build_on_published_release: true
+    workflow: .github/workflows/release.yml
+    trigger: release.published
+    permissions:
+    - contents:write
+    run_tests: true
+    run_distribution_validation: true
+    upload_artifacts_to_release: true
+    artifacts:
+    - project_zip
     - chat_zip
-    - custom_gpt_zip
-    - plugin_zip
-    - sha256_checksums
+    - claude_project_zip_when_enabled
+    - claude_skills_zip_when_enabled
+    - opencode_zip_when_enabled
+    - plugin_zip_when_enabled
+    - checksums
     - delivery_manifest
+    policy: src/runtime-policy/github-release-policy.md
+    model: docs/github-release-flow.md
+    enabled: true
+    default: true
+  local:
+    supported: true
+    version_strategy_before_github_release: development_version
+artifacts:
+  contract_version: 1
+  schema: schemas/artifact-contract.schema.json
+  outputs:
+    development_plan:
+      kind: document
+      format: markdown
+      requirement: required
+      persistence: persistent
+      multiplicity: one
+      description: Stegvis utvecklingsplan som kan återanvändas mellan runtimes.
+    project_package:
+      kind: package
+      format: zip
+      requirement: required
+      persistence: persistent
+      multiplicity: one
+      filename_pattern: <project-id>-project.zip
+      description: Komplett utvecklingsprojekt för fortsatt arbete och migrering.
+    runtime_package:
+      kind: distribution
+      format: zip
+      requirement: required
+      persistence: persistent
+      multiplicity: many
+      description: En eller flera runtime-specifika distributioner byggda från samma
+        canonical projekt.
+    validation_report:
+      kind: report
+      format: structured
+      requirement: required
+      persistence: persistent
+      multiplicity: one
+    parity_report:
+      kind: report
+      format: markdown
+      requirement: conditional
+      condition: multiple_runtimes
+      persistence: persistent
+      multiplicity: one
+    checksums:
+      kind: metadata
+      format: sha256
+      requirement: required
+      persistence: persistent
+      multiplicity: one
+  legacy_mapping:
+    project_zip: project_package
+    chat_zip: runtime_package
+    custom_gpt_zip: runtime_package
+    claude_project_zip: runtime_package
+    claude_skills_zip: runtime_package
+    opencode_zip: runtime_package
+    plugin_zip: runtime_package
+    validation_report: validation_report
+    parity_report: parity_report
+    checksums: checksums
+workspace_state:
+  contract_version: 1
+  schema: schemas/workspace-state-contract.schema.json
+  workspace:
+    requirement: required
+    persistence: required
+    portable: true
+    separate_from_assistant: true
+    artifact: project_package
+    description: GPT-projektet som användaren utvecklar är ett portabelt workspace
+      separat från GPT Byggarens runtimepaket.
+  state:
+    requirement: required
+    persistence: required
+    authority: workspace_file
+    format: yaml
+    path: project-status.yaml
+    conversation_fallback: false
+    description: Projektets maskinläsbara status är auktoritativ och ska göra fortsatt
+      arbete oberoende av tidigare chatthistorik.
+  runtime_preferences:
+    chat: conversation_or_file
+    agent: workspace_file
+workflow:
+  mode: explicit_state_machine
+  policy: src/runtime-policy/operational-execution-policy.md
+  current_state_source: project-status.yaml
+  execution_rule: one_state_or_bounded_goal_per_step
+  validator: scripts/validate_model_robustness.py
+  initial_analysis_in_chat: true
+  development_plan_artifact: development_plan
+  create_project_package_on_first_execution_step: true
+  rebuild_complete_project_package_after_each_step: true
+  recommend_next_step_from_actual_status: true
+  resume_from_project_package: true
+  states:
+    idea_analysis:
+      next:
+      - architecture
+      exit_requires:
+      - valid_analysis_recommendation
+    architecture:
+      next:
+      - planning
+      exit_requires:
+      - canonical_contracts_defined
+    planning:
+      next:
+      - implementation
+      exit_requires:
+      - valid_development_plan
+    implementation:
+      next:
+      - validation
+      exit_requires:
+      - planned_change_present
+    validation:
+      next:
+      - implementation
+      - packaging
+      exit_requires:
+      - relevant_validation_passed
+    packaging:
+      next:
+      - release
+      exit_requires:
+      - distribution_validation_passed
+    release:
+      next:
+      - maintenance
+      exit_requires:
+      - release_readiness_passed
+    maintenance:
+      next:
+      - implementation
+      - validation
+    blocked:
+      control_state: true
+    paused:
+      control_state: true
+  operational_core:
+  - read_project_contract
+  - read_project_status
+  - select_one_state_or_bounded_goal
+  - load_only_relevant_policy
+  - execute_change
+  - validate_deterministically
+  - correct_before_completion_on_failure
+  - update_structured_status_after_pass
+  - rebuild_project_zip_when_required
+  - recommend_next_step_from_actual_state
+planning:
+  mode: dynamic
+  model: docs/dynamic-planning.md
+  schema: schemas/development-plan.schema.json
+  policy: src/runtime-policy/planning-policy.md
+  derive_from_analysis: true
+  persist_markdown_before_project_creation: true
+  copy_into_project_on_first_execution_step: true
+  allow_inserted_corrective_steps: true
+  allow_step_merge: true
+  allow_step_skip: true
+  allow_step_split: true
+  plan_is_guiding_not_mechanical: true
+file_classification:
+  classes:
+  - CANONICAL
+  - RUNTIME
+  - DEVELOPMENT
+  - GENERATED
+  - TEMPORARY
+  - HISTORICAL
+  canonical_paths:
+  - src/
+  - knowledge/
+  - templates/
+  - schemas/
+  development_paths:
+  - docs/
+  - tests/
+  - evals/
+  - research/
+  - .github/
+  generated_paths:
+  - build/
+  - dist/
+instructions:
+  canonical: custom-gpt/instructions.md
+  single_source_of_truth: true
+  distribution_specific_instructions_are_generated: true
+knowledge_architecture:
+  canonical_root: custom-gpt/knowledge
+  behavior_rules_belong_in_instructions_or_policy: true
+platform_validation:
+  model: docs/platform-validation.md
+  schema: schemas/platform-validation.schema.json
+  policy: src/runtime-policy/platform-validation-policy.md
+  report_template: templates/custom-gpt-validation-report.md.tpl
+  validate_built_distribution: true
+  checks:
+    instruction_length: true
+    knowledge_file_count: true
+    knowledge_file_size: when_configured
+    knowledge_file_format: when_configured
+    conversation_starters: true
+    capabilities: true
+    builder_package: true
+    compatibility_report: true
+    distribution_hygiene: true
+  release_gate:
+    pass: true
+    warning: allowed_if_project_policy_accepts
+    blocked: false
+  same_rules_for_local_ci_and_release: true
+runtime_parity:
+  model: docs/runtime-parity.md
+  schema: schemas/runtime-parity.schema.json
+  policy: src/runtime-policy/runtime-parity-policy.md
+  report_template: templates/runtime-parity-report.md.tpl
+  reference:
+    type: canonical_contract
+  registered_runtimes:
+  - chatgpt_chat
+  - claude_project
+  - claude_skills
+  - opencode
+  - openai_plugin
+  compared_categories:
+  - behavior
+  - capability
+  - artifact
+  - workspace_state
+  - tool
+  levels:
+  - full
+  - high
+  - moderate
+  - low
+  - not_viable
+  states:
+  - equivalent
+  - reduced
+  - missing
+  - not_applicable
+  criticality:
+  - critical
+  - important
+  - optional
+  weights:
+    state:
+      equivalent: 1.0
+      reduced: 0.5
+      missing: 0.0
+    criticality:
+      critical: 3
+      important: 2
+      optional: 1
+  release_rules:
+    full: publish
+    high: publish
+    moderate: publish_with_warning
+    low: publish_with_warning
+    not_viable: do_not_publish
+  generate_separate_report_artifact: true
+build_system:
+  model: docs/build-system.md
+  build_script: scripts/build_distributions.py
+  validation_script: scripts/validate_distributions.py
+  targets:
+  - project
+  - chat
+  - claude_project
+  - claude_skills
+  - opencode
+  - plugin
+  runtime_targets:
+    chat:
+      runtime_id: chatgpt_chat
+      runtime_key: chat_zip
+      builder: chat
+      artifact_type: chat_zip
+      filename_pattern: <project-id>-chat-<version>.zip
+    claude_project:
+      runtime_id: claude_project
+      runtime_key: claude
+      builder: claude
+      artifact_type: claude_project_zip
+      filename_pattern: <project-id>-claude-project-<version>.zip
+    claude_skills:
+      runtime_id: claude_skills
+      runtime_key: claude
+      builder: claude_skills
+      artifact_type: claude_skills_zip
+      filename_pattern: <project-id>-claude-skills-<version>.zip
+    opencode:
+      runtime_id: opencode
+      runtime_key: opencode
+      builder: opencode
+      artifact_type: opencode_zip
+      filename_pattern: <project-id>-opencode-<version>.zip
+    plugin:
+      runtime_id: openai_plugin
+      runtime_key: plugin
+      builder: plugin
+      artifact_type: plugin_zip
+      filename_pattern: <project-id>-plugin-<version>.zip
+  output_root: dist
+  working_root: build
+  deterministic_zip: true
+  manifest: true
+  checksums: sha256
+  project_zip_excludes:
+  - build/**
+  - dist/**
+  - .git/**
+  - '**/__pycache__/**'
+  - '**/.pytest_cache/**'
+direct_build:
+  model: docs/direct-build.md
+  policy: src/runtime-policy/direct-build-policy.md
+  script: scripts/build_direct.py
+  delivery_manifest_schema: schemas/delivery-manifest.schema.json
+  default_development_version: 0.0.0-dev
+  github_required: false
+  deliver:
+  - project_zip
+  - chat_zip
+  - claude_project_zip_when_enabled
+  - claude_skills_zip_when_enabled
+  - opencode_zip_when_enabled
+  - plugin_zip_when_enabled
+  - checksums
+  - delivery_manifest
+  validate_before_delivery: true
+ci:
+  workflow: .github/workflows/ci.yml
+  model: docs/ci-flow.md
+  policy: src/runtime-policy/ci-policy.md
+  triggers:
+  - push
+  - pull_request
+  - workflow_dispatch
+  development_version: 0.0.0-ci
+  checks:
+  - yaml_json_parse
+  - tests
+  - build_distributions
+  - validate_distributions
+  - expected_artifacts
+  - project_hygiene
+  upload_ci_artifacts: true
+  same_toolchain_as_release: true
+  enabled: true
+  default: true
+next_step_recommendation:
+  model: docs/next-step-recommendation.md
+  policy: src/runtime-policy/next-step-policy.md
+  schema: schemas/next-step-recommendation.schema.json
+  script: scripts/recommend_next_step.py
+  plan_is_guiding_not_mechanical: true
+  allow_types:
+  - planned
+  - corrective
+  - hygiene
+  - validation
+  - dependency
+  - release
+  - pause
+  priority_order:
+  - blockers
+  - project_integrity
+  - failed_validation
+  - hygiene
+  - corrective
+  - dependency
+  - planned
+  - release_readiness
+  allow_inserted_steps: true
+  allow_skip: true
+  allow_split: true
+  allow_merge: true
+  pause_only_for_unresolved_business_decision: true
+resume:
+  model: docs/resume-flow.md
+  policy: src/runtime-policy/resume-policy.md
+  schema: schemas/resume-result.schema.json
+  script: scripts/resume_project.py
+  supported: true
+  requires_previous_chat_history: false
+  read_order:
+  - gpt-project.yaml
+  - project-status.yaml
+  - docs/development-plan.md
+  - STATUS.md
+  - PROJECT.md
+  machine_status_is_authoritative: true
+  verify_before_continue:
+  - lint
+  - next_step_recommendation
+  legacy_mode: inventory_then_migrate
+release_readiness:
+  model: docs/release-readiness.md
+  policy: src/runtime-policy/release-readiness-policy.md
+  schema: schemas/release-readiness.schema.json
+  script: scripts/assess_release_readiness.py
+  report_template: templates/release-readiness.md.tpl
+  results:
+  - ready
+  - ready_with_warnings
+  - blocked
+  blocked_stops_release: true
+  same_assessment_for_local_and_github: true
+new_project_experience:
+  model: docs/new-project-experience.md
+  runtime_strategy: peer_candidates
+  infer_runtime_targets: true
+  ask_user_only_for_business_constraints: true
+  allow_multiple_default_targets: true
+beginner_documentation:
+  getting_started: docs/getting-started.md
+  faq: docs/beginner-faq.md
+  policy: src/runtime-policy/beginner-experience-policy.md
+  target_audience: users_without_technical_gpt_build_knowledge
+  technical_choices_inferred_when_possible: true
+  project_zip_is_continuation_artifact: true
+existing_project_migration:
+  model: docs/existing-project-migration-experience.md
+  policy: src/runtime-policy/existing-project-migration-policy.md
+  script: scripts/migrate_project_for_runtime.py
+  result_schema: schemas/existing-project-migration-result.schema.json
+  natural_language_intent: true
+  apply_safe_changes_when_explicitly_requested: true
+  ask_only_for_unresolved_business_or_semantic_choices: true
+  supported_targets:
+  - opencode
+  - plugin
+legacy_migration:
+  model: docs/legacy-migration-analysis.md
+  script: scripts/migrate_legacy_project.py
+  report_schema: schemas/legacy-migration-report.schema.json
+  source_classes:
+  - L0
+  - L1
+  - L2
+  - L3
+  confidence_levels:
+  - safe_auto
+  - auto_with_warning
+  - manual_review
+  - not_applicable
+  preserve_domain_behavior: true
+  preserve_explicit_new_contracts: true
+  generated_runtime_files_are_not_canonical: true
+  scripts_are_not_tools_without_explicit_evidence: true
+  require_report_before_apply: true
+  idempotent: true
+reference_project_validation:
+  model: docs/reference-project-validation.md
+  case_schema: schemas/reference-project-case.schema.json
+  cases_root: evals/reference-projects
+  script: scripts/evaluate_reference_projects.py
+  reference_projects:
+  - Läroboksskaparen
+  - Tullverket Remiss
+  - ArchiMate Modeller
+  blocking: true
+  expected_case_count: 3
+end_to_end_testing:
+  model: docs/end-to-end-test.md
+  scenario_schema: schemas/e2e-scenario.schema.json
+  scenarios_root: evals/e2e
+  runner: scripts/run_e2e_blank_idea.py
+  blank_idea_scenario: evals/e2e/blank-idea-001.yaml
+  blocking: true
+  covers:
+  - analysis_profile
+  - development_plan
+  - project_contract
+  - project_status
+  - canonical_instruction
+  - runtime_strategy
+  - peer_runtime_candidates
+  - project_zip
+  - chat_zip
+  - custom_gpt_zip
+  - claude_project_zip
+  - claude_skills_zip
+  - checksums
+  - delivery_manifest
+architecture:
+  model: architecture.yaml
+  review: docs/architecture-simplification-review.md
+  shared_library: scripts/lib/project_model.py
+  canonical_decision_logic: true
+  thin_cli_wrappers: true
+release_candidate:
+  version: 1.0.0-rc.1
+  model: docs/release-candidate.md
+  policy: src/runtime-policy/release-candidate-policy.md
+  schema: schemas/release-candidate.schema.json
+  validator: scripts/validate_release_candidate.py
+  prerelease: true
+  stable: false
+  next_after_pass: 30
+stable_release:
+  version: 1.0.0
+  model: docs/stable-release.md
+  policy: src/runtime-policy/stable-release-policy.md
+  schema: schemas/stable-release.schema.json
+  validator: scripts/validate_stable_release.py
+  stable: true
+  maintenance_mode_after_release: true
+lifecycle:
+  state: stable
+  stable_version: 1.0.0
+  development_plan_completed: true
+  maintenance_mode: true
+migration:
+  target: gpt-builder-1.6.33
+  source: gpt-builder-1.5.1
+  model_semantics: EA Stödjare v2.0 retained
+  review: Single Skill retains the full pre-migration instruction without splitting
+    behavior

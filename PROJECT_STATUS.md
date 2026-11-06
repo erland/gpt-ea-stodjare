@@ -71,3 +71,13 @@ De 29 semantiska evalfallen är definierade och runtimeprotokollet är implement
 4. Kör relevant regression samt `scripts/run_v2_ci_gate.py` före release.
 5. Höj revision och uppdatera manifest/integritet för varje paketerad ändring.
 6. För OpenAI Plugin: bevara project-files som state authority och paketera endast deklarerade runtime-scripts, aldrig CI/releaseverktyg.
+
+## Distributionsmigration till GPT Byggaren 1.6.33 (arbetskopia, 2026-11-06)
+
+- EA Stödjares frysta v2.0-domänmodell och kompatibilitetsprofiler är oförändrade.
+- Migrerad projektkonfiguration finns i `gpt-project.yaml`; tidigare 1.5.1-konfiguration bevaras i `migration/gpt-project-1.5.1.yaml`.
+- En enda Skill (`ea-stodjare`) används för att inte genomföra en ogranskad uppdelning av det ursprungliga beteendet. Den ursprungliga kanoniska instruktionen finns kvar i `custom-gpt/instructions.md`.
+- Canonical Engine 1.6.33 har installerats efter godkänt självtest. Fem runtime-ZIP har byggts och motorns distributionsvalidering passerade.
+- Äldre Custom GPT-distribution har avaktiverats enligt aktuellt byggkontrakt; legacy-underlag finns kvar.
+- EA Stödjares fulla CI/E2E-gate är **inte godkänd** i denna arbetskörning (körning avbröts av tidsgräns). Externa hosttester för Plugin, Claude och OpenCode är inte utförda.
+- Innan merge/release: granska 1.5.1-specifika workflows i `.github/workflows/`, synkronisera referenser och kör om full `scripts/run_v2_ci_gate.py` i CI; kontrollera hostfunktioner, scriptberoenden och dokument-/paritetskontrakt.

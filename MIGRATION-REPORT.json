@@ -1,0 +1,4142 @@
+{
+  "migration": {
+    "source_class": "L2",
+    "target_contract_version": 1,
+    "status": "ready_with_manual_review"
+  },
+  "decisions": [
+    {
+      "area": "capabilities",
+      "action": "review_unknown",
+      "confidence": "manual_review",
+      "evidence": [
+        "code_execution",
+        "external_tools",
+        "filesystem",
+        "persistent_state",
+        "structured_data"
+      ]
+    },
+    {
+      "area": "artifacts",
+      "action": "preserve",
+      "confidence": "not_applicable"
+    },
+    {
+      "area": "workspace_state",
+      "action": "preserve",
+      "confidence": "not_applicable"
+    },
+    {
+      "area": "tools",
+      "action": "preserve",
+      "confidence": "not_applicable"
+    }
+  ],
+  "warnings": [
+    "Unknown legacy capabilities were not migrated automatically: code_execution, external_tools, filesystem, persistent_state, structured_data"
+  ],
+  "changes": {},
+  "opencode": {
+    "status": "ready",
+    "reasons": [],
+    "can_enable_automatically": true,
+    "required_actions": []
+  },
+  "plugin": {
+    "status": "ready",
+    "reasons": [],
+    "can_enable_automatically": true,
+    "required_actions": []
+  },
+  "safe_copy": {
+    "source_type": "directory",
+    "source_unchanged": true,
+    "project_root": ".",
+    "destination": "/mnt/data/ea-migration/migrated"
+  },
+  "custom_gpt_retirement": {
+    "result": "changed",
+    "previously_enabled": true,
+    "legacy_configuration_preserved": true,
+    "automatic_plugin_conversion": false
+  },
+  "existing_project_assessment": {
+    "status": "review_required",
+    "project_contract_present": true,
+    "issues": [
+      "Legacy runtime.openai_plugin needs explicit mapping to runtime.plugin",
+      "No modern build_system.runtime_targets are declared",
+      "Previously enabled runtimes require independent parity review",
+      "Canonical instructions missing from expected modern source path"
+    ],
+    "dependency_inventory": {
+      "knowledge_files": [
+        "custom-gpt/knowledge/00-knowledge-index.md",
+        "custom-gpt/knowledge/01-domain-model.md",
+        "custom-gpt/knowledge/02-evidence-and-research.md",
+        "custom-gpt/knowledge/03-analysis-and-modeling-workflows.md",
+        "custom-gpt/knowledge/04-quality-assurance.md",
+        "custom-gpt/knowledge/05-project-and-output.md",
+        "knowledge/change-control.md",
+        "knowledge/classification-guide.md",
+        "knowledge/conflicts-and-uncertainty.md",
+        "knowledge/project-status-rules.md",
+        "knowledge/quality-metamodel-aware.md",
+        "knowledge/quality-model.md",
+        "knowledge/quality-object.md",
+        "knowledge/workflow-boundary-first.md",
+        "knowledge/workflow-extraction.md",
+        "knowledge/workflow-model-design.md",
+        "knowledge/workflow-project-open.md",
+        "knowledge/workflow-research.md",
+        "knowledge/workflow-update.md",
+        "knowledge/workflow-usage.md"
+      ],
+      "candidate_scripts": [
+        "scripts/assemble_runtime_eval_results.py",
+        "scripts/build_builder_knowledge.py",
+        "scripts/build_distributions.py",
+        "scripts/change_control.py",
+        "scripts/detect_project_profile.py",
+        "scripts/export_documents.py",
+        "scripts/generate_confluence.py",
+        "scripts/generate_derived_views.py",
+        "scripts/generate_markdown.py",
+        "scripts/generator_context.py",
+        "scripts/migrate_rev80_to_v2.py",
+        "scripts/migrate_v1_to_v2.py",
+        "scripts/package_release.py",
+        "scripts/prepare_runtime_eval_packet.py",
+        "scripts/prepare_runtime_eval_run.py",
+        "scripts/presentation_contract.py",
+        "scripts/resolve_project_metamodel.py",
+        "scripts/resolve_quality_rules.py",
+        "scripts/run_full_e2e_regression.py",
+        "scripts/run_generation_regression.py",
+        "scripts/run_generation_smoke.py",
+        "scripts/run_v2_ci_gate.py",
+        "scripts/run_workflow_conformance.py",
+        "scripts/score_runtime_eval_results.py",
+        "scripts/validate_distributions.py",
+        "scripts/validate_project.py",
+        "scripts/validate_runtime_parity.py",
+        "scripts/verify_v1_v2_migration.py"
+      ],
+      "integration_manifests": [],
+      "tools_verified": false,
+      "knowledge_completeness_verified": false,
+      "review_required": true,
+      "limitations": [
+        "Packaged files do not prove tool availability or permissions.",
+        "A distribution may omit original Knowledge and source dependencies."
+      ]
+    },
+    "ready_for_modern_distribution_build": false,
+    "release_ready": false
+  },
+  "legacy_plugin_plan": {
+    "result": "review_required",
+    "plan": "reconstructed-canonical/plugin-migration-plan.json"
+  },
+  "apply": {
+    "result": "changed"
+  },
+  "engine_migration": {
+    "engine_required": "needs_review",
+    "engine_status": "review_required",
+    "engine_candidates": [
+      "scripts/assemble_runtime_eval_results.py",
+      "scripts/build_builder_knowledge.py",
+      "scripts/change_control.py",
+      "scripts/detect_project_profile.py",
+      "scripts/export_documents.py",
+      "scripts/generate_confluence.py",
+      "scripts/generate_derived_views.py",
+      "scripts/generate_markdown.py",
+      "scripts/generator_context.py",
+      "scripts/migrate_rev80_to_v2.py",
+      "scripts/migrate_v1_to_v2.py",
+      "scripts/package_release.py",
+      "scripts/prepare_runtime_eval_packet.py",
+      "scripts/prepare_runtime_eval_run.py",
+      "scripts/presentation_contract.py",
+      "scripts/resolve_project_metamodel.py",
+      "scripts/resolve_quality_rules.py",
+      "scripts/run_full_e2e_regression.py",
+      "scripts/run_generation_regression.py",
+      "scripts/run_generation_smoke.py",
+      "scripts/run_v2_ci_gate.py",
+      "scripts/run_workflow_conformance.py",
+      "scripts/score_runtime_eval_results.py",
+      "scripts/validate_project.py",
+      "scripts/validate_runtime_parity.py",
+      "scripts/verify_v1_v2_migration.py",
+      "tests/builder/test_builder_knowledge.py",
+      "tests/builder/test_no_stale_builder_knowledge.py",
+      "tests/compatibility/test_boundary_first_workflows_v2.py",
+      "tests/compatibility/test_capability_boundary_v2.py",
+      "tests/compatibility/test_change_control_v2.py",
+      "tests/compatibility/test_derived_views_v2.py",
+      "tests/compatibility/test_information_layers_v2.py",
+      "tests/compatibility/test_it_support_product_analysis_scenario.py",
+      "tests/compatibility/test_legacy_edit_continuity.py",
+      "tests/compatibility/test_metamodel_aware_quality_v2.py",
+      "tests/compatibility/test_minimal_v1_migration_e2e.py",
+      "tests/compatibility/test_platform_semantics_v2.py",
+      "tests/compatibility/test_platform_service_product_analysis_scenario.py",
+      "tests/compatibility/test_platform_service_semantics_v2.py",
+      "tests/compatibility/test_presentation_contract_v2.py",
+      "tests/compatibility/test_product_can_realize_v2.py",
+      "tests/compatibility/test_project_metamodel_format.py",
+      "tests/compatibility/test_project_profile_detection.py",
+      "tests/compatibility/test_provided_by_v2.py",
+      "tests/compatibility/test_relation_qualifiers_v2.py",
+      "tests/compatibility/test_rev80_migration_step24.py",
+      "tests/compatibility/test_rev80_reconstruction.py",
+      "tests/compatibility/test_structural_validator_v2.py",
+      "tests/compatibility/test_v1_profile.py",
+      "tests/compatibility/test_v1_to_v2_migration_engine.py",
+      "tests/compatibility/test_v2_embedded_function.py",
+      "tests/compatibility/test_v2_product_object.py",
+      "tests/evals/test_eval_suite.py",
+      "tests/evals/test_runtime_eval_execution_workflow.py",
+      "tests/evals/test_runtime_eval_protocol.py",
+      "tests/extensions/test_extension_mechanism.py",
+      "tests/extensions/test_optional_rev80_extensions.py",
+      "tests/generation/test_export_documents.py",
+      "tests/generation/test_generate_confluence.py",
+      "tests/generation/test_generate_markdown.py",
+      "tests/generation/test_metamodel_presentation_generation_v2.py",
+      "tests/release/test_end_to_end_release.py",
+      "tests/release/test_full_end_to_end_regression.py",
+      "tests/release/test_package_release.py",
+      "tests/release/test_release_contract.py",
+      "tests/release/test_v2_ci_release_gate.py",
+      "tests/release/test_workflow_conformance_contract.py",
+      "tests/scenarios/test_research_model_proposal_v2.py",
+      "tests/scenarios/test_stress_scenarios.py",
+      "tests/validation/test_validate_project.py"
+    ],
+    "engine_configuration_present": false,
+    "engine_selftest_verified": false,
+    "plugin_repair_status": "legacy_plugin_requires_mapping",
+    "runtime_parity_status": "unverified",
+    "automatic_plugin_repair": false,
+    "automatic_engine_activation": false,
+    "release_ready": false,
+    "required_actions": [
+      "Classify candidate Python scripts as Plugin runtime requirements, tests, or build-only tools.",
+      "If executable Plugin scripts are required, declare engine.resources and a real engine.selftest.",
+      "Rebuild Plugin using the current canonical distribution builder; inspect Skills and resources.",
+      "Validate all five distributions and test the Plugin in its actual host.",
+      "Install/verify the current canonical builder only after reviewing the copied project schema and preserving project-specific files."
+    ]
+  },
+  "canonical_build_upgrade": {
+    "status": "blocked",
+    "stage": "plugin_mapping_review",
+    "reason": "Review legacy Plugin semantics before enabling modern Plugin",
+    "release_ready": false
+  },
+  "generic_discovery": {
+    "schema_version": 1,
+    "status": "analysis_required",
+    "source_files": [
+      {
+        "path": ".github/workflows/build-artifacts.yml",
+        "sha256": "07863c4e23a1dc2d1f40e0f33f186fe34ebbab09e0ab650943b2f773a94ac99c",
+        "size": 2380,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": ".github/workflows/build-distributions.yml",
+        "sha256": "640a8b7c8ff08bc038f728f0f27b56dc230fd214ca67ae82a9c85a615b745dad",
+        "size": 2572,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": ".github/workflows/ci.yml",
+        "sha256": "3534cea0d89cdcff2a555eb8b1881a0cd672c8a7d6bf0b7e200889796085f921",
+        "size": 1158,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": ".github/workflows/release.yml",
+        "sha256": "01128d00a9cd6a129ef04a6df44daa8e39d71aa69db509ead7a95994b814df12",
+        "size": 2179,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": ".gitignore",
+        "sha256": "071271e29304ca31a25896e1097f2c18018ca2daac31956064bd5d914f7c17c3",
+        "size": 152,
+        "candidate_roles": []
+      },
+      {
+        "path": "CHANGELOG.md",
+        "sha256": "3ece23aa2e36e44b93c3050de4008bdafaf2dd2298ac37fac0493c0d06bdf985",
+        "size": 5972,
+        "candidate_roles": []
+      },
+      {
+        "path": "PROJECT_STATUS.md",
+        "sha256": "cc71ca906521f5e62fd076708e06a8cc0969c593fda03bda62008d2fda30c7f3",
+        "size": 3890,
+        "candidate_roles": []
+      },
+      {
+        "path": "README.md",
+        "sha256": "6f5b77cb68acc0f8f2189d5528e14f9f9dff33fe29af2916ef14266b3868605f",
+        "size": 6483,
+        "candidate_roles": []
+      },
+      {
+        "path": "VERSION",
+        "sha256": "c28fcca53637bc88e124af1725df13cb98c69dedefd62fb3cdbe1cdb6b760624",
+        "size": 6,
+        "candidate_roles": []
+      },
+      {
+        "path": "actual-state/README.md",
+        "sha256": "3f3ee41d92b521736add128def2e4b29f48b1e4f2de0dc4e4e8ff6bf79f2e4e5",
+        "size": 528,
+        "candidate_roles": []
+      },
+      {
+        "path": "actual-state/assertions.yaml",
+        "sha256": "ec4a030cc20af67835cbd2572c7f697340843df9d705d96cd21b361002f75cb9",
+        "size": 57,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "compatibility/ea-stodjare-v1/README.md",
+        "sha256": "7febabe86be3f0e2c7ea52fe828683aecd23321ab13e680c3a3150d8d757a40d",
+        "size": 3405,
+        "candidate_roles": []
+      },
+      {
+        "path": "compatibility/ea-stodjare-v1/profile.yaml",
+        "sha256": "c4ab40603093d795ef0cc2d36451368fe61715933dbacfcab76bc2c7cbd330f4",
+        "size": 4563,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "compatibility/ea-stodjare-v1/schemas/model-format.yaml",
+        "sha256": "567243de6b9f106507178c13fb0f8952243c7344d240d7428889d41786e0bf67",
+        "size": 2987,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "compatibility/ea-stodjare-v1/schemas/object-types.yaml",
+        "sha256": "02f27fd0e6bc0271382c2144f95017b133dbc49a3b168b57125a5aa928fd0773",
+        "size": 6331,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "compatibility/ea-stodjare-v1/schemas/project-manifest.schema.json",
+        "sha256": "eef9cc39667f346ee70cd9976d4d7590005fc4954e0cb13474f0111ed3076657",
+        "size": 3882,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "compatibility/ea-stodjare-v1/schemas/provenance.yaml",
+        "sha256": "0b4817606295f35705a4ead49ca5a20d76ee612e8bf56ed6d58c6a2c5c3b3eff",
+        "size": 5482,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "compatibility/ea-stodjare-v1/schemas/relations.yaml",
+        "sha256": "6b114b7e3f92c65e39a898a992794996fc79718f14f6233ba8b1d6cce364fc5f",
+        "size": 5149,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "compatibility/migration-rules/v1-to-v2-capability-boundary.yaml",
+        "sha256": "70c5e33471d88f6fcc688e2004688f421b6c741f32551bfdcd9649679d7595b0",
+        "size": 1146,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "compatibility/migration-rules/v1-to-v2-platform-semantics.yaml",
+        "sha256": "c53c435ac10f8e921d86eca9e05bc30c7303fa887b432b5bd413768aedcdc8aa",
+        "size": 1404,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "compatibility/migration-rules/v1-to-v2-platform-service-semantics.yaml",
+        "sha256": "70ba4ff47afc52e852e1f96610a0519c3967e0d586481a110c67f7729aef8502",
+        "size": 930,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "compatibility/migration-rules/v1-to-v2-product-object.yaml",
+        "sha256": "60236a1ee6ce3fe10e651e6651da11919c4d62e56400f3ceaed316356b7af505",
+        "size": 605,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "compatibility/migration-rules/v1-to-v2-provided-by.yaml",
+        "sha256": "dec293f236ee836b44233b1c75a3692e1dc06ab0370ff828b23a89ddb365096b",
+        "size": 924,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "compatibility/migrations/function-v1-to-v2.md",
+        "sha256": "ef199447b2365ca4a5514afd35f40aad0ca3bca6edd638067d081c173409119e",
+        "size": 429,
+        "candidate_roles": []
+      },
+      {
+        "path": "compatibility/migrations/function-v1-to-v2.yaml",
+        "sha256": "5bc35f0c756f3646442bd82d637427fabc79af7cd23d98ebf40b84dfa2a9f8a5",
+        "size": 582,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "compatibility/migrations/product-can-realize-v2.yaml",
+        "sha256": "a4e47d21533150b85191c249ad5ec02195092971188529ae4931e68210e0c7a0",
+        "size": 675,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "compatibility/reference-projects/minimal-v1-migration/README.md",
+        "sha256": "df47d3f5d4d3b4de78ffa1d6d74c43cfcdedceaa6a4de20915614723c2976dad",
+        "size": 824,
+        "candidate_roles": []
+      },
+      {
+        "path": "compatibility/reference-projects/minimal-v1-migration/verification-baseline.yaml",
+        "sha256": "47eb5421801ff8f1c5f7f938533a74aa09ebe845bc122d3659478b1fccbdece2",
+        "size": 1512,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "compatibility/reference-projects/minimal-v1-migration/verification-result.yaml",
+        "sha256": "2845bcb1fb5bfe6f2cd98aa0f7d098fe1382a001db1ad141293443e822611387",
+        "size": 641,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "compatibility/reference-projects/rev80/README.md",
+        "sha256": "926acb0f47fdbe6080ce5d5346594a9cc82601fd1d47c053b2fbd3f95d6be00b",
+        "size": 443,
+        "candidate_roles": []
+      },
+      {
+        "path": "compatibility/reference-projects/rev80/extension-inventory.yaml",
+        "sha256": "134ec471070bbd83f303ccb64fcce2e2541f09211dc3ee483780317c6e369086",
+        "size": 27266,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "compatibility/reference-projects/rev80/metamodel-reconstruction.md",
+        "sha256": "dea89b9805df5df2d4dd43f498a2955e3be3a2ff71f17d82e00c95efc7c795a2",
+        "size": 4113,
+        "candidate_roles": []
+      },
+      {
+        "path": "compatibility/reference-projects/rev80/metamodel.yaml",
+        "sha256": "63af42faee80d30d98f541f5a6ca819cd2f9a72cdb73a71e9ec096fd7d71d421",
+        "size": 8066,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "compatibility/reference-projects/rev80/migration-baseline.yaml",
+        "sha256": "2116e8616f0ae8f0f4d106cc8955651512c4844bffafa11a80b0c76118490ac1",
+        "size": 395,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "compatibility/reference-projects/rev80/migration-verification-result.yaml",
+        "sha256": "609eb22774abf080bf3326ab235bbed12ac839c5c90ec3a5706e845bb56562ab",
+        "size": 1972,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "compatibility/reference-projects/rev80/source-fingerprints.yaml",
+        "sha256": "3642f37f008ccaea9b8cf87e3e2c323fca86d93f60ddc2a3fd82fd8c3874abc4",
+        "size": 2318,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "compatibility/reports/v2-e2e-baseline.yaml",
+        "sha256": "201cd7d6c060f1d9f8efde60ce2125311eaddcad45cf48e183ab7b0f93fbbab0",
+        "size": 1390,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "compatibility/reports/workflow-conformance-baseline.json",
+        "sha256": "09f4a96e883d3fe87d2d9dde4fa1a84fdcf59d79531ce3ce97806977c9d777e1",
+        "size": 1799,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "confluence/generated/drivkrafter.txt",
+        "sha256": "3d5e1817ab3c5da1beb8df83bb9f39496feffb983ab249b71d396f2de0825f96",
+        "size": 255,
+        "candidate_roles": []
+      },
+      {
+        "path": "confluence/generated/formagor.txt",
+        "sha256": "5332ce84ebad15c1ccda3a278cc0f8ac3c9754db4596d0467e1c648ac2d63215",
+        "size": 254,
+        "candidate_roles": []
+      },
+      {
+        "path": "confluence/generated/generation-manifest.json",
+        "sha256": "ca1be2e048adcfce28ab3e183ce19eb4044508c808df97a695c78eefaeabaa84",
+        "size": 1852,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "confluence/generated/it-stod.txt",
+        "sha256": "b3f10552bf5e05a9a0b38c80e6e63e2c8487f46efcfb0d099756d69b43d7ab92",
+        "size": 252,
+        "candidate_roles": []
+      },
+      {
+        "path": "confluence/generated/losningsmonster.txt",
+        "sha256": "920ba6398f92833b4f5d1c5033c1fc599176e654cd67361034f60404423e1c31",
+        "size": 261,
+        "candidate_roles": []
+      },
+      {
+        "path": "confluence/generated/mal.txt",
+        "sha256": "bc15646781a97be9e5876fb67d694c483cf3236d35b7216361db9d22c133bc1d",
+        "size": 248,
+        "candidate_roles": []
+      },
+      {
+        "path": "confluence/generated/plattformar.txt",
+        "sha256": "a5caae3ad9a49c556238330493f4440e090b78146e68d576b2e8e68c4f1bdef3",
+        "size": 255,
+        "candidate_roles": []
+      },
+      {
+        "path": "confluence/generated/plattformstjanster.txt",
+        "sha256": "4f3a5c4784b2605aa9f3096ddf4e48c325a0c8f8ae4f7ec1bcd103e1b747de85",
+        "size": 263,
+        "candidate_roles": []
+      },
+      {
+        "path": "confluence/generated/principer.txt",
+        "sha256": "a4734269029e49c608cc49dbeac64e3826099f01e72bad3300eff969a484e6a3",
+        "size": 253,
+        "candidate_roles": []
+      },
+      {
+        "path": "confluence/generated/produkter.txt",
+        "sha256": "b1c3ccb54400331114aa0395eae6cfe23c4d7e21d62139194744fd377b0fe014",
+        "size": 253,
+        "candidate_roles": []
+      },
+      {
+        "path": "confluence/generated/referensarkitekturer.txt",
+        "sha256": "52e995ff28bc326482b13aa55adee03734224da320334028cb431a6926154dfc",
+        "size": 264,
+        "candidate_roles": []
+      },
+      {
+        "path": "confluence/generated/standarder.txt",
+        "sha256": "6e7b99ae058e1b1b758de1c911a1e0b66748c2f5710901eb181734646b304abc",
+        "size": 254,
+        "candidate_roles": []
+      },
+      {
+        "path": "custom-gpt/builder-config.md",
+        "sha256": "f9cb446c619df9f8b281f1e21bcdc66319b55144fd27b97be5dbfb29ade24540",
+        "size": 3373,
+        "candidate_roles": []
+      },
+      {
+        "path": "custom-gpt/instructions.md",
+        "sha256": "25f89a588d7dfa375ee01ceda8ce567f4c101ddc453b07c305b4cab8fe6b3f2a",
+        "size": 8046,
+        "candidate_roles": [
+          "instruction_candidate"
+        ]
+      },
+      {
+        "path": "custom-gpt/knowledge/00-knowledge-index.md",
+        "sha256": "2f5e85b17abebea51d6340f3fd2f76e52d13492c210a3f1f7ab41f5424f1ed85",
+        "size": 2040,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "custom-gpt/knowledge/01-domain-model.md",
+        "sha256": "6083e6b3d489813a259742c52112fae5bd516b15ee21cd26828920613e0e5011",
+        "size": 16689,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "custom-gpt/knowledge/02-evidence-and-research.md",
+        "sha256": "b5c0a78884b8862f9588aa22febf56dbc4d45f2487865d756c1fa30512e7e458",
+        "size": 36774,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "custom-gpt/knowledge/03-analysis-and-modeling-workflows.md",
+        "sha256": "4df04e424eb99b3f46f12ffb3fe7d2fdb925547c9858a0ddd515610a0150d2ec",
+        "size": 11692,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "custom-gpt/knowledge/04-quality-assurance.md",
+        "sha256": "77680c67c8d54638f7ad76603f0129d840bcb2af06c1b5acfefbeb74c76f1387",
+        "size": 2644,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "custom-gpt/knowledge/05-project-and-output.md",
+        "sha256": "0b17ea0a3fa583f98b1eee14a4866196964f7b3ee23291af9f730cc3d40699cb",
+        "size": 34556,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "derived-views/views.yaml",
+        "sha256": "1ed2c3a3ce309c2c5b77e6ea635fc6b3d3b28e7ddcbe927ae0d6a0ab4b4ded5e",
+        "size": 5120,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "docs/backward-compatibility-contract.md",
+        "sha256": "23ffba359589b56336c8c53fb28a9c8de85c83f0aea0f4635aecc630baa93837",
+        "size": 10269,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/boundary-first-modeling.md",
+        "sha256": "d6fb1f68d46000fce60612b3d17079aabd753dbf9008284e6cdb79a7c44d057c",
+        "size": 2521,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/change-control.md",
+        "sha256": "0133dd8c3e79d22077ddc713e88b50ef89879319d484150d8dfed3f146abe101",
+        "size": 3077,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/ci-release-v2.md",
+        "sha256": "2f64850c97f107168fd5a4f15e010b2a9810d3bfb60270b4f52ed7c2a0b4a589",
+        "size": 2000,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/confluence-generation.md",
+        "sha256": "a05632be6e3a9447ab235359c4112128c39dd727287acd3e2b4ffe2910f36276",
+        "size": 2964,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/derived-views.md",
+        "sha256": "7e8fdd82ea3b826b23a14e0feea3ab9b3a0db8359d8c659da74e3207205c2e8c",
+        "size": 1984,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/document-export.md",
+        "sha256": "f181e1a739501cf2e71ca22d003c22cc57a24ac93df3cdfe930dcf7ebe3a2aca",
+        "size": 2884,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/documentation-profiles.md",
+        "sha256": "07aa093284aebb73cdbdb9e14b480f87d1b1b66237d717130e8713c2e1ccd013",
+        "size": 9640,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/final-release-review-v2.0.0.md",
+        "sha256": "f675532f9f0a729fe58049ca62c99e4e216379b0b96f347c4ce76d33d29ac1df",
+        "size": 2014,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/full-end-to-end-regression.md",
+        "sha256": "0dcb8ac01699fd8340e34d3168d2a7f2f24645ef32f26f5ca954716c2028ddc6",
+        "size": 950,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/generated/drivkrafter.md",
+        "sha256": "e5769917401ee4d5ca5eb9522a47ef6bf777baea3ade862602b9aa7f5ced3fcc",
+        "size": 291,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/generated/formagor.md",
+        "sha256": "8e65081ef37a62448174ff9e55f6026660f3bcce89c2907b2a3520807c1f3999",
+        "size": 289,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/generated/generation-manifest.json",
+        "sha256": "3743e9967d068fe7d57ed7b273ceee2437e183adf058d492d55a611f7b788cd0",
+        "size": 1841,
+        "candidate_roles": [
+          "knowledge_candidate",
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "docs/generated/it-stod.md",
+        "sha256": "fc55f39aba7b70e36bca54e063aa3b587f634482fc648cdd3e368de2db83c32e",
+        "size": 285,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/generated/losningsmonster.md",
+        "sha256": "dfdefc7634abd944f0b665f0086c26c27153aa701887f4c0b5044d2eb327ed9b",
+        "size": 303,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/generated/mal.md",
+        "sha256": "3caa48f3778e6151d6d2350830b1e9f6d0390314879ce6be4a0206fe114deca6",
+        "size": 277,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/generated/plattformar.md",
+        "sha256": "d0e328b945feb2cf596f9fde8ffbf7a0efe85e812a8332ded15705fe289e7e08",
+        "size": 291,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/generated/plattformstjanster.md",
+        "sha256": "2f8409a4b06a7396375980966ae0c430e89fbd5207ff22564b148ddb892ada7e",
+        "size": 307,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/generated/principer.md",
+        "sha256": "ce17117ff519755044403005a2c4265baf829577b1c1d97f86ec9098ea129ecc",
+        "size": 287,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/generated/produkter.md",
+        "sha256": "4cea40a8e8b56b648dbfa18a30cb6931435e69adb292331a78b4e74a6d35cfdf",
+        "size": 287,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/generated/referensarkitekturer.md",
+        "sha256": "f555bacde32bc90236ab0a4361a2da22d8ca4352dddbb7f4ff17a91a1c4eb8bf",
+        "size": 309,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/generated/standarder.md",
+        "sha256": "5dcb8009903d45872c83ccb3b099e75a5198e8d40bfcac34fd0143587dd9018c",
+        "size": 289,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/information-layers.md",
+        "sha256": "dcdd5b33337c5cbaa2730c4c2e62b6b15cc90f6f41f17c4975a6d6a6b0d7d5a8",
+        "size": 2837,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/markdown-generation.md",
+        "sha256": "5908b8fc68f9a967246584fcbd53bc617b4eef4566e7d5c42c43f2028405e3ed",
+        "size": 1897,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/metamodel-aware-generation.md",
+        "sha256": "6d6863bf159c7fc637199f1866fda9a00e573e6642f59900d855c04afae06f6d",
+        "size": 4061,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/metamodel-aware-quality.md",
+        "sha256": "84a985af2d50907e79977c2ce43b37844c6466d09dbd7c2829e4a00f5d1da513",
+        "size": 1462,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/metamodel.md",
+        "sha256": "01df4cf19b2a0ff9c5fd48cf3bfe750537935fe36f37976d79493d0fb0b18a74",
+        "size": 23782,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/migration/v1-capability-boundary.md",
+        "sha256": "a685f25a3fee81f99d231c2a63345bc9815d9c09d20909417ce848a1c6486d70",
+        "size": 961,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/migration/v1-platform-semantics.md",
+        "sha256": "bffa95d99374d55bbd4a9d23bdf9b8182b73b697096f6e5fc5330651613e55ed",
+        "size": 1683,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/migration/v1-platform-service-semantics.md",
+        "sha256": "504da4cb54081a3bc58d0cc738aaf3eb318a980401a000f61322a48c839108e3",
+        "size": 696,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/migration/v1-realized-by-to-provided-by.md",
+        "sha256": "236b98559706c9a56c0d9d9d6348a3515b45bc843d792f383c1feb00355278b2",
+        "size": 1227,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/migration-guide-v1-to-v2.md",
+        "sha256": "22d5010cc9ccff6e98b134e7e088f2a2f5fa10b124920dc830967fae2f762974",
+        "size": 4528,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/minimal-v1-migration-verification.md",
+        "sha256": "af5057d081c8a1298a309aee5b032f9a18cdc805e674537a2cfb2f568ea95691",
+        "size": 1816,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/openai-plugin-runtime.md",
+        "sha256": "725bfc3297d7c95560e20d19381e7e9feaa7ed0b919d520617b26de35d54933e",
+        "size": 1877,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/optional-rev80-extensions.md",
+        "sha256": "3614b0ebb4abc7da216254a7eb0754be866bf904261d0cd18b82703e5a1bfaa2",
+        "size": 3063,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/presentation-contract.md",
+        "sha256": "4ec0220dba1f9b75de238d431cc7be93aa9874af5c10ff3cfecceedf960c6d37",
+        "size": 3167,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/product-vision.md",
+        "sha256": "e80756d95f223a71d807e59ca6133d3f35a83bce7267940f82051253cf28fc21",
+        "size": 19394,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/project-extensions.md",
+        "sha256": "15dfb47a463c34fec8df265bbee46592fc8083d6c8ed714dea6772c346977e41",
+        "size": 4146,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/project-format.md",
+        "sha256": "f95b574675f8db1437781af60c6294bcfcd25140fb081af9e6140591692fb61a",
+        "size": 9059,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/project-metamodel-format.md",
+        "sha256": "a772bd5ff08305027f4e93eeaab630a3185df61a580e7937b1faceb6f01d54f8",
+        "size": 10105,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/provenance-model.md",
+        "sha256": "123241cfba4b9450e151c0d46e6c30b5cd938632ae858708d2e533045ddcf390",
+        "size": 13078,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/relations.md",
+        "sha256": "ad25c39dcbd791b0e1e0db647502c8366f083aba3b7716cd77fbdec2d0680e0d",
+        "size": 17183,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/release-and-ci.md",
+        "sha256": "5d5ce32b143762a80e57a94ad54da178837329fa1ba090b15cebe19778ee8fd3",
+        "size": 2928,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/release-notes-v2.0.0.md",
+        "sha256": "1355727de7e1c00a461adba5d56abd635fe86303c9218bde4f430d85d7cc0d39",
+        "size": 1844,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/rev80-migration-verification.md",
+        "sha256": "8ecff8594b13b14c6a539c62d936c8b5df3c7eca6bd8a7104f5b826c86253473",
+        "size": 2074,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/runtime-domain-contract-v2.md",
+        "sha256": "6a535393b6f039e0780306cfcc2e020a5ca0f7e896efb9f368aabbe6fac92a53",
+        "size": 2643,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/runtime-evidence-contract-v2.md",
+        "sha256": "208fae25acc09db996c59fc979f1da67da5b6d708d9b32ba42c4e7d1c46bbfcb",
+        "size": 1205,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/runtime-project-output-v2.md",
+        "sha256": "dfb579e21ca0454b82ebbcced9befbad79c77cbde43dfc5206ccc5ce0db945b4",
+        "size": 1404,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/runtime-quality-contract-v2.md",
+        "sha256": "85101606d13ac32b39e653d85aa4c6d1600914b67d4568ec36ca02f2772811e6",
+        "size": 907,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/runtime-workflows-v2.md",
+        "sha256": "57ce03ff08acdbe079e9d020814efdddb801d2033cd304153d03ec005415afc9",
+        "size": 1321,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/source-policy.md",
+        "sha256": "342dc12c70b74e5371495a04d58603ee50403ec0fb7d60f67b81b8c8f31104b5",
+        "size": 7840,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/structural-validation-v2.md",
+        "sha256": "906ea6dc9af2d7c6301d6aa16f89940ba1b35778f5c75dfad0cc8f86823f112f",
+        "size": 2765,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/structural-validation.md",
+        "sha256": "374171bc2f29f3b5af2bbcffa553fc7a2da022f843b390bb4e4f2381f6a43ef7",
+        "size": 4155,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/technical-target.md",
+        "sha256": "43161f50322c4f0b9ec6a6dc1097e00b887c48b41bbbf5088fc1dfc6d3b1a903",
+        "size": 5026,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/user-guide.md",
+        "sha256": "2242007f434af1c3e8ebaca87677b956e6fbacfb7073e9fc58b46dd10bf90917",
+        "size": 5368,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/v1-to-v2-migration-engine.md",
+        "sha256": "fac04cad84a9c66d9ad740f60d7892f0baa0d98450df4f1f27391b8566c9d9c9",
+        "size": 2740,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/v2-design-principles.md",
+        "sha256": "4602c625d9c4c29b13a56fca19f1d8221f4c34c761de20d9d9f401cc9f22a22d",
+        "size": 10762,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/v2-development-plan.md",
+        "sha256": "a4d8b0176bb725b48a8f1350735b0e84440b67697df7eb4e880adbf078aee4d6",
+        "size": 31078,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/v2-migration-notes.md",
+        "sha256": "8ca058b83dc802e672c1c7f39e089c23479a6ea7b32b3bad97b38f109a7b4cdd",
+        "size": 539,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/yaml-model-format.md",
+        "sha256": "b857dc673313fef247b0f9e5e677fc7f040c6289dc38d22a01bf8c47b279a4ac",
+        "size": 5740,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "evals/README.md",
+        "sha256": "ddb1a951e92283c795f277038ab3307a880eae4cc61dd3ea0a54046454e332c9",
+        "size": 1469,
+        "candidate_roles": []
+      },
+      {
+        "path": "evals/cases/EVAL-001-driver-vs-goal.yaml",
+        "sha256": "97909a69fbb05ef6ca5cf66ea53310fdb1b97edb1c9176eabbc537417b5615c8",
+        "size": 1350,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "evals/cases/EVAL-002-capability-vs-function.yaml",
+        "sha256": "5812257f29dfdbdd765217a472867fd7ff74042d0354d4e555b16be63662b232",
+        "size": 1415,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "evals/cases/EVAL-003-it-support-vs-platform-service.yaml",
+        "sha256": "3f5a8a7be4fb79f2a320373a0325266cc1165790bdafe61de7e90beffc2b6c49",
+        "size": 1248,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "evals/cases/EVAL-004-platform-service-vs-platform.yaml",
+        "sha256": "7cd91072e5829b3e2b2c30db4693990c800948a81bc341715eb979982eb85010",
+        "size": 1200,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "evals/cases/EVAL-005-explicit-derived-proposed.yaml",
+        "sha256": "e4ad0ee3a8590eae845f029dc203631d99e253f80560a9f21847b7c21d7abb76",
+        "size": 1416,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "evals/cases/EVAL-006-research-model-gap.yaml",
+        "sha256": "f1ab37c563cd2357372bdb8da139a2aabc51bd0402c2c7d85216836a718b2815",
+        "size": 1574,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "evals/cases/EVAL-007-duplicate-detection.yaml",
+        "sha256": "6228dfe603024a4c71b4f841dc24de7e480cf5e98dbb805db01e0a3a24b8b177",
+        "size": 1077,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "evals/cases/EVAL-008-gap-analysis.yaml",
+        "sha256": "ed54bb205d0566f17ac034bb99deac62e288779587a1406a5beee362c09815ea",
+        "size": 1074,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "evals/cases/EVAL-009-model-proposal.yaml",
+        "sha256": "11bb11445c6421b327b32968e16d756c3d9f467e466d40f95b7d0be8e074f487",
+        "size": 1799,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "evals/cases/EVAL-010-insufficient-evidence.yaml",
+        "sha256": "787bd54c12e9484e2f097a531144457e8bc6123f4b21f47277b9050930645629",
+        "size": 1167,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "evals/cases/EVAL-011-conflicting-sources.yaml",
+        "sha256": "2d980b180964957a7031e4ee6be279889aaed820fecc4453ab06e586e34209aa",
+        "size": 1344,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "evals/cases/EVAL-012-solution-architecture-boundary.yaml",
+        "sha256": "66f038aa439c0ec16550786e73628a95167bebe9685edd7014d66d6540b56d55",
+        "size": 1394,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "evals/cases/EVAL-013-it-capabilities-supporting-domain.yaml",
+        "sha256": "8e94b38350ac7ccdebead449a48c186faa5eb02f9489062cfb0b9fb3f217ff0d",
+        "size": 1508,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "evals/cases/EVAL-014-principle-vs-standard.yaml",
+        "sha256": "c77990f03cc328c5153e4617cef4fc57bd06183672173b72967e1e4ce650472d",
+        "size": 1190,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "evals/cases/EVAL-015-external-example-transferability.yaml",
+        "sha256": "1c7f88a270cc22eb3aa834914bee3de547cf471901fbb9969237fbcebc0f15fd",
+        "size": 1632,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "evals/cases/EVAL-016-v1-project-open.yaml",
+        "sha256": "320fff4e1a84f0c953a7d9aac889a76cf95df86a55ff48a24a90a6e489dd1a50",
+        "size": 1602,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "evals/cases/EVAL-017-extended-legacy-project.yaml",
+        "sha256": "97e8e6bf8a5e7024f0be2a1083716486f38fa885ee957091bc880828f15f3c37",
+        "size": 1753,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "evals/cases/EVAL-018-project-metamodel-override.yaml",
+        "sha256": "d9c0c8b66be79b2be50fc9518336b38c9cc79b7be4bd29e82668e31c6834e5f6",
+        "size": 1635,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "evals/cases/EVAL-019-product-vs-it-support.yaml",
+        "sha256": "664e5b7d35594748cce18b6a69c9713790ad4638140026844e8dba5c72755891",
+        "size": 1777,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "evals/cases/EVAL-020-product-vs-platform.yaml",
+        "sha256": "34dc3e99dc91b11f8c3ffaef462b489682b41458f57274b0fdb15be684bdb0a7",
+        "size": 1620,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "evals/cases/EVAL-021-can-realize-it-support.yaml",
+        "sha256": "e8082680958472eba801399a5a685472b2a708c82ee7350846c0e0b792201e91",
+        "size": 1735,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "evals/cases/EVAL-022-can-realize-platform-service.yaml",
+        "sha256": "1e097b012252bb780ce90bb64faaa18e95390ca8863bca475ea92e4f3ab9344b",
+        "size": 1600,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "evals/cases/EVAL-023-provided-by.yaml",
+        "sha256": "7ddcb36440a0033463c3c4c45bc0d4185067043e25cdaff5f724faaa5e30034e",
+        "size": 1511,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "evals/cases/EVAL-024-legacy-realized-by-ambiguity.yaml",
+        "sha256": "5f7ae624ab310af6e99a950e319425cb904dd70bbfce129d56afc44d9fe22481",
+        "size": 1615,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "evals/cases/EVAL-025-embedded-function-coverage.yaml",
+        "sha256": "070738e3e2be2ad81f11b9e4da174164a3bed5ff704a4a2e73ee379cd56535c1",
+        "size": 1645,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "evals/cases/EVAL-026-information-layer-separation.yaml",
+        "sha256": "3f7848fbe458c4247e9c3e6d17bd416fdf7c3514d909f0d4ccb2498597bf2c7c",
+        "size": 1871,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "evals/cases/EVAL-027-derived-view-source-of-truth.yaml",
+        "sha256": "6b8d2ab203cd5a5adf03bc47ad75c4ea9a6b30b3a8941be395eb3fd4cb8a4df0",
+        "size": 1733,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "evals/cases/EVAL-028-project-specific-extension.yaml",
+        "sha256": "f329c0a32f9f703843c39ab7a5d8018de9c88c5f2febe781a479522d6b193524",
+        "size": 1640,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "evals/cases/EVAL-029-metamodel-change-control.yaml",
+        "sha256": "2a0f3e4d604aab7015545305c1ac0c78609535a2a2b61c8bd6585f0103635614",
+        "size": 1618,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "evals/eval-suite.yaml",
+        "sha256": "b9a86f1f2fb9f19c68de1a06c644de6c0f4fd44bdfdcc5ed2ee1a49cd2c08045",
+        "size": 3506,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "evals/rubrics/research-grading.md",
+        "sha256": "99c2fd5f1bec593e56d695ab34942dc465c8f69b84d9d0bcdff540086a209a4b",
+        "size": 1307,
+        "candidate_roles": []
+      },
+      {
+        "path": "evals/rubrics/semantic-grading.md",
+        "sha256": "c5ddfd638b389c3bd7118db171c78115aa375050cd411b9f29d162053ff83365",
+        "size": 2687,
+        "candidate_roles": []
+      },
+      {
+        "path": "evals/runtime/README.md",
+        "sha256": "f756e4deb6ea3568e9ced0e69812f288d6ba1f5545a88bdf7a15d4d437d74086",
+        "size": 1372,
+        "candidate_roles": []
+      },
+      {
+        "path": "evals/runtime/RUNBOOK.md",
+        "sha256": "be3132716955f10b603bb5127cb94dea75f7f2c4479f199cf8f64c1466159b83",
+        "size": 2936,
+        "candidate_roles": []
+      },
+      {
+        "path": "evals/runtime/runtime-eval-packet.json",
+        "sha256": "c2929cb0419cd431a9f32b81cd8407d8bdb02b8377d8e4cabd9771039db773b1",
+        "size": 50922,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "evals/runtime/runtime-eval-status.yaml",
+        "sha256": "71c87b9229bdc0432b5a6489f63389f865edb4cda60c5bda2d0970337aace7ff",
+        "size": 744,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "evals/v2-risk-coverage.yaml",
+        "sha256": "810e2b2ac7271580af1e718f7c2ad8358ab0a16c09ecd643c77b0e5dcbe8e10c",
+        "size": 661,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/extensions/project-metamodel.yaml",
+        "sha256": "94c53aec1a41b2bad028e0edbbdfe5c718d8026cf36119d2e349770e4076c6eb",
+        "size": 817,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/extensions/rev80-optional-extensions.yaml",
+        "sha256": "245a669c3a7aba1768c75d73a22067d86441995f470f823ec0c0f92967984932",
+        "size": 968,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/minimal-model/PROJECT_STATUS.md",
+        "sha256": "de7776f7b87fbfe8b9ae352f5781bc0839ece0256497e43742fd94ff56445b9d",
+        "size": 1239,
+        "candidate_roles": []
+      },
+      {
+        "path": "examples/minimal-model/README.md",
+        "sha256": "d993c4358c2c39631b4090ed94e73939ae6891970d051f7242bec4b2eaf844be",
+        "size": 1286,
+        "candidate_roles": []
+      },
+      {
+        "path": "examples/minimal-model/docs/generated/drivkrafter.md",
+        "sha256": "69b52939fb20a870bcda6bb186ff2277149307d270ce9884ec0ac7d65babb144",
+        "size": 464,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "examples/minimal-model/docs/generated/formagor.md",
+        "sha256": "72ec97e8a7a97ec46caf5d9a83404823e49167ca21b504f7b715d4c4ab26473b",
+        "size": 680,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "examples/minimal-model/docs/generated/generation-manifest.json",
+        "sha256": "e556381385cc55faf05294d3a3d385f2ce6fb62282b08472c12a7a853445dd61",
+        "size": 1691,
+        "candidate_roles": [
+          "knowledge_candidate",
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/minimal-model/docs/generated/it-stod.md",
+        "sha256": "b8883254c5f7fd5f134b3306542bbe9f5dc3a9c88ce4e61ac6bcb7707779f40e",
+        "size": 419,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "examples/minimal-model/docs/generated/losningsmonster.md",
+        "sha256": "cf3103236354d2ce190a5305f9b0e5732c3ba0c38d646002350f3c8c5dd2620b",
+        "size": 508,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "examples/minimal-model/docs/generated/mal.md",
+        "sha256": "00508cddea31a625ebf182651e9474583d8948cef452ecfde7f46e4fc750d1cb",
+        "size": 469,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "examples/minimal-model/docs/generated/objects/drivkrafter/DRV-001-kortare-ledtid-for-digital-utveckling.md",
+        "sha256": "3e1b918c86946295c255e9ee5e0b4735606b8fcc06f88fc14191c33fcd63c80a",
+        "size": 700,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "examples/minimal-model/docs/generated/objects/formagor/CAP-001-hantera-arenden-digitalt.md",
+        "sha256": "a05a44da9d1a7427f67fc7c7b259915dac2031ab6a02c6926aa219c0b9dc01bd",
+        "size": 780,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "examples/minimal-model/docs/generated/objects/formagor/CAP-002-driftsatta-och-kora-applikationer.md",
+        "sha256": "cb341ee96e26109aee9b7cfd698c1cb9d447cf4ef90bc2240ff2e1af510e6718",
+        "size": 1042,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "examples/minimal-model/docs/generated/objects/it-stod/ITS-001-arendehanteringsstod.md",
+        "sha256": "0ef8f4008cd34d6cb311a4e272009e31c1373aa6a9bde5161135fcc667bf59c8",
+        "size": 812,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "examples/minimal-model/docs/generated/objects/losningsmonster/PAT-001-standardiserad-applikationskorning.md",
+        "sha256": "2ab74f528847341058a02e4ffda3b54ae45bebd0340f161251f1789ba8b2e41a",
+        "size": 1357,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "examples/minimal-model/docs/generated/objects/mal/GOAL-001-snabbare-och-mer-sjalvstandig-utveckling.md",
+        "sha256": "d9b4598b22bfb7415fe9dfc71955ffae3c5d19c4be77a7975e1d0bd2513e8f65",
+        "size": 1059,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "examples/minimal-model/docs/generated/objects/plattformar/PLT-001-containerplattform.md",
+        "sha256": "e60d2a4eddcd327ebb228885920568bcbb29d9504aaf1cf5fa4ae8d789d0726d",
+        "size": 838,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "examples/minimal-model/docs/generated/objects/plattformstjanster/PLS-001-containerplattformstjanst.md",
+        "sha256": "9d45b554962c1e53e3800b6ec7c6a50095b18bcd7c85c5c1489e3c3261be5539",
+        "size": 1430,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "examples/minimal-model/docs/generated/objects/principer/PRN-001-gemensamma-behov-realiseras-som-ateranvandbara-tjanster.md",
+        "sha256": "e956c439f1ca72c3e9c8d1e7a508d013a1e4e980695cc151d64c644cbf0ec012",
+        "size": 1604,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "examples/minimal-model/docs/generated/objects/referensarkitekturer/RA-001-referensarkitektur-for-gemensam-applikationskorning.md",
+        "sha256": "158029981fdcf82a23afbace8916d8bccdc168ac68902e9f0b9ddfdbcf9234f8",
+        "size": 1238,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "examples/minimal-model/docs/generated/objects/standarder/STD-001-standard-for-paketering-av-applikationer.md",
+        "sha256": "5d88dd5a2dabb9e94863ffa1ca7f8b86f304181db77843da7f1a9080311fb56f",
+        "size": 773,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "examples/minimal-model/docs/generated/plattformar.md",
+        "sha256": "d8c766351cc2c2896e13c6d25a6f8ea3e5cb4924ef164131673d56e9219c5828",
+        "size": 422,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "examples/minimal-model/docs/generated/plattformstjanster.md",
+        "sha256": "00ffaf749ebf0cec5e49e2292d36675d08351dd7aa6f82db5d17db73336cdafc",
+        "size": 480,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "examples/minimal-model/docs/generated/principer.md",
+        "sha256": "926ef25ed72ce5c0459550f32535d13e8e996665da5724394e647f7857a0fe08",
+        "size": 525,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "examples/minimal-model/docs/generated/referensarkitekturer.md",
+        "sha256": "1f6f7414250d41b52eff1c585fae9faaad3b3aaaef6e1236a8cd7527d0a5423c",
+        "size": 563,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "examples/minimal-model/docs/generated/standarder.md",
+        "sha256": "d6f5ba18ce8e0dddd743f899191a3370b643c8bcf2c535dc8a153f3c194d28a7",
+        "size": 512,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "examples/minimal-model/exports/confluence/drivkrafter.txt",
+        "sha256": "a758d142e61c578059bff3f5a81f7ced2efe45610e276100eb94fc050f89f4d7",
+        "size": 407,
+        "candidate_roles": []
+      },
+      {
+        "path": "examples/minimal-model/exports/confluence/formagor.txt",
+        "sha256": "5076649c3a4ea09dbe9d39a280f76fff5252128ca28010d0e2007afb829ffe6b",
+        "size": 610,
+        "candidate_roles": []
+      },
+      {
+        "path": "examples/minimal-model/exports/confluence/generation-manifest.json",
+        "sha256": "249f543922cf03a260acbaee54411bba2c082e175ba664f08fde1b5699e927c6",
+        "size": 1701,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/minimal-model/exports/confluence/it-stod.txt",
+        "sha256": "5780e3c86f4f6dce73395b441cc12d79861906a70aa666d0bdc8c7c6e2dd1782",
+        "size": 370,
+        "candidate_roles": []
+      },
+      {
+        "path": "examples/minimal-model/exports/confluence/losningsmonster.txt",
+        "sha256": "d74c462e2a4bb6828eed201107b7efa56f73e6ae9f34e56e458ec7a1b093b869",
+        "size": 441,
+        "candidate_roles": []
+      },
+      {
+        "path": "examples/minimal-model/exports/confluence/mal.txt",
+        "sha256": "9af6eec3fbd7b53c2bc425aabade0bbdc11647a7fcea382d2cad4b01ba0ef783",
+        "size": 428,
+        "candidate_roles": []
+      },
+      {
+        "path": "examples/minimal-model/exports/confluence/objects/drivkrafter/DRV-001-kortare-ledtid-for-digital-utveckling.txt",
+        "sha256": "8fb1b406fd2ac1bc54d68f3c8e5a33df5b8869797f800bc4c872e55e91342b99",
+        "size": 654,
+        "candidate_roles": []
+      },
+      {
+        "path": "examples/minimal-model/exports/confluence/objects/formagor/CAP-001-hantera-arenden-digitalt.txt",
+        "sha256": "8c05b9c4fa5c96cc3c974e1bef97e2998614028572a6c36ed8f84741b14ce173",
+        "size": 734,
+        "candidate_roles": []
+      },
+      {
+        "path": "examples/minimal-model/exports/confluence/objects/formagor/CAP-002-driftsatta-och-kora-applikationer.txt",
+        "sha256": "d7171956254123da46d1cdcb06df54d3fdf5faf1b626b21700ade211a68229b2",
+        "size": 835,
+        "candidate_roles": []
+      },
+      {
+        "path": "examples/minimal-model/exports/confluence/objects/it-stod/ITS-001-arendehanteringsstod.txt",
+        "sha256": "5bf8eaccd43e49b85f806bd22221cb3e344783b1e71c9d24d58f67ad3998371e",
+        "size": 779,
+        "candidate_roles": []
+      },
+      {
+        "path": "examples/minimal-model/exports/confluence/objects/losningsmonster/PAT-001-standardiserad-applikationskorning.txt",
+        "sha256": "fc35baeddeb5a827d1c4764dfd5e2f775e903bd8c0b103bbbfb7167d38b5d14c",
+        "size": 1144,
+        "candidate_roles": []
+      },
+      {
+        "path": "examples/minimal-model/exports/confluence/objects/mal/GOAL-001-snabbare-och-mer-sjalvstandig-utveckling.txt",
+        "sha256": "59fde5386fe0c6cc130592c949eef9c282fbb9c17127dc7a5c697ed9fe6c480d",
+        "size": 905,
+        "candidate_roles": []
+      },
+      {
+        "path": "examples/minimal-model/exports/confluence/objects/plattformar/PLT-001-containerplattform.txt",
+        "sha256": "508d5cc24f91257efcf90b99c55c7351b26b540023141b57d129d23485446f32",
+        "size": 681,
+        "candidate_roles": []
+      },
+      {
+        "path": "examples/minimal-model/exports/confluence/objects/plattformstjanster/PLS-001-containerplattformstjanst.txt",
+        "sha256": "c1077dca24ab6f1ec71af2a00677592b50624bf4016459efe3a57711dcaf8acf",
+        "size": 1271,
+        "candidate_roles": []
+      },
+      {
+        "path": "examples/minimal-model/exports/confluence/objects/principer/PRN-001-gemensamma-behov-realiseras-som-ateranvandbara-tjanster.txt",
+        "sha256": "f55610e940ba021ba89f66e75e3c9aff9d0b23a95a1f6359bd808c7c62b97f6d",
+        "size": 1358,
+        "candidate_roles": []
+      },
+      {
+        "path": "examples/minimal-model/exports/confluence/objects/referensarkitekturer/RA-001-referensarkitektur-for-gemensam-applikationskorning.txt",
+        "sha256": "240ccec0e1fcbe4ee669c8500f8657e6a6a558b4a749666464d7416d0ae7e552",
+        "size": 1018,
+        "candidate_roles": []
+      },
+      {
+        "path": "examples/minimal-model/exports/confluence/objects/standarder/STD-001-standard-for-paketering-av-applikationer.txt",
+        "sha256": "e946374429ebb44ed53a1f93ecc105ada516b679a83187b3f0afffae44b0bde8",
+        "size": 595,
+        "candidate_roles": []
+      },
+      {
+        "path": "examples/minimal-model/exports/confluence/plattformar.txt",
+        "sha256": "b33f48436cded3619e03e86ac011963c19dc7733cb4e183efd0606528d540516",
+        "size": 364,
+        "candidate_roles": []
+      },
+      {
+        "path": "examples/minimal-model/exports/confluence/plattformstjanster.txt",
+        "sha256": "d64ec09b706be2254c5f28d7d6620a79749bc16ac39330e109e024d10654e6dd",
+        "size": 408,
+        "candidate_roles": []
+      },
+      {
+        "path": "examples/minimal-model/exports/confluence/principer.txt",
+        "sha256": "7e6df95f31a2ecfe46b29462f833c2ea1586dd81217913fa768f3d6199206259",
+        "size": 474,
+        "candidate_roles": []
+      },
+      {
+        "path": "examples/minimal-model/exports/confluence/referensarkitekturer.txt",
+        "sha256": "88437f6e79368267cc913d620c56418adebefcfc521c2fcfddd670a04442e10d",
+        "size": 489,
+        "candidate_roles": []
+      },
+      {
+        "path": "examples/minimal-model/exports/confluence/standarder.txt",
+        "sha256": "26aa86bfd93b98fee8303639e9896334b846c107ae9794f5751dc3b3e59856b1",
+        "size": 457,
+        "candidate_roles": []
+      },
+      {
+        "path": "examples/minimal-model/exports/document/ea-dokumentation-published.docx",
+        "sha256": "426993ab0fd566cb8e49f00cd90ee7c43e79143e033143ed353e7b5792836274",
+        "size": 11925,
+        "candidate_roles": []
+      },
+      {
+        "path": "examples/minimal-model/exports/document/ea-dokumentation-published.pdf",
+        "sha256": "b95c98266ff43e4cbba71a45fbe933635de176ea35a800777d80b54f7ba6862b",
+        "size": 105449,
+        "candidate_roles": []
+      },
+      {
+        "path": "examples/minimal-model/model/capabilities.yaml",
+        "sha256": "a7f931e45ff55c9945c904e275d4b61469b56f70ff1074d6a8a8fb63b31256ea",
+        "size": 821,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/minimal-model/model/drivers.yaml",
+        "sha256": "b16dd74c255192a51639050c05262ec83648aa287eff6512a90a9df041111750",
+        "size": 382,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/minimal-model/model/goals.yaml",
+        "sha256": "9016f82f776b669193f39e80c6583244cb61106ed23904cb96749807c53b654a",
+        "size": 552,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/minimal-model/model/it-support.yaml",
+        "sha256": "b9afcd1c7bdd429a93f7eb4c529b9ed0f062667c7c2f1d6aa64b17c98515fc8b",
+        "size": 442,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/minimal-model/model/platform-services.yaml",
+        "sha256": "7251e2180cad817da434129607b5ed8722b71c7cf1d176a430b9b314c04d6d0b",
+        "size": 630,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/minimal-model/model/platforms.yaml",
+        "sha256": "6f61ef2fc7ab66fc60076cbaaec58356d67d8d6431b70da990d20fb460cadf97",
+        "size": 610,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/minimal-model/model/principles.yaml",
+        "sha256": "2dd603b10c1de0377daa3b16f5462f041e3e3163e80d8b4b9e81ae9128a4e2bb",
+        "size": 999,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/minimal-model/model/reference-architectures.yaml",
+        "sha256": "b4431020bd769051ec955b3640e3ba0b375b774c3d3e5f5d77d989b1136395f5",
+        "size": 851,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/minimal-model/model/relations.yaml",
+        "sha256": "bff01eed061fd87df9373dc52dc82d4d9bccd58ce63ce6b6a08b3ca348975d15",
+        "size": 3169,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/minimal-model/model/solution-patterns.yaml",
+        "sha256": "3fb2ba26a3876124fa1a0b7d982f4b254effaf75070a42427f289b4b2dc78252",
+        "size": 862,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/minimal-model/model/sources.yaml",
+        "sha256": "ea62d1180e24995f34e23f794ae804b8ea11d7859a70df4a7fe8005bd51b0043",
+        "size": 597,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/minimal-model/model/standards.yaml",
+        "sha256": "5c34851c4b84e2ba2cd1af4e033379b004ff7fc14034daa98cfd378b4c346af0",
+        "size": 523,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/minimal-model/project-manifest.json",
+        "sha256": "659a8ab7a061302caf1ff0a6959b54a3d8fd4434a6fd55d360f468feb18782ce",
+        "size": 14489,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/minimal-model/revision-log.md",
+        "sha256": "92ad02f257cafaec61d4a310770f82868d61b27839693784e3c7c8c83ee6fede",
+        "size": 1117,
+        "candidate_roles": []
+      },
+      {
+        "path": "examples/product-analysis-it-support/README.md",
+        "sha256": "b061ee2ad4ca7db01f1111a31bead5a175b5f1ed75d66229b13bd5342259b6a5",
+        "size": 846,
+        "candidate_roles": []
+      },
+      {
+        "path": "examples/product-analysis-it-support/actual-state/assertions.yaml",
+        "sha256": "7972b7a12d84bbfdb4497416bc3577cb4e59f319d5ae52730327d11e12aa1c89",
+        "size": 319,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/product-analysis-it-support/expected-analysis.yaml",
+        "sha256": "debf18daf1b708b68b6c8c4f7b7b0f2f444fe1c800d640b373ad36e0ac3a8ed4",
+        "size": 570,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/product-analysis-it-support/market-reference/assertions.yaml",
+        "sha256": "f2d7f107cd36e78db8f16f06afcedb65dc6fb1c718735047062ef1c92c115c18",
+        "size": 1063,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/product-analysis-it-support/model/capabilities.yaml",
+        "sha256": "2b66c929977209e8431af86c9c91e86aa3e549cf8e77abab224bf5088e5088da",
+        "size": 526,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/product-analysis-it-support/model/drivers.yaml",
+        "sha256": "83f38e1a41b40f7a7c3150c48c50cf9b00e6bf0409e1e83812ed5d8fa176cc54",
+        "size": 54,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/product-analysis-it-support/model/goals.yaml",
+        "sha256": "addbf51ff0b5a42054d42c63d580861072c9107b8f5a6a9b9bcc2b33a1490949",
+        "size": 52,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/product-analysis-it-support/model/it-support.yaml",
+        "sha256": "618d0893d63b2509d20b6646caa9c5ceeddbf4092a550650011a7736fae4414e",
+        "size": 988,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/product-analysis-it-support/model/platform-services.yaml",
+        "sha256": "d7c86f2e1b5174a51ec13bd2e7f91ad0d777dd6cd533ffe884e8ca053bb775cd",
+        "size": 64,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/product-analysis-it-support/model/platforms.yaml",
+        "sha256": "405d346b1d7d60b78721f632fe4e2082127b71326a1b65f7845285a70d319584",
+        "size": 56,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/product-analysis-it-support/model/principles.yaml",
+        "sha256": "401a10b87561494d1f121cbedd24bfb98c70fb39e8bf8e2a7f17b50d7346f58f",
+        "size": 57,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/product-analysis-it-support/model/products.yaml",
+        "sha256": "785376829e432310e9fbb2a188fa49da14cfd73379f54b18519952c40d499764",
+        "size": 1173,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/product-analysis-it-support/model/reference-architectures.yaml",
+        "sha256": "dbdb16ae98250ba65314434279a9c2dca3b2ef35a8abe6b211ba4b548c66a36f",
+        "size": 70,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/product-analysis-it-support/model/relations.yaml",
+        "sha256": "3894b85365efb4fbe8790d43417f128ebd4e0ed1edeb3a84956a7a80e1c506e0",
+        "size": 1364,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/product-analysis-it-support/model/solution-patterns.yaml",
+        "sha256": "3a8dd2198ad2a7cd004ef8571d97c02f4aa67ffb6d9e259635dae982b0459104",
+        "size": 64,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/product-analysis-it-support/model/sources.yaml",
+        "sha256": "1ac029afa91712a5eada5e8051bf2e2c7f8fd8b0dab87f84a54a9fbdce68b18a",
+        "size": 1066,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/product-analysis-it-support/model/standards.yaml",
+        "sha256": "ed770a02cedcb44fddf85ed59ba47024aa7d056779d1015007a245559c4b75f7",
+        "size": 56,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/product-analysis-platform-service/README.md",
+        "sha256": "79c5a1862c93dff3053a4c38861995412cee89893a042ff1d9a79ba14c3c2442",
+        "size": 436,
+        "candidate_roles": []
+      },
+      {
+        "path": "examples/product-analysis-platform-service/actual-state/assertions.yaml",
+        "sha256": "ec4a030cc20af67835cbd2572c7f697340843df9d705d96cd21b361002f75cb9",
+        "size": 57,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/product-analysis-platform-service/expected-analysis.yaml",
+        "sha256": "4823fd03a2dce91ab2e9a066f9a775b2a6eba3b8710f32b5fd0d04af12a3abc1",
+        "size": 340,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/product-analysis-platform-service/market-reference/assertions.yaml",
+        "sha256": "db87f8fc9e2a56a9a9366a17495635538fe7cd971adf18e79a0d08630b9968f7",
+        "size": 894,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/product-analysis-platform-service/model/capabilities.yaml",
+        "sha256": "d97d329dd85359ce5962f05bc9c258e25681437231fb42c16e6a83692a555b2a",
+        "size": 481,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/product-analysis-platform-service/model/drivers.yaml",
+        "sha256": "83f38e1a41b40f7a7c3150c48c50cf9b00e6bf0409e1e83812ed5d8fa176cc54",
+        "size": 54,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/product-analysis-platform-service/model/goals.yaml",
+        "sha256": "addbf51ff0b5a42054d42c63d580861072c9107b8f5a6a9b9bcc2b33a1490949",
+        "size": 52,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/product-analysis-platform-service/model/it-support.yaml",
+        "sha256": "c931cdc1b20d8b270bdc0858a59a67e2d6d7c65d6ac74385ffb249c6ea7afa1a",
+        "size": 58,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/product-analysis-platform-service/model/platform-services.yaml",
+        "sha256": "9fcac7669e4253b2a23b73c22884f2e698c2b39cc6c6c31fb9125acbdf6556f8",
+        "size": 963,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/product-analysis-platform-service/model/platforms.yaml",
+        "sha256": "405d346b1d7d60b78721f632fe4e2082127b71326a1b65f7845285a70d319584",
+        "size": 56,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/product-analysis-platform-service/model/principles.yaml",
+        "sha256": "401a10b87561494d1f121cbedd24bfb98c70fb39e8bf8e2a7f17b50d7346f58f",
+        "size": 57,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/product-analysis-platform-service/model/products.yaml",
+        "sha256": "396438696b9ece012b183249b1c8b1a1a4fea462b8e5de3ff7ad2efe809fc4f2",
+        "size": 1016,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/product-analysis-platform-service/model/reference-architectures.yaml",
+        "sha256": "dbdb16ae98250ba65314434279a9c2dca3b2ef35a8abe6b211ba4b548c66a36f",
+        "size": 70,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/product-analysis-platform-service/model/relations.yaml",
+        "sha256": "3e18754a6992e5d316e4e02f9b592fa3a62f1e1ecacb950b2fa1be4ce9cd7eb6",
+        "size": 1029,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/product-analysis-platform-service/model/solution-patterns.yaml",
+        "sha256": "3a8dd2198ad2a7cd004ef8571d97c02f4aa67ffb6d9e259635dae982b0459104",
+        "size": 64,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/product-analysis-platform-service/model/sources.yaml",
+        "sha256": "9fca27fa20d52bbc8ffac9f9b904abec716cb90fdc519404eef7ef2df2897562",
+        "size": 774,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/product-analysis-platform-service/model/standards.yaml",
+        "sha256": "ed770a02cedcb44fddf85ed59ba47024aa7d056779d1015007a245559c4b75f7",
+        "size": 56,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/project-metamodel/extended.yaml",
+        "sha256": "9b2edeb7714188175e381216c5900c7dffe21e2e4fa1c800c181513bca2d5627",
+        "size": 3805,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/project-metamodel/minimal.yaml",
+        "sha256": "e6033b41a6874ba943885bef6ee5215e838c4916a28910de31847f80fed934b6",
+        "size": 994,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "exports/confluence/drivkrafter.txt",
+        "sha256": "89046ac0012c6fcd7117c70dc905d16c56944ed23c3007702cec6e5cb9da9729",
+        "size": 255,
+        "candidate_roles": []
+      },
+      {
+        "path": "exports/confluence/formagor.txt",
+        "sha256": "601f59f61b2eb81969dcfdec450fa78975043e76809b5f5982d7bc9fb667e1fd",
+        "size": 254,
+        "candidate_roles": []
+      },
+      {
+        "path": "exports/confluence/generation-manifest.json",
+        "sha256": "23772ed06b67b25d13125acb262b1a450de8c6fa55150781a26411cc00ff523c",
+        "size": 1852,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "exports/confluence/it-stod.txt",
+        "sha256": "de3ebcce376c6ff1dce218e0c21c6680ebcdcb9184971af8ac95a3ffc04f18c3",
+        "size": 252,
+        "candidate_roles": []
+      },
+      {
+        "path": "exports/confluence/losningsmonster.txt",
+        "sha256": "7371bbd9ad5121c1e811394fb5b1f61ee7e2d937da95ee111c87517a649b6851",
+        "size": 261,
+        "candidate_roles": []
+      },
+      {
+        "path": "exports/confluence/mal.txt",
+        "sha256": "914ac0813b70c8690e717deae6d7f3f43d7a3e07f2cbcc1f31f9bd3d538cb0a6",
+        "size": 248,
+        "candidate_roles": []
+      },
+      {
+        "path": "exports/confluence/plattformar.txt",
+        "sha256": "d138b2a3a42f8d4b1c5fd2bf1c331781f12a16ba439b04bc4537d19ddfc2878b",
+        "size": 255,
+        "candidate_roles": []
+      },
+      {
+        "path": "exports/confluence/plattformstjanster.txt",
+        "sha256": "005765d49604637cbcecc10c0e3d4f1f7dc96e1ffa298092f26d4f2989c93c41",
+        "size": 263,
+        "candidate_roles": []
+      },
+      {
+        "path": "exports/confluence/principer.txt",
+        "sha256": "fc7c9d5901aa2f059664652b4a10a3fac0696c5498672939c82f930d4beefb4a",
+        "size": 253,
+        "candidate_roles": []
+      },
+      {
+        "path": "exports/confluence/produkter.txt",
+        "sha256": "d6dd71efa9235ff0d494f8beefc7990a7b58fdf45a118dbd6dfc657d70ff8269",
+        "size": 253,
+        "candidate_roles": []
+      },
+      {
+        "path": "exports/confluence/referensarkitekturer.txt",
+        "sha256": "602e144d79907cf084542c9d55ab991f087ef0bcfe61120169478947f8e0ee4f",
+        "size": 264,
+        "candidate_roles": []
+      },
+      {
+        "path": "exports/confluence/standarder.txt",
+        "sha256": "89079b498f15ff6b95d1bb9a452e9567ae927c7d9ea1004a5db512c5b9748aa4",
+        "size": 254,
+        "candidate_roles": []
+      },
+      {
+        "path": "exports/document/ea-dokumentation.docx",
+        "sha256": "96471f3017bdd6b985afa4e67506d279689868c31e457a9d8c4e73f9341da420",
+        "size": 11196,
+        "candidate_roles": []
+      },
+      {
+        "path": "exports/document/ea-dokumentation.pdf",
+        "sha256": "464f1765f0f166df01721e873397b02c3d6e4dcfa71e9a10079ef2d0b2d1cf2f",
+        "size": 101738,
+        "candidate_roles": []
+      },
+      {
+        "path": "exports/markdown/drivkrafter.md",
+        "sha256": "cc059c40c68abee3dcdb9030e919ed3b759855d94f7897887da63e7d6821a0ad",
+        "size": 291,
+        "candidate_roles": []
+      },
+      {
+        "path": "exports/markdown/formagor.md",
+        "sha256": "96f1e09d00c2f2f793d09dc1a78ca860d12d0a7a74f0050713f4b6d25a49961e",
+        "size": 289,
+        "candidate_roles": []
+      },
+      {
+        "path": "exports/markdown/generation-manifest.json",
+        "sha256": "da75762d05d35ee84bf2bced173405f4cb68739e03de7fd1cd934ed21e805553",
+        "size": 1841,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "exports/markdown/it-stod.md",
+        "sha256": "43e01283cd76e158b5babc0010afb06d7bf1271118d1e2e9e05d34ad1693a2cf",
+        "size": 285,
+        "candidate_roles": []
+      },
+      {
+        "path": "exports/markdown/losningsmonster.md",
+        "sha256": "db0e400ce2ea5809ac0b3c8700e464a3fa9f0ff43c66d5d8c5cffb9a02764e43",
+        "size": 303,
+        "candidate_roles": []
+      },
+      {
+        "path": "exports/markdown/mal.md",
+        "sha256": "a3c4fea73b42bee2433435720a2682cced5a1f0c27dd19484a0c52535e4c6eaf",
+        "size": 277,
+        "candidate_roles": []
+      },
+      {
+        "path": "exports/markdown/plattformar.md",
+        "sha256": "61e3527de86f4095afb09fea46e07f5dac78d621aee0d597fa5bff05158042a2",
+        "size": 291,
+        "candidate_roles": []
+      },
+      {
+        "path": "exports/markdown/plattformstjanster.md",
+        "sha256": "dc43a468936968b9c1ea9f6db589c696ea0caf8880a51c6010f0c606067c5a10",
+        "size": 307,
+        "candidate_roles": []
+      },
+      {
+        "path": "exports/markdown/principer.md",
+        "sha256": "ca36adc70df9a41693ef2b7dcdad3fac4501e5ae3e70c60ea2706ff0bddb07a8",
+        "size": 287,
+        "candidate_roles": []
+      },
+      {
+        "path": "exports/markdown/produkter.md",
+        "sha256": "93f165315e96fcc7f554b46d8d593e74a7fc73cc934914975ba945db007fc4be",
+        "size": 287,
+        "candidate_roles": []
+      },
+      {
+        "path": "exports/markdown/referensarkitekturer.md",
+        "sha256": "4195280c64a3d065817a6c199d300ccbcf747d5c002c2269ee099a03966447a9",
+        "size": 309,
+        "candidate_roles": []
+      },
+      {
+        "path": "exports/markdown/standarder.md",
+        "sha256": "877b1c709944e64eefffbdf17c8da16c60275236e08622a275da7a0cf5549a7c",
+        "size": 289,
+        "candidate_roles": []
+      },
+      {
+        "path": "extensions/example-ownership/extension.yaml",
+        "sha256": "6803d7fa41170628baf8c4c1e6d872f668d1def9043020255643372dbbdd8fbd",
+        "size": 2019,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "extensions/platform-maturity/extension.yaml",
+        "sha256": "2cf398362eb4e9aefa272c4fd1a3e8cd6029ddc6a77d50f4adb27cbc5b11c193",
+        "size": 1553,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "extensions/product-deployment/extension.yaml",
+        "sha256": "26c76bfb9f3b4b8d70e3edc851fded379005c6e5d10a762adad5546130bc53d3",
+        "size": 2964,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "extensions/product-openness/extension.yaml",
+        "sha256": "429513bc2a5704d46f33d0967919574d5e66c81f469235d7b6fb346188adc1c1",
+        "size": 1364,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "extensions/registry.yaml",
+        "sha256": "88e56b64635ec2a6d00e0d43b8e3bbd34dd674914def8ccf958fa4646f10f69d",
+        "size": 623,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "governance/change-control.yaml",
+        "sha256": "e6b7b8c312465b1931cf7e7fe554e7ca9cf9cfe33cfa2c478c342a7e694736c7",
+        "size": 2479,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "governance/metamodel-changelog.yaml",
+        "sha256": "ea6e2562c414c78cb2540fca9f247c50909db3ef3b6ee963093c510500d824fa",
+        "size": 4364,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "governance/model-changelog.yaml",
+        "sha256": "d0f9172ab9a8bfc6c904ec3670ca762f8747154941c255452813b9259624446f",
+        "size": 5434,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "governance/retired-ids.yaml",
+        "sha256": "5fb0623506f9c861f06ef173d06bb8fa7dedf7a8d3c6c417f3e2470c3bf39264",
+        "size": 65,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "gpt-project.yaml",
+        "sha256": "017e40c72498ffdb015928da591bd26e362731e8798b9215bb7677b2134829c5",
+        "size": 5138,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "knowledge/change-control.md",
+        "sha256": "908058de9232e6f9c74f4d53fd2232c3a5f98503d19f0a01526b46879b65b8ae",
+        "size": 801,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "knowledge/classification-guide.md",
+        "sha256": "aac50866e33c5ebb48cea828738eeda178171f485de54896bd7ea7cd4e7b0ddb",
+        "size": 20135,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "knowledge/conflicts-and-uncertainty.md",
+        "sha256": "bb138763cc382fd82931aa3b4a76b7bd77b7a5c7a8bd44d1c6d064d28bb24d34",
+        "size": 15199,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "knowledge/project-status-rules.md",
+        "sha256": "d9dd629c0e4af80a744923b1689116736fb2df2741b0e1a1c462753893628a4d",
+        "size": 4866,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "knowledge/quality-metamodel-aware.md",
+        "sha256": "a6921dc3615ad278924e589369bdfe09612ebde765dc93f64cf65080f6a011e3",
+        "size": 464,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "knowledge/quality-model.md",
+        "sha256": "b8564249d6a4aee055ef19f85d67cf258515d9e10a679897688a06490e573a6b",
+        "size": 20299,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "knowledge/quality-object.md",
+        "sha256": "71c70eecd18746b4f2b20cf4894b8c9f99babc4ab1e7613e5f4e3e6bdd4b243a",
+        "size": 16849,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "knowledge/workflow-boundary-first.md",
+        "sha256": "906c9898e5ff5fc66f04f2359489e930c227b674e0e6d62fcc03337d46dace2b",
+        "size": 1607,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "knowledge/workflow-extraction.md",
+        "sha256": "0ea6fd06893e0e8f726279d636155efa2615c9927bedf5eba524cf91e34c774f",
+        "size": 14093,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "knowledge/workflow-model-design.md",
+        "sha256": "db89ab716abfd34f56632c2c95637ffe8b9d55f6c407cdcf26a75f35451cf1be",
+        "size": 9209,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "knowledge/workflow-project-open.md",
+        "sha256": "bda7dbc097fbf2ad02186848699dbc5a91dea8c996d5ddd7c5ebcc358d502030",
+        "size": 3284,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "knowledge/workflow-research.md",
+        "sha256": "3a03c35a86083989532794510e587747240ab7a95e64e749cb76d991a411a9ad",
+        "size": 11979,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "knowledge/workflow-update.md",
+        "sha256": "e949ca9e23555abc9b7c5e9751a503cb2c97dbb5af58a0aa507b9de93e9fbf58",
+        "size": 15526,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "knowledge/workflow-usage.md",
+        "sha256": "20d45bbfab8ba9b4533afa7a9c2ef0b6123ec6514cb5b2e67e3fa107d28b9da3",
+        "size": 8018,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "market-reference/README.md",
+        "sha256": "1dcea2b7b2c30ce9362d9d868c41b3828d32d818024474cbc8ea6b9049ab81a7",
+        "size": 386,
+        "candidate_roles": []
+      },
+      {
+        "path": "market-reference/assertions.yaml",
+        "sha256": "5f3921730cd070cba362601ddda4bae4b75ebc3d2fc0e56f62dde6b968839975",
+        "size": 61,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "model/capabilities.yaml",
+        "sha256": "eeadaa8a0e24ae75351f42b487a74b082d5296e1af3b56e2359221e743b13488",
+        "size": 58,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "model/drivers.yaml",
+        "sha256": "83f38e1a41b40f7a7c3150c48c50cf9b00e6bf0409e1e83812ed5d8fa176cc54",
+        "size": 54,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "model/goals.yaml",
+        "sha256": "addbf51ff0b5a42054d42c63d580861072c9107b8f5a6a9b9bcc2b33a1490949",
+        "size": 52,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "model/it-support.yaml",
+        "sha256": "c931cdc1b20d8b270bdc0858a59a67e2d6d7c65d6ac74385ffb249c6ea7afa1a",
+        "size": 58,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "model/platform-services.yaml",
+        "sha256": "d7c86f2e1b5174a51ec13bd2e7f91ad0d777dd6cd533ffe884e8ca053bb775cd",
+        "size": 64,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "model/platforms.yaml",
+        "sha256": "405d346b1d7d60b78721f632fe4e2082127b71326a1b65f7845285a70d319584",
+        "size": 56,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "model/principles.yaml",
+        "sha256": "401a10b87561494d1f121cbedd24bfb98c70fb39e8bf8e2a7f17b50d7346f58f",
+        "size": 57,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "model/products.yaml",
+        "sha256": "42b263aa2771b0e7bdee200c6d9ee592b99fdd8a4a04e8cd556c8dec9d19c14b",
+        "size": 55,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "model/reference-architectures.yaml",
+        "sha256": "dbdb16ae98250ba65314434279a9c2dca3b2ef35a8abe6b211ba4b548c66a36f",
+        "size": 70,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "model/relations.yaml",
+        "sha256": "240477fb66391c7735eeff74dabdb60e0f84f296101bf2184656e555145b0ed6",
+        "size": 36,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "model/solution-patterns.yaml",
+        "sha256": "3a8dd2198ad2a7cd004ef8571d97c02f4aa67ffb6d9e259635dae982b0459104",
+        "size": 64,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "model/sources.yaml",
+        "sha256": "c68cfdd95fdc474c591516265e7e46d3794caad0a9d04636e07c4d29ed332637",
+        "size": 34,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "model/standards.yaml",
+        "sha256": "ed770a02cedcb44fddf85ed59ba47024aa7d056779d1015007a245559c4b75f7",
+        "size": 56,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "portable/START-HERE.md",
+        "sha256": "acc1018b751e950d07a40143cab19ffaa8e435f845240f24971e8ccc1951dc58",
+        "size": 1017,
+        "candidate_roles": []
+      },
+      {
+        "path": "presentation/presentation-contract.yaml",
+        "sha256": "7ba3697a3ac5ed330d554f9d36e1933edf2df2f4162f033bf9a330e4df0b4b48",
+        "size": 3115,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "project-manifest.json",
+        "sha256": "0d79aa8f3b04947a0fd4aaa055b166b7b73ec1cd23a1f1bb7474ca2f75adbe08",
+        "size": 98502,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "reconstructed-canonical/plugin-migration-plan.json",
+        "sha256": "4c55215305947a89046288d8eec3788e4998121c27b78733454531f637bb59c8",
+        "size": 1383,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "requirements-dev.txt",
+        "sha256": "00a27188140217e8344a3032abf6f83c45ce15bdeb0d95919d7b8a1aaf1822f6",
+        "size": 49,
+        "candidate_roles": []
+      },
+      {
+        "path": "revision-log.md",
+        "sha256": "ec50f5c6736dd82ce201b4d1c65c6cd2a26c8ecfefadb65e6efc986dc5025450",
+        "size": 29923,
+        "candidate_roles": []
+      },
+      {
+        "path": "runtime-parity.yaml",
+        "sha256": "73812aa4b9178994ae9a21dc785d026b9855a2d2b3568e0997e9ce0f966bf860",
+        "size": 1116,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "schemas/change-control.schema.json",
+        "sha256": "386f4b6cc0338d50048120cd00303cdafef023a789f19abfbfa9277eb70d8cab",
+        "size": 3969,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "schemas/change-log.schema.json",
+        "sha256": "4f16014c50bf9502c3539079c824cfb2ba8aca94f342ab16367ef1f773757675",
+        "size": 1585,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "schemas/conflicts-and-uncertainty.yaml",
+        "sha256": "ef4fad4564de71a451dc0a425af85d85b274a47562b5bc84a703ea675e3f7b41",
+        "size": 3652,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "schemas/derived-view.schema.json",
+        "sha256": "51c6a0a0e77464b72e635e13d8bf32afc867b602bdacdcd09ac830eece083de8",
+        "size": 3247,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "schemas/information-layers.yaml",
+        "sha256": "ade447249ad709879cc2e4c7e9c447adcea2d7c4d4b13afe54c01dced7300a1c",
+        "size": 3471,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "schemas/migration-report.schema.json",
+        "sha256": "25a9e9633663fcfb518ddcb0251c3ade5c61ac77ceb23e9ab8e2ffb4e0ff5fc0",
+        "size": 3062,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "schemas/model-format.yaml",
+        "sha256": "532884e5f85ebece253efa11641c098fbb6c6510734c8fcfdef7e8b00a1abef3",
+        "size": 7351,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "schemas/model-quality-rules.yaml",
+        "sha256": "37b8c6cb02c1d6c554dc0ae5fd7d10a7adb1746b305da307ccf79abbe01eca1a",
+        "size": 10391,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "schemas/modeling-review-workflows.yaml",
+        "sha256": "e0f3a7a8f6bcac989c6c491c66bd8468be50e9900e0d3a45cfec9bd257f2ca6d",
+        "size": 4865,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "schemas/object-quality-rules.yaml",
+        "sha256": "7b535c2546e042d86a0ca0a7b7bc14288bd57f9cf76c4c5a3275def168cd44e0",
+        "size": 11788,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "schemas/object-types.yaml",
+        "sha256": "4b2056c7e9d8521d2053b78cb26958f2aaef26110dc1a97cb5faaf23632c8dda",
+        "size": 9910,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "schemas/presentation-contract.schema.json",
+        "sha256": "0a67b0273985296cd12e3ff331fc07dbf886e067191acff064cfa0add2a0d86b",
+        "size": 3427,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "schemas/product-model.yaml",
+        "sha256": "7ac31ae58a769bd1e4ce331b63553e6b7a71a5892ad093bfaf8465bd28178257",
+        "size": 921,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "schemas/project-compatibility-marker.schema.json",
+        "sha256": "4c138213d62e3d45311552ca071b3982ffd5c5d8dadce27fea16af9f126add97",
+        "size": 722,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "schemas/project-detection-rules.yaml",
+        "sha256": "9be05be1d8eaaa3c53916dab759e418bf9a4caa762bd1eeb29cba89618023799",
+        "size": 3023,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "schemas/project-extension.schema.json",
+        "sha256": "a9600a67f495e4734857aeb783a54ba9b1b42ed620d75c311226ee83e0c477cb",
+        "size": 3815,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "schemas/project-manifest.schema.json",
+        "sha256": "1f489c1b09e4ee889e5c6b6f904acb297717a7766e68aec17f1d4dbb25b786a5",
+        "size": 4405,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "schemas/project-metamodel.schema.json",
+        "sha256": "7795574063130894a80f4627fb22770292213568f789e4b546c42daaf4539e63",
+        "size": 12530,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "schemas/provenance.yaml",
+        "sha256": "0b4817606295f35705a4ead49ca5a20d76ee612e8bf56ed6d58c6a2c5c3b3eff",
+        "size": 5482,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "schemas/relations.yaml",
+        "sha256": "69ae4982939fef12fd633cffe248706b3680efab2fff2dfb28e7aca500ab4dd0",
+        "size": 10591,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "schemas/retired-id-registry.schema.json",
+        "sha256": "395dbbf9499d1b15bbbbf7e0d242a79cf452dfab81a7b6d4ae87af887625bedf",
+        "size": 1150,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "schemas/runtime-eval-result.schema.json",
+        "sha256": "958b3101981e2d725d4bb68f86c75d30c88a7d6cc32d5dddddaa41b56a1c42a9",
+        "size": 1162,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "schemas/semantic-eval.schema.json",
+        "sha256": "46026f595ad296263677b15c8859c16d74f40c84eb14d8cdefce39faf26dd6db",
+        "size": 2036,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "schemas/validation-report.schema.json",
+        "sha256": "1488ffa5c2fa86e6c8a864e8bf583113599edc70ec003483bea72468969c0997",
+        "size": 1968,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "scripts/assemble_runtime_eval_results.py",
+        "sha256": "3ce9e8aef74c4fcbd327e37da7d3f030a0672c2759acee4d38cd945cc772636f",
+        "size": 2817,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/build_builder_knowledge.py",
+        "sha256": "d03f1c9d0b5c8b914fd93144d0c9a32f184ca770e237ca5f8944dbb4199bdd78",
+        "size": 4803,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/build_distributions.py",
+        "sha256": "fc28cfa6d55337f94974c6e6924fa150abe8f575be316c8e1f6b902cb11789de",
+        "size": 11679,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/change_control.py",
+        "sha256": "f0fc059ebfe4fbbdd9abcfcfb6aabce61b5302ce822298fbe4edc64d2ee7282a",
+        "size": 1839,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/detect_project_profile.py",
+        "sha256": "bc496a127631bb6592bbfa3b1874977491e6510d1f1a8c68cd0aeff3add99c78",
+        "size": 8708,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/docx-pagebreak.lua",
+        "sha256": "9a3507106979a2044564c34de2111793859f54e7fcb032da558e2bd17ec8ff2c",
+        "size": 249,
+        "candidate_roles": []
+      },
+      {
+        "path": "scripts/export_documents.py",
+        "sha256": "70366508eeab02e375b1541c195343115c035e6019cf26e22a9c7f5ea9c80d20",
+        "size": 6881,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/generate_confluence.py",
+        "sha256": "d6483d4416520da3e3d670dad3304f781761f1ced8611616cad5a39709812c18",
+        "size": 5214,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/generate_derived_views.py",
+        "sha256": "b25cfd56be43c9c80009b46a0dab2dd467e936f3d882113c3386fdf373dbfdc0",
+        "size": 4676,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/generate_markdown.py",
+        "sha256": "655848f4d2eeab6db8fd7fd7836ec70eeb04ff95c9f6db159c2bf35adc21af7c",
+        "size": 6768,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/generator_context.py",
+        "sha256": "0d645631fe524e8ec843896fe0ef9b59e2bb0d24215cd4ff81b09e0a5209f625",
+        "size": 12096,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/migrate_rev80_to_v2.py",
+        "sha256": "6c2ec95bc812daa0833488b0a6383fec67d2e9cc6013d9cf7239c7a6bc989039",
+        "size": 11160,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/migrate_v1_to_v2.py",
+        "sha256": "61d64ebb318ec64d0560116168dff211a37f1e9ad53c5d5306ff40e4366b8165",
+        "size": 16430,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/package_release.py",
+        "sha256": "4f83457737cc5a989ee674a105d2ed4e99af44d658e074b77e5ebfd9074eb145",
+        "size": 5795,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/prepare_runtime_eval_packet.py",
+        "sha256": "573ca8bb20b2e1748ff821b641fc4ce296f6b9b27904d2e12995a2b9b1abe5a0",
+        "size": 1452,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/prepare_runtime_eval_run.py",
+        "sha256": "fbd021819121904d5d5676fe3774683e4a93d5e5a22e69761c6113d23d6681b5",
+        "size": 3340,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/presentation_contract.py",
+        "sha256": "a2d5eff112c0f13246019f67397dd1a982a07d4b8fdeed491770c27f3a516adb",
+        "size": 2867,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/resolve_project_metamodel.py",
+        "sha256": "e39fcc391905f93b5bf53c5d5d70127b0cbd597d5b32073d5285b1f8a1d9b8a2",
+        "size": 12672,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/resolve_quality_rules.py",
+        "sha256": "0c9ec317821e87d79f465a663103c2b8838c756706fbbbe40ed719c0b152310b",
+        "size": 5492,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/run_full_e2e_regression.py",
+        "sha256": "5f0d42f488aa300e7fc2d3f7a4918076cbc6fbfd9be48589d33d24a714a00761",
+        "size": 3563,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/run_generation_regression.py",
+        "sha256": "6c19638d33f058a53ef7442960f9251aab8c65fbaa8344d961ce1e61ccff024a",
+        "size": 639,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/run_generation_smoke.py",
+        "sha256": "ca68f2ea77fd7be308b0130cf5db6daecad0b43882510b47a1a86e2131f9bd97",
+        "size": 1368,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/run_v2_ci_gate.py",
+        "sha256": "8b8c1f4bcdab5e4dc7ce94239f6f8bf43784a71ce7f618de6bc423e7ad06d1b9",
+        "size": 7977,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/run_workflow_conformance.py",
+        "sha256": "d16f4d47d0c55788eb5cfab15563e9f7651e29c4b2a69507300ce9b292f7084a",
+        "size": 1919,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/score_runtime_eval_results.py",
+        "sha256": "9439bc29e646b8998c8529767e5ed1406de8d032ca616066cc286bc20729968d",
+        "size": 2799,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/validate_distributions.py",
+        "sha256": "22ca4d0ea28c14c1003c0f905de0f1c47938d4ed365c79bc053e04ae520bf163",
+        "size": 7869,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/validate_project.py",
+        "sha256": "cd8728cf6575e9cd7772ac515eef80f37a6f5524f9d31796975a1e8681dd3ec5",
+        "size": 68355,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/validate_runtime_parity.py",
+        "sha256": "95c5779287fbe0da6bc2b181a42a9062e225daac726da8841ad8fc84808d167e",
+        "size": 2841,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/verify_v1_v2_migration.py",
+        "sha256": "2503ba909aa82168c534e4116cdca4a73e84752125e44f424936d721157a342a",
+        "size": 7632,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "templates/markdown/capabilities-catalog.md",
+        "sha256": "1864f1ab00f5e85ad5660b907456b6d3d56d0e0d8df42b1e1bfbd961a5dc7221",
+        "size": 161,
+        "candidate_roles": []
+      },
+      {
+        "path": "templates/markdown/capability-detail.md",
+        "sha256": "c2557dba30fa02feceaf8d6d5efdc3c58c81731b1417ab5fbefee6c8ca2b8812",
+        "size": 166,
+        "candidate_roles": []
+      },
+      {
+        "path": "templates/markdown/driver-detail.md",
+        "sha256": "27c07239968747231c6411cd5fead35c9ec1a5f3a50ad833171d7e9a2b8b0134",
+        "size": 163,
+        "candidate_roles": []
+      },
+      {
+        "path": "templates/markdown/drivers-catalog.md",
+        "sha256": "95bdc90cd34f2913bb50dcd47a67a0d1cd8154d1ddd00d117ec8b68d0f17f39e",
+        "size": 167,
+        "candidate_roles": []
+      },
+      {
+        "path": "templates/markdown/goal-detail.md",
+        "sha256": "fb883482e1033e161038730b87912fd6104fbff3068391d421d8881876f8fa24",
+        "size": 155,
+        "candidate_roles": []
+      },
+      {
+        "path": "templates/markdown/goals-catalog.md",
+        "sha256": "49b0b29154340e5949a3860392b63642003843970dd6a19a620766a8bedc7c4c",
+        "size": 164,
+        "candidate_roles": []
+      },
+      {
+        "path": "templates/markdown/it-support-catalog.md",
+        "sha256": "cd80e0ca1896ed314549b647f837c8aef0bfc1e88badb31d18993c7ee0230c24",
+        "size": 166,
+        "candidate_roles": []
+      },
+      {
+        "path": "templates/markdown/it-support-detail.md",
+        "sha256": "0ea59ed3e3fb7bb33bd36428c67a2c3c243b66e6f48d57111092c92b322d1b38",
+        "size": 196,
+        "candidate_roles": []
+      },
+      {
+        "path": "templates/markdown/platform-detail.md",
+        "sha256": "2f05e5865aca8959d64025d7688263eeaf9cc38c3c898cf2072d292a1790b5f0",
+        "size": 195,
+        "candidate_roles": []
+      },
+      {
+        "path": "templates/markdown/platform-service-detail.md",
+        "sha256": "bc61d7866aead1322c4617653df3ef53c53f7528693db88f6dc973708d7cb45a",
+        "size": 201,
+        "candidate_roles": []
+      },
+      {
+        "path": "templates/markdown/platform-services-catalog.md",
+        "sha256": "a6465ede042194ba872f63692cc5f00f11662d1249380ca468edc40e40be2593",
+        "size": 200,
+        "candidate_roles": []
+      },
+      {
+        "path": "templates/markdown/platforms-catalog.md",
+        "sha256": "649e785828ddfccc09f3a1d15169aebfcb6dfc971551e25520fdb60af7fc4162",
+        "size": 192,
+        "candidate_roles": []
+      },
+      {
+        "path": "templates/markdown/principle-detail.md",
+        "sha256": "288ed3fd94d3c985ad2f7f4e4b22b46d48741ced14cafd22a032fb08f43610f1",
+        "size": 213,
+        "candidate_roles": []
+      },
+      {
+        "path": "templates/markdown/principles-catalog.md",
+        "sha256": "ed57baaeacf5bce5bba75562c7129b3ed0e02cb62d4f5c6c3ae7b2a5eaf789e8",
+        "size": 157,
+        "candidate_roles": []
+      },
+      {
+        "path": "templates/markdown/reference-architecture-detail.md",
+        "sha256": "b08be5c525c4e6b4a6074247f22fa8b0d47de1c71a05a412821edae4c605829b",
+        "size": 242,
+        "candidate_roles": []
+      },
+      {
+        "path": "templates/markdown/reference-architectures-catalog.md",
+        "sha256": "3e150784d115a00cff79f4ad6fce4445b295f3fa2c17a3fe5aee5e2e056c8fda",
+        "size": 170,
+        "candidate_roles": []
+      },
+      {
+        "path": "templates/markdown/solution-pattern-detail.md",
+        "sha256": "794efce8709870b944f04509f832b16812e1ccabfd6df110d4cc221c3b02e257",
+        "size": 231,
+        "candidate_roles": []
+      },
+      {
+        "path": "templates/markdown/solution-patterns-catalog.md",
+        "sha256": "c09e78506589e3e0f2fd27363f98b1e081304e9e5469d562a77a6694a875ef46",
+        "size": 162,
+        "candidate_roles": []
+      },
+      {
+        "path": "templates/markdown/standard-detail.md",
+        "sha256": "60dff9d254850e138ece94453cc091f166b1afdecf0011799ece439cb370e160",
+        "size": 163,
+        "candidate_roles": []
+      },
+      {
+        "path": "templates/markdown/standards-catalog.md",
+        "sha256": "5d1a22f8f727482bf94c0cba5fade27170c79667269fea7a8a4038999b324dc7",
+        "size": 185,
+        "candidate_roles": []
+      },
+      {
+        "path": "tests/builder/test_builder_knowledge.py",
+        "sha256": "017a547349ce522c3d7ffe4af8dd8fdc3b038f20d2537fd1764bbed0d7b74406",
+        "size": 2922,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/builder/test_no_stale_builder_knowledge.py",
+        "sha256": "9d1d0edc08e30a297b8575bf9eebcfd13d15aa408575b1edfd9d3821bb9b259f",
+        "size": 775,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/compatibility/test_boundary_first_workflows_v2.py",
+        "sha256": "0c89c893416712a295a00fb5e98fb1095c47cb8ddc99a587f54c7737b60162c4",
+        "size": 1806,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/compatibility/test_capability_boundary_v2.py",
+        "sha256": "fa5e55a0928a87c66ada60ded49cd35ba708f5d1e3b3df15bfc32215a020c531",
+        "size": 1293,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/compatibility/test_change_control_v2.py",
+        "sha256": "dd137d0b55f15db0cc274b88d8c8d2ceaaded624f83d784a803f45e1e80dee01",
+        "size": 5438,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/compatibility/test_derived_views_v2.py",
+        "sha256": "7e1ffc4261cacc6f12cd20127d31788ec0869e58ab49ab5b025ef318ee159a6f",
+        "size": 3402,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/compatibility/test_information_layers_v2.py",
+        "sha256": "8013f2ea1ec0bb0e019de0d09191ae02225750c3af95153f9d364ac25cea298a",
+        "size": 4191,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/compatibility/test_it_support_product_analysis_scenario.py",
+        "sha256": "0de7a66d9c141ca464d175a3f8a2405d0547932168244637a0821c8ac62b7996",
+        "size": 3026,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/compatibility/test_legacy_edit_continuity.py",
+        "sha256": "e34eada29986564d4cbb404122897e28c1f42c031c3da3a72a0c030603e463ca",
+        "size": 1359,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/compatibility/test_metamodel_aware_quality_v2.py",
+        "sha256": "9da048c2c384d14e4f641144dd8eacdeeb1b807c11a6680dea4251592dbc5071",
+        "size": 4849,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/compatibility/test_minimal_v1_migration_e2e.py",
+        "sha256": "ba9dcdfdc7132cceb0b6126ffbaa2c191a5374af437cb254100f1300273031f2",
+        "size": 2629,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/compatibility/test_platform_semantics_v2.py",
+        "sha256": "c19a5bfe7e48accc584b9f9bdeff0410d77b2fd0778e87b05912824d51256949",
+        "size": 1337,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/compatibility/test_platform_service_product_analysis_scenario.py",
+        "sha256": "4dda61de616040af8ba8ceef5d1d7d00956afa0ae4f3785285e0417f62ef853c",
+        "size": 1777,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/compatibility/test_platform_service_semantics_v2.py",
+        "sha256": "b948dd963889b9e8bd48de8b67b33510fa3af8aa6a566dbcaea5d36af7d16337",
+        "size": 1213,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/compatibility/test_presentation_contract_v2.py",
+        "sha256": "b3310722731497b3970a47182a06a0ce81b7a7fee2140b4d64cffc530be28d49",
+        "size": 2226,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/compatibility/test_product_can_realize_v2.py",
+        "sha256": "35e880a30efbbdacbfe88f0814fb95335e417f25f07de4a4f5036a7d4c33e740",
+        "size": 1048,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/compatibility/test_project_metamodel_format.py",
+        "sha256": "226be3ef63c78ce59804e35b592d51f1d5a3333ea9a51d415d477a301df3d1d7",
+        "size": 2059,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/compatibility/test_project_profile_detection.py",
+        "sha256": "f3dcde1290b8dad55933f0378dfb812b8e81613dce3b9144f0f3ea924f5a4171",
+        "size": 3919,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/compatibility/test_provided_by_v2.py",
+        "sha256": "44c5d56f08587f2a45477bf90b1bb15a80d0914f96c8d54a5987275b56c5e169",
+        "size": 1237,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/compatibility/test_relation_qualifiers_v2.py",
+        "sha256": "035dc5168242b419fe27e520674bb5864cc0cb326d77f8d0e7411bd992150e26",
+        "size": 2474,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/compatibility/test_rev80_migration_step24.py",
+        "sha256": "58162449aee9282a61c30fa880c8f055c9e5f42956f0c368709f112f55245c99",
+        "size": 2180,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/compatibility/test_rev80_reconstruction.py",
+        "sha256": "72010520a353d76e40b4d3bd9c3e00c31d01750acb0f9a25f32cc07fadcef471",
+        "size": 2162,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/compatibility/test_structural_validator_v2.py",
+        "sha256": "9434f59ef5a89feb214e95ed7b53f75dd1174b8dd0b8701ecc4ddaa7d575862e",
+        "size": 3647,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/compatibility/test_v1_profile.py",
+        "sha256": "54324e9876495408f446c31e8bd79743dc85992d617efcfe9846faaef8dad2c1",
+        "size": 2553,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/compatibility/test_v1_to_v2_migration_engine.py",
+        "sha256": "44f34af8b503d176eb70bcc7f2ebad6e1573ef5c9debe8976c6367a0ba161c81",
+        "size": 2575,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/compatibility/test_v2_embedded_function.py",
+        "sha256": "0f2e68032a24facea6252fe3c4c1ee34b72bcc4755513314195831f02d08a000",
+        "size": 2276,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/compatibility/test_v2_product_object.py",
+        "sha256": "c03168c8929d232461ddef4d4b567bfd746615458f4cd2afd81c7a2f3168906f",
+        "size": 943,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/evals/test_eval_suite.py",
+        "sha256": "33efcde123756cdebac53ab7f2d0c44a0a08f31b400cd8e96dfbf4189e70df06",
+        "size": 2836,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/evals/test_runtime_eval_execution_workflow.py",
+        "sha256": "c3f664354e8f90d76d6cd880256c842540b7677dffbfbf5758fb285025994732",
+        "size": 1589,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/evals/test_runtime_eval_protocol.py",
+        "sha256": "395523fc900a5df3c2f3ae3af1dae12b83ce9c7b2388c873b5e8fd5a8b75a37b",
+        "size": 1080,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/extensions/test_extension_mechanism.py",
+        "sha256": "71bd3c0d7e7637eeed309942130ec53e2d32cccf10769a1006e85435cb9f5c60",
+        "size": 4424,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/extensions/test_optional_rev80_extensions.py",
+        "sha256": "fa6811cf1aa9205905372f35cad9a229eabd6f5f99f1027d6f924cc1dad0f041",
+        "size": 4503,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/extraction/01-explicit-and-derived.md",
+        "sha256": "80aab9313cfc7bbdb38ac8341acb69ef2bd3afc82ecb61d1e7ca388d5d03496c",
+        "size": 925,
+        "candidate_roles": []
+      },
+      {
+        "path": "tests/extraction/02-platform-vs-service.md",
+        "sha256": "ded494ecf53199817207ff797d995c1f88eece39e27db932cd71f4fc5a929040",
+        "size": 950,
+        "candidate_roles": []
+      },
+      {
+        "path": "tests/extraction/03-no-object.md",
+        "sha256": "0926d900ad7b00cce283c9692d5736bcc02be1553e6b7c8d51d6b469e85023cb",
+        "size": 388,
+        "candidate_roles": []
+      },
+      {
+        "path": "tests/extraction/04-duplicate-and-normalization.md",
+        "sha256": "12fd4dc9f63bdb736ab793b2ca4c179c8e001ddb184a3ffb45d00f61cb7e0088",
+        "size": 872,
+        "candidate_roles": []
+      },
+      {
+        "path": "tests/extraction/README.md",
+        "sha256": "e857b3f3fa39d3fb58f923d7a365673cd291f7c68bbf2de7a3e6622261e5efc6",
+        "size": 1131,
+        "candidate_roles": []
+      },
+      {
+        "path": "tests/generation/test_export_documents.py",
+        "sha256": "08a36c67a349696c563ea64a2acfe1f936988fe07d983cbed2e222c5827c3c85",
+        "size": 1821,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/generation/test_generate_confluence.py",
+        "sha256": "cb2198c379a549d3cb316d09c89edde1f8728cc1201690b48e7e3ac80ae6741e",
+        "size": 2430,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/generation/test_generate_markdown.py",
+        "sha256": "4a0d6573d2dc08469b147f4b2c5dac7b6f0e806d0976558628367546f685a9be",
+        "size": 852,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/generation/test_metamodel_presentation_generation_v2.py",
+        "sha256": "780d5dcd5993659198ecff56efbf933ed0e7dd0309ab4100fed2d70c228545ca",
+        "size": 3605,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/release/test_end_to_end_release.py",
+        "sha256": "fe5ec374537f239a397c25efe46232aca4867fd6c0a5b84112c1f06d4ba45900",
+        "size": 1198,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/release/test_full_end_to_end_regression.py",
+        "sha256": "8ee6dc85de7db9fdf787eb3c359e175cbc5ac29bd128ff6c904cae40544c967b",
+        "size": 828,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/release/test_package_release.py",
+        "sha256": "9288eea73a6ba5fd5b9705ae4030e2101301363d911b2006c448d174d3a222cd",
+        "size": 2008,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/release/test_release_contract.py",
+        "sha256": "11e0045810afe656bb6be274573e8be555d66a14d265de073331c237432425b7",
+        "size": 1142,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/release/test_v2_ci_release_gate.py",
+        "sha256": "2f35916d57cf2ef45168f0c59df6a91086c998783728c311fbba714e5d0e5479",
+        "size": 3000,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/release/test_workflow_conformance_contract.py",
+        "sha256": "d5bdffa2b54572153634ff7371b83a21484e16570f4bb36126d363953da58dd9",
+        "size": 560,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/scenarios/01-strategy-to-drivers-goals.md",
+        "sha256": "2dda8a6d0931c9a0000a3e60a3e31402c25ac49934d762d75841038d2afcc74d",
+        "size": 970,
+        "candidate_roles": []
+      },
+      {
+        "path": "tests/scenarios/02-unstructured-it-to-capabilities.md",
+        "sha256": "2e55457f26a150deeef1db67052512423ef55810727f527ac8d13f0fa1a8f4a3",
+        "size": 924,
+        "candidate_roles": []
+      },
+      {
+        "path": "tests/scenarios/03-supporting-it-capabilities.md",
+        "sha256": "8bc40de2eae282c5d48c2e8ce8579f5f2f46eae9492992ebac7958e4f5d94d15",
+        "size": 1085,
+        "candidate_roles": []
+      },
+      {
+        "path": "tests/scenarios/04-it-support-inventory.md",
+        "sha256": "b1bdb398469fd81962c5a4501c975b3e9932df0019ac23acf36ae09aac479d8c",
+        "size": 848,
+        "candidate_roles": []
+      },
+      {
+        "path": "tests/scenarios/05-platform-vs-service.md",
+        "sha256": "f9be1c4539c30adcfd12e932756109e7e071fc64c1e1c04ed9948f83fe0b6add",
+        "size": 848,
+        "candidate_roles": []
+      },
+      {
+        "path": "tests/scenarios/06-standards-and-principles.md",
+        "sha256": "f6c2003c7ca6f1462a7e3040e6090d444e8b240b88ba6002a612f916156cd3dd",
+        "size": 849,
+        "candidate_roles": []
+      },
+      {
+        "path": "tests/scenarios/07-fragmented-conflicting-input.md",
+        "sha256": "f15e0a18678640c554622c85dc0535a6f892f7d04936b6594da6fe1599719a2b",
+        "size": 942,
+        "candidate_roles": []
+      },
+      {
+        "path": "tests/scenarios/08-research-based-model-proposal.md",
+        "sha256": "25b9848ca8006ea9097542306ae1b3a0c32932bbe8495a10d65352fea10d70ad",
+        "size": 947,
+        "candidate_roles": []
+      },
+      {
+        "path": "tests/scenarios/09-duplicates-wrong-levels.md",
+        "sha256": "83a5224317317c546258ead7a0351700a0e143e780de5c57f4b5489c434573f5",
+        "size": 925,
+        "candidate_roles": []
+      },
+      {
+        "path": "tests/scenarios/10-insufficient-evidence.md",
+        "sha256": "b790672efa0c52a591117d65d8ae9a4417a0555bd126c5f96e352a2f9627c641",
+        "size": 836,
+        "candidate_roles": []
+      },
+      {
+        "path": "tests/scenarios/README.md",
+        "sha256": "5295d7a13a082052ee0688728846f1a883f2ca2d1309349d86e963538558ac64",
+        "size": 517,
+        "candidate_roles": []
+      },
+      {
+        "path": "tests/scenarios/test_research_model_proposal_v2.py",
+        "sha256": "fd500b4da65f795ab80df14bc04728158950595e021396d5119ca02fdc0276eb",
+        "size": 737,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/scenarios/test_stress_scenarios.py",
+        "sha256": "0b3182453ad58fb01fa20e70a3ad5b794f38faad500ab6dace7a4242b216e4ca",
+        "size": 624,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/validation/test_validate_project.py",
+        "sha256": "a0c3b3d88400dbb193e44d0261b8df0fc53b98278ad530e02172db88966585a9",
+        "size": 4761,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      }
+    ],
+    "candidates": {
+      "instruction_candidate": [
+        "custom-gpt/instructions.md"
+      ],
+      "knowledge_candidate": [
+        "custom-gpt/knowledge/00-knowledge-index.md",
+        "custom-gpt/knowledge/01-domain-model.md",
+        "custom-gpt/knowledge/02-evidence-and-research.md",
+        "custom-gpt/knowledge/03-analysis-and-modeling-workflows.md",
+        "custom-gpt/knowledge/04-quality-assurance.md",
+        "custom-gpt/knowledge/05-project-and-output.md",
+        "docs/backward-compatibility-contract.md",
+        "docs/boundary-first-modeling.md",
+        "docs/change-control.md",
+        "docs/ci-release-v2.md",
+        "docs/confluence-generation.md",
+        "docs/derived-views.md",
+        "docs/document-export.md",
+        "docs/documentation-profiles.md",
+        "docs/final-release-review-v2.0.0.md",
+        "docs/full-end-to-end-regression.md",
+        "docs/generated/drivkrafter.md",
+        "docs/generated/formagor.md",
+        "docs/generated/generation-manifest.json",
+        "docs/generated/it-stod.md",
+        "docs/generated/losningsmonster.md",
+        "docs/generated/mal.md",
+        "docs/generated/plattformar.md",
+        "docs/generated/plattformstjanster.md",
+        "docs/generated/principer.md",
+        "docs/generated/produkter.md",
+        "docs/generated/referensarkitekturer.md",
+        "docs/generated/standarder.md",
+        "docs/information-layers.md",
+        "docs/markdown-generation.md",
+        "docs/metamodel-aware-generation.md",
+        "docs/metamodel-aware-quality.md",
+        "docs/metamodel.md",
+        "docs/migration/v1-capability-boundary.md",
+        "docs/migration/v1-platform-semantics.md",
+        "docs/migration/v1-platform-service-semantics.md",
+        "docs/migration/v1-realized-by-to-provided-by.md",
+        "docs/migration-guide-v1-to-v2.md",
+        "docs/minimal-v1-migration-verification.md",
+        "docs/openai-plugin-runtime.md",
+        "docs/optional-rev80-extensions.md",
+        "docs/presentation-contract.md",
+        "docs/product-vision.md",
+        "docs/project-extensions.md",
+        "docs/project-format.md",
+        "docs/project-metamodel-format.md",
+        "docs/provenance-model.md",
+        "docs/relations.md",
+        "docs/release-and-ci.md",
+        "docs/release-notes-v2.0.0.md",
+        "docs/rev80-migration-verification.md",
+        "docs/runtime-domain-contract-v2.md",
+        "docs/runtime-evidence-contract-v2.md",
+        "docs/runtime-project-output-v2.md",
+        "docs/runtime-quality-contract-v2.md",
+        "docs/runtime-workflows-v2.md",
+        "docs/source-policy.md",
+        "docs/structural-validation-v2.md",
+        "docs/structural-validation.md",
+        "docs/technical-target.md",
+        "docs/user-guide.md",
+        "docs/v1-to-v2-migration-engine.md",
+        "docs/v2-design-principles.md",
+        "docs/v2-development-plan.md",
+        "docs/v2-migration-notes.md",
+        "docs/yaml-model-format.md",
+        "examples/minimal-model/docs/generated/drivkrafter.md",
+        "examples/minimal-model/docs/generated/formagor.md",
+        "examples/minimal-model/docs/generated/generation-manifest.json",
+        "examples/minimal-model/docs/generated/it-stod.md",
+        "examples/minimal-model/docs/generated/losningsmonster.md",
+        "examples/minimal-model/docs/generated/mal.md",
+        "examples/minimal-model/docs/generated/objects/drivkrafter/DRV-001-kortare-ledtid-for-digital-utveckling.md",
+        "examples/minimal-model/docs/generated/objects/formagor/CAP-001-hantera-arenden-digitalt.md",
+        "examples/minimal-model/docs/generated/objects/formagor/CAP-002-driftsatta-och-kora-applikationer.md",
+        "examples/minimal-model/docs/generated/objects/it-stod/ITS-001-arendehanteringsstod.md",
+        "examples/minimal-model/docs/generated/objects/losningsmonster/PAT-001-standardiserad-applikationskorning.md",
+        "examples/minimal-model/docs/generated/objects/mal/GOAL-001-snabbare-och-mer-sjalvstandig-utveckling.md",
+        "examples/minimal-model/docs/generated/objects/plattformar/PLT-001-containerplattform.md",
+        "examples/minimal-model/docs/generated/objects/plattformstjanster/PLS-001-containerplattformstjanst.md",
+        "examples/minimal-model/docs/generated/objects/principer/PRN-001-gemensamma-behov-realiseras-som-ateranvandbara-tjanster.md",
+        "examples/minimal-model/docs/generated/objects/referensarkitekturer/RA-001-referensarkitektur-for-gemensam-applikationskorning.md",
+        "examples/minimal-model/docs/generated/objects/standarder/STD-001-standard-for-paketering-av-applikationer.md",
+        "examples/minimal-model/docs/generated/plattformar.md",
+        "examples/minimal-model/docs/generated/plattformstjanster.md",
+        "examples/minimal-model/docs/generated/principer.md",
+        "examples/minimal-model/docs/generated/referensarkitekturer.md",
+        "examples/minimal-model/docs/generated/standarder.md",
+        "knowledge/change-control.md",
+        "knowledge/classification-guide.md",
+        "knowledge/conflicts-and-uncertainty.md",
+        "knowledge/project-status-rules.md",
+        "knowledge/quality-metamodel-aware.md",
+        "knowledge/quality-model.md",
+        "knowledge/quality-object.md",
+        "knowledge/workflow-boundary-first.md",
+        "knowledge/workflow-extraction.md",
+        "knowledge/workflow-model-design.md",
+        "knowledge/workflow-project-open.md",
+        "knowledge/workflow-research.md",
+        "knowledge/workflow-update.md",
+        "knowledge/workflow-usage.md"
+      ],
+      "script_candidate": [
+        "scripts/assemble_runtime_eval_results.py",
+        "scripts/build_builder_knowledge.py",
+        "scripts/build_distributions.py",
+        "scripts/change_control.py",
+        "scripts/detect_project_profile.py",
+        "scripts/export_documents.py",
+        "scripts/generate_confluence.py",
+        "scripts/generate_derived_views.py",
+        "scripts/generate_markdown.py",
+        "scripts/generator_context.py",
+        "scripts/migrate_rev80_to_v2.py",
+        "scripts/migrate_v1_to_v2.py",
+        "scripts/package_release.py",
+        "scripts/prepare_runtime_eval_packet.py",
+        "scripts/prepare_runtime_eval_run.py",
+        "scripts/presentation_contract.py",
+        "scripts/resolve_project_metamodel.py",
+        "scripts/resolve_quality_rules.py",
+        "scripts/run_full_e2e_regression.py",
+        "scripts/run_generation_regression.py",
+        "scripts/run_generation_smoke.py",
+        "scripts/run_v2_ci_gate.py",
+        "scripts/run_workflow_conformance.py",
+        "scripts/score_runtime_eval_results.py",
+        "scripts/validate_distributions.py",
+        "scripts/validate_project.py",
+        "scripts/validate_runtime_parity.py",
+        "scripts/verify_v1_v2_migration.py",
+        "tests/builder/test_builder_knowledge.py",
+        "tests/builder/test_no_stale_builder_knowledge.py",
+        "tests/compatibility/test_boundary_first_workflows_v2.py",
+        "tests/compatibility/test_capability_boundary_v2.py",
+        "tests/compatibility/test_change_control_v2.py",
+        "tests/compatibility/test_derived_views_v2.py",
+        "tests/compatibility/test_information_layers_v2.py",
+        "tests/compatibility/test_it_support_product_analysis_scenario.py",
+        "tests/compatibility/test_legacy_edit_continuity.py",
+        "tests/compatibility/test_metamodel_aware_quality_v2.py",
+        "tests/compatibility/test_minimal_v1_migration_e2e.py",
+        "tests/compatibility/test_platform_semantics_v2.py",
+        "tests/compatibility/test_platform_service_product_analysis_scenario.py",
+        "tests/compatibility/test_platform_service_semantics_v2.py",
+        "tests/compatibility/test_presentation_contract_v2.py",
+        "tests/compatibility/test_product_can_realize_v2.py",
+        "tests/compatibility/test_project_metamodel_format.py",
+        "tests/compatibility/test_project_profile_detection.py",
+        "tests/compatibility/test_provided_by_v2.py",
+        "tests/compatibility/test_relation_qualifiers_v2.py",
+        "tests/compatibility/test_rev80_migration_step24.py",
+        "tests/compatibility/test_rev80_reconstruction.py",
+        "tests/compatibility/test_structural_validator_v2.py",
+        "tests/compatibility/test_v1_profile.py",
+        "tests/compatibility/test_v1_to_v2_migration_engine.py",
+        "tests/compatibility/test_v2_embedded_function.py",
+        "tests/compatibility/test_v2_product_object.py",
+        "tests/evals/test_eval_suite.py",
+        "tests/evals/test_runtime_eval_execution_workflow.py",
+        "tests/evals/test_runtime_eval_protocol.py",
+        "tests/extensions/test_extension_mechanism.py",
+        "tests/extensions/test_optional_rev80_extensions.py",
+        "tests/generation/test_export_documents.py",
+        "tests/generation/test_generate_confluence.py",
+        "tests/generation/test_generate_markdown.py",
+        "tests/generation/test_metamodel_presentation_generation_v2.py",
+        "tests/release/test_end_to_end_release.py",
+        "tests/release/test_full_end_to_end_regression.py",
+        "tests/release/test_package_release.py",
+        "tests/release/test_release_contract.py",
+        "tests/release/test_v2_ci_release_gate.py",
+        "tests/release/test_workflow_conformance_contract.py",
+        "tests/scenarios/test_research_model_proposal_v2.py",
+        "tests/scenarios/test_stress_scenarios.py",
+        "tests/validation/test_validate_project.py"
+      ],
+      "configuration_candidate": [
+        ".github/workflows/build-artifacts.yml",
+        ".github/workflows/build-distributions.yml",
+        ".github/workflows/ci.yml",
+        ".github/workflows/release.yml",
+        "actual-state/assertions.yaml",
+        "compatibility/ea-stodjare-v1/profile.yaml",
+        "compatibility/ea-stodjare-v1/schemas/model-format.yaml",
+        "compatibility/ea-stodjare-v1/schemas/object-types.yaml",
+        "compatibility/ea-stodjare-v1/schemas/project-manifest.schema.json",
+        "compatibility/ea-stodjare-v1/schemas/provenance.yaml",
+        "compatibility/ea-stodjare-v1/schemas/relations.yaml",
+        "compatibility/migration-rules/v1-to-v2-capability-boundary.yaml",
+        "compatibility/migration-rules/v1-to-v2-platform-semantics.yaml",
+        "compatibility/migration-rules/v1-to-v2-platform-service-semantics.yaml",
+        "compatibility/migration-rules/v1-to-v2-product-object.yaml",
+        "compatibility/migration-rules/v1-to-v2-provided-by.yaml",
+        "compatibility/migrations/function-v1-to-v2.yaml",
+        "compatibility/migrations/product-can-realize-v2.yaml",
+        "compatibility/reference-projects/minimal-v1-migration/verification-baseline.yaml",
+        "compatibility/reference-projects/minimal-v1-migration/verification-result.yaml",
+        "compatibility/reference-projects/rev80/extension-inventory.yaml",
+        "compatibility/reference-projects/rev80/metamodel.yaml",
+        "compatibility/reference-projects/rev80/migration-baseline.yaml",
+        "compatibility/reference-projects/rev80/migration-verification-result.yaml",
+        "compatibility/reference-projects/rev80/source-fingerprints.yaml",
+        "compatibility/reports/v2-e2e-baseline.yaml",
+        "compatibility/reports/workflow-conformance-baseline.json",
+        "confluence/generated/generation-manifest.json",
+        "derived-views/views.yaml",
+        "docs/generated/generation-manifest.json",
+        "evals/cases/EVAL-001-driver-vs-goal.yaml",
+        "evals/cases/EVAL-002-capability-vs-function.yaml",
+        "evals/cases/EVAL-003-it-support-vs-platform-service.yaml",
+        "evals/cases/EVAL-004-platform-service-vs-platform.yaml",
+        "evals/cases/EVAL-005-explicit-derived-proposed.yaml",
+        "evals/cases/EVAL-006-research-model-gap.yaml",
+        "evals/cases/EVAL-007-duplicate-detection.yaml",
+        "evals/cases/EVAL-008-gap-analysis.yaml",
+        "evals/cases/EVAL-009-model-proposal.yaml",
+        "evals/cases/EVAL-010-insufficient-evidence.yaml",
+        "evals/cases/EVAL-011-conflicting-sources.yaml",
+        "evals/cases/EVAL-012-solution-architecture-boundary.yaml",
+        "evals/cases/EVAL-013-it-capabilities-supporting-domain.yaml",
+        "evals/cases/EVAL-014-principle-vs-standard.yaml",
+        "evals/cases/EVAL-015-external-example-transferability.yaml",
+        "evals/cases/EVAL-016-v1-project-open.yaml",
+        "evals/cases/EVAL-017-extended-legacy-project.yaml",
+        "evals/cases/EVAL-018-project-metamodel-override.yaml",
+        "evals/cases/EVAL-019-product-vs-it-support.yaml",
+        "evals/cases/EVAL-020-product-vs-platform.yaml",
+        "evals/cases/EVAL-021-can-realize-it-support.yaml",
+        "evals/cases/EVAL-022-can-realize-platform-service.yaml",
+        "evals/cases/EVAL-023-provided-by.yaml",
+        "evals/cases/EVAL-024-legacy-realized-by-ambiguity.yaml",
+        "evals/cases/EVAL-025-embedded-function-coverage.yaml",
+        "evals/cases/EVAL-026-information-layer-separation.yaml",
+        "evals/cases/EVAL-027-derived-view-source-of-truth.yaml",
+        "evals/cases/EVAL-028-project-specific-extension.yaml",
+        "evals/cases/EVAL-029-metamodel-change-control.yaml",
+        "evals/eval-suite.yaml",
+        "evals/runtime/runtime-eval-packet.json",
+        "evals/runtime/runtime-eval-status.yaml",
+        "evals/v2-risk-coverage.yaml",
+        "examples/extensions/project-metamodel.yaml",
+        "examples/extensions/rev80-optional-extensions.yaml",
+        "examples/minimal-model/docs/generated/generation-manifest.json",
+        "examples/minimal-model/exports/confluence/generation-manifest.json",
+        "examples/minimal-model/model/capabilities.yaml",
+        "examples/minimal-model/model/drivers.yaml",
+        "examples/minimal-model/model/goals.yaml",
+        "examples/minimal-model/model/it-support.yaml",
+        "examples/minimal-model/model/platform-services.yaml",
+        "examples/minimal-model/model/platforms.yaml",
+        "examples/minimal-model/model/principles.yaml",
+        "examples/minimal-model/model/reference-architectures.yaml",
+        "examples/minimal-model/model/relations.yaml",
+        "examples/minimal-model/model/solution-patterns.yaml",
+        "examples/minimal-model/model/sources.yaml",
+        "examples/minimal-model/model/standards.yaml",
+        "examples/minimal-model/project-manifest.json",
+        "examples/product-analysis-it-support/actual-state/assertions.yaml",
+        "examples/product-analysis-it-support/expected-analysis.yaml",
+        "examples/product-analysis-it-support/market-reference/assertions.yaml",
+        "examples/product-analysis-it-support/model/capabilities.yaml",
+        "examples/product-analysis-it-support/model/drivers.yaml",
+        "examples/product-analysis-it-support/model/goals.yaml",
+        "examples/product-analysis-it-support/model/it-support.yaml",
+        "examples/product-analysis-it-support/model/platform-services.yaml",
+        "examples/product-analysis-it-support/model/platforms.yaml",
+        "examples/product-analysis-it-support/model/principles.yaml",
+        "examples/product-analysis-it-support/model/products.yaml",
+        "examples/product-analysis-it-support/model/reference-architectures.yaml",
+        "examples/product-analysis-it-support/model/relations.yaml",
+        "examples/product-analysis-it-support/model/solution-patterns.yaml",
+        "examples/product-analysis-it-support/model/sources.yaml",
+        "examples/product-analysis-it-support/model/standards.yaml",
+        "examples/product-analysis-platform-service/actual-state/assertions.yaml",
+        "examples/product-analysis-platform-service/expected-analysis.yaml",
+        "examples/product-analysis-platform-service/market-reference/assertions.yaml",
+        "examples/product-analysis-platform-service/model/capabilities.yaml",
+        "examples/product-analysis-platform-service/model/drivers.yaml",
+        "examples/product-analysis-platform-service/model/goals.yaml",
+        "examples/product-analysis-platform-service/model/it-support.yaml",
+        "examples/product-analysis-platform-service/model/platform-services.yaml",
+        "examples/product-analysis-platform-service/model/platforms.yaml",
+        "examples/product-analysis-platform-service/model/principles.yaml",
+        "examples/product-analysis-platform-service/model/products.yaml",
+        "examples/product-analysis-platform-service/model/reference-architectures.yaml",
+        "examples/product-analysis-platform-service/model/relations.yaml",
+        "examples/product-analysis-platform-service/model/solution-patterns.yaml",
+        "examples/product-analysis-platform-service/model/sources.yaml",
+        "examples/product-analysis-platform-service/model/standards.yaml",
+        "examples/project-metamodel/extended.yaml",
+        "examples/project-metamodel/minimal.yaml",
+        "exports/confluence/generation-manifest.json",
+        "exports/markdown/generation-manifest.json",
+        "extensions/example-ownership/extension.yaml",
+        "extensions/platform-maturity/extension.yaml",
+        "extensions/product-deployment/extension.yaml",
+        "extensions/product-openness/extension.yaml",
+        "extensions/registry.yaml",
+        "governance/change-control.yaml",
+        "governance/metamodel-changelog.yaml",
+        "governance/model-changelog.yaml",
+        "governance/retired-ids.yaml",
+        "gpt-project.yaml",
+        "market-reference/assertions.yaml",
+        "model/capabilities.yaml",
+        "model/drivers.yaml",
+        "model/goals.yaml",
+        "model/it-support.yaml",
+        "model/platform-services.yaml",
+        "model/platforms.yaml",
+        "model/principles.yaml",
+        "model/products.yaml",
+        "model/reference-architectures.yaml",
+        "model/relations.yaml",
+        "model/solution-patterns.yaml",
+        "model/sources.yaml",
+        "model/standards.yaml",
+        "presentation/presentation-contract.yaml",
+        "project-manifest.json",
+        "reconstructed-canonical/plugin-migration-plan.json",
+        "runtime-parity.yaml",
+        "schemas/change-control.schema.json",
+        "schemas/change-log.schema.json",
+        "schemas/conflicts-and-uncertainty.yaml",
+        "schemas/derived-view.schema.json",
+        "schemas/information-layers.yaml",
+        "schemas/migration-report.schema.json",
+        "schemas/model-format.yaml",
+        "schemas/model-quality-rules.yaml",
+        "schemas/modeling-review-workflows.yaml",
+        "schemas/object-quality-rules.yaml",
+        "schemas/object-types.yaml",
+        "schemas/presentation-contract.schema.json",
+        "schemas/product-model.yaml",
+        "schemas/project-compatibility-marker.schema.json",
+        "schemas/project-detection-rules.yaml",
+        "schemas/project-extension.schema.json",
+        "schemas/project-manifest.schema.json",
+        "schemas/project-metamodel.schema.json",
+        "schemas/provenance.yaml",
+        "schemas/relations.yaml",
+        "schemas/retired-id-registry.schema.json",
+        "schemas/runtime-eval-result.schema.json",
+        "schemas/semantic-eval.schema.json",
+        "schemas/validation-report.schema.json"
+      ]
+    },
+    "analysis_contract": {
+      "purpose": "Classify project behavior, knowledge, dependencies and workflows based on evidence",
+      "evidence_rule": "Every proposed fact must cite a source_files.path and SHA-256",
+      "uncertainty_rule": "Mark unresolved source ambiguity for review; do not invent behavior",
+      "output": "platform-neutral reviewed project model before runtime configuration"
+    },
+    "release_ready": false,
+    "runtime_activated": false
+  },
+  "project_hygiene": {
+    "status": "review_required",
+    "missing_documents": [
+      "PROJECT.md",
+      "STATUS.md",
+      "docs/development-plan.md"
+    ],
+    "possible_stale_versions": [
+      {
+        "file": "README.md",
+        "mentioned_versions": [
+          "1.5.1"
+        ]
+      }
+    ],
+    "ci_references_to_reconcile": [],
+    "legacy_validator_candidates": [
+      "scripts/validate_runtime_parity.py"
+    ],
+    "broken_document_links": [],
+    "open_development_checklist_items": [],
+    "open_migration_checklists": [],
+    "unresolved_status_claims": [],
+    "files_deleted": [],
+    "documentation_modified": false,
+    "required_actions": [
+      "Update README, PROJECT, STATUS, development plan and migration checklist together.",
+      "Compare legacy validator behavior with canonical checks before deleting any file.",
+      "Reconcile CI identifiers and actual validation evidence; do not claim host parity from ZIP builds.",
+      "Verify no documentation points at removed paths before release."
+    ]
+  },
+  "migration_steps": [
+    {
+      "id": "inventory",
+      "title": "Inventera källprojekt",
+      "status": "completed"
+    },
+    {
+      "id": "model",
+      "title": "Granska projektmodell och runtime-mappning",
+      "status": "completed"
+    },
+    {
+      "id": "engine",
+      "title": "Bedöm och installera kanonisk byggmotor",
+      "status": "pending_or_blocked"
+    },
+    {
+      "id": "distributions",
+      "title": "Bygg och kontrollera fem distributioner",
+      "status": "pending_or_blocked"
+    },
+    {
+      "id": "hygiene",
+      "title": "Uppdatera dokumentation och granska äldre filer",
+      "status": "review_required"
+    },
+    {
+      "id": "release",
+      "title": "Slutverifiera runtime och release",
+      "status": "pending"
+    }
+  ],
+  "next_step": {
+    "id": "engine",
+    "title": "Bedöm och installera kanonisk byggmotor"
+  }
+}

@@ -4,8 +4,6 @@ on:
   push:
   pull_request:
   workflow_dispatch:
-  release:
-    types: [published]
 
 permissions:
   contents: read
@@ -32,6 +30,9 @@ jobs:
           python -m pip install -r requirements-dev.txt
           sudo apt-get update
           sudo apt-get install -y pandoc libreoffice poppler-utils
+
+      - name: Install and verify GPT Byggaren 1.6.33
+        uses: ./.github/actions/setup-gpt-engine
 
       - name: Resolve version
         id: version
@@ -68,20 +69,3 @@ jobs:
             build/v2-distribution-gate.json
           retention-days: 14
 
-  release-assets:
-    if: github.event_name == 'release'
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      actions: read
-      contents: write
-    steps:
-      - name: Download distribution artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: ea-stodjare-gpt-v${{ needs.build.outputs.version }}
-          path: .
-      - name: Attach distributions to GitHub Release
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: gh release upload "${{ github.event.release.tag_name }}" dist/*.zip dist/SHA256SUMS.txt dist/DELIVERY-MANIFEST.json --clobber --repo "${{ github.repository }}"

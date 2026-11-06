@@ -6,7 +6,7 @@ on:
       - 'v*.*.*'
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   release:
@@ -37,6 +37,9 @@ jobs:
           python -m pip install -r requirements-dev.txt
           sudo apt-get update
           sudo apt-get install -y pandoc libreoffice poppler-utils
+
+      - name: Install and verify GPT Byggaren 1.6.33
+        uses: ./.github/actions/setup-gpt-engine
 
       - name: Run mandatory v2 release gate
         run: |
@@ -72,3 +75,16 @@ jobs:
             dist/DELIVERY-MANIFEST.json
             dist/v2-release-gate.json
           if-no-files-found: error
+
+      - name: Publish verified release assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          shopt -s nullglob
+          assets=(dist/*.zip dist/*.release.json dist/SHA256SUMS.txt dist/DELIVERY-MANIFEST.json dist/v2-release-gate.json)
+          if (( ${#assets[@]} == 0 )); then
+            echo 'No release assets were produced' >&2; exit 1
+          fi
+          gh release create "$GITHUB_REF_NAME" "${assets[@]}" --verify-tag --generate-notes --repo "$GITHUB_REPOSITORY"

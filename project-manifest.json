@@ -27,28 +27,34 @@
   },
   "files": [
     {
+      "path": ".github/actions/setup-gpt-engine/action.yml",
+      "role": "support",
+      "required": false,
+      "sha256": "d2f8df3449df97c3f41a6f45664ddc168557d3f91e32489161360e8c2a4d52be"
+    },
+    {
       "path": ".github/workflows/build-artifacts.yml",
       "role": "support",
       "required": false,
-      "sha256": "07863c4e23a1dc2d1f40e0f33f186fe34ebbab09e0ab650943b2f773a94ac99c"
+      "sha256": "29de5e00c49daffe2b6da3191dbb52f6319e5e1ddbc954480d13c77db19eb847"
     },
     {
       "path": ".github/workflows/build-distributions.yml",
       "role": "support",
       "required": false,
-      "sha256": "640a8b7c8ff08bc038f728f0f27b56dc230fd214ca67ae82a9c85a615b745dad"
+      "sha256": "2151ffb476175adea92e6b2f2acd653c6fe166d72c9be03924820d18f8526c10"
     },
     {
       "path": ".github/workflows/ci.yml",
       "role": "support",
       "required": false,
-      "sha256": "3534cea0d89cdcff2a555eb8b1881a0cd672c8a7d6bf0b7e200889796085f921"
+      "sha256": "c7b58ed6339bb820892833399eba654fad9f326dd27cdf9b7029fac5691bd9ef"
     },
     {
       "path": ".github/workflows/release.yml",
       "role": "support",
       "required": false,
-      "sha256": "01128d00a9cd6a129ef04a6df44daa8e39d71aa69db509ead7a95994b814df12"
+      "sha256": "8602a8031d114c36ce6f0f2002321a79171b6cb41e3fd25be28a3a6224e0f956"
     },
     {
       "path": ".gitignore",
@@ -63,16 +69,22 @@
       "sha256": "3ece23aa2e36e44b93c3050de4008bdafaf2dd2298ac37fac0493c0d06bdf985"
     },
     {
+      "path": "MIGRATION-CI-1.6.33.md",
+      "role": "support",
+      "required": false,
+      "sha256": "56b3457c5d04ce5310153ba390789438d522d892123306021c3da565b642e045"
+    },
+    {
       "path": "PROJECT_STATUS.md",
       "role": "documentation_source",
       "required": true,
-      "sha256": "cc71ca906521f5e62fd076708e06a8cc0969c593fda03bda62008d2fda30c7f3"
+      "sha256": "b0bf410a3b36f6d08d416850fc6f2afb9578dda49b96e6afedb54ef2ef711897"
     },
     {
       "path": "README.md",
       "role": "documentation_source",
       "required": true,
-      "sha256": "6f5b77cb68acc0f8f2189d5528e14f9f9dff33fe29af2916ef14266b3868605f"
+      "sha256": "4de495f6e4758ab0f2eb2c8899bda4db654d2b2c6c885141f4ccda6709460f50"
     },
     {
       "path": "VERSION",
@@ -1776,7 +1788,7 @@
       "path": "gpt-project.yaml",
       "role": "support",
       "required": false,
-      "sha256": "6927b86f248ca63424451c3cb4684a16634151f1141309bb68e20cbed926bc9b"
+      "sha256": "d591e0b058448214d6b6f29300807e4789bd11151f1c78aeb28aed6077482246"
     },
     {
       "path": "knowledge/change-control.md",
@@ -1965,6 +1977,12 @@
       "sha256": "7ba3697a3ac5ed330d554f9d36e1933edf2df2f4162f033bf9a330e4df0b4b48"
     },
     {
+      "path": "project-status.yaml",
+      "role": "support",
+      "required": false,
+      "sha256": "eb11465481d726254e19d8f292e67767177d241528913f49078788cfa83e332d"
+    },
+    {
       "path": "requirements-dev.txt",
       "role": "support",
       "required": false,
@@ -1980,7 +1998,7 @@
       "path": "runtime-parity.yaml",
       "role": "support",
       "required": false,
-      "sha256": "73812aa4b9178994ae9a21dc785d026b9855a2d2b3568e0997e9ce0f966bf860"
+      "sha256": "309068ce20bc4def568858e232500693ad8927125cfddc54aa7bd77272d1b964"
     },
     {
       "path": "schemas/change-control.schema.json",
@@ -2142,7 +2160,7 @@
       "path": "scripts/build_distributions.py",
       "role": "support",
       "required": false,
-      "sha256": "fc28cfa6d55337f94974c6e6924fa150abe8f575be316c8e1f6b902cb11789de"
+      "sha256": "31640d15d8a154d704866ef959133ec74e1a5a20b396fd1dbc2deab6f8ee6406"
     },
     {
       "path": "scripts/change_control.py",
@@ -2262,7 +2280,7 @@
       "path": "scripts/run_v2_ci_gate.py",
       "role": "support",
       "required": false,
-      "sha256": "8b8c1f4bcdab5e4dc7ce94239f6f8bf43784a71ce7f618de6bc423e7ad06d1b9"
+      "sha256": "92e76d7aad5741a67e4f26187919bcb9b0075ff7da2cb4fa255825d002908593"
     },
     {
       "path": "scripts/run_workflow_conformance.py",
@@ -2280,7 +2298,7 @@
       "path": "scripts/validate_distributions.py",
       "role": "support",
       "required": false,
-      "sha256": "22ca4d0ea28c14c1003c0f905de0f1c47938d4ed365c79bc053e04ae520bf163"
+      "sha256": "6cebde7ff3bb76b3188afdfda47ae700a9c472ef5291b40fee035c1e8c47cd9a"
     },
     {
       "path": "scripts/validate_project.py",
@@ -2292,7 +2310,7 @@
       "path": "scripts/validate_runtime_parity.py",
       "role": "support",
       "required": false,
-      "sha256": "95c5779287fbe0da6bc2b181a42a9062e225daac726da8841ad8fc84808d167e"
+      "sha256": "e0b5bc4fff2214ee3835fb89c70cc3615530413f3b7ffee7aad357224f4cff15"
     },
     {
       "path": "scripts/verify_v1_v2_migration.py",
@@ -2694,7 +2712,7 @@
       "path": "tests/release/test_v2_ci_release_gate.py",
       "role": "support",
       "required": false,
-      "sha256": "2f35916d57cf2ef45168f0c59df6a91086c998783728c311fbba714e5d0e5479"
+      "sha256": "cea84b60dd0e262ee5115476c6e1e310f0f25615a985dce1dca578687c08878e"
     },
     {
       "path": "tests/release/test_workflow_conformance_contract.py",
