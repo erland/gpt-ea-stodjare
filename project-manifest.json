@@ -54,7 +54,7 @@
       "path": ".github/workflows/release.yml",
       "role": "support",
       "required": false,
-      "sha256": "8602a8031d114c36ce6f0f2002321a79171b6cb41e3fd25be28a3a6224e0f956"
+      "sha256": "fbd21e08f7e466d0211ad07a3fa03d1ac6f73a8fc92d1a44beeabb1ea2648693"
     },
     {
       "path": ".gitignore",
