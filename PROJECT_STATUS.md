@@ -104,3 +104,10 @@ De 29 semantiska evalfallen är definierade och runtimeprotokollet är implement
 - Kanoniskt projektarkiv packas upp och körs genom `validate_project.py` i obligatorisk CI/release-gate.
 - `scripts/package_release.py` bevaras för historisk kompatibilitet men anropas inte automatiskt. Externa konsumenter av äldre format behöver vid behov migrera.
 - Fullständig GitHub CI för ändringen måste verifieras på PR #10.
+
+## Engine 2.2.2 – korrigering efter funktionell slutverifiering
+
+- Engine v2.2.1 hade korrekt skript-SHA och import-PASS men saknade schemas, presentation contract, extensions, legacy-kompatibilitet och Markdown-mallar. Det blockerade fullständig fristående funktionalitet.
+- Engine v2.2.2 paketerar explicita EA-referensresurser och ett representativt, oföränderligt testprojekt; användarens projekt levereras fortfarande separat.
+- Det verkliga Engine-självtestet provar profil, projektvalidering, kvalitetsregler, derived views, deterministisk dokumentgenerering samt planering och tillämpning av v1→v2-migration i temporära kopior. PDF/DOCX-kontroll kräver externa pandoc/LibreOffice och redovisas som blockerad om dessa saknas.
+- Den nya Engine-korrigeringen måste klara distributionsbygge och full CI före release. Verkliga Plugin-värdtester kvarstår.
