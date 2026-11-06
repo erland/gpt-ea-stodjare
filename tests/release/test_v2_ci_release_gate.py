@@ -18,7 +18,7 @@ REQUIRED_COVERAGE = {
     "generators",
     "gpt_distributions",
     "runtime_parity",
-    "release_unpack_and_validate",
+    "project_unpack_and_validate",
     "full_end_to_end_regression",
 }
 
@@ -28,7 +28,8 @@ def test_v2_gate_declares_all_plan_step_30_coverage():
     for name in REQUIRED_COVERAGE:
         assert f'"{name}"' in text
     assert "--full-pytest" in text
-    assert "package_release.py" in text
+    assert "ea-stodjare-project-" in text
+    assert "package_release.py" not in text
     assert "validate_distributions.py" in text
     assert "validate_runtime_parity.py" in text
     assert "run_full_e2e_regression.py" in text
@@ -41,7 +42,8 @@ def test_workflows_use_central_gate_and_release_is_blocking():
     artifacts = (ROOT / ".github/workflows/build-artifacts.yml").read_text(encoding="utf-8")
     assert "run_v2_ci_gate.py" in ci and "--full-pytest" in ci
     assert "run_v2_ci_gate.py" in release and "--mode release" in release and "--full-pytest" in release
-    assert release.index("run_v2_ci_gate.py") < release.index("package_release.py")
+    assert "package_release.py" not in release
+    assert "dist/*.zip" in release
     assert "gh release create" in release and release.index("run_v2_ci_gate.py") < release.index("gh release create")
     assert "v2-release-gate.json" in release
     assert "run_v2_ci_gate.py" in dist
@@ -61,11 +63,19 @@ def test_openai_plugin_is_a_first_class_distribution():
     assert "openai_plugin:" in parity and "claude_skills:" in parity and "host_execution_verified: false" in parity
 
 
-def test_release_packager_has_structural_preflight_metadata():
-    source = (ROOT / "scripts/package_release.py").read_text(encoding="utf-8")
-    assert "validate_project.py" in source
-    assert "structural_preflight" in source
-    assert "project_revision" in source
+def test_release_uses_one_canonical_project_archive():
+    gate = GATE.read_text(encoding="utf-8")
+    workflow = (ROOT / ".github/workflows/release.yml").read_text(encoding="utf-8")
+    assert "ea-stodjare-project-" in gate
+    assert "project_unpack_and_validate" in gate
+    assert "package_release.py" not in gate
+    assert "package_release.py" not in workflow
+    assert "ea-stodjare-*.release.json" not in workflow
+    assert "dist/*.zip" in workflow
+    # Old packager remains available as a historical developer command,
+    # but it must not be invoked by the automatic release paths.
+    legacy = ROOT / "scripts/package_release.py"
+    assert legacy.is_file()
 
 
 def test_gate_help_is_runnable():
