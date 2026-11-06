@@ -54,7 +54,7 @@
       "path": ".github/workflows/release.yml",
       "role": "support",
       "required": false,
-      "sha256": "fbd21e08f7e466d0211ad07a3fa03d1ac6f73a8fc92d1a44beeabb1ea2648693"
+      "sha256": "f4fc1faf7feab04dd25695d708fd4ef29a6063f9f7cb57a7415fce5cb60f4400"
     },
     {
       "path": ".gitignore",
@@ -78,13 +78,13 @@
       "path": "PROJECT_STATUS.md",
       "role": "documentation_source",
       "required": true,
-      "sha256": "d8cb4c3f82f302292e1cf36a89ae813ccfef6fde8f724b5bc6ebfa63e87e1b89"
+      "sha256": "deab2019d59db068b80f1f757280504ff1d176d18df9ea1aec0d015489fe2db5"
     },
     {
       "path": "README.md",
       "role": "documentation_source",
       "required": true,
-      "sha256": "5b77a2eaa6a11b872b3059f99c0b7e83d35765a0043755bad38d9fa092fda534"
+      "sha256": "941632d690e921c743dcc8225cfeb7019121fa29d487e02b2b58d0e0ea51f5f6"
     },
     {
       "path": "VERSION",
@@ -2328,7 +2328,7 @@
       "path": "scripts/run_v2_ci_gate.py",
       "role": "support",
       "required": false,
-      "sha256": "1a9cf720273c7ff9380aa3a6f7139b6f9d81e0a9520056984163c045667155f5"
+      "sha256": "8d31d137aef6e1497f04f68d9689fdccb0d54ab29f9723b19850990ddc34290f"
     },
     {
       "path": "scripts/run_workflow_conformance.py",
@@ -2772,7 +2772,7 @@
       "path": "tests/release/test_v2_ci_release_gate.py",
       "role": "support",
       "required": false,
-      "sha256": "cea84b60dd0e262ee5115476c6e1e310f0f25615a985dce1dca578687c08878e"
+      "sha256": "6e5e646462da872e5663391163217594233dd6114546ea04ee5455021464b215"
     },
     {
       "path": "tests/release/test_workflow_conformance_contract.py",
