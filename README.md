@@ -65,11 +65,12 @@ Se [`docs/metamodel-aware-generation.md`](docs/metamodel-aware-generation.md).
 
 ## Runtime-distributioner
 
-EA Stödjare har tre aktiva peer-distributioner från samma v2-semantik:
+EA Stödjare har fem aktiva peer-distributioner från samma v2-semantik:
 
-- **Custom GPT** – Builder Instructions och deterministiskt Builder Knowledge.
-- **Portable Chat** – samma instruktion/Knowledge plus stödjande schemas, modell och mallar.
-- **OpenAI Plugin** – skills-first `ready_runtime_dependent` runtime enligt GPT Byggaren 1.5.1.
+- **Chat ZIP** – instruktioner, Knowledge, schemas och projektrelaterade resurser.
+- **Claude Project** och **Claude Skills** – två separata Claude-distributioner.
+- **OpenCode** – workspace-distribution.
+- **OpenAI Plugin** – skills-first `ready_runtime_dependent` runtime enligt GPT Byggaren 1.6.33.
 
 Pluginen kräver hostens fil read/write, code execution och persistent workspace-state för verifierade projektändringar. Projektfiler är auktoritativ state och chattminne är inte fallback. Aktuell extern research är ett villkorligt krav för standarder, ramverk, praxis och marknads-/produktdata.
 
@@ -107,3 +108,17 @@ python3 scripts/validate_runtime_parity.py
 - [`docs/release-notes-v2.0.0.md`](docs/release-notes-v2.0.0.md)
 
 Den genomförda utvecklingsplanen finns kvar i [`docs/v2-development-plan.md`](docs/v2-development-plan.md) eftersom eval-coverage och revisionshistorik fortfarande refererar till den; den är historisk dokumentation, inte runtimekontrakt.
+
+## Migration av GPT-distributioner (1.6.33, PR #8)
+
+Projektet har en separat migrationskopia med originalmodellen kvar och fem nya distributioner som genereras med den kanoniska GPT Byggaren-motorn 1.6.33. Se `migration/MIGRATION-1.6.33.md` och `PROJECT_STATUS.md`. Migreringen innebär inte att förändra EA Stödjares v2.0-modellsemantik. Äldre `custom-gpt/` behålls som kanonisk instruktionskälla, inte som aktiv sjätte distribution.
+
+GitHub Actions CI med full pytest och distributionsbygge passerade på PR #8 den 6 november 2026. Externa funktionella värdtester återstår och byggvalidering ska inte tolkas som bevis på runtimeparitet.
+
+## Migrering av CI och release (GPT Byggaren 1.6.33)
+
+Se [MIGRATION-CI-1.6.33.md](MIGRATION-CI-1.6.33.md) för verifierade kontroller, versionslåst engine-installation och öppna releasegrindar.
+
+## Modulära Skills
+
+Den modulära arkitekturen är aktiverad genom `instructions.mode: modular_skills`. Gemensamma regler ligger i `canonical/core.md`; tre separata Skills finns i `canonical/skills/`. Läs [Skill-arkitekturen](canonical/SKILL-ARCHITECTURE.md). Funktionella värdtester kvarstår.

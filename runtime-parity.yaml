@@ -2,8 +2,8 @@ schema_version: 1
 reference: canonical_contract
 registered_runtimes:
   - chatgpt_chat
-  - chatgpt_custom
   - claude_project
+  - claude_skills
   - opencode
   - openai_plugin
 compared_categories:
@@ -12,26 +12,15 @@ compared_categories:
   - artifact
   - workspace_state
   - tool
+host_execution_verified: false
 runtimes:
-  chatgpt_chat:
-    suitability: ready
-    active: true
-  chatgpt_custom:
-    suitability: ready
-    active: true
-  claude_project:
-    suitability: reduced
-    active: false
-  opencode:
-    suitability: reduced
-    active: false
-  openai_plugin:
-    suitability: ready
-    active: true
-    compatibility: ready_runtime_dependent
+  chatgpt_chat: {suitability: host_dependent, active: true}
+  claude_project: {suitability: host_dependent, active: true}
+  claude_skills: {suitability: host_dependent, active: true}
+  opencode: {suitability: host_dependent, active: true}
+  openai_plugin: {suitability: host_dependent, active: true}
 notes:
-  - OpenAI Plugin är skills-first och bevarar canonical instruktion, Builder Knowledge och project-first/metamodel-first-regler.
-  - Full verifierad projektändring kräver filesystem read/write, code execution och persistent workspace-state.
-  - Projektfiler är auktoritativ state; chattminne är aldrig fallback för ett öppnat EA-projekt.
-  - Webbresearch är villkorligt krav för uppgifter om aktuell standard, ramverk, marknad, produkt eller praxis.
-  - DOCX/PDF-export kräver externa hostverktyg utöver Python.
+  - Alla fem distributioner byggs av samma kanoniska EA-instruktion och kontrolleras strukturellt.
+  - Faktisk exekvering, verktygsåtkomst och persistent state måste verifieras separat i respektive värdmiljö.
+  - Tidigare Custom GPT-distribution är historisk och inte längre aktiverad.
+  - Projektfiler är auktoritativt tillstånd; chattminne ersätter inte projektets modell.

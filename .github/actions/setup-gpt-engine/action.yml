@@ -1,0 +1,22 @@
+name: Install pinned GPT Byggaren engine
+description: Verify and install the canonical GPT Byggaren 1.6.33 distribution engine.
+runs:
+  using: composite
+  steps:
+    - name: Download, verify, self-test and install engine 1.6.33
+      shell: bash
+      run: |
+        set -euo pipefail
+        ENGINE_VERSION=1.6.33
+        ENGINE_SHA256=9638ce2b9300423ace6c055ef824284154788d9d8e6e54459f875fe56ff69885
+        ENGINE_ZIP="$RUNNER_TEMP/gpt-byggaren-engine-${ENGINE_VERSION}.zip"
+        ENGINE_ROOT="$RUNNER_TEMP/gpt-byggaren-engine-${ENGINE_VERSION}"
+        curl --fail --location --retry 3 --silent --show-error \
+          "https://github.com/erland/gpt-byggaren/releases/download/v${ENGINE_VERSION}/gpt-byggaren-engine-${ENGINE_VERSION}.zip" \
+          --output "$ENGINE_ZIP"
+        echo "$ENGINE_SHA256  $ENGINE_ZIP" | sha256sum --check --status
+        mkdir -p "$ENGINE_ROOT"
+        unzip -q "$ENGINE_ZIP" -d "$ENGINE_ROOT"
+        python "$ENGINE_ROOT/scripts/selftest_distribution_engine.py" --source "$ENGINE_ROOT"
+        python "$ENGINE_ROOT/scripts/install_distribution_engine.py" --source "$ENGINE_ROOT" --project-root "$GITHUB_WORKSPACE"
+        python -c 'from pathlib import Path; assert (Path("scripts") / "build_distributions.py").is_file()'

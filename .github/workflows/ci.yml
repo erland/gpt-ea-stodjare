@@ -30,6 +30,9 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y pandoc libreoffice poppler-utils
 
+      - name: Install and verify GPT Byggaren 1.6.33
+        uses: ./.github/actions/setup-gpt-engine
+
       - name: Run mandatory v2 CI gate
         run: |
           python scripts/run_v2_ci_gate.py \

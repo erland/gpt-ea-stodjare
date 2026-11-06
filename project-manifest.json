@@ -27,28 +27,34 @@
   },
   "files": [
     {
+      "path": ".github/actions/setup-gpt-engine/action.yml",
+      "role": "support",
+      "required": false,
+      "sha256": "d2f8df3449df97c3f41a6f45664ddc168557d3f91e32489161360e8c2a4d52be"
+    },
+    {
       "path": ".github/workflows/build-artifacts.yml",
       "role": "support",
       "required": false,
-      "sha256": "07863c4e23a1dc2d1f40e0f33f186fe34ebbab09e0ab650943b2f773a94ac99c"
+      "sha256": "29de5e00c49daffe2b6da3191dbb52f6319e5e1ddbc954480d13c77db19eb847"
     },
     {
       "path": ".github/workflows/build-distributions.yml",
       "role": "support",
       "required": false,
-      "sha256": "640a8b7c8ff08bc038f728f0f27b56dc230fd214ca67ae82a9c85a615b745dad"
+      "sha256": "2151ffb476175adea92e6b2f2acd653c6fe166d72c9be03924820d18f8526c10"
     },
     {
       "path": ".github/workflows/ci.yml",
       "role": "support",
       "required": false,
-      "sha256": "3534cea0d89cdcff2a555eb8b1881a0cd672c8a7d6bf0b7e200889796085f921"
+      "sha256": "c7b58ed6339bb820892833399eba654fad9f326dd27cdf9b7029fac5691bd9ef"
     },
     {
       "path": ".github/workflows/release.yml",
       "role": "support",
       "required": false,
-      "sha256": "01128d00a9cd6a129ef04a6df44daa8e39d71aa69db509ead7a95994b814df12"
+      "sha256": "8602a8031d114c36ce6f0f2002321a79171b6cb41e3fd25be28a3a6224e0f956"
     },
     {
       "path": ".gitignore",
@@ -63,16 +69,22 @@
       "sha256": "3ece23aa2e36e44b93c3050de4008bdafaf2dd2298ac37fac0493c0d06bdf985"
     },
     {
+      "path": "MIGRATION-CI-1.6.33.md",
+      "role": "support",
+      "required": false,
+      "sha256": "69d0186e214483ab11b8616c19491e68f7f1c7c8c8c06fa4f5308584d91f13ee"
+    },
+    {
       "path": "PROJECT_STATUS.md",
       "role": "documentation_source",
       "required": true,
-      "sha256": "cc71ca906521f5e62fd076708e06a8cc0969c593fda03bda62008d2fda30c7f3"
+      "sha256": "718c6c6cea9a37269eb3c3ffcac356c69e88174ebdffcf1d821f0331e0a4f2a0"
     },
     {
       "path": "README.md",
       "role": "documentation_source",
       "required": true,
-      "sha256": "6f5b77cb68acc0f8f2189d5528e14f9f9dff33fe29af2916ef14266b3868605f"
+      "sha256": "67e4197c53a7c4747a557214a7214975841670d26f03da07b91b556a063b97ea"
     },
     {
       "path": "VERSION",
@@ -91,6 +103,42 @@
       "role": "support",
       "required": false,
       "sha256": "ec4a030cc20af67835cbd2572c7f697340843df9d705d96cd21b361002f75cb9"
+    },
+    {
+      "path": "canonical/SKILL-ARCHITECTURE.md",
+      "role": "support",
+      "required": false,
+      "sha256": "9dc1024a2dc193e40a8f22b39fbd6154d65932e2df45fb6d97f9ca2536a9071d"
+    },
+    {
+      "path": "canonical/assembly.json",
+      "role": "support",
+      "required": false,
+      "sha256": "a8b826cfa27a4b8ae0a79016b31ef2c92a615512be9483e198715b78a27f5ed3"
+    },
+    {
+      "path": "canonical/core.md",
+      "role": "support",
+      "required": false,
+      "sha256": "80e1ddcab1715dd8f0c7a1eef765c2fc3ced898389e31f8a437ecbd5daa02195"
+    },
+    {
+      "path": "canonical/skills/modeling-and-research/behavior.md",
+      "role": "support",
+      "required": false,
+      "sha256": "3fca3ca750ba6fa74cf59ec470cb9972b22b102967a36dbc92b47d8261d5d317"
+    },
+    {
+      "path": "canonical/skills/project-lifecycle/behavior.md",
+      "role": "support",
+      "required": false,
+      "sha256": "c07de1bdaab7041f08c1243c094cb33fdbec4bea8bc45408277f3c3e8aa82b24"
+    },
+    {
+      "path": "canonical/skills/quality-and-publication/behavior.md",
+      "role": "support",
+      "required": false,
+      "sha256": "db4d6708fea5ad4a24460ff0c37389ce692b8187f5fb75094ab37c843ade247b"
     },
     {
       "path": "compatibility/ea-stodjare-v1/README.md",
@@ -1776,7 +1824,7 @@
       "path": "gpt-project.yaml",
       "role": "support",
       "required": false,
-      "sha256": "6927b86f248ca63424451c3cb4684a16634151f1141309bb68e20cbed926bc9b"
+      "sha256": "88df184f7c0fa377f0b966332d47dc4fee98b021a7304f1e2c3828090bd1fa65"
     },
     {
       "path": "knowledge/change-control.md",
@@ -1875,6 +1923,12 @@
       "sha256": "5f3921730cd070cba362601ddda4bae4b75ebc3d2fc0e56f62dde6b968839975"
     },
     {
+      "path": "migration/MIGRATION-1.6.33.md",
+      "role": "support",
+      "required": false,
+      "sha256": "16d1a3cc13c8a4db3d00dc7b34074e5570041630922165f57ce03c504397cb06"
+    },
+    {
       "path": "model/capabilities.yaml",
       "role": "canonical_model",
       "required": true,
@@ -1965,6 +2019,12 @@
       "sha256": "7ba3697a3ac5ed330d554f9d36e1933edf2df2f4162f033bf9a330e4df0b4b48"
     },
     {
+      "path": "project-status.yaml",
+      "role": "support",
+      "required": false,
+      "sha256": "78d313ebeecdf7918b778a84070be3ef27d7eb8f17588a0aa46b7b3d7a673786"
+    },
+    {
       "path": "requirements-dev.txt",
       "role": "support",
       "required": false,
@@ -1980,7 +2040,7 @@
       "path": "runtime-parity.yaml",
       "role": "support",
       "required": false,
-      "sha256": "73812aa4b9178994ae9a21dc785d026b9855a2d2b3568e0997e9ce0f966bf860"
+      "sha256": "309068ce20bc4def568858e232500693ad8927125cfddc54aa7bd77272d1b964"
     },
     {
       "path": "schemas/change-control.schema.json",
@@ -2142,7 +2202,7 @@
       "path": "scripts/build_distributions.py",
       "role": "support",
       "required": false,
-      "sha256": "fc28cfa6d55337f94974c6e6924fa150abe8f575be316c8e1f6b902cb11789de"
+      "sha256": "31640d15d8a154d704866ef959133ec74e1a5a20b396fd1dbc2deab6f8ee6406"
     },
     {
       "path": "scripts/change_control.py",
@@ -2262,7 +2322,7 @@
       "path": "scripts/run_v2_ci_gate.py",
       "role": "support",
       "required": false,
-      "sha256": "8b8c1f4bcdab5e4dc7ce94239f6f8bf43784a71ce7f618de6bc423e7ad06d1b9"
+      "sha256": "92e76d7aad5741a67e4f26187919bcb9b0075ff7da2cb4fa255825d002908593"
     },
     {
       "path": "scripts/run_workflow_conformance.py",
@@ -2280,7 +2340,7 @@
       "path": "scripts/validate_distributions.py",
       "role": "support",
       "required": false,
-      "sha256": "22ca4d0ea28c14c1003c0f905de0f1c47938d4ed365c79bc053e04ae520bf163"
+      "sha256": "6cebde7ff3bb76b3188afdfda47ae700a9c472ef5291b40fee035c1e8c47cd9a"
     },
     {
       "path": "scripts/validate_project.py",
@@ -2292,7 +2352,7 @@
       "path": "scripts/validate_runtime_parity.py",
       "role": "support",
       "required": false,
-      "sha256": "95c5779287fbe0da6bc2b181a42a9062e225daac726da8841ad8fc84808d167e"
+      "sha256": "e0b5bc4fff2214ee3835fb89c70cc3615530413f3b7ffee7aad357224f4cff15"
     },
     {
       "path": "scripts/verify_v1_v2_migration.py",
@@ -2694,7 +2754,7 @@
       "path": "tests/release/test_v2_ci_release_gate.py",
       "role": "support",
       "required": false,
-      "sha256": "2f35916d57cf2ef45168f0c59df6a91086c998783728c311fbba714e5d0e5479"
+      "sha256": "cea84b60dd0e262ee5115476c6e1e310f0f25615a985dce1dca578687c08878e"
     },
     {
       "path": "tests/release/test_workflow_conformance_contract.py",

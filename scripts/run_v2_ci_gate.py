@@ -136,7 +136,7 @@ def main() -> int:
     # Build and validate all active end-user GPT distribution formats.
     if not step("build_gpt_distributions", [py, "scripts/build_distributions.py", "--version", version]):
         write_report(report_path, report); print(json.dumps(report, ensure_ascii=False, indent=2)); return 1
-    if not step("gpt_distributions", [py, "scripts/validate_distributions.py", "--version", version]):
+    if not step("gpt_distributions", [py, "scripts/validate_distributions.py", "--project-root", "."]):
         write_report(report_path, report); print(json.dumps(report, ensure_ascii=False, indent=2)); return 1
 
     # Release package is always smoke-tested in CI as well as on tag releases.

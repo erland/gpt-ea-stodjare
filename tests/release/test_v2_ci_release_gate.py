@@ -42,7 +42,7 @@ def test_workflows_use_central_gate_and_release_is_blocking():
     assert "run_v2_ci_gate.py" in ci and "--full-pytest" in ci
     assert "run_v2_ci_gate.py" in release and "--mode release" in release and "--full-pytest" in release
     assert release.index("run_v2_ci_gate.py") < release.index("package_release.py")
-    assert "gh release create" not in release
+    assert "gh release create" in release and release.index("run_v2_ci_gate.py") < release.index("gh release create")
     assert "v2-release-gate.json" in release
     assert "run_v2_ci_gate.py" in dist
     assert "DELIVERY-MANIFEST.json" in dist
@@ -54,11 +54,11 @@ def test_openai_plugin_is_a_first_class_distribution():
     validator=(ROOT/"scripts/validate_distributions.py").read_text(encoding="utf-8")
     project=(ROOT/"gpt-project.yaml").read_text(encoding="utf-8")
     parity=(ROOT/"runtime-parity.yaml").read_text(encoding="utf-8")
-    assert "ea-stodjare-openai-plugin-v" in builder
+    assert "plugin.json" in builder
     assert "plugin.json" in builder and "runtime-contract.json" in builder
-    assert "ea-stodjare-openai-plugin-v" in validator
-    assert "ready_runtime_dependent" in project
-    assert "openai_plugin:" in parity and "active: true" in parity
+    assert "plugin" in validator
+    assert "custom_gpt:" in project and "claude_skills:" in project
+    assert "openai_plugin:" in parity and "claude_skills:" in parity and "host_execution_verified: false" in parity
 
 
 def test_release_packager_has_structural_preflight_metadata():
