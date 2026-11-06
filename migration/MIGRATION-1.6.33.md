@@ -24,3 +24,7 @@ Källprojekt: EA Stödjare 2.0.0 (revision 60), ursprungligen byggt för GPT Byg
 ## Nästa steg
 
 Samordna CI/release-workflows med nya fem-distributionskontraktet, kör full regression och granska hostparitet innan release.
+
+## Uppföljande modularisering
+
+Tidigare beskrivningar av en enda Skill är historiska. `instructions.mode: modular_skills` är nu aktiverat med tre Skills och gemensam kärna. Se `canonical/SKILL-ARCHITECTURE.md`. Lokala distributions- och innehållskontroller har passerat; hostverifiering kvarstår.

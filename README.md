@@ -118,3 +118,7 @@ GitHub Actions CI med full pytest och distributionsbygge passerade på PR #8 den
 ## Migrering av CI och release (GPT Byggaren 1.6.33)
 
 Se [MIGRATION-CI-1.6.33.md](MIGRATION-CI-1.6.33.md) för verifierade kontroller, versionslåst engine-installation och öppna releasegrindar.
+
+## Modulära Skills
+
+Den modulära arkitekturen är aktiverad genom `instructions.mode: modular_skills`. Gemensamma regler ligger i `canonical/core.md`; tre separata Skills finns i `canonical/skills/`. Läs [Skill-arkitekturen](canonical/SKILL-ARCHITECTURE.md). Funktionella värdtester kvarstår.

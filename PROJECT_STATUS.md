@@ -82,3 +82,9 @@ De 29 semantiska evalfallen är definierade och runtimeprotokollet är implement
 - GitHub Actions CI #42164185604 (inklusive `--full-pytest`) och distributionsbygge #42164185577 har passerat på PR #8, commit `11856798f8c9df655eb53660b1cb4ed00a4f5a66`.
 - Externa funktionella värdtester för Chat, Plugin, Claude och OpenCode är inte utförda. Byggresultat bevisar inte funktionell runtimeparitet.
 - CI- och release-workflows använder den versionslåsta motorn 1.6.33. Slutlig releasegranskning ska skilja passerad CI från externa hosttester och redovisa kvarstående begränsningar.
+
+## Modulära Skills (2026-11-06)
+
+- Tre Skills med gemensam kärna och separat ansvar har aktiverats.
+- Samtliga avsnitt i ursprunglig instruktion är bevarade och spårade i `canonical/assembly.json`.
+- Fem distributioner har byggts och validerats lokalt. GitHub-kontroll efter denna förändring och externa värdtester återstår.

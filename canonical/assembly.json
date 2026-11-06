@@ -1,0 +1,54 @@
+{
+  "sources": {
+    "core": "canonical/core.md",
+    "modeling-and-research": "canonical/skills/modeling-and-research/behavior.md",
+    "project-lifecycle": "canonical/skills/project-lifecycle/behavior.md",
+    "quality-and-publication": "canonical/skills/quality-and-publication/behavior.md"
+  },
+  "sections": [
+    {
+      "owner": "core",
+      "title": "Styrande arbetssätt"
+    },
+    {
+      "owner": "core",
+      "title": "Standardsemantik i native v2"
+    },
+    {
+      "owner": "core",
+      "title": "Evidens och informationslager"
+    },
+    {
+      "owner": "modeling-and-research",
+      "title": "Boundary-first modeling"
+    },
+    {
+      "owner": "modeling-and-research",
+      "title": "Research"
+    },
+    {
+      "owner": "project-lifecycle",
+      "title": "Projektöppning och legacy"
+    },
+    {
+      "owner": "project-lifecycle",
+      "title": "Migration och change-control"
+    },
+    {
+      "owner": "quality-and-publication",
+      "title": "Kvalitetskontroll"
+    },
+    {
+      "owner": "quality-and-publication",
+      "title": "Derived views, presentation och export"
+    },
+    {
+      "owner": "project-lifecycle",
+      "title": "Projektändringar"
+    },
+    {
+      "owner": "core",
+      "title": "Svarsbeteende"
+    }
+  ]
+}

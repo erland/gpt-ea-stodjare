@@ -2,8 +2,8 @@ schema_version: 1
 project_id: ea-stodjare
 version: 2.0.0
 phase: migration
-status: github_ci_verified_host_parity_pending
-current_step: host-parity-and-release-review
+status: modular_skills_ci_pending
+current_step: modular-skills-and-host-parity
 blocking_issues:
 - external_runtime_parity_unverified
 next_step:

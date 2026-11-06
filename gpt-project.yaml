@@ -210,33 +210,50 @@ skills:
   mode: inferred
   resource_policy: explicit
   definitions:
-  - id: ea-stodjare
-    name: EA Stödjare
-    description: Modellera, analysera, kvalitetssäkra och dokumentera enterprise architecture
-      med projektstyrd metamodell och evidens.
+  - id: modeling-and-research
+    name: EA-modellering och research
+    description: Boundary-first modellering, kandidater, research och alternativanalys.
+    source: canonical/skills/modeling-and-research/behavior.md
     references:
-    - custom-gpt/knowledge/00-knowledge-index.md
     - custom-gpt/knowledge/01-domain-model.md
     - custom-gpt/knowledge/02-evidence-and-research.md
     - custom-gpt/knowledge/03-analysis-and-modeling-workflows.md
+    assets: []
+    scripts:
+    - scripts/resolve_project_metamodel.py
+    - scripts/generate_derived_views.py
+  - id: project-lifecycle
+    name: EA-projekt och migration
+    description: Projektöppning, profil, legacy, kontrollerad ändring och migration.
+    source: canonical/skills/project-lifecycle/behavior.md
+    references:
+    - custom-gpt/knowledge/00-knowledge-index.md
+    - custom-gpt/knowledge/05-project-and-output.md
+    assets: []
+    scripts:
+    - scripts/detect_project_profile.py
+    - scripts/resolve_project_metamodel.py
+    - scripts/change_control.py
+    - scripts/migrate_v1_to_v2.py
+    - scripts/migrate_rev80_to_v2.py
+    - scripts/verify_v1_v2_migration.py
+  - id: quality-and-publication
+    name: Kvalitetssäkring och publicering
+    description: Metamodellstyrd QA, derived views, presentation och dokumentexport.
+    source: canonical/skills/quality-and-publication/behavior.md
+    references:
     - custom-gpt/knowledge/04-quality-assurance.md
     - custom-gpt/knowledge/05-project-and-output.md
     assets: []
     scripts:
     - scripts/validate_project.py
-    - scripts/detect_project_profile.py
-    - scripts/resolve_project_metamodel.py
     - scripts/resolve_quality_rules.py
-    - scripts/change_control.py
     - scripts/generate_derived_views.py
     - scripts/generate_markdown.py
     - scripts/generate_confluence.py
     - scripts/generator_context.py
     - scripts/presentation_contract.py
     - scripts/export_documents.py
-    - scripts/migrate_v1_to_v2.py
-    - scripts/migrate_rev80_to_v2.py
-    - scripts/verify_v1_v2_migration.py
 capabilities:
   contract_version: 1
   requirements:
@@ -654,7 +671,9 @@ file_classification:
   - build/
   - dist/
 instructions:
-  canonical: custom-gpt/instructions.md
+  mode: modular_skills
+  core: canonical/core.md
+  canonical: canonical/core.md
   single_source_of_truth: true
   distribution_specific_instructions_are_generated: true
 knowledge_architecture:
