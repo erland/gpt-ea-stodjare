@@ -1038,5 +1038,5 @@ migration:
   target: gpt-builder-1.6.33
   source: gpt-builder-1.5.1
   model_semantics: EA Stödjare v2.0 retained
-  review: Single Skill retains the full pre-migration instruction without splitting
-    behavior
+  review: Three modular Skills with explicit runtime script dependencies and an optional
+    separately packaged EA runtime Engine for hosts without direct script execution
