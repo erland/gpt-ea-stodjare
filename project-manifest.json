@@ -78,13 +78,13 @@
       "path": "PROJECT_STATUS.md",
       "role": "documentation_source",
       "required": true,
-      "sha256": "deab2019d59db068b80f1f757280504ff1d176d18df9ea1aec0d015489fe2db5"
+      "sha256": "b29ff2891b906ada1da790955a792ca31fae6ef9991fdd56bd5e090a164074ea"
     },
     {
       "path": "README.md",
       "role": "documentation_source",
       "required": true,
-      "sha256": "941632d690e921c743dcc8225cfeb7019121fa29d487e02b2b58d0e0ea51f5f6"
+      "sha256": "6a88fb8b400f4e0575892c9f92116400f6ac3d850fe8820f129774b1e9b9022e"
     },
     {
       "path": "VERSION",
@@ -1824,7 +1824,7 @@
       "path": "gpt-project.yaml",
       "role": "support",
       "required": false,
-      "sha256": "a09f508bc9cdc6220f7e7afe414262091f43fa0cd58ed296871e592c200ec40d"
+      "sha256": "97fc3659cf77f94c9a9ff5abc15dfdb45cf741c54f010d38db0d487c0cf42bd6"
     },
     {
       "path": "knowledge/change-control.md",
@@ -2346,7 +2346,7 @@
       "path": "scripts/selftest_ea_engine.py",
       "role": "support",
       "required": false,
-      "sha256": "35bd6004adb8fb3cdeb9e9316184935fe4190c963842abab54d6fb54e3457558"
+      "sha256": "94b735c1dae84c57e2524f00803da46ee13ad7d10a524da3befbc9f0112ff725"
     },
     {
       "path": "scripts/validate_distributions.py",
@@ -2743,6 +2743,12 @@
       "role": "support",
       "required": false,
       "sha256": "fe5ec374537f239a397c25efe46232aca4867fd6c0a5b84112c1f06d4ba45900"
+    },
+    {
+      "path": "tests/release/test_engine_resource_contract.py",
+      "role": "support",
+      "required": false,
+      "sha256": "94f60f8755b667b422ac39dca7cf55a5aaaa4fb3a61e718575158a7439166abb"
     },
     {
       "path": "tests/release/test_full_end_to_end_regression.py",
